@@ -25,34 +25,23 @@ cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
       --tag-random-bg: #fce8ec; --tag-random-txt: #7a1a2e;
     }
     html { font-size: 16px; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     body::before {
-      content: '';
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 0;
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       background-size: 200px 200px;
     }
     .page { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 3.5rem 2rem 5rem; }
     .header { margin-bottom: 2.5rem; }
-    .site-title {
-      font-family: 'Instrument Serif', serif;
-      font-size: clamp(2.8rem, 6vw, 4.5rem);
-      line-height: 1; letter-spacing: -0.02em; color: var(--text);
-    }
+    .site-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1; letter-spacing: -0.02em; color: var(--text); }
     .site-title em { font-style: italic; color: var(--accent); }
     .subtitle { font-size: 0.875rem; color: var(--muted); margin-top: 0.5rem; }
     .divider { margin: 1.25rem 0; border: none; border-top: 1px solid var(--border); }
 
     .status-bar { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); margin-bottom: 1.25rem; }
     .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; flex-shrink: 0; transition: background 0.3s; }
-    .status-dot.ok    { background: #3a9c5a; }
-    .status-dot.error { background: #c8602a; }
+    .status-dot.ok      { background: #3a9c5a; }
+    .status-dot.error   { background: #c8602a; }
     .status-dot.loading { background: #f0a500; }
 
     .add-form { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
@@ -76,14 +65,12 @@ cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
     .add-btn {
       height: 42px; padding: 0 20px;
       font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
-      background: var(--accent); color: #fff;
-      border: none; border-radius: 8px; cursor: pointer;
-      transition: background 0.15s, transform 0.1s; white-space: nowrap;
+      background: var(--accent); color: #fff; border: none; border-radius: 8px;
+      cursor: pointer; transition: background 0.15s, transform 0.1s; white-space: nowrap;
     }
     .add-btn:hover { background: #b5521f; }
     .add-btn:active { transform: scale(0.97); }
     .add-btn:disabled { background: #ccc; cursor: not-allowed; }
-
     .refresh-btn {
       height: 42px; padding: 0 16px;
       font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
@@ -95,9 +82,8 @@ cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
 
     .filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
     .filter-btn {
-      font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
-      padding: 5px 13px; border-radius: 99px;
-      border: 1px solid var(--border-strong);
+      font-family: 'DM Sans', sans-serif; font-size: 0.8rem; padding: 5px 13px;
+      border-radius: 99px; border: 1px solid var(--border-strong);
       background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s;
     }
     .filter-btn:hover { background: var(--surface); color: var(--text); }
@@ -126,17 +112,13 @@ cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
     .tip-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 2px; }
     .tip-author { font-size: 0.75rem; color: var(--muted); font-style: italic; }
     .del-btn {
-      background: none; border: none; cursor: pointer;
-      color: var(--muted); font-size: 0.8rem;
-      padding: 3px 7px; border-radius: 5px;
-      transition: all 0.12s; display: flex; align-items: center; gap: 3px;
+      background: none; border: none; cursor: pointer; color: var(--muted); font-size: 0.8rem;
+      padding: 3px 7px; border-radius: 5px; transition: all 0.12s; display: flex; align-items: center; gap: 3px;
     }
     .del-btn:hover { color: #c0392b; background: #fce8ec; }
-
     .state-msg { grid-column: 1 / -1; text-align: center; padding: 4rem 0; color: var(--muted); }
     .state-msg .icon { font-size: 2rem; margin-bottom: 0.75rem; }
     .state-msg p { font-size: 0.9rem; }
-
     .site-footer { margin-top: 4rem; text-align: center; font-size: 0.78rem; color: var(--muted); }
 
     @media (max-width: 600px) {
@@ -147,7 +129,6 @@ cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
 </head>
 <body>
 <main class="page">
-
   <header class="header">
     <h1 class="site-title">tips <em>&</em> stuff</h1>
     <p class="subtitle">a shared board for tips, tricks, and random gems ✦ add yours below</p>
@@ -178,14 +159,13 @@ cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
   <div class="tips-grid" id="tips-grid">
     <div class="state-msg"><div class="icon">✦</div><p>loading tips...</p></div>
   </div>
-
   <footer class="site-footer"><p>tips & stuff — shared with friends ✦</p></footer>
 </main>
 
 <script>
   const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
   const API_KEY = '$2a$10$FaAhdz4K8wgcjv1zKQsQPuTxgxKRaJSh3KTbqPozlDj0He1bUigtu';
-  const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+  const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
 
   const TAG_CONFIG = {
     tip:    { label: '💡 tip',    bg: 'var(--tag-tip-bg)',    color: 'var(--tag-tip-txt)',    accent: '#4a8a1a' },
@@ -211,34 +191,53 @@ cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  // Pull tips out of whatever shape JSONBin returns
+  function extractTips(record) {
+    if (Array.isArray(record)) return record;
+    if (record && Array.isArray(record.tips)) return record.tips;
+    return [];
+  }
+
   async function loadTips() {
     setStatus('loading', 'loading tips...');
     try {
       const res = await fetch(BIN_URL + '/latest', {
-        headers: { 'X-Master-Key': API_KEY }
+        headers: {
+          'X-Master-Key': API_KEY,
+          'X-Bin-Meta': 'false'
+        }
       });
-      if (!res.ok) throw new Error('fetch failed');
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error('HTTP ' + res.status + ': ' + txt);
+      }
       const data = await res.json();
-      allTips = Array.isArray(data.record) ? data.record
-              : Array.isArray(data.record.tips) ? data.record.tips
-              : [];
-      setStatus('ok', `loaded — hit ↻ refresh to see new tips`);
+      // JSONBin wraps in { record: ... } — handle both wrapped and raw
+      const record = data.record !== undefined ? data.record : data;
+      allTips = extractTips(record);
+      setStatus('ok', 'loaded ✓ — hit ↻ refresh to see new tips from others');
       render();
     } catch(e) {
-      console.error(e);
-      setStatus('error', 'could not load tips — check your connection');
+      console.error('loadTips error:', e);
+      setStatus('error', 'could not load — check console (F12) for details');
       document.getElementById('tips-grid').innerHTML =
-        `<div class="state-msg"><div class="icon">⚠️</div><p>Could not load tips. Try refreshing.</p></div>`;
+        `<div class="state-msg"><div class="icon">⚠️</div><p>Could not load tips.<br><small style="opacity:0.7">${escHtml(e.message)}</small></p></div>`;
     }
   }
 
   async function saveTips() {
     const res = await fetch(BIN_URL, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': API_KEY
+      },
       body: JSON.stringify(allTips)
     });
-    if (!res.ok) throw new Error('save failed');
+    if (!res.ok) {
+      const txt = await res.text();
+      throw new Error('HTTP ' + res.status + ': ' + txt);
+    }
   }
 
   async function addTip() {
@@ -255,12 +254,12 @@ cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
       allTips.unshift({ id: Date.now(), text, tag, author });
       await saveTips();
       tipInput.value = '';
-      setStatus('ok', 'saved! hit ↻ refresh to see tips from others');
+      setStatus('ok', 'saved ✓');
       render();
     } catch(e) {
-      console.error(e);
+      console.error('addTip error:', e);
       allTips.shift();
-      setStatus('error', 'could not save — try again');
+      setStatus('error', 'could not save — ' + e.message);
     }
     addBtn.disabled = false;
   }
@@ -275,9 +274,9 @@ cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
       await saveTips();
       setStatus('ok', 'deleted ✓');
     } catch(e) {
-      console.error(e);
+      console.error('deleteTip error:', e);
       allTips = prev;
-      setStatus('error', 'could not delete — try again');
+      setStatus('error', 'could not delete — ' + e.message);
       render();
     }
   }
