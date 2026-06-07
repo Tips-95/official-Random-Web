@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranks - Official Random Web</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+```
+    h1 {
+        text-align: center;
+    }
+
+    .rank {
+        background: #1e1e1e;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .owner {
+        border-left: 5px solid gold;
+    }
+
+    .admin {
+        border-left: 5px solid red;
+    }
+
+    .mod {
+        border-left: 5px solid blue;
+    }
+
+    .public {
+        border-left: 5px solid green;
+    }
+
+    a {
+        color: #4da6ff;
+    }
+</style>
+```
+
+</head>
+<body>
+
+<h1>Official Random Web - Rank System</h1>
+
+<div class="rank owner">
+    <h2>👑 Owner</h2>
+    <p><strong>Current Owner:</strong> Tips-95</p>
+    <p>The Owner has full control over the website.</p>
+    <ul>
+        <li>Edit anything on the site.</li>
+        <li>Add or remove Admins.</li>
+        <li>Add or remove Moderators.</li>
+        <li>Delete any tip.</li>
+        <li>Manage all sections.</li>
+    </ul>
+</div>
+
+<div class="rank admin">
+    <h2>🛡️ Admin</h2>
+    <p>Admins help manage the website.</p>
+    <ul>
+        <li>Delete tips made by Public users.</li>
+        <li>Help keep the site clean.</li>
+        <li>Cannot create new Admins.</li>
+        <li>Cannot create new Moderators.</li>
+    </ul>
+    <p><strong>Only the Owner can add Admins.</strong></p>
+</div>
+
+<div class="rank mod">
+    <h2>🔨 Moderator</h2>
+    <p>Moderators help expand the site.</p>
+    <ul>
+        <li>Add tips to all tip sections.</li>
+        <li>Create content for staff sections.</li>
+        <li>Cannot add Admins.</li>
+        <li>Cannot remove users.</li>
+    </ul>
+    <p><strong>Only the Owner can add Moderators.</strong></p>
+</div>
+
+<div class="rank public">
+    <h2>🌎 Public</h2>
+    <p>All regular users automatically have this rank.</p>
+    <ul>
+        <li>Can submit tips only in the "Public Tips" section.</li>
+        <li>Cannot post in staff sections.</li>
+        <li>Cannot delete tips.</li>
+        <li>Cannot manage ranks.</li>
+    </ul>
+</div>
+
+<h2>📋 Tip Section Rules</h2>
+<ul>
+    <li><strong>Public Tips</strong> → Public, Mod, Admin, Owner</li>
+    <li><strong>All Other Sections</strong> → Mod, Admin, Owner only</li>
+</ul>
+
+<p><a href="index.html">← Back to Home</a></p>
+
+</body>
+</html>
