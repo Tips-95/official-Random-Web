@@ -1,0 +1,329 @@
+cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tips & stuff ✦</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f2eb;
+      --surface: #fffdf8;
+      --border: rgba(60,50,30,0.12);
+      --border-strong: rgba(60,50,30,0.22);
+      --text: #1a1612;
+      --muted: #7a7060;
+      --accent: #c8602a;
+      --tag-tip-bg: #e8f0e0;    --tag-tip-txt: #2d5016;
+      --tag-food-bg: #fdecd6;   --tag-food-txt: #7a3a0a;
+      --tag-life-bg: #e0eaf8;   --tag-life-txt: #1a3d6b;
+      --tag-tech-bg: #ece0f8;   --tag-tech-txt: #4a1f7a;
+      --tag-random-bg: #fce8ec; --tag-random-txt: #7a1a2e;
+    }
+    html { font-size: 16px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+    .page { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 3.5rem 2rem 5rem; }
+    .header { margin-bottom: 2.5rem; }
+    .site-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      line-height: 1; letter-spacing: -0.02em; color: var(--text);
+    }
+    .site-title em { font-style: italic; color: var(--accent); }
+    .subtitle { font-size: 0.875rem; color: var(--muted); margin-top: 0.5rem; }
+    .divider { margin: 1.25rem 0; border: none; border-top: 1px solid var(--border); }
+
+    .status-bar { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); margin-bottom: 1.25rem; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; flex-shrink: 0; transition: background 0.3s; }
+    .status-dot.ok    { background: #3a9c5a; }
+    .status-dot.error { background: #c8602a; }
+    .status-dot.loading { background: #f0a500; }
+
+    .add-form { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .add-form input[type="text"] {
+      flex: 1; min-width: 180px; height: 42px; padding: 0 14px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      background: var(--surface); border: 1px solid var(--border-strong);
+      border-radius: 8px; color: var(--text); outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .add-form input[type="text"]::placeholder { color: var(--muted); }
+    .add-form input[type="text"]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
+    .name-input { width: 130px; flex: none !important; min-width: unset !important; }
+    select {
+      height: 42px; padding: 0 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.875rem;
+      background: var(--surface); border: 1px solid var(--border-strong);
+      border-radius: 8px; color: var(--text); cursor: pointer; outline: none;
+    }
+    select:focus { border-color: var(--accent); }
+    .add-btn {
+      height: 42px; padding: 0 20px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 8px; cursor: pointer;
+      transition: background 0.15s, transform 0.1s; white-space: nowrap;
+    }
+    .add-btn:hover { background: #b5521f; }
+    .add-btn:active { transform: scale(0.97); }
+    .add-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+    .refresh-btn {
+      height: 42px; padding: 0 16px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      background: transparent; color: var(--muted);
+      border: 1px solid var(--border-strong); border-radius: 8px;
+      cursor: pointer; transition: all 0.15s; white-space: nowrap;
+    }
+    .refresh-btn:hover { background: var(--surface); color: var(--text); }
+
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
+    .filter-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+      padding: 5px 13px; border-radius: 99px;
+      border: 1px solid var(--border-strong);
+      background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s;
+    }
+    .filter-btn:hover { background: var(--surface); color: var(--text); }
+    .filter-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+    .count-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+    .tip-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1.2rem;
+      display: flex; flex-direction: column; gap: 10px;
+      animation: rise 0.22s ease both; position: relative; overflow: hidden;
+    }
+    .tip-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--card-accent, transparent); border-radius: 12px 12px 0 0;
+    }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .tip-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 99px;
+    }
+    .tip-text { font-size: 0.92rem; line-height: 1.55; color: var(--text); flex: 1; }
+    .tip-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 2px; }
+    .tip-author { font-size: 0.75rem; color: var(--muted); font-style: italic; }
+    .del-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: 0.8rem;
+      padding: 3px 7px; border-radius: 5px;
+      transition: all 0.12s; display: flex; align-items: center; gap: 3px;
+    }
+    .del-btn:hover { color: #c0392b; background: #fce8ec; }
+
+    .state-msg { grid-column: 1 / -1; text-align: center; padding: 4rem 0; color: var(--muted); }
+    .state-msg .icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .state-msg p { font-size: 0.9rem; }
+
+    .site-footer { margin-top: 4rem; text-align: center; font-size: 0.78rem; color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .page { padding: 2rem 1.2rem 4rem; }
+      .name-input { width: 100%; flex: 1 1 100% !important; }
+    }
+  </style>
+</head>
+<body>
+<main class="page">
+
+  <header class="header">
+    <h1 class="site-title">tips <em>&</em> stuff</h1>
+    <p class="subtitle">a shared board for tips, tricks, and random gems ✦ add yours below</p>
+    <hr class="divider" />
+  </header>
+
+  <div class="status-bar">
+    <div class="status-dot loading" id="status-dot"></div>
+    <span id="status-text">loading tips...</span>
+  </div>
+
+  <div class="add-form">
+    <input type="text" id="tip-input"  placeholder="Drop a tip or random thought..." maxlength="280" />
+    <input type="text" id="name-input" placeholder="Your name" maxlength="30" class="name-input" />
+    <select id="tag-select">
+      <option value="tip">💡 tip</option>
+      <option value="food">🍜 food</option>
+      <option value="life">✌️ life</option>
+      <option value="tech">⚡ tech</option>
+      <option value="random">🎲 random</option>
+    </select>
+    <button class="add-btn" id="add-btn" onclick="addTip()">+ Add</button>
+    <button class="refresh-btn" onclick="loadTips()">↻ Refresh</button>
+  </div>
+
+  <div class="filter-bar" id="filter-bar"></div>
+  <p class="count-label" id="count-label"></p>
+  <div class="tips-grid" id="tips-grid">
+    <div class="state-msg"><div class="icon">✦</div><p>loading tips...</p></div>
+  </div>
+
+  <footer class="site-footer"><p>tips & stuff — shared with friends ✦</p></footer>
+</main>
+
+<script>
+  const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
+  const API_KEY = '$2a$10$FaAhdz4K8wgcjv1zKQsQPuTxgxKRaJSh3KTbqPozlDj0He1bUigtu';
+  const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+  const TAG_CONFIG = {
+    tip:    { label: '💡 tip',    bg: 'var(--tag-tip-bg)',    color: 'var(--tag-tip-txt)',    accent: '#4a8a1a' },
+    food:   { label: '🍜 food',   bg: 'var(--tag-food-bg)',   color: 'var(--tag-food-txt)',   accent: '#c8602a' },
+    life:   { label: '✌️ life',   bg: 'var(--tag-life-bg)',   color: 'var(--tag-life-txt)',   accent: '#2a60c8' },
+    tech:   { label: '⚡ tech',   bg: 'var(--tag-tech-bg)',   color: 'var(--tag-tech-txt)',   accent: '#7a2ac8' },
+    random: { label: '🎲 random', bg: 'var(--tag-random-bg)', color: 'var(--tag-random-txt)', accent: '#c82a4a' },
+  };
+
+  let allTips = [];
+  let activeFilter = 'all';
+
+  const dot      = document.getElementById('status-dot');
+  const statusTx = document.getElementById('status-text');
+  const addBtn   = document.getElementById('add-btn');
+
+  function setStatus(state, msg) {
+    dot.className = 'status-dot ' + state;
+    statusTx.textContent = msg;
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  async function loadTips() {
+    setStatus('loading', 'loading tips...');
+    try {
+      const res = await fetch(BIN_URL + '/latest', {
+        headers: { 'X-Master-Key': API_KEY }
+      });
+      if (!res.ok) throw new Error('fetch failed');
+      const data = await res.json();
+      allTips = Array.isArray(data.record) ? data.record
+              : Array.isArray(data.record.tips) ? data.record.tips
+              : [];
+      setStatus('ok', `loaded — hit ↻ refresh to see new tips`);
+      render();
+    } catch(e) {
+      console.error(e);
+      setStatus('error', 'could not load tips — check your connection');
+      document.getElementById('tips-grid').innerHTML =
+        `<div class="state-msg"><div class="icon">⚠️</div><p>Could not load tips. Try refreshing.</p></div>`;
+    }
+  }
+
+  async function saveTips() {
+    const res = await fetch(BIN_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+      body: JSON.stringify(allTips)
+    });
+    if (!res.ok) throw new Error('save failed');
+  }
+
+  async function addTip() {
+    const tipInput  = document.getElementById('tip-input');
+    const nameInput = document.getElementById('name-input');
+    const tag       = document.getElementById('tag-select').value;
+    const text      = tipInput.value.trim();
+    const author    = nameInput.value.trim() || 'anon';
+    if (!text) { tipInput.focus(); return; }
+
+    addBtn.disabled = true;
+    setStatus('loading', 'saving...');
+    try {
+      allTips.unshift({ id: Date.now(), text, tag, author });
+      await saveTips();
+      tipInput.value = '';
+      setStatus('ok', 'saved! hit ↻ refresh to see tips from others');
+      render();
+    } catch(e) {
+      console.error(e);
+      allTips.shift();
+      setStatus('error', 'could not save — try again');
+    }
+    addBtn.disabled = false;
+  }
+
+  async function deleteTip(id) {
+    if (!confirm('Delete this tip?')) return;
+    const prev = [...allTips];
+    allTips = allTips.filter(t => t.id !== id);
+    render();
+    setStatus('loading', 'deleting...');
+    try {
+      await saveTips();
+      setStatus('ok', 'deleted ✓');
+    } catch(e) {
+      console.error(e);
+      allTips = prev;
+      setStatus('error', 'could not delete — try again');
+      render();
+    }
+  }
+
+  function setFilter(tag) { activeFilter = tag; render(); }
+
+  function render() {
+    const filtered = activeFilter === 'all' ? allTips : allTips.filter(t => t.tag === activeFilter);
+    const counts   = {};
+    allTips.forEach(t => counts[t.tag] = (counts[t.tag] || 0) + 1);
+
+    const availTags = Object.keys(TAG_CONFIG).filter(k => counts[k]);
+    document.getElementById('filter-bar').innerHTML = ['all', ...availTags].map(tag => {
+      const isAll  = tag === 'all';
+      const label  = isAll ? `All (${allTips.length})` : `${TAG_CONFIG[tag].label} (${counts[tag]})`;
+      const active = activeFilter === tag ? ' active' : '';
+      return `<button class="filter-btn${active}" onclick="setFilter('${tag}')">${label}</button>`;
+    }).join('');
+
+    document.getElementById('count-label').textContent =
+      filtered.length ? `${filtered.length} tip${filtered.length !== 1 ? 's' : ''}` : '';
+
+    const grid = document.getElementById('tips-grid');
+    if (!filtered.length) {
+      grid.innerHTML = `<div class="state-msg"><div class="icon">✦</div><p>${allTips.length ? 'No tips in this category yet.' : 'No tips yet — drop the first one!'}</p></div>`;
+      return;
+    }
+    grid.innerHTML = filtered.map(t => {
+      const cfg = TAG_CONFIG[t.tag] || TAG_CONFIG.random;
+      return `
+        <article class="tip-card" style="--card-accent:${cfg.accent}">
+          <span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span>
+          <p class="tip-text">${escHtml(t.text)}</p>
+          <div class="tip-footer">
+            <span class="tip-author">${escHtml(t.author)}</span>
+            <button class="del-btn" onclick="deleteTip(${t.id})" title="Delete">✕ delete</button>
+          </div>
+        </article>`;
+    }).join('');
+  }
+
+  document.getElementById('tip-input').addEventListener('keydown', e => { if (e.key === 'Enter') addTip(); });
+
+  loadTips();
+</script>
+</body>
+</html>
+HTMLEOF
+echo "done"
