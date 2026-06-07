@@ -17,6 +17,12 @@
       --text: #1a1612;
       --muted: #7a7060;
       --accent: #c8602a;
+ 
+      --owner-bg: #1a1612;   --owner-txt: #f0c060;
+      --admin-bg: #2a1a4a;   --admin-txt: #c090ff;
+      --mod-bg:   #0a2a1a;   --mod-txt:   #60d090;
+      --pub-bg:   #2a2a2a;   --pub-txt:   #cccccc;
+ 
       --tag-tip-bg: #e8f0e0;    --tag-tip-txt: #2d5016;
       --tag-food-bg: #fdecd6;   --tag-food-txt: #7a3a0a;
       --tag-life-bg: #e0eaf8;   --tag-life-txt: #1a3d6b;
@@ -30,142 +36,353 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       background-size: 200px 200px;
     }
-    .page { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 3.5rem 2rem 5rem; }
-    .header { margin-bottom: 2.5rem; }
-    .site-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1; letter-spacing: -0.02em; color: var(--text); }
+    .page { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+ 
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 10px;
+      margin-bottom: 2rem; padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-links { display: flex; gap: 8px; }
+    .nav-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+      padding: 6px 14px; border-radius: 99px;
+      border: 1px solid var(--border-strong);
+      background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .nav-btn:hover { background: var(--surface); color: var(--text); }
+    .nav-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+ 
+    /* RANK BADGE */
+    .rank-badge {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.05em;
+      padding: 3px 10px; border-radius: 99px; text-transform: uppercase;
+    }
+    .rank-owner  { background: var(--owner-bg); color: var(--owner-txt); }
+    .rank-admin  { background: var(--admin-bg); color: var(--admin-txt); }
+    .rank-mod    { background: var(--mod-bg);   color: var(--mod-txt); }
+    .rank-public { background: var(--pub-bg);   color: var(--pub-txt); }
+ 
+    /* HEADER */
+    .header { margin-bottom: 2rem; }
+    .site-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: 1; letter-spacing: -0.02em; }
     .site-title em { font-style: italic; color: var(--accent); }
-    .subtitle { font-size: 0.875rem; color: var(--muted); margin-top: 0.5rem; }
+    .subtitle { font-size: 0.875rem; color: var(--muted); margin-top: 0.4rem; }
     .divider { margin: 1.25rem 0; border: none; border-top: 1px solid var(--border); }
-
-    .status-bar { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); margin-bottom: 1.25rem; }
+ 
+    /* STATUS */
+    .status-bar { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; }
     .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; flex-shrink: 0; transition: background 0.3s; }
     .status-dot.ok      { background: #3a9c5a; }
     .status-dot.error   { background: #c8602a; }
     .status-dot.loading { background: #f0a500; }
-
-    .add-form { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .add-form input[type="text"] {
-      flex: 1; min-width: 180px; height: 42px; padding: 0 14px;
-      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+ 
+    /* SECTION */
+    .section { margin-bottom: 2.5rem; }
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px;
+      margin-bottom: 1rem; padding: 0.75rem 1rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .section-title { font-size: 1rem; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+    .section-lock { font-size: 0.75rem; color: var(--muted); }
+ 
+    /* ADD FORM (staff) */
+    .staff-form { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+    .staff-form input[type="text"], .staff-form textarea {
+      flex: 1; min-width: 160px; padding: 8px 14px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
       background: var(--surface); border: 1px solid var(--border-strong);
       border-radius: 8px; color: var(--text); outline: none;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
-    .add-form input[type="text"]::placeholder { color: var(--muted); }
-    .add-form input[type="text"]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
-    .name-input { width: 130px; flex: none !important; min-width: unset !important; }
-    select {
-      height: 42px; padding: 0 10px;
-      font-family: 'DM Sans', sans-serif; font-size: 0.875rem;
+    .staff-form input[type="text"] { height: 38px; }
+    .staff-form input:focus, .staff-form textarea:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12);
+    }
+    select.tag-sel {
+      height: 38px; padding: 0 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
       background: var(--surface); border: 1px solid var(--border-strong);
       border-radius: 8px; color: var(--text); cursor: pointer; outline: none;
     }
-    select:focus { border-color: var(--accent); }
-    .add-btn {
-      height: 42px; padding: 0 20px;
-      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+    .post-btn {
+      height: 38px; padding: 0 18px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
       background: var(--accent); color: #fff; border: none; border-radius: 8px;
       cursor: pointer; transition: background 0.15s, transform 0.1s; white-space: nowrap;
     }
-    .add-btn:hover { background: #b5521f; }
-    .add-btn:active { transform: scale(0.97); }
-    .add-btn:disabled { background: #ccc; cursor: not-allowed; }
-    .refresh-btn {
-      height: 42px; padding: 0 16px;
-      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
-      background: transparent; color: var(--muted);
-      border: 1px solid var(--border-strong); border-radius: 8px;
-      cursor: pointer; transition: all 0.15s; white-space: nowrap;
+    .post-btn:hover { background: #b5521f; }
+    .post-btn:active { transform: scale(0.97); }
+    .post-btn:disabled { background: #ccc; cursor: not-allowed; }
+ 
+    /* PUBLIC SUBMIT FORM */
+    .public-form {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem;
     }
-    .refresh-btn:hover { background: var(--surface); color: var(--text); }
-
-    .filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
-    .filter-btn {
-      font-family: 'DM Sans', sans-serif; font-size: 0.8rem; padding: 5px 13px;
-      border-radius: 99px; border: 1px solid var(--border-strong);
-      background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s;
+    .public-form h3 { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--muted); }
+    .form-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+    .form-row input, .form-row textarea, .form-row select {
+      flex: 1; min-width: 140px; padding: 8px 12px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+      background: var(--bg); border: 1px solid var(--border-strong);
+      border-radius: 8px; color: var(--text); outline: none;
     }
-    .filter-btn:hover { background: var(--surface); color: var(--text); }
-    .filter-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-
-    .count-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; letter-spacing: 0.04em; text-transform: uppercase; }
-
-    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+    .form-row input { height: 38px; }
+    .form-row textarea { height: 72px; resize: vertical; }
+    .form-row input:focus, .form-row textarea:focus, .form-row select:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12);
+    }
+    .submit-btn {
+      height: 38px; padding: 0 18px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
+      background: var(--text); color: var(--bg); border: none; border-radius: 8px;
+      cursor: pointer; transition: opacity 0.15s; white-space: nowrap;
+    }
+    .submit-btn:hover { opacity: 0.85; }
+    .pending-notice {
+      font-size: 0.8rem; color: var(--muted); margin-top: 6px;
+      padding: 6px 10px; background: #fdecd6; border-radius: 6px; display: inline-block;
+    }
+ 
+    /* TIPS GRID */
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
     .tip-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1rem 1.2rem;
-      display: flex; flex-direction: column; gap: 10px;
-      animation: rise 0.22s ease both; position: relative; overflow: hidden;
+      border-radius: 12px; padding: 1rem 1.1rem;
+      display: flex; flex-direction: column; gap: 8px;
+      animation: rise 0.2s ease both; position: relative; overflow: hidden;
     }
+    .tip-card.pending { opacity: 0.7; border-style: dashed; }
     .tip-card::after {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
       background: var(--card-accent, transparent); border-radius: 12px 12px 0 0;
     }
-    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
     .tip-tag {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
-      padding: 3px 9px; border-radius: 99px;
+      display: inline-flex; align-items: center; gap: 3px;
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 99px;
     }
-    .tip-text { font-size: 0.92rem; line-height: 1.55; color: var(--text); flex: 1; }
-    .tip-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 2px; }
-    .tip-author { font-size: 0.75rem; color: var(--muted); font-style: italic; }
-    .del-btn {
-      background: none; border: none; cursor: pointer; color: var(--muted); font-size: 0.8rem;
-      padding: 3px 7px; border-radius: 5px; transition: all 0.12s; display: flex; align-items: center; gap: 3px;
+    .tip-text { font-size: 0.9rem; line-height: 1.5; color: var(--text); flex: 1; }
+    .tip-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+    .tip-author { font-size: 0.72rem; color: var(--muted); font-style: italic; }
+    .tip-actions { display: flex; gap: 4px; }
+    .action-btn {
+      background: none; border: none; cursor: pointer; font-size: 0.75rem;
+      padding: 2px 7px; border-radius: 5px; transition: all 0.12s;
     }
+    .del-btn { color: var(--muted); }
     .del-btn:hover { color: #c0392b; background: #fce8ec; }
-    .state-msg { grid-column: 1 / -1; text-align: center; padding: 4rem 0; color: var(--muted); }
-    .state-msg .icon { font-size: 2rem; margin-bottom: 0.75rem; }
-    .state-msg p { font-size: 0.9rem; }
-    .site-footer { margin-top: 4rem; text-align: center; font-size: 0.78rem; color: var(--muted); }
-
+    .approve-btn { color: #2d7a2d; }
+    .approve-btn:hover { background: #e8f0e0; }
+    .deny-btn { color: #c0392b; }
+    .deny-btn:hover { background: #fce8ec; }
+    .pending-tag {
+      font-size: 0.68rem; background: #fdecd6; color: #7a3a0a;
+      padding: 2px 7px; border-radius: 99px; font-weight: 500;
+    }
+ 
+    /* EMPTY */
+    .empty { text-align: center; padding: 2.5rem 0; color: var(--muted); font-size: 0.875rem; grid-column: 1/-1; }
+ 
+    /* REFRESH */
+    .refresh-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+      padding: 5px 12px; border-radius: 8px;
+      border: 1px solid var(--border-strong);
+      background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s;
+    }
+    .refresh-btn:hover { background: var(--surface); color: var(--text); }
+ 
+    /* LOGIN MODAL */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.45);
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface); border-radius: 14px;
+      padding: 2rem; width: 90%; max-width: 360px;
+      border: 1px solid var(--border);
+    }
+    .modal h2 { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.4rem; }
+    .modal p { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.2rem; }
+    .modal input {
+      width: 100%; height: 42px; padding: 0 14px; margin-bottom: 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      background: var(--bg); border: 1px solid var(--border-strong);
+      border-radius: 8px; color: var(--text); outline: none;
+    }
+    .modal input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
+    .modal-btns { display: flex; gap: 8px; }
+    .modal-login {
+      flex: 1; height: 40px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+      background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer;
+    }
+    .modal-login:hover { background: #b5521f; }
+    .modal-cancel {
+      height: 40px; padding: 0 16px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      background: transparent; border: 1px solid var(--border-strong); border-radius: 8px; cursor: pointer; color: var(--muted);
+    }
+    .modal-error { font-size: 0.8rem; color: #c0392b; margin-bottom: 8px; display: none; }
+ 
+    .site-footer { margin-top: 3rem; text-align: center; font-size: 0.78rem; color: var(--muted); }
+ 
     @media (max-width: 600px) {
-      .page { padding: 2rem 1.2rem 4rem; }
-      .name-input { width: 100%; flex: 1 1 100% !important; }
+      .page { padding: 1.5rem 1rem 4rem; }
     }
   </style>
 </head>
 <body>
+<div class="modal-overlay" id="login-modal">
+  <div class="modal">
+    <h2>Staff Login</h2>
+    <p>Enter your rank password to continue</p>
+    <p class="modal-error" id="modal-error">Incorrect password. Try again.</p>
+    <input type="password" id="modal-pw" placeholder="Password" />
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-login" onclick="tryLogin()">Login</button>
+    </div>
+  </div>
+</div>
+ 
 <main class="page">
+  <!-- NAV -->
+  <nav>
+    <div class="nav-links">
+      <a href="index.html" class="nav-btn active">📋 Tips Board</a>
+      <a href="ranks.html" class="nav-btn">🏅 Ranks</a>
+    </div>
+    <div class="nav-right">
+      <span id="rank-display" class="rank-badge rank-public">Public</span>
+      <button class="nav-btn" id="auth-btn" onclick="openModal()">Login</button>
+      <button class="refresh-btn" onclick="loadAll()">↻ Refresh</button>
+    </div>
+  </nav>
+ 
+  <!-- HEADER -->
   <header class="header">
     <h1 class="site-title">tips <em>&</em> stuff</h1>
-    <p class="subtitle">a shared board for tips, tricks, and random gems ✦ add yours below</p>
+    <p class="subtitle">a shared board for tips, tricks, and random gems ✦</p>
     <hr class="divider" />
   </header>
-
+ 
   <div class="status-bar">
     <div class="status-dot loading" id="status-dot"></div>
-    <span id="status-text">loading tips...</span>
+    <span id="status-text">loading...</span>
   </div>
-
-  <div class="add-form">
-    <input type="text" id="tip-input"  placeholder="Drop a tip or random thought..." maxlength="280" />
-    <input type="text" id="name-input" placeholder="Your name" maxlength="30" class="name-input" />
-    <select id="tag-select">
-      <option value="tip">💡 tip</option>
-      <option value="food">🍜 food</option>
-      <option value="life">✌️ life</option>
-      <option value="tech">⚡ tech</option>
-      <option value="random">🎲 random</option>
-    </select>
-    <button class="add-btn" id="add-btn" onclick="addTip()">+ Add</button>
-    <button class="refresh-btn" onclick="loadTips()">↻ Refresh</button>
+ 
+  <!-- ══ PENDING SECTION (owner/admin only) ══ -->
+  <div class="section" id="pending-section" style="display:none">
+    <div class="section-header">
+      <span class="section-title">⏳ Pending Approval <span class="section-lock">Owner &amp; Admin only</span></span>
+      <span class="rank-badge rank-admin">Review Queue</span>
+    </div>
+    <div class="tips-grid" id="pending-grid">
+      <p class="empty">No pending tips.</p>
+    </div>
   </div>
-
-  <div class="filter-bar" id="filter-bar"></div>
-  <p class="count-label" id="count-label"></p>
-  <div class="tips-grid" id="tips-grid">
-    <div class="state-msg"><div class="icon">✦</div><p>loading tips...</p></div>
+ 
+  <!-- ══ FEATURED SECTION (mod+ can post) ══ -->
+  <div class="section" id="featured-section" style="display:none">
+    <div class="section-header">
+      <span class="section-title">⭐ Featured Tips <span class="section-lock">Mod+ only</span></span>
+      <span class="rank-badge rank-mod">Mod+</span>
+    </div>
+    <div class="staff-form" id="featured-form">
+      <input type="text" id="feat-text" placeholder="Add a featured tip..." maxlength="280" />
+      <input type="text" id="feat-author" placeholder="Your name" maxlength="30" />
+      <select class="tag-sel" id="feat-tag">
+        <option value="tip">💡 tip</option>
+        <option value="food">🍜 food</option>
+        <option value="life">✌️ life</option>
+        <option value="tech">⚡ tech</option>
+        <option value="random">🎲 random</option>
+      </select>
+      <button class="post-btn" onclick="staffPost('featured')">+ Post</button>
+    </div>
+    <div class="tips-grid" id="featured-grid">
+      <p class="empty">No featured tips yet.</p>
+    </div>
   </div>
+ 
+  <!-- ══ ADMIN BOARD (admin+ can post) ══ -->
+  <div class="section" id="admin-section" style="display:none">
+    <div class="section-header">
+      <span class="section-title">🔒 Admin Board <span class="section-lock">Admin+ only</span></span>
+      <span class="rank-badge rank-admin">Admin+</span>
+    </div>
+    <div class="staff-form" id="admin-form">
+      <input type="text" id="admin-text" placeholder="Add an admin tip..." maxlength="280" />
+      <input type="text" id="admin-author" placeholder="Your name" maxlength="30" />
+      <select class="tag-sel" id="admin-tag">
+        <option value="tip">💡 tip</option>
+        <option value="food">🍜 food</option>
+        <option value="life">✌️ life</option>
+        <option value="tech">⚡ tech</option>
+        <option value="random">🎲 random</option>
+      </select>
+      <button class="post-btn" onclick="staffPost('adminboard')">+ Post</button>
+    </div>
+    <div class="tips-grid" id="adminboard-grid">
+      <p class="empty">No admin tips yet.</p>
+    </div>
+  </div>
+ 
+  <!-- ══ PUBLIC TIPS (everyone sees, submit form) ══ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">📢 Public Tips <span class="section-lock">Everyone can submit</span></span>
+      <span class="rank-badge rank-public">Public</span>
+    </div>
+ 
+    <!-- Public submit form -->
+    <div class="public-form" id="public-submit-area">
+      <h3>Submit a tip for review</h3>
+      <div class="form-row">
+        <input type="text" id="pub-name" placeholder="Your name" maxlength="30" />
+        <select id="pub-tag">
+          <option value="tip">💡 tip</option>
+          <option value="food">🍜 food</option>
+          <option value="life">✌️ life</option>
+          <option value="tech">⚡ tech</option>
+          <option value="random">🎲 random</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <textarea id="pub-text" placeholder="Write your tip here..." maxlength="280"></textarea>
+      </div>
+      <div class="form-row">
+        <button class="submit-btn" onclick="submitPublicTip()">Submit for Review</button>
+      </div>
+      <span class="pending-notice">⏳ Tips are reviewed before being posted — Owner &amp; Admins will approve or deny.</span>
+    </div>
+ 
+    <div class="tips-grid" id="public-grid">
+      <p class="empty">No approved tips yet.</p>
+    </div>
+  </div>
+ 
   <footer class="site-footer"><p>tips & stuff — shared with friends ✦</p></footer>
 </main>
-
+ 
 <script>
   const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
   const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
   const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
-
+ 
+  const PASSWORDS = { owner: '20140314', admin: '382790', mod: '23889' };
+ 
   const TAG_CONFIG = {
     tip:    { label: '💡 tip',    bg: 'var(--tag-tip-bg)',    color: 'var(--tag-tip-txt)',    accent: '#4a8a1a' },
     food:   { label: '🍜 food',   bg: 'var(--tag-food-bg)',   color: 'var(--tag-food-txt)',   accent: '#c8602a' },
@@ -173,153 +390,222 @@
     tech:   { label: '⚡ tech',   bg: 'var(--tag-tech-bg)',   color: 'var(--tag-tech-txt)',   accent: '#7a2ac8' },
     random: { label: '🎲 random', bg: 'var(--tag-random-bg)', color: 'var(--tag-random-txt)', accent: '#c82a4a' },
   };
-
-  let allTips = [];
-  let activeFilter = 'all';
-
-  const dot      = document.getElementById('status-dot');
-  const statusTx = document.getElementById('status-text');
-  const addBtn   = document.getElementById('add-btn');
-
-  function setStatus(state, msg) {
-    dot.className = 'status-dot ' + state;
-    statusTx.textContent = msg;
+ 
+  let currentRank = 'public';
+  let db = { public: [], featured: [], adminboard: [], pending: [] };
+ 
+  // ── AUTH ──
+  function openModal() { document.getElementById('login-modal').classList.add('open'); document.getElementById('modal-pw').focus(); }
+  function closeModal() { document.getElementById('login-modal').classList.remove('open'); document.getElementById('modal-pw').value = ''; document.getElementById('modal-error').style.display = 'none'; }
+  function tryLogin() {
+    const pw = document.getElementById('modal-pw').value;
+    if (pw === PASSWORDS.owner)      setRank('owner');
+    else if (pw === PASSWORDS.admin) setRank('admin');
+    else if (pw === PASSWORDS.mod)   setRank('mod');
+    else { document.getElementById('modal-error').style.display = 'block'; return; }
+    closeModal();
   }
-
+  document.getElementById('modal-pw').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+ 
+  function setRank(rank) {
+    currentRank = rank;
+    sessionStorage.setItem('rank', rank);
+    updateUI();
+  }
+ 
+  function updateUI() {
+    const rank = currentRank;
+    const labels = { owner: '👑 Owner', admin: '🛡️ Admin', mod: '🔧 Mod', public: 'Public' };
+    const classes = { owner: 'rank-owner', admin: 'rank-admin', mod: 'rank-mod', public: 'rank-public' };
+    const d = document.getElementById('rank-display');
+    d.textContent = labels[rank];
+    d.className = 'rank-badge ' + classes[rank];
+ 
+    const authBtn = document.getElementById('auth-btn');
+    if (rank !== 'public') {
+      authBtn.textContent = 'Logout';
+      authBtn.onclick = () => { currentRank = 'public'; sessionStorage.removeItem('rank'); updateUI(); renderAll(); };
+    } else {
+      authBtn.textContent = 'Login';
+      authBtn.onclick = openModal;
+    }
+ 
+    // show/hide sections
+    const isAdmin = rank === 'owner' || rank === 'admin';
+    const isMod   = rank === 'owner' || rank === 'admin' || rank === 'mod';
+    document.getElementById('pending-section').style.display  = isAdmin ? 'block' : 'none';
+    document.getElementById('featured-section').style.display = isMod   ? 'block' : 'none';
+    document.getElementById('admin-section').style.display    = isAdmin ? 'block' : 'none';
+ 
+    renderAll();
+  }
+ 
+  // ── DATA ──
   function escHtml(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-
-  // Pull tips out of whatever shape JSONBin returns
-  function extractTips(record) {
-    if (Array.isArray(record)) return record;
-    if (record && Array.isArray(record.tips)) return record.tips;
-    return [];
+ 
+  function setStatus(state, msg) {
+    document.getElementById('status-dot').className = 'status-dot ' + state;
+    document.getElementById('status-text').textContent = msg;
   }
-
-  async function loadTips() {
-    setStatus('loading', 'loading tips...');
+ 
+  async function loadAll() {
+    setStatus('loading', 'loading...');
     try {
-      const res = await fetch(BIN_URL + '/latest', {
-        headers: {
-          'X-Master-Key': API_KEY,
-          'X-Bin-Meta': 'false'
-        }
-      });
-      if (!res.ok) {
-        const txt = await res.text();
-        throw new Error('HTTP ' + res.status + ': ' + txt);
-      }
-      const data = await res.json();
-      // JSONBin wraps in { record: ... } — handle both wrapped and raw
-      const record = data.record !== undefined ? data.record : data;
-      allTips = extractTips(record);
-      setStatus('ok', 'loaded ✓ — hit ↻ refresh to see new tips from others');
-      render();
+      const res = await fetch(BIN_URL + '/latest', { headers: { 'X-Master-Key': API_KEY, 'X-Bin-Meta': 'false' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const raw = await res.json();
+      const data = raw.record !== undefined ? raw.record : raw;
+      db.public     = Array.isArray(data.public)     ? data.public     : [];
+      db.featured   = Array.isArray(data.featured)   ? data.featured   : [];
+      db.adminboard = Array.isArray(data.adminboard) ? data.adminboard : [];
+      db.pending    = Array.isArray(data.pending)    ? data.pending    : [];
+      setStatus('ok', 'loaded ✓');
+      renderAll();
     } catch(e) {
-      console.error('loadTips error:', e);
-      setStatus('error', 'could not load — check console (F12) for details');
-      document.getElementById('tips-grid').innerHTML =
-        `<div class="state-msg"><div class="icon">⚠️</div><p>Could not load tips.<br><small style="opacity:0.7">${escHtml(e.message)}</small></p></div>`;
+      console.error(e);
+      setStatus('error', 'could not load — ' + e.message);
     }
   }
-
-  async function saveTips() {
+ 
+  async function saveAll() {
     const res = await fetch(BIN_URL, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': API_KEY
-      },
-      body: JSON.stringify(allTips)
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+      body: JSON.stringify(db)
     });
-    if (!res.ok) {
-      const txt = await res.text();
-      throw new Error('HTTP ' + res.status + ': ' + txt);
-    }
+    if (!res.ok) throw new Error('HTTP ' + res.status);
   }
-
-  async function addTip() {
-    const tipInput  = document.getElementById('tip-input');
-    const nameInput = document.getElementById('name-input');
-    const tag       = document.getElementById('tag-select').value;
-    const text      = tipInput.value.trim();
-    const author    = nameInput.value.trim() || 'anon';
-    if (!text) { tipInput.focus(); return; }
-
-    addBtn.disabled = true;
-    setStatus('loading', 'saving...');
-    try {
-      allTips.unshift({ id: Date.now(), text, tag, author });
-      await saveTips();
-      tipInput.value = '';
-      setStatus('ok', 'saved ✓');
-      render();
-    } catch(e) {
-      console.error('addTip error:', e);
-      allTips.shift();
-      setStatus('error', 'could not save — ' + e.message);
-    }
-    addBtn.disabled = false;
-  }
-
-  async function deleteTip(id) {
-    if (!confirm('Delete this tip?')) return;
-    const prev = [...allTips];
-    allTips = allTips.filter(t => t.id !== id);
-    render();
-    setStatus('loading', 'deleting...');
-    try {
-      await saveTips();
-      setStatus('ok', 'deleted ✓');
-    } catch(e) {
-      console.error('deleteTip error:', e);
-      allTips = prev;
-      setStatus('error', 'could not delete — ' + e.message);
-      render();
-    }
-  }
-
-  function setFilter(tag) { activeFilter = tag; render(); }
-
-  function render() {
-    const filtered = activeFilter === 'all' ? allTips : allTips.filter(t => t.tag === activeFilter);
-    const counts   = {};
-    allTips.forEach(t => counts[t.tag] = (counts[t.tag] || 0) + 1);
-
-    const availTags = Object.keys(TAG_CONFIG).filter(k => counts[k]);
-    document.getElementById('filter-bar').innerHTML = ['all', ...availTags].map(tag => {
-      const isAll  = tag === 'all';
-      const label  = isAll ? `All (${allTips.length})` : `${TAG_CONFIG[tag].label} (${counts[tag]})`;
-      const active = activeFilter === tag ? ' active' : '';
-      return `<button class="filter-btn${active}" onclick="setFilter('${tag}')">${label}</button>`;
-    }).join('');
-
-    document.getElementById('count-label').textContent =
-      filtered.length ? `${filtered.length} tip${filtered.length !== 1 ? 's' : ''}` : '';
-
-    const grid = document.getElementById('tips-grid');
-    if (!filtered.length) {
-      grid.innerHTML = `<div class="state-msg"><div class="icon">✦</div><p>${allTips.length ? 'No tips in this category yet.' : 'No tips yet — drop the first one!'}</p></div>`;
-      return;
-    }
-    grid.innerHTML = filtered.map(t => {
-      const cfg = TAG_CONFIG[t.tag] || TAG_CONFIG.random;
+ 
+  // ── RENDER ──
+  function renderGrid(gridId, tips, canDelete, showPendingControls) {
+    const grid = document.getElementById(gridId);
+    if (!tips.length) { grid.innerHTML = '<p class="empty">Nothing here yet.</p>'; return; }
+    grid.innerHTML = tips.map(t => {
+      const cfg = TAG_CONFIG[t.tag] || TAG_CONFIG.tip;
+      const actions = [];
+      if (showPendingControls) {
+        actions.push(`<button class="action-btn approve-btn" onclick="approveTip('${t.id}')">✓ Approve</button>`);
+        actions.push(`<button class="action-btn deny-btn"    onclick="denyTip('${t.id}')">✕ Deny</button>`);
+      } else if (canDelete) {
+        actions.push(`<button class="action-btn del-btn" onclick="deleteTip('${gridId}','${t.id}')">✕ delete</button>`);
+      }
       return `
-        <article class="tip-card" style="--card-accent:${cfg.accent}">
+        <article class="tip-card${t.pending ? ' pending' : ''}" style="--card-accent:${cfg.accent}">
           <span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span>
           <p class="tip-text">${escHtml(t.text)}</p>
           <div class="tip-footer">
             <span class="tip-author">${escHtml(t.author)}</span>
-            <button class="del-btn" onclick="deleteTip(${t.id})" title="Delete">✕ delete</button>
+            <div class="tip-actions">${actions.join('')}</div>
           </div>
         </article>`;
     }).join('');
   }
-
-  document.getElementById('tip-input').addEventListener('keydown', e => { if (e.key === 'Enter') addTip(); });
-
-  loadTips();
+ 
+  function renderAll() {
+    const rank    = currentRank;
+    const isAdmin = rank === 'owner' || rank === 'admin';
+    const isMod   = rank === 'owner' || rank === 'admin' || rank === 'mod';
+ 
+    renderGrid('public-grid',     db.public,     isAdmin, false);
+    renderGrid('featured-grid',   db.featured,   isMod,   false);
+    renderGrid('adminboard-grid', db.adminboard, isAdmin, false);
+    renderGrid('pending-grid',    db.pending,    false,   true);
+  }
+ 
+  // ── ACTIONS ──
+  async function submitPublicTip() {
+    const text   = document.getElementById('pub-text').value.trim();
+    const author = document.getElementById('pub-name').value.trim() || 'anon';
+    const tag    = document.getElementById('pub-tag').value;
+    if (!text) { document.getElementById('pub-text').focus(); return; }
+    setStatus('loading', 'submitting...');
+    try {
+      db.pending.unshift({ id: Date.now(), text, tag, author, pending: true });
+      await saveAll();
+      document.getElementById('pub-text').value = '';
+      document.getElementById('pub-name').value = '';
+      setStatus('ok', 'submitted ✓ — waiting for approval');
+    } catch(e) {
+      db.pending.shift();
+      setStatus('error', 'could not submit — ' + e.message);
+    }
+  }
+ 
+  async function staffPost(section) {
+    const textEl   = document.getElementById(section === 'featured' ? 'feat-text'   : 'admin-text');
+    const authorEl = document.getElementById(section === 'featured' ? 'feat-author' : 'admin-author');
+    const tagEl    = document.getElementById(section === 'featured' ? 'feat-tag'    : 'admin-tag');
+    const text   = textEl.value.trim();
+    const author = authorEl.value.trim() || 'Staff';
+    const tag    = tagEl.value;
+    if (!text) { textEl.focus(); return; }
+    setStatus('loading', 'posting...');
+    try {
+      db[section].unshift({ id: Date.now(), text, tag, author });
+      await saveAll();
+      textEl.value = '';
+      setStatus('ok', 'posted ✓');
+      renderAll();
+    } catch(e) {
+      db[section].shift();
+      setStatus('error', 'could not post — ' + e.message);
+    }
+  }
+ 
+  async function approveTip(id) {
+    const tip = db.pending.find(t => t.id == id);
+    if (!tip) return;
+    setStatus('loading', 'approving...');
+    try {
+      db.pending    = db.pending.filter(t => t.id != id);
+      db.public.unshift({ ...tip, pending: false });
+      await saveAll();
+      setStatus('ok', 'approved ✓');
+      renderAll();
+    } catch(e) {
+      setStatus('error', 'could not approve — ' + e.message);
+      await loadAll();
+    }
+  }
+ 
+  async function denyTip(id) {
+    if (!confirm('Deny and delete this tip?')) return;
+    setStatus('loading', 'denying...');
+    try {
+      db.pending = db.pending.filter(t => t.id != id);
+      await saveAll();
+      setStatus('ok', 'denied ✓');
+      renderAll();
+    } catch(e) {
+      setStatus('error', 'could not deny — ' + e.message);
+      await loadAll();
+    }
+  }
+ 
+  async function deleteTip(gridId, id) {
+    if (!confirm('Delete this tip?')) return;
+    const section = gridId.replace('-grid', '');
+    const prev = [...db[section]];
+    db[section] = db[section].filter(t => t.id != id);
+    renderAll();
+    setStatus('loading', 'deleting...');
+    try {
+      await saveAll();
+      setStatus('ok', 'deleted ✓');
+    } catch(e) {
+      db[section] = prev;
+      setStatus('error', 'could not delete — ' + e.message);
+      renderAll();
+    }
+  }
+ 
+  // ── INIT ──
+  const saved = sessionStorage.getItem('rank');
+  if (saved) currentRank = saved;
+  updateUI();
+  loadAll();
 </script>
 </body>
 </html>
