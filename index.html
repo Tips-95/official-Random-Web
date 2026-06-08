@@ -1,4 +1,3 @@
-cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +31,6 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
       background-size: 200px 200px;
     }
     .page { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 3rem 2rem 5rem; }
-
     nav {
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; padding-bottom: 1rem;
@@ -47,28 +45,20 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
     }
     .nav-btn:hover { background: var(--surface); color: var(--text); }
     .nav-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-    .nav-right { display: flex; align-items: center; gap: 10px; }
-    .rank-badge {
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.05em;
-      padding: 3px 10px; border-radius: 99px; text-transform: uppercase;
-    }
+    .nav-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .rank-badge { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.05em; padding: 3px 10px; border-radius: 99px; text-transform: uppercase; }
     .rank-owner  { background: var(--owner-bg); color: var(--owner-txt); }
     .rank-admin  { background: var(--admin-bg); color: var(--admin-txt); }
     .rank-mod    { background: var(--mod-bg);   color: var(--mod-txt); }
     .rank-public { background: var(--pub-bg);   color: var(--pub-txt); }
-
     .header { margin-bottom: 2rem; }
     .site-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: 1; letter-spacing: -0.02em; }
     .site-title em { font-style: italic; color: var(--accent); }
     .subtitle { font-size: 0.875rem; color: var(--muted); margin-top: 0.4rem; }
     .divider { margin: 1.25rem 0; border: none; border-top: 1px solid var(--border); }
-
     .status-bar { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; }
     .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; flex-shrink: 0; transition: background 0.3s; }
-    .status-dot.ok      { background: #3a9c5a; }
-    .status-dot.error   { background: #c8602a; }
-    .status-dot.loading { background: #f0a500; }
-
+    .status-dot.ok { background: #3a9c5a; } .status-dot.error { background: #c8602a; } .status-dot.loading { background: #f0a500; }
     .section { margin-bottom: 2.5rem; }
     .section-header {
       display: flex; align-items: center; justify-content: space-between;
@@ -77,14 +67,12 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
     }
     .section-title { font-size: 1rem; font-weight: 500; display: flex; align-items: center; gap: 8px; }
     .section-lock { font-size: 0.75rem; color: var(--muted); }
-
     .staff-form { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
     .staff-form input[type="text"] {
       flex: 1; min-width: 160px; height: 38px; padding: 0 14px;
       font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
       background: var(--surface); border: 1px solid var(--border-strong);
       border-radius: 8px; color: var(--text); outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
     }
     .staff-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
     select.tag-sel {
@@ -97,33 +85,17 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
       background: var(--accent); color: #fff; border: none; border-radius: 8px;
       cursor: pointer; transition: background 0.15s, transform 0.1s; white-space: nowrap;
     }
-    .post-btn:hover { background: #b5521f; }
-    .post-btn:active { transform: scale(0.97); }
-    .post-btn:disabled { background: #ccc; cursor: not-allowed; }
-
-    /* RECOMMENDED TIPS — special style */
+    .post-btn:hover { background: #b5521f; } .post-btn:active { transform: scale(0.97); } .post-btn:disabled { background: #ccc; cursor: not-allowed; }
     .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
     .rec-card {
       background: linear-gradient(135deg, #fffbf0, #fff8e8);
-      border: 1px solid rgba(200,96,42,0.25);
-      border-radius: 12px; padding: 1rem 1.1rem;
+      border: 1px solid rgba(200,96,42,0.25); border-radius: 12px; padding: 1rem 1.1rem;
       display: flex; flex-direction: column; gap: 8px;
       animation: rise 0.2s ease both; position: relative; overflow: hidden;
     }
-    .rec-card::before {
-      content: '⭐'; position: absolute; top: 8px; right: 10px;
-      font-size: 0.7rem; opacity: 0.5;
-    }
-    .rec-card::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--accent); border-radius: 12px 12px 0 0;
-    }
-
-    /* PUBLIC FORM */
-    .public-form {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem;
-    }
+    .rec-card::before { content: '⭐'; position: absolute; top: 8px; right: 10px; font-size: 0.7rem; opacity: 0.5; }
+    .rec-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); border-radius: 12px 12px 0 0; }
+    .public-form { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
     .public-form h3 { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--muted); }
     .form-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
     .form-row input, .form-row textarea, .form-row select {
@@ -132,86 +104,44 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
       background: var(--bg); border: 1px solid var(--border-strong);
       border-radius: 8px; color: var(--text); outline: none;
     }
-    .form-row input { height: 38px; }
-    .form-row textarea { height: 72px; resize: vertical; }
-    .form-row input:focus, .form-row textarea:focus, .form-row select:focus {
-      border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12);
-    }
+    .form-row input { height: 38px; } .form-row textarea { height: 72px; resize: vertical; }
+    .form-row input:focus, .form-row textarea:focus, .form-row select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
     .submit-btn {
       height: 38px; padding: 0 18px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
-      background: var(--text); color: var(--bg); border: none; border-radius: 8px;
-      cursor: pointer; transition: opacity 0.15s; white-space: nowrap;
+      background: var(--text); color: var(--bg); border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; white-space: nowrap;
     }
     .submit-btn:hover { opacity: 0.85; }
-    .pending-notice {
-      font-size: 0.8rem; color: var(--muted); margin-top: 6px;
-      padding: 6px 10px; background: #fdecd6; border-radius: 6px; display: inline-block;
-    }
-
-    /* TIPS GRID */
+    .pending-notice { font-size: 0.8rem; color: var(--muted); margin-top: 6px; padding: 6px 10px; background: #fdecd6; border-radius: 6px; display: inline-block; }
     .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
     .tip-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1rem 1.1rem;
-      display: flex; flex-direction: column; gap: 8px;
-      animation: rise 0.2s ease both; position: relative; overflow: hidden;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem;
+      display: flex; flex-direction: column; gap: 8px; animation: rise 0.2s ease both; position: relative; overflow: hidden;
     }
     @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-    .tip-card::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--card-accent, transparent); border-radius: 12px 12px 0 0;
-    }
-    .tip-tag {
-      display: inline-flex; align-items: center; gap: 3px;
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
-      padding: 2px 8px; border-radius: 99px;
-    }
+    .tip-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--card-accent, transparent); border-radius: 12px 12px 0 0; }
+    .tip-tag { display: inline-flex; align-items: center; gap: 3px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; }
     .tip-text { font-size: 0.9rem; line-height: 1.5; color: var(--text); flex: 1; }
     .tip-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
     .tip-author { font-size: 0.72rem; color: var(--muted); font-style: italic; }
     .tip-actions { display: flex; gap: 4px; }
     .action-btn { background: none; border: none; cursor: pointer; font-size: 0.75rem; padding: 2px 7px; border-radius: 5px; transition: all 0.12s; }
-    .del-btn { color: var(--muted); }
-    .del-btn:hover { color: #c0392b; background: #fce8ec; }
+    .del-btn { color: var(--muted); } .del-btn:hover { color: #c0392b; background: #fce8ec; }
     .approve-btn { color: #2d7a2d; } .approve-btn:hover { background: #e8f0e0; }
     .deny-btn    { color: #c0392b; } .deny-btn:hover    { background: #fce8ec; }
-
     .empty { text-align: center; padding: 2.5rem 0; color: var(--muted); font-size: 0.875rem; grid-column: 1/-1; }
-
-    .refresh-btn {
-      font-family: 'DM Sans', sans-serif; font-size: 0.82rem; padding: 5px 12px; border-radius: 8px;
-      border: 1px solid var(--border-strong); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s;
-    }
+    .refresh-btn { font-family: 'DM Sans', sans-serif; font-size: 0.82rem; padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border-strong); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s; }
     .refresh-btn:hover { background: var(--surface); color: var(--text); }
-
-    .modal-overlay {
-      display: none; position: fixed; inset: 0; z-index: 100;
-      background: rgba(0,0,0,0.45); align-items: center; justify-content: center;
-    }
+    .modal-overlay { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.45); align-items: center; justify-content: center; }
     .modal-overlay.open { display: flex; }
-    .modal {
-      background: var(--surface); border-radius: 14px;
-      padding: 2rem; width: 90%; max-width: 360px; border: 1px solid var(--border);
-    }
+    .modal { background: var(--surface); border-radius: 14px; padding: 2rem; width: 90%; max-width: 360px; border: 1px solid var(--border); }
     .modal h2 { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.4rem; }
     .modal p  { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.2rem; }
-    .modal input {
-      width: 100%; height: 42px; padding: 0 14px; margin-bottom: 10px;
-      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
-      background: var(--bg); border: 1px solid var(--border-strong);
-      border-radius: 8px; color: var(--text); outline: none;
-    }
+    .modal input { width: 100%; height: 42px; padding: 0 14px; margin-bottom: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); outline: none; }
     .modal input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
     .modal-btns { display: flex; gap: 8px; }
-    .modal-login {
-      flex: 1; height: 40px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
-      background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer;
-    }
+    .modal-login { flex: 1; height: 40px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer; }
     .modal-login:hover { background: #b5521f; }
-    .modal-cancel {
-      height: 40px; padding: 0 16px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
-      background: transparent; border: 1px solid var(--border-strong); border-radius: 8px; cursor: pointer; color: var(--muted);
-    }
+    .modal-cancel { height: 40px; padding: 0 16px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: transparent; border: 1px solid var(--border-strong); border-radius: 8px; cursor: pointer; color: var(--muted); }
     .modal-error { font-size: 0.8rem; color: #c0392b; margin-bottom: 8px; display: none; }
     .site-footer { margin-top: 3rem; text-align: center; font-size: 0.78rem; color: var(--muted); }
     @media (max-width: 600px) { .page { padding: 1.5rem 1rem 4rem; } }
@@ -230,13 +160,13 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
     </div>
   </div>
 </div>
-
 <main class="page">
   <nav>
     <div class="nav-links">
       <a href="index.html" class="nav-btn active">📋 Tips Board</a>
       <a href="ranks.html" class="nav-btn">🏅 Ranks</a>
       <a href="rules.html" class="nav-btn">📜 Rules</a>
+      <a href="banlist.html" class="nav-btn">🚫 Ban List</a>
     </div>
     <div class="nav-right">
       <span id="rank-display" class="rank-badge rank-public">Public</span>
@@ -244,19 +174,17 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
       <button class="refresh-btn" onclick="loadAll()">↻ Refresh</button>
     </div>
   </nav>
-
   <header class="header">
     <h1 class="site-title">tips <em>&</em> stuff</h1>
     <p class="subtitle">a shared board for tips, tricks, and random gems ✦</p>
     <hr class="divider" />
   </header>
-
   <div class="status-bar">
     <div class="status-dot loading" id="status-dot"></div>
     <span id="status-text">loading...</span>
   </div>
 
-  <!-- PENDING (owner/admin) -->
+  <!-- PENDING -->
   <div class="section" id="pending-section" style="display:none">
     <div class="section-header">
       <span class="section-title">⏳ Pending Approval <span class="section-lock">Owner &amp; Admin only</span></span>
@@ -265,20 +193,18 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
     <div class="tips-grid" id="pending-grid"><p class="empty">No pending tips.</p></div>
   </div>
 
-  <!-- RECOMMENDED TIPS (owner/admin can add) -->
-  <div class="section" id="recommended-section">
+  <!-- RECOMMENDED -->
+  <div class="section">
     <div class="section-header">
       <span class="section-title">⭐ Recommended Tips <span class="section-lock">Curated by Owner &amp; Admins</span></span>
       <span class="rank-badge rank-admin">Staff Picks</span>
     </div>
     <div class="staff-form" id="rec-form" style="display:none">
-      <input type="text" id="rec-text"   placeholder="Add a recommended tip..." maxlength="280" />
+      <input type="text" id="rec-text" placeholder="Add a recommended tip..." maxlength="280" />
       <input type="text" id="rec-author" placeholder="Your name" maxlength="30" />
       <select class="tag-sel" id="rec-tag">
-        <option value="tip">💡 tip</option>
-        <option value="food">🍜 food</option>
-        <option value="life">✌️ life</option>
-        <option value="tech">⚡ tech</option>
+        <option value="tip">💡 tip</option><option value="food">🍜 food</option>
+        <option value="life">✌️ life</option><option value="tech">⚡ tech</option>
         <option value="random">🎲 random</option>
       </select>
       <button class="post-btn" onclick="staffPost('recommended')">+ Post</button>
@@ -286,20 +212,18 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
     <div class="rec-grid" id="recommended-grid"><p class="empty">No recommended tips yet.</p></div>
   </div>
 
-  <!-- FEATURED (mod+) -->
+  <!-- FEATURED -->
   <div class="section" id="featured-section" style="display:none">
     <div class="section-header">
       <span class="section-title">🔥 Featured Tips <span class="section-lock">Mod+ only</span></span>
       <span class="rank-badge rank-mod">Mod+</span>
     </div>
     <div class="staff-form">
-      <input type="text" id="feat-text"   placeholder="Add a featured tip..." maxlength="280" />
+      <input type="text" id="feat-text" placeholder="Add a featured tip..." maxlength="280" />
       <input type="text" id="feat-author" placeholder="Your name" maxlength="30" />
       <select class="tag-sel" id="feat-tag">
-        <option value="tip">💡 tip</option>
-        <option value="food">🍜 food</option>
-        <option value="life">✌️ life</option>
-        <option value="tech">⚡ tech</option>
+        <option value="tip">💡 tip</option><option value="food">🍜 food</option>
+        <option value="life">✌️ life</option><option value="tech">⚡ tech</option>
         <option value="random">🎲 random</option>
       </select>
       <button class="post-btn" onclick="staffPost('featured')">+ Post</button>
@@ -307,20 +231,18 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
     <div class="tips-grid" id="featured-grid"><p class="empty">No featured tips yet.</p></div>
   </div>
 
-  <!-- ADMIN BOARD (admin+) -->
+  <!-- ADMIN BOARD -->
   <div class="section" id="admin-section" style="display:none">
     <div class="section-header">
       <span class="section-title">🔒 Admin Board <span class="section-lock">Admin+ only</span></span>
       <span class="rank-badge rank-admin">Admin+</span>
     </div>
     <div class="staff-form">
-      <input type="text" id="admin-text"   placeholder="Add an admin tip..." maxlength="280" />
+      <input type="text" id="admin-text" placeholder="Add an admin tip..." maxlength="280" />
       <input type="text" id="admin-author" placeholder="Your name" maxlength="30" />
       <select class="tag-sel" id="admin-tag">
-        <option value="tip">💡 tip</option>
-        <option value="food">🍜 food</option>
-        <option value="life">✌️ life</option>
-        <option value="tech">⚡ tech</option>
+        <option value="tip">💡 tip</option><option value="food">🍜 food</option>
+        <option value="life">✌️ life</option><option value="tech">⚡ tech</option>
         <option value="random">🎲 random</option>
       </select>
       <button class="post-btn" onclick="staffPost('adminboard')">+ Post</button>
@@ -339,33 +261,24 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
       <div class="form-row">
         <input type="text" id="pub-name" placeholder="Your name" maxlength="30" />
         <select id="pub-tag">
-          <option value="tip">💡 tip</option>
-          <option value="food">🍜 food</option>
-          <option value="life">✌️ life</option>
-          <option value="tech">⚡ tech</option>
+          <option value="tip">💡 tip</option><option value="food">🍜 food</option>
+          <option value="life">✌️ life</option><option value="tech">⚡ tech</option>
           <option value="random">🎲 random</option>
         </select>
       </div>
-      <div class="form-row">
-        <textarea id="pub-text" placeholder="Write your tip here..." maxlength="280"></textarea>
-      </div>
-      <div class="form-row">
-        <button class="submit-btn" onclick="submitPublicTip()">Submit for Review</button>
-      </div>
+      <div class="form-row"><textarea id="pub-text" placeholder="Write your tip here..." maxlength="280"></textarea></div>
+      <div class="form-row"><button class="submit-btn" onclick="submitPublicTip()">Submit for Review</button></div>
       <span class="pending-notice">⏳ Tips are reviewed before being posted — Owner &amp; Admins will approve or deny.</span>
     </div>
     <div class="tips-grid" id="public-grid"><p class="empty">No approved tips yet.</p></div>
   </div>
-
   <footer class="site-footer"><p>tips & stuff — shared with friends ✦</p></footer>
 </main>
-
 <script>
   const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
   const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
   const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
   const PASSWORDS = { owner: '20140314', admin: '382790', mod: '23889' };
-
   const TAG_CONFIG = {
     tip:    { label: '💡 tip',    bg: 'var(--tag-tip-bg)',    color: 'var(--tag-tip-txt)',    accent: '#4a8a1a' },
     food:   { label: '🍜 food',   bg: 'var(--tag-food-bg)',   color: 'var(--tag-food-txt)',   accent: '#c8602a' },
@@ -374,8 +287,27 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
     random: { label: '🎲 random', bg: 'var(--tag-random-bg)', color: 'var(--tag-random-txt)', accent: '#c82a4a' },
   };
 
+  const SEED_TIPS = {
+    recommended: [
+      { id: 'r1', text: 'Drink a glass of water first thing in the morning before anything else. Your body is dehydrated after sleep.', tag: 'life', author: 'Owner' },
+      { id: 'r2', text: 'Add a pinch of salt to your coffee grounds before brewing — it cuts bitterness without changing the flavor.', tag: 'food', author: 'Owner' },
+      { id: 'r3', text: 'Press Ctrl+Shift+T to instantly reopen a closed browser tab.', tag: 'tech', author: 'Owner' },
+      { id: 'r4', text: 'If you can\'t decide between two options, flip a coin — not to let chance decide, but to notice which outcome you\'re hoping for.', tag: 'random', author: 'Owner' },
+    ],
+    public: [
+      { id: 'p1', text: 'Make your bed every morning. It starts your day with a small win and makes your room feel instantly cleaner.', tag: 'life', author: 'Admin' },
+      { id: 'p2', text: 'Store fresh herbs like flowers — trim the stems and put them in a glass of water in the fridge. They last 2x longer.', tag: 'food', author: 'Admin' },
+      { id: 'p3', text: 'Use "focus mode" on your phone during meals. Even 20 minutes of undistracted eating improves digestion and enjoyment.', tag: 'life', author: 'Admin' },
+      { id: 'p4', text: 'Google anything followed by "site:reddit.com" for honest real-world reviews and opinions on any topic.', tag: 'tech', author: 'Admin' },
+      { id: 'p5', text: 'Freeze overripe bananas — they\'re perfect for smoothies and banana bread whenever you need them.', tag: 'food', author: 'Admin' },
+      { id: 'p6', text: 'If you\'re bored, clean something. You won\'t be bored anymore and your space will be cleaner.', tag: 'random', author: 'Admin' },
+      { id: 'p7', text: 'Use dark mode everywhere you can. Easier on the eyes at night and saves battery on OLED screens.', tag: 'tech', author: 'Admin' },
+      { id: 'p8', text: 'Tell people when you appreciate them. Most people never say it out loud.', tag: 'life', author: 'Admin' },
+    ]
+  };
+
   let currentRank = 'public';
-  let db = { public: [], featured: [], adminboard: [], pending: [], recommended: [] };
+  let db = { public: [], featured: [], adminboard: [], pending: [], recommended: [], banlist: [], rules: [], members: [] };
 
   function openModal()  { document.getElementById('login-modal').classList.add('open'); document.getElementById('modal-pw').focus(); }
   function closeModal() { document.getElementById('login-modal').classList.remove('open'); document.getElementById('modal-pw').value = ''; document.getElementById('modal-error').style.display = 'none'; }
@@ -388,7 +320,6 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
     closeModal();
   }
   document.getElementById('modal-pw').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
-
   function setRank(rank) { currentRank = rank; sessionStorage.setItem('rank', rank); updateUI(); }
 
   function updateUI() {
@@ -402,7 +333,6 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
       authBtn.textContent = 'Logout';
       authBtn.onclick = () => { currentRank = 'public'; sessionStorage.removeItem('rank'); updateUI(); renderAll(); };
     } else { authBtn.textContent = 'Login'; authBtn.onclick = openModal; }
-
     const isAdmin = rank === 'owner' || rank === 'admin';
     const isMod   = rank === 'owner' || rank === 'admin' || rank === 'mod';
     document.getElementById('pending-section').style.display  = isAdmin ? 'block' : 'none';
@@ -412,10 +342,7 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
     renderAll();
   }
 
-  function setStatus(state, msg) {
-    document.getElementById('status-dot').className = 'status-dot ' + state;
-    document.getElementById('status-text').textContent = msg;
-  }
+  function setStatus(state, msg) { document.getElementById('status-dot').className = 'status-dot ' + state; document.getElementById('status-text').textContent = msg; }
   function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
   async function loadAll() {
@@ -423,60 +350,63 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
     try {
       const res = await fetch(BIN_URL + '/latest', { headers: { 'X-Master-Key': API_KEY, 'X-Bin-Meta': 'false' } });
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      const raw = await res.json();
+      const raw  = await res.json();
       const data = raw.record !== undefined ? raw.record : raw;
       db.public      = Array.isArray(data.public)      ? data.public      : [];
       db.featured    = Array.isArray(data.featured)    ? data.featured    : [];
       db.adminboard  = Array.isArray(data.adminboard)  ? data.adminboard  : [];
       db.pending     = Array.isArray(data.pending)     ? data.pending     : [];
       db.recommended = Array.isArray(data.recommended) ? data.recommended : [];
+      db.banlist     = Array.isArray(data.banlist)     ? data.banlist     : [];
+      db.rules       = Array.isArray(data.rules)       ? data.rules       : [];
+      db.members     = Array.isArray(data.members)     ? data.members     : [];
+
+      // Seed tips if both sections are empty (first time load)
+      let needsSave = false;
+      if (db.recommended.length === 0) { db.recommended = SEED_TIPS.recommended; needsSave = true; }
+      if (db.public.length === 0)      { db.public      = SEED_TIPS.public;      needsSave = true; }
+      if (needsSave) await saveAll();
+
       setStatus('ok', 'loaded ✓ — hit ↻ to see new tips');
       renderAll();
     } catch(e) { console.error(e); setStatus('error', 'could not load — ' + e.message); }
   }
 
   async function saveAll() {
-    const res = await fetch(BIN_URL, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
-      body: JSON.stringify(db)
-    });
+    const res = await fetch(BIN_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY }, body: JSON.stringify(db) });
     if (!res.ok) throw new Error('HTTP ' + res.status);
   }
 
   function renderGrid(gridId, tips, canDelete, showPendingControls, isRec) {
     const grid = document.getElementById(gridId);
     if (!tips || !tips.length) { grid.innerHTML = '<p class="empty">Nothing here yet.</p>'; return; }
-    const rank    = currentRank;
-    const isAdmin = rank === 'owner' || rank === 'admin';
-    const isMod   = rank === 'owner' || rank === 'admin' || rank === 'mod';
+    const isAdmin = currentRank === 'owner' || currentRank === 'admin';
+    const isMod   = currentRank === 'owner' || currentRank === 'admin' || currentRank === 'mod';
     grid.innerHTML = tips.map(t => {
       const cfg = TAG_CONFIG[t.tag] || TAG_CONFIG.tip;
       const actions = [];
       if (showPendingControls && isAdmin) {
         actions.push(`<button class="action-btn approve-btn" onclick="approveTip('${t.id}')">✓ Approve</button>`);
-        actions.push(`<button class="action-btn deny-btn"    onclick="denyTip('${t.id}')">✕ Deny</button>`);
+        actions.push(`<button class="action-btn deny-btn" onclick="denyTip('${t.id}')">✕ Deny</button>`);
       } else if (canDelete) {
         actions.push(`<button class="action-btn del-btn" onclick="deleteTip('${gridId}','${t.id}')">✕ delete</button>`);
       }
       const cardClass = isRec ? 'rec-card' : 'tip-card';
       const styleAttr = isRec ? '' : `style="--card-accent:${cfg.accent}"`;
-      return `
-        <article class="${cardClass}" ${styleAttr}>
-          <span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span>
-          <p class="tip-text">${escHtml(t.text)}</p>
-          <div class="tip-footer">
-            <span class="tip-author">${escHtml(t.author)}</span>
-            <div class="tip-actions">${actions.join('')}</div>
-          </div>
-        </article>`;
+      return `<article class="${cardClass}" ${styleAttr}>
+        <span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span>
+        <p class="tip-text">${escHtml(t.text)}</p>
+        <div class="tip-footer">
+          <span class="tip-author">${escHtml(t.author)}</span>
+          <div class="tip-actions">${actions.join('')}</div>
+        </div>
+      </article>`;
     }).join('');
   }
 
   function renderAll() {
-    const rank    = currentRank;
-    const isAdmin = rank === 'owner' || rank === 'admin';
-    const isMod   = rank === 'owner' || rank === 'admin' || rank === 'mod';
+    const isAdmin = currentRank === 'owner' || currentRank === 'admin';
+    const isMod   = currentRank === 'owner' || currentRank === 'admin' || currentRank === 'mod';
     renderGrid('recommended-grid', db.recommended, isAdmin, false, true);
     renderGrid('public-grid',      db.public,      isAdmin, false, false);
     renderGrid('featured-grid',    db.featured,    isMod,   false, false);
@@ -485,9 +415,9 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
   }
 
   async function submitPublicTip() {
-    const text   = document.getElementById('pub-text').value.trim();
+    const text = document.getElementById('pub-text').value.trim();
     const author = document.getElementById('pub-name').value.trim() || 'anon';
-    const tag    = document.getElementById('pub-tag').value;
+    const tag  = document.getElementById('pub-tag').value;
     if (!text) { document.getElementById('pub-text').focus(); return; }
     setStatus('loading', 'submitting...');
     try {
@@ -502,23 +432,20 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
   async function staffPost(section) {
     const map = { recommended: ['rec-text','rec-author','rec-tag'], featured: ['feat-text','feat-author','feat-tag'], adminboard: ['admin-text','admin-author','admin-tag'] };
     const [ti, ai, gi] = map[section];
-    const text   = document.getElementById(ti).value.trim();
+    const text = document.getElementById(ti).value.trim();
     const author = document.getElementById(ai).value.trim() || 'Staff';
-    const tag    = document.getElementById(gi).value;
+    const tag  = document.getElementById(gi).value;
     if (!text) { document.getElementById(ti).focus(); return; }
     setStatus('loading', 'posting...');
     try {
       db[section].unshift({ id: Date.now(), text, tag, author });
-      await saveAll();
-      document.getElementById(ti).value = '';
-      setStatus('ok', 'posted ✓');
-      renderAll();
+      await saveAll(); document.getElementById(ti).value = '';
+      setStatus('ok', 'posted ✓'); renderAll();
     } catch(e) { db[section].shift(); setStatus('error', 'could not post — ' + e.message); }
   }
 
   async function approveTip(id) {
-    const tip = db.pending.find(t => t.id == id);
-    if (!tip) return;
+    const tip = db.pending.find(t => t.id == id); if (!tip) return;
     setStatus('loading', 'approving...');
     try {
       db.pending = db.pending.filter(t => t.id != id);
@@ -540,8 +467,7 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
     if (!confirm('Delete this tip?')) return;
     const section = gridId.replace('-grid', '');
     const prev = [...db[section]];
-    db[section] = db[section].filter(t => t.id != id);
-    renderAll();
+    db[section] = db[section].filter(t => t.id != id); renderAll();
     setStatus('loading', 'deleting...');
     try { await saveAll(); setStatus('ok', 'deleted ✓'); }
     catch(e) { db[section] = prev; setStatus('error', 'could not delete — ' + e.message); renderAll(); }
@@ -549,8 +475,7 @@ cat > /mnt/user-data/outputs/tips-site/index.html << 'HTMLEOF'
 
   const saved = sessionStorage.getItem('rank');
   if (saved) currentRank = saved;
-  updateUI();
-  loadAll();
+  updateUI(); loadAll();
 </script>
 </body>
 </html>
