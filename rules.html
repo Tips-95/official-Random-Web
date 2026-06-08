@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rules ✦ tips & stuff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f2eb;
+      --surface: #fffdf8;
+      --border: rgba(60,50,30,0.12);
+      --border-strong: rgba(60,50,30,0.22);
+      --text: #1a1612;
+      --muted: #7a7060;
+      --accent: #c8602a;
+      --owner-bg: #1a1612; --owner-txt: #f0c060;
+      --admin-bg: #2a1a4a; --admin-txt: #c090ff;
+      --mod-bg:   #0a2a1a; --mod-txt:   #60d090;
+      --pub-bg:   #2a2a2a; --pub-txt:   #cccccc;
+    }
+    html { font-size: 16px; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+    .page { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+ 
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+      padding: 6px 14px; border-radius: 99px;
+      border: 1px solid var(--border-strong);
+      background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .nav-btn:hover { background: var(--surface); color: var(--text); }
+    .nav-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .rank-badge {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.05em;
+      padding: 3px 10px; border-radius: 99px; text-transform: uppercase;
+    }
+    .rank-owner  { background: var(--owner-bg); color: var(--owner-txt); }
+    .rank-admin  { background: var(--admin-bg); color: var(--admin-txt); }
+    .rank-mod    { background: var(--mod-bg);   color: var(--mod-txt); }
+    .rank-public { background: var(--pub-bg);   color: var(--pub-txt); }
+ 
+    /* HEADER */
+    .header { margin-bottom: 2rem; }
+    .site-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: 1; letter-spacing: -0.02em; }
+    .site-title em { font-style: italic; color: var(--accent); }
+    .subtitle { font-size: 0.875rem; color: var(--muted); margin-top: 0.4rem; }
+    .divider { margin: 1.25rem 0; border: none; border-top: 1px solid var(--border); }
+ 
+    /* STATUS */
+    .status-bar { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; flex-shrink: 0; transition: background 0.3s; }
+    .status-dot.ok      { background: #3a9c5a; }
+    .status-dot.error   { background: #c8602a; }
+    .status-dot.loading { background: #f0a500; }
+ 
+    /* RULES LIST */
+    .rules-container { display: flex; flex-direction: column; gap: 12px; margin-bottom: 2rem; }
+    .rule-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.1rem 1.3rem;
+      display: flex; align-items: flex-start; gap: 14px;
+      animation: rise 0.2s ease both;
+      position: relative;
+    }
+    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .rule-number {
+      font-family: 'Instrument Serif', serif; font-size: 1.8rem; font-style: italic;
+      color: var(--accent); line-height: 1; flex-shrink: 0; min-width: 32px;
+    }
+    .rule-content { flex: 1; }
+    .rule-title { font-size: 0.95rem; font-weight: 500; margin-bottom: 3px; }
+    .rule-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+    .rule-actions { display: flex; gap: 6px; margin-left: auto; flex-shrink: 0; }
+    .rule-edit-btn, .rule-del-btn {
+      font-size: 0.75rem; padding: 3px 10px; border-radius: 6px;
+      border: 1px solid var(--border-strong); background: transparent;
+      color: var(--muted); cursor: pointer; transition: all 0.12s;
+    }
+    .rule-edit-btn:hover { background: var(--bg); color: var(--text); }
+    .rule-del-btn:hover  { background: #fce8ec; color: #c0392b; border-color: #fce8ec; }
+ 
+    /* EMPTY */
+    .no-rules {
+      text-align: center; padding: 3rem 0; color: var(--muted); font-size: 0.9rem;
+      background: var(--surface); border: 1px dashed var(--border-strong); border-radius: 12px;
+    }
+    .no-rules .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+ 
+    /* ADD / EDIT RULE FORM (owner only) */
+    .add-rule-section {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2rem;
+    }
+    .add-rule-section h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.25rem; }
+    .add-rule-section p  { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; }
+    .rule-form { display: flex; flex-direction: column; gap: 8px; }
+    .rule-form input, .rule-form textarea {
+      width: 100%; padding: 8px 14px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      background: var(--bg); border: 1px solid var(--border-strong);
+      border-radius: 8px; color: var(--text); outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .rule-form input { height: 42px; }
+    .rule-form textarea { height: 80px; resize: vertical; }
+    .rule-form input:focus, .rule-form textarea:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12);
+    }
+    .rule-form-btns { display: flex; gap: 8px; }
+    .save-rule-btn {
+      height: 40px; padding: 0 20px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+      background: var(--accent); color: #fff; border: none; border-radius: 8px;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .save-rule-btn:hover { background: #b5521f; }
+    .cancel-edit-btn {
+      height: 40px; padding: 0 16px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      background: transparent; border: 1px solid var(--border-strong);
+      border-radius: 8px; cursor: pointer; color: var(--muted); display: none;
+    }
+    .cancel-edit-btn:hover { background: var(--bg); }
+ 
+    /* OWNER NOTICE */
+    .owner-notice {
+      background: #fdecd6; border: 1px solid #f0c090; border-radius: 10px;
+      padding: 0.9rem 1.2rem; margin-bottom: 1.5rem;
+      font-size: 0.84rem; color: #7a3a0a;
+    }
+ 
+    /* LOGIN MODAL */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.45); align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface); border-radius: 14px;
+      padding: 2rem; width: 90%; max-width: 360px; border: 1px solid var(--border);
+    }
+    .modal h2 { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.4rem; }
+    .modal p  { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.2rem; }
+    .modal input {
+      width: 100%; height: 42px; padding: 0 14px; margin-bottom: 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      background: var(--bg); border: 1px solid var(--border-strong);
+      border-radius: 8px; color: var(--text); outline: none;
+    }
+    .modal input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
+    .modal-btns { display: flex; gap: 8px; }
+    .modal-login {
+      flex: 1; height: 40px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+      background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer;
+    }
+    .modal-login:hover { background: #b5521f; }
+    .modal-cancel {
+      height: 40px; padding: 0 16px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+      background: transparent; border: 1px solid var(--border-strong);
+      border-radius: 8px; cursor: pointer; color: var(--muted);
+    }
+    .modal-error { font-size: 0.8rem; color: #c0392b; margin-bottom: 8px; display: none; }
+ 
+    .site-footer { margin-top: 3rem; text-align: center; font-size: 0.78rem; color: var(--muted); }
+    @media (max-width: 600px) { .page { padding: 1.5rem 1rem 4rem; } }
+  </style>
+</head>
+<body>
+ 
+<div class="modal-overlay" id="login-modal">
+  <div class="modal">
+    <h2>Staff Login</h2>
+    <p>Enter your rank password to continue</p>
+    <p class="modal-error" id="modal-error">Incorrect password. Try again.</p>
+    <input type="password" id="modal-pw" placeholder="Password" />
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-login" onclick="tryLogin()">Login</button>
+    </div>
+  </div>
+</div>
+ 
+<main class="page">
+  <nav>
+    <div class="nav-links">
+      <a href="index.html" class="nav-btn">📋 Tips Board</a>
+      <a href="ranks.html" class="nav-btn">🏅 Ranks</a>
+      <a href="rules.html" class="nav-btn active">📜 Rules</a>
+    </div>
+    <div class="nav-right">
+      <span id="rank-display" class="rank-badge rank-public">Public</span>
+      <button class="nav-btn" id="auth-btn" onclick="openModal()">Login</button>
+    </div>
+  </nav>
+ 
+  <header class="header">
+    <h1 class="site-title">rules <em>&</em> guidelines</h1>
+    <p class="subtitle">please read before posting ✦ set by the Owner</p>
+    <hr class="divider" />
+  </header>
+ 
+  <div class="status-bar">
+    <div class="status-dot loading" id="status-dot"></div>
+    <span id="status-text">loading...</span>
+  </div>
+ 
+  <!-- Owner: add/edit form -->
+  <div id="owner-controls" style="display:none">
+    <div class="add-rule-section">
+      <h3 id="form-title">➕ Add a Rule</h3>
+      <p>Only you (Owner) can add, edit, or remove rules.</p>
+      <div class="rule-form">
+        <input type="text" id="rule-title-input" placeholder="Rule title (e.g. Be Respectful)" maxlength="60" />
+        <textarea id="rule-desc-input" placeholder="Describe the rule in detail..."></textarea>
+        <div class="rule-form-btns">
+          <button class="save-rule-btn" onclick="saveRule()">Save Rule</button>
+          <button class="cancel-edit-btn" id="cancel-btn" onclick="cancelEdit()">Cancel Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- Non-owner notice -->
+  <div id="non-owner-notice" class="owner-notice">
+    📜 These rules are set by the <strong>Owner</strong>. Only the Owner can add or edit rules.
+  </div>
+ 
+  <!-- Rules list -->
+  <div class="rules-container" id="rules-container"></div>
+ 
+  <footer class="site-footer"><p>tips & stuff — shared with friends ✦</p></footer>
+</main>
+ 
+<script>
+  const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
+  const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
+  const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
+  const PASSWORDS = { owner: '20140314', admin: '382790', mod: '23889' };
+ 
+  let currentRank = 'public';
+  let db = {};
+  let editingId = null;
+ 
+  function openModal()  { document.getElementById('login-modal').classList.add('open'); document.getElementById('modal-pw').focus(); }
+  function closeModal() { document.getElementById('login-modal').classList.remove('open'); document.getElementById('modal-pw').value = ''; document.getElementById('modal-error').style.display = 'none'; }
+  function tryLogin() {
+    const pw = document.getElementById('modal-pw').value;
+    if      (pw === PASSWORDS.owner) setRank('owner');
+    else if (pw === PASSWORDS.admin) setRank('admin');
+    else if (pw === PASSWORDS.mod)   setRank('mod');
+    else { document.getElementById('modal-error').style.display = 'block'; return; }
+    closeModal();
+  }
+  document.getElementById('modal-pw').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+ 
+  function setRank(rank) { currentRank = rank; sessionStorage.setItem('rank', rank); updateUI(); }
+ 
+  function updateUI() {
+    const rank = currentRank;
+    const labels  = { owner: '👑 Owner', admin: '🛡️ Admin', mod: '🔧 Mod', public: 'Public' };
+    const classes = { owner: 'rank-owner', admin: 'rank-admin', mod: 'rank-mod', public: 'rank-public' };
+    const d = document.getElementById('rank-display');
+    d.textContent = labels[rank]; d.className = 'rank-badge ' + classes[rank];
+    const authBtn = document.getElementById('auth-btn');
+    if (rank !== 'public') {
+      authBtn.textContent = 'Logout';
+      authBtn.onclick = () => { currentRank = 'public'; sessionStorage.removeItem('rank'); updateUI(); renderRules(); };
+    } else { authBtn.textContent = 'Login'; authBtn.onclick = openModal; }
+    const isOwner = rank === 'owner';
+    document.getElementById('owner-controls').style.display   = isOwner ? 'block' : 'none';
+    document.getElementById('non-owner-notice').style.display = isOwner ? 'none'  : 'block';
+    renderRules();
+  }
+ 
+  function setStatus(state, msg) {
+    document.getElementById('status-dot').className = 'status-dot ' + state;
+    document.getElementById('status-text').textContent = msg;
+  }
+  function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+ 
+  async function loadAll() {
+    setStatus('loading', 'loading...');
+    try {
+      const res = await fetch(BIN_URL + '/latest', { headers: { 'X-Master-Key': API_KEY, 'X-Bin-Meta': 'false' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const raw = await res.json();
+      db = raw.record !== undefined ? raw.record : raw;
+      if (!Array.isArray(db.rules)) db.rules = [];
+      setStatus('ok', 'loaded ✓');
+      renderRules();
+    } catch(e) { console.error(e); setStatus('error', 'could not load — ' + e.message); }
+  }
+ 
+  async function saveAll() {
+    const res = await fetch(BIN_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+      body: JSON.stringify(db)
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+  }
+ 
+  function renderRules() {
+    const isOwner  = currentRank === 'owner';
+    const container = document.getElementById('rules-container');
+    const rules     = db.rules || [];
+    if (!rules.length) {
+      container.innerHTML = `<div class="no-rules"><div class="icon">📜</div><p>${isOwner ? 'No rules yet — add the first one above.' : 'No rules have been set yet.'}</p></div>`;
+      return;
+    }
+    container.innerHTML = rules.map((r, i) => `
+      <div class="rule-card">
+        <div class="rule-number">${i + 1}</div>
+        <div class="rule-content">
+          <div class="rule-title">${escHtml(r.title)}</div>
+          <div class="rule-desc">${escHtml(r.desc)}</div>
+        </div>
+        ${isOwner ? `
+        <div class="rule-actions">
+          <button class="rule-edit-btn" onclick="startEdit(${r.id})">✏️ Edit</button>
+          <button class="rule-del-btn"  onclick="deleteRule(${r.id})">✕ Delete</button>
+        </div>` : ''}
+      </div>`).join('');
+  }
+ 
+  async function saveRule() {
+    const title = document.getElementById('rule-title-input').value.trim();
+    const desc  = document.getElementById('rule-desc-input').value.trim();
+    if (!title || !desc) { alert('Please fill in both the title and description.'); return; }
+    setStatus('loading', 'saving...');
+    try {
+      if (!Array.isArray(db.rules)) db.rules = [];
+      if (editingId !== null) {
+        db.rules = db.rules.map(r => r.id === editingId ? { ...r, title, desc } : r);
+      } else {
+        db.rules.push({ id: Date.now(), title, desc });
+      }
+      await saveAll();
+      document.getElementById('rule-title-input').value = '';
+      document.getElementById('rule-desc-input').value  = '';
+      cancelEdit();
+      setStatus('ok', 'saved ✓');
+      renderRules();
+    } catch(e) { setStatus('error', 'could not save — ' + e.message); }
+  }
+ 
+  function startEdit(id) {
+    const rule = db.rules.find(r => r.id === id);
+    if (!rule) return;
+    editingId = id;
+    document.getElementById('rule-title-input').value = rule.title;
+    document.getElementById('rule-desc-input').value  = rule.desc;
+    document.getElementById('form-title').textContent = '✏️ Edit Rule';
+    document.getElementById('cancel-btn').style.display = 'inline-block';
+    document.getElementById('rule-title-input').focus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+ 
+  function cancelEdit() {
+    editingId = null;
+    document.getElementById('rule-title-input').value  = '';
+    document.getElementById('rule-desc-input').value   = '';
+    document.getElementById('form-title').textContent  = '➕ Add a Rule';
+    document.getElementById('cancel-btn').style.display = 'none';
+  }
+ 
+  async function deleteRule(id) {
+    if (!confirm('Delete this rule?')) return;
+    const prev = [...db.rules];
+    db.rules = db.rules.filter(r => r.id !== id);
+    renderRules();
+    setStatus('loading', 'deleting...');
+    try { await saveAll(); setStatus('ok', 'deleted ✓'); }
+    catch(e) { db.rules = prev; setStatus('error', 'could not delete — ' + e.message); renderRules(); }
+  }
+ 
+  const saved = sessionStorage.getItem('rank');
+  if (saved) currentRank = saved;
+  updateUI();
+  loadAll();
+</script>
+</body>
+</html>
+ 
