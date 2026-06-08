@@ -1,129 +1,691 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ban List - Official Random Web</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: white;
-            margin: 0;
-            padding: 20px;
-        }
-
-```
-    h1 {
-        text-align: center;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🚫 Ban List ✦ tips & stuff</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0e10;
+      --surface: #16161a;
+      --surface2: #1e1e24;
+      --border: #2a2a35;
+      --accent: #ff4d4d;
+      --accent2: #ff8c42;
+      --gold: #f5c542;
+      --text: #e8e8f0;
+      --muted: #888898;
+      --green: #4dffaa;
+      --red: #ff4d4d;
+      --radius: 12px;
     }
-
-    .container {
-        max-width: 1200px;
-        margin: auto;
+ 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      min-height: 100vh;
     }
-
+ 
+    /* ─── NAV ─── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 28px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nav-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text);
+      background: var(--surface2);
+      border-color: var(--border);
+    }
+    #loginBtn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      background: var(--surface2);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 7px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    #loginBtn:hover { color: var(--text); border-color: var(--accent); }
+    #loginBtn.logged-in { color: var(--green); border-color: var(--green); }
+ 
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      width: 340px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .modal h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; }
+    .modal input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.88rem;
+      padding: 10px 14px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .modal input:focus { border-color: var(--accent); }
+    .modal-error { color: var(--red); font-size: 0.8rem; display: none; }
+    .modal-btns { display: flex; gap: 10px; justify-content: flex-end; }
+    .btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-danger { background: #3a1010; color: var(--red); border: 1px solid #5a1a1a; }
+    .btn-danger:hover { background: #5a1a1a; }
+ 
+    /* ─── HEADER ─── */
+    header {
+      text-align: center;
+      padding: 52px 20px 36px;
+    }
+    header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    header h1 span { color: var(--accent); }
+    header p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 8px;
+    }
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+ 
+    /* ─── MAIN ─── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+ 
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 22px;
+      flex: 1;
+      min-width: 130px;
+      text-align: center;
+    }
+    .stat-card .num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .stat-card .label { color: var(--muted); font-size: 0.75rem; margin-top: 2px; }
+ 
+    /* ─── ADD BAN PANEL ─── */
+    .add-ban-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 28px;
+      display: none;
+    }
+    .add-ban-panel.visible { display: block; }
+    .add-ban-panel h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .form-grid .full { grid-column: 1 / -1; }
+    .form-grid input, .form-grid select, .form-grid textarea {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      padding: 9px 13px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-grid select option { background: var(--bg); }
+    .form-grid input:focus, .form-grid select:focus, .form-grid textarea:focus {
+      border-color: var(--accent);
+    }
+    .form-grid textarea { resize: vertical; min-height: 70px; }
+    .form-actions { margin-top: 14px; display: flex; gap: 10px; justify-content: flex-end; }
+ 
+    /* ─── BAN TABLE ─── */
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+ 
+    .table-wrap { overflow-x: auto; }
     table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-        background-color: #1e1e1e;
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
     }
-
-    th, td {
-        border: 1px solid #333;
-        padding: 12px;
-        text-align: left;
+    thead th {
+      padding: 11px 14px;
+      text-align: left;
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
     }
-
-    th {
-        background-color: #2b2b2b;
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
     }
-
-    tr:nth-child(even) {
-        background-color: #252525;
+    tbody tr:hover { background: var(--surface2); }
+    tbody td {
+      padding: 13px 14px;
+      vertical-align: middle;
     }
-
-    tr:hover {
-        background-color: #333;
+    .td-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
     }
-
-    .permanent {
-        color: #ff4d4d;
-        font-weight: bold;
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
     }
-
-    a {
-        color: #4da6ff;
-        text-decoration: none;
+    .badge-perm { background: #3a1010; color: #ff6b6b; border: 1px solid #5a1a1a; }
+    .badge-temp { background: #1a2a10; color: #88dd66; border: 1px solid #2a4a18; }
+    .badge-pending { background: #2a2010; color: var(--gold); border: 1px solid #4a3a10; }
+ 
+    .td-actions { text-align: right; }
+    .unban-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.18s;
+      display: none;
     }
-
-    a:hover {
-        text-decoration: underline;
+    .unban-btn:hover { color: var(--green); border-color: var(--green); }
+    body.staff-mode .unban-btn { display: inline-block; }
+ 
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--muted);
+      font-size: 0.85rem;
     }
-
-    .note {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #1e1e1e;
-        border-radius: 8px;
+    .empty-state span { display: block; font-size: 2rem; margin-bottom: 10px; }
+ 
+    /* ─── POLICY ─── */
+    .policy-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin-top: 32px;
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.7;
     }
-</style>
-```
-
+    .policy-box strong { color: var(--text); }
+ 
+    /* ─── LOADING ─── */
+    .loading-row td {
+      text-align: center;
+      color: var(--muted);
+      padding: 40px;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+    }
+ 
+    footer {
+      text-align: center;
+      padding: 28px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+ 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeIn 0.3s ease forwards; }
+  </style>
 </head>
 <body>
-
-<div class="container">
-    <h1>🚫 Official Random Web Ban List</h1>
-
-```
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Reason For Ban</th>
-            <th>Date Banned</th>
-            <th>Banned By</th>
-            <th>Ban Length</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <!-- Example Ban -->
-        <tr>
-            <td>Evan</td>
-            <td>Spamming Bad Tips</td>
-            <td>June 8, 2026</td>
-            <td>Owner</td>
-            <td>7 Days</td>
-        </tr>
-
-        <!-- Example Permanent Ban -->
-        <tr>
-            <td>Brodie</td>
-            <td>Repeated Rule Violations</td>
-            <td>June 8, 2026</td>
-            <td>Owner</td>
-            <td class="permanent">Permanent</td>
-        </tr>
-
-    </tbody>
-</table>
-
-<div class="note">
-    <strong>Ban Policy:</strong><br>
-    !Users may be banned for spam, abuse, inappropriate content,
-    exploiting bugs, or repeated violations of site rules.!
+ 
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <h3>🔒 Staff Login</h3>
+    <p style="color:var(--muted);font-size:0.82rem;">Enter your rank password to continue</p>
+    <input type="password" id="pwInput" placeholder="Password…" />
+    <p class="modal-error" id="loginError">Incorrect password. Try again.</p>
+    <div class="modal-btns">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="doLogin()">Login</button>
+    </div>
+  </div>
 </div>
-
-<p>
-    <a href="index.html">← Back to Home</a>
-</p>
-```
-
+ 
+<!-- UNBAN CONFIRM MODAL -->
+<div class="modal-overlay" id="unbanModal">
+  <div class="modal">
+    <h3>🔓 Confirm Unban</h3>
+    <p style="color:var(--muted);font-size:0.82rem;">Are you sure you want to unban <strong id="unbanName" style="color:var(--text)"></strong>?</p>
+    <div class="modal-btns">
+      <button class="btn btn-ghost" onclick="closeUnbanModal()">Cancel</button>
+      <button class="btn btn-danger" onclick="confirmUnban()">Unban</button>
+    </div>
+  </div>
 </div>
-
+ 
+<!-- NAV -->
+<nav>
+  <div class="nav-links">
+    <a href="https://tips-95.github.io/official-Random-Web/index.html">📋 Tips Board</a>
+    <a href="https://tips-95.github.io/official-Random-Web/ranks.html">🏅 Ranks</a>
+    <a href="https://tips-95.github.io/official-Random-Web/rules.html">📜 Rules</a>
+    <a href="https://tips-95.github.io/official-Random-Web/banlist.html" class="active">🚫 Ban List</a>
+  </div>
+  <button class="btn" id="loginBtn" onclick="openModal()">Public Login</button>
+</nav>
+ 
+<!-- HEADER -->
+<header>
+  <h1>🚫 ban <span>list</span></h1>
+  <p>users removed from the community ✦</p>
+  <div class="divider"></div>
+</header>
+ 
+<main>
+ 
+  <!-- STATS -->
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-card">
+      <div class="num" id="statTotal">—</div>
+      <div class="label">Total Bans</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="statPerm" style="color:#ff6b6b">—</div>
+      <div class="label">Permanent</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="statTemp" style="color:#88dd66">—</div>
+      <div class="label">Temporary</div>
+    </div>
+  </div>
+ 
+  <!-- ADD BAN PANEL (staff only) -->
+  <div class="add-ban-panel" id="addBanPanel">
+    <h3>➕ Add Ban Entry</h3>
+    <div class="form-grid">
+      <input type="text" id="banName" placeholder="Username" />
+      <input type="text" id="banBy" placeholder="Banned by (your name)" />
+      <input type="text" id="banLength" placeholder="Ban Length (e.g. 7 Days / Permanent)" />
+      <select id="banType">
+        <option value="Permanent">Permanent</option>
+        <option value="Temporary">Temporary</option>
+      </select>
+      <textarea id="banReason" class="full" placeholder="Reason for ban…"></textarea>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" onclick="addBan()">🚫 Add Ban</button>
+    </div>
+  </div>
+ 
+  <!-- BAN TABLE -->
+  <div class="section-label">Active Bans</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Reason</th>
+          <th>Date Banned</th>
+          <th>Banned By</th>
+          <th>Length</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="banTableBody">
+        <tr class="loading-row"><td colspan="6">loading bans…</td></tr>
+      </tbody>
+    </table>
+  </div>
+ 
+  <!-- POLICY -->
+  <div class="policy-box">
+    <strong>Ban Policy:</strong><br/>
+    Users may be banned for spam, abuse, inappropriate content, exploiting bugs, or repeated violations of site rules.
+    Bans are issued by Owner or Admins. Permanent bans are non-negotiable. Temporary bans expire after the stated duration.
+  </div>
+ 
+</main>
+ 
+<footer>tips &amp; stuff — shared with friends ✦</footer>
+ 
+<script>
+  // ─── CONFIG ───────────────────────────────────────────────────────────────
+  // Replace these with your JSONBin details
+  const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';      // e.g. '664abc123...'
+  const API_KEY = '$2a$10$FaAhdz4K8wgcjv1zKQsQPuTxgxKRaJSh3KTbqPozlDj0He1bUigtu';     // your JSONBin X-Access-Key
+ 
+  const PASSWORDS = {
+    owner: '20140314',   // change to your real passwords
+    admin: '382790',
+    mod:   '23889'
+  };
+ 
+  // Ranks that can add/remove bans
+  const CAN_BAN = ['owner', 'admin', 'mod'];
+ 
+  // ─── STATE ────────────────────────────────────────────────────────────────
+  let currentRank = localStorage.getItem('rank') || null;
+  let bans = [];
+  let unbanTarget = null;
+ 
+  // ─── INIT ─────────────────────────────────────────────────────────────────
+  window.addEventListener('DOMContentLoaded', () => {
+    updateUI();
+    loadBans();
+  });
+ 
+  // ─── AUTH ─────────────────────────────────────────────────────────────────
+  function openModal() {
+    if (currentRank) { logout(); return; }
+    document.getElementById('loginModal').classList.add('show');
+    document.getElementById('pwInput').value = '';
+    document.getElementById('loginError').style.display = 'none';
+    setTimeout(() => document.getElementById('pwInput').focus(), 100);
+  }
+  function closeModal() {
+    document.getElementById('loginModal').classList.remove('show');
+  }
+  document.getElementById('pwInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+  function doLogin() {
+    const pw = document.getElementById('pwInput').value.trim();
+    let matched = null;
+    for (const [rank, pass] of Object.entries(PASSWORDS)) {
+      if (pw === pass) { matched = rank; break; }
+    }
+    if (matched) {
+      currentRank = matched;
+      localStorage.setItem('rank', matched);
+      closeModal();
+      updateUI();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+  function logout() {
+    currentRank = null;
+    localStorage.removeItem('rank');
+    updateUI();
+  }
+  function updateUI() {
+    const btn = document.getElementById('loginBtn');
+    const panel = document.getElementById('addBanPanel');
+    if (currentRank) {
+      btn.textContent = `🔓 ${capitalize(currentRank)} — Logout`;
+      btn.classList.add('logged-in');
+      document.body.classList.add('staff-mode');
+      if (CAN_BAN.includes(currentRank)) panel.classList.add('visible');
+    } else {
+      btn.textContent = 'Public Login';
+      btn.classList.remove('logged-in');
+      document.body.classList.remove('staff-mode');
+      panel.classList.remove('visible');
+    }
+    renderTable();
+  }
+ 
+  // ─── JSONBIN ──────────────────────────────────────────────────────────────
+  async function loadBans() {
+    // If no Bin ID configured yet, use default seed data
+    if (BIN_ID === 'YOUR_BIN_ID_HERE') {
+      bans = getDefaultBans();
+      renderTable();
+      updateStats();
+      return;
+    }
+    try {
+      const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+        headers: { 'X-Access-Key': API_KEY }
+      });
+      const data = await res.json();
+      bans = data.record.bans || getDefaultBans();
+    } catch (e) {
+      console.warn('JSONBin load failed, using defaults:', e);
+      bans = getDefaultBans();
+    }
+    renderTable();
+    updateStats();
+  }
+ 
+  async function saveBans() {
+    if (BIN_ID === 'YOUR_BIN_ID_HERE') {
+      renderTable(); updateStats(); return;
+    }
+    try {
+      await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Access-Key': API_KEY
+        },
+        body: JSON.stringify({ bans })
+      });
+    } catch (e) {
+      console.error('Save failed:', e);
+    }
+    renderTable();
+    updateStats();
+  }
+ 
+  function getDefaultBans() {
+    return [
+      {
+        id: 'ban_001',
+        name: 'Evan',
+        reason: 'Spamming Bad Tips',
+        date: 'June 8, 2025',
+        bannedBy: 'Owner',
+        length: '7 Days',
+        type: 'Temporary'
+      },
+      {
+        id: 'ban_002',
+        name: 'Brodie',
+        reason: 'Repeated Rule Violations',
+        date: 'June 8, 2025',
+        bannedBy: 'Owner',
+        length: 'Permanent',
+        type: 'Permanent'
+      }
+    ];
+  }
+ 
+  // ─── RENDER ───────────────────────────────────────────────────────────────
+  function renderTable() {
+    const tbody = document.getElementById('banTableBody');
+    if (!bans.length) {
+      tbody.innerHTML = `
+        <tr><td colspan="6">
+          <div class="empty-state"><span>✅</span>No active bans — everyone's behaving!</div>
+        </td></tr>`;
+      return;
+    }
+    tbody.innerHTML = bans.map(b => `
+      <tr class="fade-in">
+        <td class="td-name">${esc(b.name)}</td>
+        <td style="color:var(--muted);max-width:220px">${esc(b.reason)}</td>
+        <td style="color:var(--muted)">${esc(b.date)}</td>
+        <td style="color:var(--muted)">${esc(b.bannedBy)}</td>
+        <td>
+          <span class="badge ${b.type === 'Permanent' ? 'badge-perm' : 'badge-temp'}">
+            ${esc(b.length)}
+          </span>
+        </td>
+        <td class="td-actions">
+          <button class="unban-btn" onclick="promptUnban('${b.id}', '${esc(b.name)}')">
+            🔓 Unban
+          </button>
+        </td>
+      </tr>
+    `).join('');
+  }
+ 
+  function updateStats() {
+    document.getElementById('statTotal').textContent = bans.length;
+    document.getElementById('statPerm').textContent  = bans.filter(b => b.type === 'Permanent').length;
+    document.getElementById('statTemp').textContent  = bans.filter(b => b.type === 'Temporary').length;
+  }
+ 
+  // ─── ADD BAN ──────────────────────────────────────────────────────────────
+  function addBan() {
+    const name   = document.getElementById('banName').value.trim();
+    const by     = document.getElementById('banBy').value.trim();
+    const length = document.getElementById('banLength').value.trim();
+    const type   = document.getElementById('banType').value;
+    const reason = document.getElementById('banReason').value.trim();
+ 
+    if (!name || !reason || !by || !length) {
+      alert('Please fill in all fields.'); return;
+    }
+ 
+    const now = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    bans.push({
+      id: 'ban_' + Date.now(),
+      name, reason, date: now, bannedBy: by, length, type
+    });
+    saveBans();
+ 
+    // Clear form
+    ['banName','banBy','banLength','banReason'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('banType').value = 'Permanent';
+  }
+ 
+  // ─── UNBAN ────────────────────────────────────────────────────────────────
+  function promptUnban(id, name) {
+    unbanTarget = id;
+    document.getElementById('unbanName').textContent = name;
+    document.getElementById('unbanModal').classList.add('show');
+  }
+  function closeUnbanModal() {
+    document.getElementById('unbanModal').classList.remove('show');
+    unbanTarget = null;
+  }
+  function confirmUnban() {
+    if (!unbanTarget) return;
+    bans = bans.filter(b => b.id !== unbanTarget);
+    closeUnbanModal();
+    saveBans();
+  }
+ 
+  // ─── UTILS ────────────────────────────────────────────────────────────────
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+</script>
 </body>
 </html>
+ 
