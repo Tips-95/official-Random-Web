@@ -6,7 +6,7 @@
   <title>tips & stuff ✦</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -24,231 +24,248 @@
       --tag-random-bg: #fce8ec; --tag-random-txt: #7a1a2e;
     }
     html { font-size: 16px; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-    body::before {
-      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
-    }
-    .page-wrap { position: relative; z-index: 1; display: flex; min-height: 100vh; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+    body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); background-size:200px 200px; }
 
-    /* ── SIDEBAR ── */
-    .sidebar {
-      width: 200px; min-width: 200px;
-      background: var(--surface); border-right: 1px solid var(--border);
-      padding: 1.5rem 0 2rem; display: flex; flex-direction: column; gap: 2px;
-      position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    /* ── ANNOUNCEMENT BANNER ── */
+    .announcement {
+      display: none;
+      position: relative; z-index: 20;
+      padding: 10px 2rem;
+      font-size: 0.84rem;
+      font-family: 'DM Mono', monospace;
+      text-align: center;
+      background: var(--accent);
+      color: #fff;
+      line-height: 1.4;
     }
-    .sb-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 0 16px 6px; margin-top: 12px; }
-    .sb-label:first-child { margin-top: 0; }
-    .sb-item {
-      display: flex; align-items: center; gap: 9px; padding: 8px 16px;
-      font-size: 0.82rem; color: var(--muted); cursor: pointer;
-      border-left: 2px solid transparent; transition: background 0.13s, color 0.13s;
-      text-decoration: none; background: none; border-top: none; border-right: none; border-bottom: none;
-      font-family: 'DM Sans', sans-serif; text-align: left; width: 100%;
+    .announcement.show { display: block; }
+    .announcement a { color: #fff; text-decoration: underline; }
+    .ann-close {
+      position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: #fff; cursor: pointer;
+      font-size: 1rem; opacity: 0.7; padding: 2px 6px;
     }
-    .sb-item:hover { background: var(--bg); color: var(--text); }
-    .sb-item.active { background: var(--bg); color: var(--text); border-left-color: var(--accent); font-weight: 500; }
-    .sb-icon { font-size: 0.9rem; width: 16px; text-align: center; flex-shrink: 0; }
-    .sb-badge { margin-left: auto; font-size: 0.62rem; font-weight: 500; padding: 2px 6px; border-radius: 99px; white-space: nowrap; }
-    .sb-divider { height: 1px; background: var(--border); margin: 8px 16px; }
+    .ann-close:hover { opacity: 1; }
 
-    /* ── MAIN ── */
-    .page { flex: 1; max-width: 900px; margin: 0 auto; padding: 2rem 2rem 5rem; min-width: 0; }
-    nav { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
-    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
-    .nav-btn { font-family: 'DM Sans', sans-serif; font-size: 0.82rem; padding: 6px 14px; border-radius: 99px; border: 1px solid var(--border-strong); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
-    .nav-btn:hover { background: var(--surface); color: var(--text); }
-    .nav-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-    .nav-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .rank-badge { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.05em; padding: 3px 10px; border-radius: 99px; text-transform: uppercase; }
-    .rank-owner  { background: var(--owner-bg); color: var(--owner-txt); }
+    /* ── TOP NAV ── */
+    .topnav {
+      position: sticky; top: 0; z-index: 30;
+      background: var(--text);
+      display: flex; align-items: center;
+      padding: 0 1.5rem;
+      height: 52px;
+      gap: 0;
+    }
+    .topnav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.15rem;
+      color: #fff;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .topnav-logo em { font-style: italic; color: var(--accent); }
+    .topnav-links { display: flex; align-items: center; gap: 2px; flex: 1; }
+    .topnav-link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.13s;
+      white-space: nowrap;
+    }
+    .topnav-link:hover  { color: #fff; background: rgba(255,255,255,0.08); }
+    .topnav-link.active { color: #fff; background: rgba(255,255,255,0.12); }
+    .topnav-right { display: flex; align-items: center; gap: 8px; margin-left: auto; flex-shrink: 0; }
+    .rank-badge { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.05em; padding: 3px 9px; border-radius: 99px; text-transform: uppercase; white-space: nowrap; }
+    .rank-owner  { background: var(--owner-bg); color: var(--owner-txt); border: 1px solid rgba(255,255,255,0.15); }
     .rank-admin  { background: var(--admin-bg); color: var(--admin-txt); }
     .rank-mod    { background: var(--mod-bg);   color: var(--mod-txt); }
-    .rank-public { background: var(--pub-bg);   color: var(--pub-txt); }
-    .header { margin-bottom: 2rem; }
-    .site-title { font-family: 'Instrument Serif', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: 1; letter-spacing: -0.02em; }
-    .site-title em { font-style: italic; color: var(--accent); }
-    .subtitle { font-size: 0.875rem; color: var(--muted); margin-top: 0.4rem; }
-    .divider { margin: 1.25rem 0; border: none; border-top: 1px solid var(--border); }
-    .status-bar { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; }
-    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; flex-shrink: 0; transition: background 0.3s; }
-    .status-dot.ok { background: #3a9c5a; } .status-dot.error { background: #c8602a; } .status-dot.loading { background: #f0a500; }
-    .section { margin-bottom: 2.5rem; }
-    .section-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; padding: 0.75rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
-    .section-title { font-size: 1rem; font-weight: 500; display: flex; align-items: center; gap: 8px; }
-    .section-lock { font-size: 0.75rem; color: var(--muted); }
-    .staff-form { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
-    .staff-form input[type="text"] { flex: 1; min-width: 160px; height: 38px; padding: 0 14px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); outline: none; }
-    .staff-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
-    select.tag-sel { height: 38px; padding: 0 10px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); cursor: pointer; outline: none; }
-    .post-btn { height: 38px; padding: 0 18px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.15s, transform 0.1s; white-space: nowrap; }
-    .post-btn:hover { background: #b5521f; } .post-btn:active { transform: scale(0.97); } .post-btn:disabled { background: #ccc; cursor: not-allowed; }
-    .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
-    .rec-card { background: linear-gradient(135deg, #fffbf0, #fff8e8); border: 1px solid rgba(200,96,42,0.25); border-radius: 12px; padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: 8px; animation: rise 0.2s ease both; position: relative; overflow: hidden; }
-    .rec-card::before { content: '⭐'; position: absolute; top: 8px; right: 10px; font-size: 0.7rem; opacity: 0.5; }
-    .rec-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); border-radius: 12px 12px 0 0; }
-    .public-form { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
-    .public-form h3 { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--muted); }
-    .form-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
-    .form-row input, .form-row textarea, .form-row select { flex: 1; min-width: 140px; padding: 8px 12px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); outline: none; }
-    .form-row input { height: 38px; } .form-row textarea { height: 72px; resize: vertical; }
-    .form-row input:focus, .form-row textarea:focus, .form-row select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
-    .submit-btn { height: 38px; padding: 0 18px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; background: var(--text); color: var(--bg); border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
-    .submit-btn:hover { opacity: 0.85; }
-    .pending-notice { font-size: 0.8rem; color: var(--muted); margin-top: 6px; padding: 6px 10px; background: #fdecd6; border-radius: 6px; display: inline-block; }
-    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
-    .tip-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: 8px; animation: rise 0.2s ease both; position: relative; overflow: hidden; }
-    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-    .tip-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--card-accent, transparent); border-radius: 12px 12px 0 0; }
-    .tip-tag { display: inline-flex; align-items: center; gap: 3px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; }
-    .tip-text { font-size: 0.9rem; line-height: 1.5; color: var(--text); flex: 1; }
-    .tip-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
-    .tip-author { font-size: 0.72rem; color: var(--muted); font-style: italic; }
-    .tip-actions { display: flex; gap: 4px; }
-    .action-btn { background: none; border: none; cursor: pointer; font-size: 0.75rem; padding: 2px 7px; border-radius: 5px; transition: all 0.12s; }
-    .del-btn { color: var(--muted); } .del-btn:hover { color: #c0392b; background: #fce8ec; }
-    .approve-btn { color: #2d7a2d; } .approve-btn:hover { background: #e8f0e0; }
-    .deny-btn    { color: #c0392b; } .deny-btn:hover    { background: #fce8ec; }
-    .empty { text-align: center; padding: 2.5rem 0; color: var(--muted); font-size: 0.875rem; grid-column: 1/-1; }
-    .refresh-btn { font-family: 'DM Sans', sans-serif; font-size: 0.82rem; padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border-strong); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s; }
-    .refresh-btn:hover { background: var(--surface); color: var(--text); }
-    .modal-overlay { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.45); align-items: center; justify-content: center; }
-    .modal-overlay.open { display: flex; }
-    .modal { background: var(--surface); border-radius: 14px; padding: 2rem; width: 90%; max-width: 360px; border: 1px solid var(--border); }
-    .modal h2 { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.4rem; }
-    .modal p  { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.2rem; }
-    .modal input { width: 100%; height: 42px; padding: 0 14px; margin-bottom: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); outline: none; }
-    .modal input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
-    .modal-btns { display: flex; gap: 8px; }
-    .modal-login { flex: 1; height: 40px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer; }
-    .modal-login:hover { background: #b5521f; }
-    .modal-cancel { height: 40px; padding: 0 16px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: transparent; border: 1px solid var(--border-strong); border-radius: 8px; cursor: pointer; color: var(--muted); }
-    .modal-error { font-size: 0.8rem; color: #c0392b; margin-bottom: 8px; display: none; }
-    .site-footer { margin-top: 3rem; text-align: center; font-size: 0.78rem; color: var(--muted); }
-    .sec-panel { display: none; } .sec-panel.visible { display: block; }
+    .rank-public { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+    .topnav-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+      padding: 5px 12px; border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent; color: rgba(255,255,255,0.8); cursor: pointer;
+      transition: all 0.13s; white-space: nowrap;
+    }
+    .topnav-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
-    /* ── OWNER SETTINGS PANEL ── */
-    .settings-wrap { display: flex; flex-direction: column; gap: 1.5rem; }
-    .settings-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-    .settings-card-header { display: flex; align-items: center; gap: 8px; padding: 0.9rem 1.2rem; background: var(--bg); border-bottom: 1px solid var(--border); font-size: 0.85rem; font-weight: 600; color: var(--text); }
-    .settings-card-body { padding: 1.2rem; display: flex; flex-direction: column; gap: 12px; }
-    .setting-row { display: flex; flex-direction: column; gap: 5px; }
-    .setting-row label { font-size: 0.75rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .setting-row input[type="text"], .setting-row input[type="password"], .setting-row input[type="color"] { height: 38px; padding: 0 12px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); outline: none; width: 100%; transition: border-color 0.15s; }
-    .setting-row input[type="color"] { padding: 3px 6px; cursor: pointer; }
-    .setting-row input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
-    .setting-row .hint { font-size: 0.72rem; color: var(--muted); }
-    .setting-row-inline { display: flex; gap: 10px; align-items: flex-end; }
-    .setting-row-inline .setting-row { flex: 1; }
-    .save-btn { height: 38px; padding: 0 20px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.15s; white-space: nowrap; align-self: flex-end; }
-    .save-btn:hover { background: #b5521f; }
-    .save-btn.secondary { background: var(--text); } .save-btn.secondary:hover { opacity: 0.8; }
-    .save-btn.danger { background: #c0392b; } .save-btn.danger:hover { background: #96281b; }
-    .settings-toast { display: none; font-size: 0.78rem; color: #2d7a2d; background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 6px; padding: 6px 12px; margin-top: 4px; }
-    .settings-toast.show { display: inline-block; }
-    .settings-toast.error { color: #c0392b; background: #fce8ec; border-color: #ef9a9a; }
-    .member-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
-    .member-row { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; }
-    .member-name { font-weight: 500; flex: 1; }
-    .member-rank { font-size: 0.72rem; }
-    .member-del { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.8rem; padding: 2px 6px; border-radius: 4px; transition: all 0.12s; }
-    .member-del:hover { color: #c0392b; background: #fce8ec; }
-    .add-member-row { display: flex; gap: 8px; flex-wrap: wrap; }
-    .add-member-row input, .add-member-row select { flex: 1; min-width: 110px; height: 36px; padding: 0 10px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); outline: none; }
-    .add-member-row input:focus { border-color: var(--accent); }
-    .color-preview { display: flex; align-items: center; gap: 10px; }
-    .color-swatch { width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-strong); flex-shrink: 0; }
-    @media (max-width: 700px) { .sidebar { display: none; } .page { padding: 1.5rem 1rem 4rem; } }
+    /* ── INNER SIDEBAR (section tabs) ── */
+    .page-wrap { position: relative; z-index: 1; display: flex; flex: 1; }
+    .sidebar {
+      width: 190px; min-width: 190px;
+      background: var(--surface); border-right: 1px solid var(--border);
+      padding: 1.25rem 0 2rem; display: flex; flex-direction: column; gap: 2px;
+      position: sticky; top: 52px; height: calc(100vh - 52px); overflow-y: auto;
+    }
+    .sb-label { font-size: 0.66rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 0 14px 5px; margin-top: 10px; }
+    .sb-label:first-child { margin-top: 0; }
+    .sb-item {
+      display: flex; align-items: center; gap: 8px; padding: 8px 14px;
+      font-size: 0.82rem; color: var(--muted); cursor: pointer;
+      border-left: 2px solid transparent; transition: background 0.13s, color 0.13s;
+      background: none; border-top: none; border-right: none; border-bottom: none;
+      font-family: 'DM Sans', sans-serif; text-align: left; width: 100%;
+    }
+    .sb-item:hover  { background: var(--bg); color: var(--text); }
+    .sb-item.active { background: var(--bg); color: var(--text); border-left-color: var(--accent); font-weight: 500; }
+    .sb-icon  { font-size: 0.88rem; width: 16px; text-align: center; flex-shrink: 0; }
+    .sb-badge { margin-left: auto; font-size: 0.6rem; font-weight: 500; padding: 2px 5px; border-radius: 99px; white-space: nowrap; }
+    .sb-divider { height: 1px; background: var(--border); margin: 6px 14px; }
+
+    /* ── MAIN CONTENT ── */
+    .page { flex: 1; max-width: 880px; margin: 0 auto; padding: 2rem 2rem 5rem; min-width: 0; width: 100%; }
+    .page-header { margin-bottom: 1.75rem; }
+    .site-title { font-family: 'Instrument Serif', serif; font-size: clamp(2rem, 4vw, 3rem); line-height: 1; letter-spacing: -0.02em; }
+    .site-title em { font-style: italic; color: var(--accent); }
+    .subtitle { font-size: 0.875rem; color: var(--muted); margin-top: 0.35rem; }
+    .divider { margin: 1.1rem 0; border: none; border-top: 1px solid var(--border); }
+    .status-bar { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #ccc; flex-shrink: 0; transition: background 0.3s; }
+    .status-dot.ok { background: #3a9c5a; } .status-dot.error { background: #c8602a; } .status-dot.loading { background: #f0a500; }
+    .section { margin-bottom: 2.25rem; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; padding: 0.7rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+    .section-title { font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+    .section-lock { font-size: 0.72rem; color: var(--muted); }
+    .staff-form { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+    .staff-form input[type="text"] { flex: 1; min-width: 150px; height: 38px; padding: 0 12px; font-family: 'DM Sans', sans-serif; font-size: 0.875rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); outline: none; }
+    .staff-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.1); }
+    select.tag-sel { height: 38px; padding: 0 10px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); cursor: pointer; outline: none; }
+    .post-btn { height: 38px; padding: 0 16px; font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 500; background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.15s, transform 0.1s; white-space: nowrap; }
+    .post-btn:hover { background: #b5521f; } .post-btn:active { transform: scale(0.97); } .post-btn:disabled { background: #ccc; cursor: not-allowed; }
+    .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+    .rec-card { background: linear-gradient(135deg,#fffbf0,#fff8e8); border: 1px solid rgba(200,96,42,0.22); border-radius: 12px; padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 8px; animation: rise 0.2s ease both; position: relative; overflow: hidden; }
+    .rec-card::before { content:'⭐'; position: absolute; top: 8px; right: 9px; font-size: 0.65rem; opacity: 0.45; }
+    .rec-card::after  { content:''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); border-radius: 12px 12px 0 0; }
+    .public-form { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+    .public-form h3 { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--muted); }
+    .form-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+    .form-row input, .form-row textarea, .form-row select { flex: 1; min-width: 130px; padding: 8px 12px; font-family: 'DM Sans', sans-serif; font-size: 0.875rem; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); outline: none; }
+    .form-row input { height: 38px; } .form-row textarea { height: 68px; resize: vertical; }
+    .form-row input:focus, .form-row textarea:focus, .form-row select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.1); }
+    .submit-btn { height: 38px; padding: 0 16px; font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 500; background: var(--text); color: var(--bg); border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
+    .submit-btn:hover { opacity: 0.85; }
+    .pending-notice { font-size: 0.78rem; color: var(--muted); margin-top: 5px; padding: 5px 10px; background: #fdecd6; border-radius: 6px; display: inline-block; }
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+    .tip-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 8px; animation: rise 0.2s ease both; position: relative; overflow: hidden; }
+    @keyframes rise { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+    .tip-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--card-accent,transparent); border-radius:12px 12px 0 0; }
+    .tip-tag { display:inline-flex; align-items:center; gap:3px; font-size:0.68rem; font-weight:500; letter-spacing:0.04em; text-transform:uppercase; padding:2px 7px; border-radius:99px; }
+    .tip-text { font-size:0.875rem; line-height:1.5; color:var(--text); flex:1; }
+    .tip-footer { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px; margin-top:2px; }
+    .tip-author { font-size:0.7rem; color:var(--muted); font-style:italic; }
+    .tip-actions { display:flex; gap:3px; }
+    .action-btn { background:none; border:none; cursor:pointer; font-size:0.72rem; padding:2px 6px; border-radius:4px; transition:all 0.12s; }
+    .del-btn { color:var(--muted); } .del-btn:hover { color:#c0392b; background:#fce8ec; }
+    .approve-btn { color:#2d7a2d; } .approve-btn:hover { background:#e8f0e0; }
+    .deny-btn    { color:#c0392b; } .deny-btn:hover    { background:#fce8ec; }
+    .empty { text-align:center; padding:2.25rem 0; color:var(--muted); font-size:0.875rem; grid-column:1/-1; }
+    .sec-panel { display:none; } .sec-panel.visible { display:block; }
+
+    /* ── SETTINGS ── */
+    .settings-wrap { display:flex; flex-direction:column; gap:1.5rem; }
+    .settings-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    .settings-card-header { display:flex; align-items:center; gap:8px; padding:0.85rem 1.2rem; background:var(--bg); border-bottom:1px solid var(--border); font-size:0.85rem; font-weight:600; color:var(--text); }
+    .settings-card-body { padding:1.2rem; display:flex; flex-direction:column; gap:12px; }
+    .setting-row { display:flex; flex-direction:column; gap:5px; }
+    .setting-row label { font-size:0.72rem; font-weight:500; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; }
+    .setting-row input[type="text"], .setting-row input[type="password"], .setting-row input[type="color"], .setting-row textarea, .setting-row select {
+      font-family:'DM Sans',sans-serif; font-size:0.875rem; background:var(--bg);
+      border:1px solid var(--border-strong); border-radius:8px; color:var(--text);
+      outline:none; width:100%; transition:border-color 0.15s; padding:0 12px;
+    }
+    .setting-row input[type="text"], .setting-row input[type="password"], .setting-row select { height:40px; }
+    .setting-row textarea { padding:10px 12px; min-height:80px; resize:vertical; }
+    .setting-row input[type="color"] { height:40px; padding:4px 8px; cursor:pointer; }
+    .setting-row input:focus, .setting-row textarea:focus, .setting-row select:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(200,96,42,0.1); }
+    .setting-row .hint { font-size:0.72rem; color:var(--muted); }
+    .settings-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .save-btn { height:38px; padding:0 18px; font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:500; background:var(--accent); color:#fff; border:none; border-radius:8px; cursor:pointer; transition:background 0.15s; white-space:nowrap; }
+    .save-btn:hover { background:#b5521f; }
+    .save-btn.secondary { background:var(--text); } .save-btn.secondary:hover { opacity:0.8; }
+    .save-btn.danger { background:#c0392b; } .save-btn.danger:hover { background:#96281b; }
+    .save-btn.success { background:#2d7a2d; } .save-btn.success:hover { background:#1d5a1d; }
+    .settings-toast { display:none; font-size:0.78rem; color:#2d7a2d; background:#e8f5e9; border:1px solid #a5d6a7; border-radius:6px; padding:5px 10px; }
+    .settings-toast.show { display:inline-block; }
+    .settings-toast.error { color:#c0392b; background:#fce8ec; border-color:#ef9a9a; }
+    .member-list { display:flex; flex-direction:column; gap:6px; margin-bottom:8px; }
+    .member-row { display:flex; align-items:center; gap:10px; padding:7px 12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; font-size:0.85rem; }
+    .member-name { font-weight:500; flex:1; }
+    .member-del { background:none; border:none; color:var(--muted); cursor:pointer; font-size:0.8rem; padding:2px 6px; border-radius:4px; }
+    .member-del:hover { color:#c0392b; background:#fce8ec; }
+    .add-row { display:flex; gap:8px; flex-wrap:wrap; }
+    .add-row input, .add-row select { flex:1; min-width:110px; height:36px; padding:0 10px; font-family:'DM Sans',sans-serif; font-size:0.85rem; background:var(--bg); border:1px solid var(--border-strong); border-radius:8px; color:var(--text); outline:none; }
+    .add-row input:focus { border-color:var(--accent); }
+    .color-row { display:flex; align-items:center; gap:10px; }
+    .color-swatch { width:32px; height:32px; border-radius:6px; border:1px solid var(--border-strong); flex-shrink:0; }
+    .ann-preview { background:var(--accent); color:#fff; border-radius:8px; padding:8px 14px; font-size:0.82rem; margin-top:4px; font-family:'DM Mono',monospace; }
+    .site-footer { margin-top:2rem; text-align:center; font-size:0.75rem; color:var(--muted); padding-bottom:2rem; }
+
+    @media (max-width:700px) {
+      .sidebar { display:none; }
+      .page { padding:1.5rem 1rem 4rem; }
+      .topnav-links .topnav-link:not(.always) { display:none; }
+    }
   </style>
 </head>
 <body>
 
-<div class="modal-overlay" id="login-modal">
-  <div class="modal">
-    <h2>Staff Login</h2>
-    <p>Enter your rank password to continue</p>
-    <p class="modal-error" id="modal-error">Incorrect password. Try again.</p>
-    <input type="password" id="modal-pw" placeholder="Password" />
-    <div class="modal-btns">
-      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
-      <button class="modal-login" onclick="tryLogin()">Login</button>
-    </div>
-  </div>
+<!-- ANNOUNCEMENT BANNER -->
+<div class="announcement" id="announcement-banner">
+  <span id="announcement-text"></span>
+  <button class="ann-close" onclick="document.getElementById('announcement-banner').classList.remove('show')">✕</button>
 </div>
 
+<!-- TOP NAV -->
+<header class="topnav">
+  <a href="index.html" class="topnav-logo">tips <em>&</em> stuff</a>
+  <div class="topnav-links">
+    <a href="index.html"    class="topnav-link active always">📋 Tips</a>
+    <a href="ranks.html"    class="topnav-link">🏅 Ranks</a>
+    <a href="rules.html"    class="topnav-link">📜 Rules</a>
+    <a href="banlist.html"  class="topnav-link">🚫 Bans</a>
+  </div>
+  <div class="topnav-right">
+    <span id="rank-display" class="rank-badge rank-public">Public</span>
+    <button class="topnav-btn" id="auth-btn" onclick="window.location.href='login.html'">Login</button>
+    <button class="topnav-btn" onclick="loadAll()" title="Refresh">↻</button>
+  </div>
+</header>
+
 <div class="page-wrap">
+  <!-- INNER SIDEBAR -->
   <aside class="sidebar">
     <div class="sb-label">Browse</div>
-    <button class="sb-item active" id="nav-recommended" onclick="showSection('recommended')">
-      <span class="sb-icon">⭐</span> Recommended
-      <span class="sb-badge rank-admin">Staff Picks</span>
-    </button>
-    <button class="sb-item" id="nav-featured" onclick="showSection('featured')">
-      <span class="sb-icon">🔥</span> Featured
-      <span class="sb-badge rank-mod">Mod+</span>
-    </button>
-    <button class="sb-item" id="nav-public" onclick="showSection('public')">
-      <span class="sb-icon">📢</span> Public Tips
-      <span class="sb-badge rank-public">All</span>
-    </button>
+    <button class="sb-item active" id="nav-recommended" onclick="showSection('recommended')"><span class="sb-icon">⭐</span>Recommended<span class="sb-badge rank-admin">Picks</span></button>
+    <button class="sb-item" id="nav-featured"    onclick="showSection('featured')"><span class="sb-icon">🔥</span>Featured<span class="sb-badge rank-mod">Mod+</span></button>
+    <button class="sb-item" id="nav-public"      onclick="showSection('public')"><span class="sb-icon">📢</span>Public Tips<span class="sb-badge rank-public">All</span></button>
     <div class="sb-divider"></div>
-    <div class="sb-label">Staff Only</div>
-    <button class="sb-item" id="nav-pending" onclick="showSection('pending')" style="display:none">
-      <span class="sb-icon">⏳</span> Pending
-      <span class="sb-badge rank-admin">Review</span>
-    </button>
-    <button class="sb-item" id="nav-adminboard" onclick="showSection('adminboard')" style="display:none">
-      <span class="sb-icon">🔒</span> Admin Board
-      <span class="sb-badge rank-admin">Admin+</span>
-    </button>
-    <button class="sb-item" id="nav-settings" onclick="showSection('settings')" style="display:none">
-      <span class="sb-icon">⚙️</span> Settings
-      <span class="sb-badge rank-owner">Owner</span>
-    </button>
+    <div class="sb-label">Staff</div>
+    <button class="sb-item" id="nav-pending"     onclick="showSection('pending')"    style="display:none"><span class="sb-icon">⏳</span>Pending<span class="sb-badge rank-admin" id="pending-count"></span></button>
+    <button class="sb-item" id="nav-adminboard"  onclick="showSection('adminboard')" style="display:none"><span class="sb-icon">🔒</span>Admin Board<span class="sb-badge rank-admin">Admin+</span></button>
+    <button class="sb-item" id="nav-settings"    onclick="showSection('settings')"   style="display:none"><span class="sb-icon">⚙️</span>Settings<span class="sb-badge rank-owner">Owner</span></button>
   </aside>
 
   <main class="page">
-    <nav>
-      <div class="nav-links">
-        <a href="index.html" class="nav-btn active">📋 Tips Board</a>
-        <a href="ranks.html" class="nav-btn">🏅 Ranks</a>
-        <a href="rules.html" class="nav-btn">📜 Rules</a>
-        <a href="banlist.html" class="nav-btn">🚫 Ban List</a>
-      </div>
-      <div class="nav-right">
-        <span id="rank-display" class="rank-badge rank-public">Public</span>
-        <button class="nav-btn" id="auth-btn" onclick="openModal()">Login</button>
-        <button class="refresh-btn" onclick="loadAll()">↻ Refresh</button>
-      </div>
-    </nav>
-
-    <header class="header">
+    <div class="page-header">
       <h1 class="site-title" id="site-title-el">tips <em>&</em> stuff</h1>
       <p class="subtitle" id="site-subtitle-el">a shared board for tips, tricks, and random gems ✦</p>
       <hr class="divider" />
-    </header>
-
-    <div class="status-bar">
-      <div class="status-dot loading" id="status-dot"></div>
-      <span id="status-text">loading...</span>
     </div>
+    <div class="status-bar"><div class="status-dot loading" id="status-dot"></div><span id="status-text">loading...</span></div>
 
     <!-- RECOMMENDED -->
     <div class="section sec-panel visible" id="sec-recommended">
-      <div class="section-header">
-        <span class="section-title">⭐ Recommended Tips <span class="section-lock">Curated by Owner &amp; Admins</span></span>
-        <span class="rank-badge rank-admin">Staff Picks</span>
-      </div>
+      <div class="section-header"><span class="section-title">⭐ Recommended Tips <span class="section-lock">Curated by Owner &amp; Admins</span></span><span class="rank-badge rank-admin">Staff Picks</span></div>
       <div class="staff-form" id="rec-form" style="display:none">
         <input type="text" id="rec-text" placeholder="Add a recommended tip..." maxlength="280" />
         <input type="text" id="rec-author" placeholder="Your name" maxlength="30" />
-        <select class="tag-sel" id="rec-tag">
-          <option value="tip">💡 tip</option><option value="food">🍜 food</option>
-          <option value="life">✌️ life</option><option value="tech">⚡ tech</option>
-          <option value="random">🎲 random</option>
-        </select>
+        <select class="tag-sel" id="rec-tag"><option value="tip">💡 tip</option><option value="food">🍜 food</option><option value="life">✌️ life</option><option value="tech">⚡ tech</option><option value="random">🎲 random</option></select>
         <button class="post-btn" onclick="staffPost('recommended')">+ Post</button>
       </div>
       <div class="rec-grid" id="recommended-grid"><p class="empty">No recommended tips yet.</p></div>
@@ -256,92 +273,101 @@
 
     <!-- FEATURED -->
     <div class="section sec-panel" id="sec-featured">
-      <div class="section-header">
-        <span class="section-title">🔥 Featured Tips <span class="section-lock">Mod+ only</span></span>
-        <span class="rank-badge rank-mod">Mod+</span>
-      </div>
+      <div class="section-header"><span class="section-title">🔥 Featured Tips <span class="section-lock">Mod+ only</span></span><span class="rank-badge rank-mod">Mod+</span></div>
       <div class="staff-form" id="feat-form" style="display:none">
         <input type="text" id="feat-text" placeholder="Add a featured tip..." maxlength="280" />
         <input type="text" id="feat-author" placeholder="Your name" maxlength="30" />
-        <select class="tag-sel" id="feat-tag">
-          <option value="tip">💡 tip</option><option value="food">🍜 food</option>
-          <option value="life">✌️ life</option><option value="tech">⚡ tech</option>
-          <option value="random">🎲 random</option>
-        </select>
+        <select class="tag-sel" id="feat-tag"><option value="tip">💡 tip</option><option value="food">🍜 food</option><option value="life">✌️ life</option><option value="tech">⚡ tech</option><option value="random">🎲 random</option></select>
         <button class="post-btn" onclick="staffPost('featured')">+ Post</button>
       </div>
       <div class="tips-grid" id="featured-grid"><p class="empty">No featured tips yet.</p></div>
     </div>
 
-    <!-- PUBLIC TIPS -->
+    <!-- PUBLIC -->
     <div class="section sec-panel" id="sec-public">
-      <div class="section-header">
-        <span class="section-title">📢 Public Tips <span class="section-lock">Everyone can submit</span></span>
-        <span class="rank-badge rank-public">Public</span>
-      </div>
+      <div class="section-header"><span class="section-title">📢 Public Tips <span class="section-lock">Everyone can submit</span></span><span class="rank-badge rank-public">Public</span></div>
       <div class="public-form">
         <h3>Submit a tip for review</h3>
-        <div class="form-row">
-          <input type="text" id="pub-name" placeholder="Your name" maxlength="30" />
-          <select id="pub-tag">
-            <option value="tip">💡 tip</option><option value="food">🍜 food</option>
-            <option value="life">✌️ life</option><option value="tech">⚡ tech</option>
-            <option value="random">🎲 random</option>
-          </select>
-        </div>
+        <div class="form-row"><input type="text" id="pub-name" placeholder="Your name" maxlength="30" /><select id="pub-tag"><option value="tip">💡 tip</option><option value="food">🍜 food</option><option value="life">✌️ life</option><option value="tech">⚡ tech</option><option value="random">🎲 random</option></select></div>
         <div class="form-row"><textarea id="pub-text" placeholder="Write your tip here..." maxlength="280"></textarea></div>
         <div class="form-row"><button class="submit-btn" onclick="submitPublicTip()">Submit for Review</button></div>
-        <span class="pending-notice">⏳ Tips are reviewed before being posted — Owner &amp; Admins will approve or deny.</span>
+        <span class="pending-notice">⏳ Tips are reviewed before being posted — Owner &amp; Admins approve or deny.</span>
       </div>
       <div class="tips-grid" id="public-grid"><p class="empty">No approved tips yet.</p></div>
     </div>
 
     <!-- PENDING -->
     <div class="section sec-panel" id="sec-pending">
-      <div class="section-header">
-        <span class="section-title">⏳ Pending Approval <span class="section-lock">Owner &amp; Admin only</span></span>
-        <span class="rank-badge rank-admin">Review Queue</span>
-      </div>
+      <div class="section-header"><span class="section-title">⏳ Pending Approval <span class="section-lock">Owner &amp; Admin only</span></span><span class="rank-badge rank-admin">Review Queue</span></div>
       <div class="tips-grid" id="pending-grid"><p class="empty">No pending tips.</p></div>
     </div>
 
     <!-- ADMIN BOARD -->
     <div class="section sec-panel" id="sec-adminboard">
-      <div class="section-header">
-        <span class="section-title">🔒 Admin Board <span class="section-lock">Admin+ only</span></span>
-        <span class="rank-badge rank-admin">Admin+</span>
-      </div>
+      <div class="section-header"><span class="section-title">🔒 Admin Board <span class="section-lock">Admin+ only</span></span><span class="rank-badge rank-admin">Admin+</span></div>
       <div class="staff-form" id="admin-form" style="display:none">
         <input type="text" id="admin-text" placeholder="Add an admin tip..." maxlength="280" />
         <input type="text" id="admin-author" placeholder="Your name" maxlength="30" />
-        <select class="tag-sel" id="admin-tag">
-          <option value="tip">💡 tip</option><option value="food">🍜 food</option>
-          <option value="life">✌️ life</option><option value="tech">⚡ tech</option>
-          <option value="random">🎲 random</option>
-        </select>
+        <select class="tag-sel" id="admin-tag"><option value="tip">💡 tip</option><option value="food">🍜 food</option><option value="life">✌️ life</option><option value="tech">⚡ tech</option><option value="random">🎲 random</option></select>
         <button class="post-btn" onclick="staffPost('adminboard')">+ Post</button>
       </div>
       <div class="tips-grid" id="adminboard-grid"><p class="empty">No admin tips yet.</p></div>
     </div>
 
-    <!-- OWNER SETTINGS -->
+    <!-- SETTINGS -->
     <div class="sec-panel" id="sec-settings">
-      <div class="section-header" style="margin-bottom:1.5rem">
-        <span class="section-title">⚙️ Owner Settings</span>
-        <span class="rank-badge rank-owner">👑 Owner Only</span>
-      </div>
+      <div class="section-header" style="margin-bottom:1.5rem"><span class="section-title">⚙️ Owner Settings</span><span class="rank-badge rank-owner">👑 Owner Only</span></div>
       <div class="settings-wrap">
+
+        <!-- ANNOUNCEMENT -->
+        <div class="settings-card">
+          <div class="settings-card-header">📢 Announcement Banner</div>
+          <div class="settings-card-body">
+            <div class="setting-row"><label>Message</label><textarea id="set-ann-text" placeholder="e.g. 🎉 Welcome to tips &amp; stuff! Read the rules before posting." maxlength="200"></textarea></div>
+            <div class="setting-row">
+              <label>Banner Color</label>
+              <div class="color-row">
+                <input type="color" id="set-ann-color" value="#c8602a" oninput="document.getElementById('ann-color-swatch').style.background=this.value;updateAnnPreview()" style="width:80px" />
+                <div class="color-swatch" id="ann-color-swatch" style="background:#c8602a"></div>
+              </div>
+            </div>
+            <div id="ann-preview-wrap" style="display:none"><div class="ann-preview" id="ann-preview"></div></div>
+            <div class="settings-row-2">
+              <div class="setting-row"><label>Show Banner</label>
+                <select id="set-ann-show"><option value="yes">✅ Visible to everyone</option><option value="no">🚫 Hidden</option></select>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+              <button class="save-btn" onclick="saveAnnouncement()">Save Banner</button>
+              <span class="settings-toast" id="toast-ann"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- APPEARANCE -->
         <div class="settings-card">
           <div class="settings-card-header">🎨 Site Appearance</div>
           <div class="settings-card-body">
-            <div class="setting-row"><label>Site Title</label><input type="text" id="set-title" placeholder="tips & stuff" maxlength="40" /></div>
-            <div class="setting-row"><label>Subtitle / Tagline</label><input type="text" id="set-subtitle" placeholder="a shared board for tips, tricks, and random gems ✦" maxlength="80" /></div>
-            <div class="setting-row">
-              <label>Accent Color</label>
-              <div class="color-preview">
-                <input type="color" id="set-accent" value="#c8602a" style="width:80px" oninput="document.getElementById('accent-swatch').style.background=this.value" />
-                <div class="color-swatch" id="accent-swatch" style="background:#c8602a"></div>
-                <span class="hint">Used for buttons, highlights, and borders</span>
+            <div class="settings-row-2">
+              <div class="setting-row"><label>Site Title</label><input type="text" id="set-title" placeholder="tips & stuff" maxlength="40" /></div>
+              <div class="setting-row"><label>Subtitle</label><input type="text" id="set-subtitle" placeholder="a shared board..." maxlength="80" /></div>
+            </div>
+            <div class="settings-row-2">
+              <div class="setting-row">
+                <label>Accent Color</label>
+                <div class="color-row">
+                  <input type="color" id="set-accent" value="#c8602a" style="width:80px" oninput="document.getElementById('accent-swatch').style.background=this.value" />
+                  <div class="color-swatch" id="accent-swatch" style="background:#c8602a"></div>
+                  <span class="hint">Buttons &amp; highlights</span>
+                </div>
+              </div>
+              <div class="setting-row">
+                <label>Background Color</label>
+                <div class="color-row">
+                  <input type="color" id="set-bg" value="#f5f2eb" style="width:80px" oninput="document.getElementById('bg-swatch').style.background=this.value" />
+                  <div class="color-swatch" id="bg-swatch" style="background:#f5f2eb"></div>
+                  <span class="hint">Page background</span>
+                </div>
               </div>
             </div>
             <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
@@ -350,33 +376,36 @@
             </div>
           </div>
         </div>
+
+        <!-- PASSWORDS -->
         <div class="settings-card">
           <div class="settings-card-header">🔑 Staff Passwords</div>
           <div class="settings-card-body">
-            <div class="hint" style="margin-bottom:4px">These are saved to JSONBin and take effect immediately. Keep them safe!</div>
-            <div class="setting-row-inline"><div class="setting-row"><label>👑 Owner Password</label><input type="password" id="set-pw-owner" placeholder="current password hidden" autocomplete="new-password" /></div></div>
-            <div class="setting-row-inline"><div class="setting-row"><label>🛡️ Admin Password</label><input type="password" id="set-pw-admin" placeholder="current password hidden" autocomplete="new-password" /></div></div>
-            <div class="setting-row-inline"><div class="setting-row"><label>🔧 Mod Password</label><input type="password" id="set-pw-mod" placeholder="current password hidden" autocomplete="new-password" /></div></div>
-            <div class="hint">Leave a field blank to keep the current password unchanged.</div>
-            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px">
+            <p class="hint">Leave blank to keep the current password. Changes take effect immediately.</p>
+            <div class="settings-row-2">
+              <div class="setting-row"><label>👑 Owner Password</label><input type="password" id="set-pw-owner" placeholder="new password..." autocomplete="new-password" /></div>
+              <div class="setting-row"><label>🛡️ Admin Password</label><input type="password" id="set-pw-admin" placeholder="new password..." autocomplete="new-password" /></div>
+            </div>
+            <div class="settings-row-2">
+              <div class="setting-row"><label>🔧 Mod Password</label><input type="password" id="set-pw-mod" placeholder="new password..." autocomplete="new-password" /></div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
               <button class="save-btn" onclick="savePasswords()">Save Passwords</button>
               <span class="settings-toast" id="toast-passwords"></span>
             </div>
           </div>
         </div>
+
+        <!-- STAFF MEMBERS -->
         <div class="settings-card">
           <div class="settings-card-header">👥 Staff Members</div>
           <div class="settings-card-body">
-            <div class="hint">Visible roster of staff — displayed on the Ranks page.</div>
+            <p class="hint">Roster shown on the Ranks page.</p>
             <div class="member-list" id="member-list"></div>
-            <div class="add-member-row">
+            <div class="add-row">
               <input type="text" id="new-member-name" placeholder="Name" maxlength="30" />
-              <select id="new-member-rank">
-                <option value="owner">👑 Owner</option>
-                <option value="admin">🛡️ Admin</option>
-                <option value="mod">🔧 Mod</option>
-              </select>
-              <button class="save-btn secondary" onclick="addMember()" style="height:36px;padding:0 14px">+ Add</button>
+              <select id="new-member-rank"><option value="owner">👑 Owner</option><option value="admin">🛡️ Admin</option><option value="mod">🔧 Mod</option></select>
+              <button class="save-btn secondary" onclick="addMember()" style="height:36px;padding:0 12px">+ Add</button>
             </div>
             <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px">
               <button class="save-btn" onclick="saveMembers()">Save Members</button>
@@ -384,40 +413,63 @@
             </div>
           </div>
         </div>
+
+        <!-- RULES EDITOR -->
         <div class="settings-card">
           <div class="settings-card-header">📜 Site Rules</div>
           <div class="settings-card-body">
-            <div class="hint">One rule per line. These appear on the Rules page.</div>
-            <textarea id="set-rules" style="width:100%;height:160px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;resize:vertical;margin-top:6px" placeholder="e.g. Be respectful to others&#10;No spam or self-promotion&#10;Keep tips on-topic"></textarea>
-            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px">
+            <p class="hint">One rule per line. Shown on the Rules page.</p>
+            <div class="setting-row"><textarea id="set-rules" style="min-height:140px" placeholder="e.g. Be respectful&#10;No spam&#10;Keep tips on-topic"></textarea></div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
               <button class="save-btn" onclick="saveRules()">Save Rules</button>
               <span class="settings-toast" id="toast-rules"></span>
             </div>
           </div>
         </div>
-        <div class="settings-card" style="border-color:rgba(192,57,43,0.3)">
-          <div class="settings-card-header" style="color:#c0392b">🗑️ Danger Zone</div>
+
+        <!-- WELCOME MESSAGE -->
+        <div class="settings-card">
+          <div class="settings-card-header">👋 Welcome Message</div>
           <div class="settings-card-body">
-            <div style="display:flex;flex-wrap:wrap;gap:10px">
-              <div style="flex:1;min-width:200px"><div style="font-size:0.85rem;font-weight:500;margin-bottom:4px">Clear Pending Queue</div><div class="hint">Permanently delete all tips awaiting approval.</div></div>
-              <button class="save-btn danger" onclick="dangerClear('pending')">Clear Pending</button>
-            </div>
-            <hr style="border:none;border-top:1px solid var(--border);margin:4px 0">
-            <div style="display:flex;flex-wrap:wrap;gap:10px">
-              <div style="flex:1;min-width:200px"><div style="font-size:0.85rem;font-weight:500;margin-bottom:4px">Clear Public Tips</div><div class="hint">Permanently delete all approved public tips.</div></div>
-              <button class="save-btn danger" onclick="dangerClear('public')">Clear Public</button>
-            </div>
-            <hr style="border:none;border-top:1px solid var(--border);margin:4px 0">
-            <div style="display:flex;flex-wrap:wrap;gap:10px">
-              <div style="flex:1;min-width:200px"><div style="font-size:0.85rem;font-weight:500;margin-bottom:4px">Clear Featured Tips</div><div class="hint">Permanently delete all featured tips.</div></div>
-              <button class="save-btn danger" onclick="dangerClear('featured')">Clear Featured</button>
+            <p class="hint">Shown below the site title on the homepage.</p>
+            <div class="setting-row"><textarea id="set-welcome" placeholder="Welcome to tips & stuff! Here you can find and share tips with friends." maxlength="300"></textarea></div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+              <button class="save-btn" onclick="saveWelcome()">Save Welcome</button>
+              <span class="settings-toast" id="toast-welcome"></span>
             </div>
           </div>
         </div>
+
+        <!-- DANGER ZONE -->
+        <div class="settings-card" style="border-color:rgba(192,57,43,0.3)">
+          <div class="settings-card-header" style="color:#c0392b">🗑️ Danger Zone</div>
+          <div class="settings-card-body">
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+              <div style="flex:1;min-width:180px"><div style="font-size:0.85rem;font-weight:500;margin-bottom:2px">Clear Pending Queue</div><div class="hint">Delete all tips awaiting approval.</div></div>
+              <button class="save-btn danger" onclick="dangerClear('pending')">Clear Pending</button>
+            </div>
+            <hr style="border:none;border-top:1px solid var(--border)">
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+              <div style="flex:1;min-width:180px"><div style="font-size:0.85rem;font-weight:500;margin-bottom:2px">Clear Public Tips</div><div class="hint">Delete all approved public tips.</div></div>
+              <button class="save-btn danger" onclick="dangerClear('public')">Clear Public</button>
+            </div>
+            <hr style="border:none;border-top:1px solid var(--border)">
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+              <div style="flex:1;min-width:180px"><div style="font-size:0.85rem;font-weight:500;margin-bottom:2px">Clear Featured Tips</div><div class="hint">Delete all featured tips.</div></div>
+              <button class="save-btn danger" onclick="dangerClear('featured')">Clear Featured</button>
+            </div>
+            <hr style="border:none;border-top:1px solid var(--border)">
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+              <div style="flex:1;min-width:180px"><div style="font-size:0.85rem;font-weight:500;margin-bottom:2px">Clear Recommended</div><div class="hint">Delete all recommended/staff picks tips.</div></div>
+              <button class="save-btn danger" onclick="dangerClear('recommended')">Clear Recommended</button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <footer class="site-footer"><p id="footer-text">tips & stuff — shared with friends ✦</p></footer>
+    <div class="site-footer"><p id="footer-text">tips & stuff — shared with friends ✦</p></div>
   </main>
 </div>
 
@@ -425,82 +477,68 @@
   const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
   const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
   const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
-  let PASSWORDS = { owner: '20140314', admin: '382790', mod: '23889' };
+  let PASSWORDS = { owner:'20140314', admin:'382790', mod:'23889' };
+
   const TAG_CONFIG = {
-    tip:    { label:'💡 tip',    bg:'var(--tag-tip-bg)',    color:'var(--tag-tip-txt)',    accent:'#4a8a1a' },
-    food:   { label:'🍜 food',   bg:'var(--tag-food-bg)',   color:'var(--tag-food-txt)',   accent:'#c8602a' },
-    life:   { label:'✌️ life',   bg:'var(--tag-life-bg)',   color:'var(--tag-life-txt)',   accent:'#2a60c8' },
-    tech:   { label:'⚡ tech',   bg:'var(--tag-tech-bg)',   color:'var(--tag-tech-txt)',   accent:'#7a2ac8' },
-    random: { label:'🎲 random', bg:'var(--tag-random-bg)', color:'var(--tag-random-txt)', accent:'#c82a4a' },
+    tip:    {label:'💡 tip',    bg:'var(--tag-tip-bg)',    color:'var(--tag-tip-txt)',    accent:'#4a8a1a'},
+    food:   {label:'🍜 food',   bg:'var(--tag-food-bg)',   color:'var(--tag-food-txt)',   accent:'#c8602a'},
+    life:   {label:'✌️ life',   bg:'var(--tag-life-bg)',   color:'var(--tag-life-txt)',   accent:'#2a60c8'},
+    tech:   {label:'⚡ tech',   bg:'var(--tag-tech-bg)',   color:'var(--tag-tech-txt)',   accent:'#7a2ac8'},
+    random: {label:'🎲 random', bg:'var(--tag-random-bg)', color:'var(--tag-random-txt)', accent:'#c82a4a'},
   };
-  const SEED_TIPS = {
+
+  const SEED = {
     recommended: [
-      { id:'r1',  text:'Drink a glass of water first thing in the morning — your body is dehydrated after sleep.', tag:'life', author:'Owner' },
-      { id:'r2',  text:'Make your bed every morning. It takes 2 minutes and makes your whole room feel cleaner instantly.', tag:'life', author:'Owner' },
-      { id:'r3',  text:'Tell people when you appreciate them. Most people never say it out loud and everyone wishes someone would.', tag:'life', author:'Owner' },
-      { id:'r4',  text:'When you feel overwhelmed, write down everything on your mind. Getting it out of your head and onto paper cuts anxiety in half.', tag:'life', author:'Owner' },
-      { id:'r5',  text:'Reply to messages as soon as you read them. Letting them sit causes more stress than just answering.', tag:'life', author:'Owner' },
-      { id:'r6',  text:'Set your alarm 10 minutes earlier than you need to. That buffer removes all the rushing-out-the-door stress.', tag:'life', author:'Owner' },
-      { id:'r7',  text:"If a task takes less than 2 minutes, do it right now. Don't put it on a list — just do it.", tag:'life', author:'Owner' },
-      { id:'r8',  text:'Take a 10-minute walk outside after lunch. It boosts your afternoon energy more than coffee does.', tag:'life', author:'Owner' },
-      { id:'r9',  text:'Add a pinch of salt to your coffee grounds before brewing — it cuts bitterness without changing the flavor.', tag:'food', author:'Owner' },
-      { id:'r10', text:'Store fresh herbs like flowers — trim the stems and put them in a glass of water in the fridge. They last 2× longer.', tag:'food', author:'Owner' },
-      { id:'r11', text:'Freeze overripe bananas. They are perfect for smoothies and banana bread whenever you need them.', tag:'food', author:'Owner' },
-      { id:'r12', text:'Let your steak rest for 5 minutes after cooking before cutting. All the juices redistribute and it stays tender.', tag:'food', author:'Owner' },
-      { id:'r13', text:'Pasta water is liquid gold. Add a ladle of it to your sauce — the starch makes everything creamy and helps it stick.', tag:'food', author:'Owner' },
-      { id:'r14', text:'If your soup or stew is too salty, drop a peeled raw potato in and simmer for 15 minutes. It absorbs the excess salt.', tag:'food', author:'Owner' },
-      { id:'r15', text:'Toast your spices in a dry pan for 30 seconds before using them. It doubles the flavor.', tag:'food', author:'Owner' },
-      { id:'r16', text:'Press Ctrl+Shift+T to instantly reopen a closed browser tab.', tag:'tech', author:'Owner' },
-      { id:'r17', text:'Google anything followed by "site:reddit.com" for honest real-world opinions on any product or topic.', tag:'tech', author:'Owner' },
-      { id:'r18', text:'Use dark mode everywhere you can. Easier on the eyes at night and saves battery on OLED screens.', tag:'tech', author:'Owner' },
-      { id:'r19', text:'Press Windows+V to open clipboard history and paste anything you copied earlier in the day.', tag:'tech', author:'Owner' },
-      { id:'r20', text:'Use a password manager. One strong master password protects everything else — stop reusing the same one.', tag:'tech', author:'Owner' },
-      { id:'r21', text:'Ctrl+Z undoes mistakes in almost every app, not just text editors. Works in file explorers, design tools, and more.', tag:'tech', author:'Owner' },
-      { id:'r22', text:'If your WiFi is slow, restart your router by unplugging it for 30 seconds. It fixes most issues instantly.', tag:'tech', author:'Owner' },
-      { id:'r23', text:"If you can't decide between two options, flip a coin — not to let chance decide, but to notice which outcome you're hoping for.", tag:'random', author:'Owner' },
-      { id:'r24', text:"If you're bored, clean something. You won't be bored anymore and your space will be better for it.", tag:'random', author:'Owner' },
-      { id:'r25', text:'Put your phone on the other side of the room at night. Forces you to get up to turn off the alarm — and you actually wake up.', tag:'random', author:'Owner' },
-      { id:'r26', text:'Keep a small notebook by your bed. Your best ideas come right before sleep and you will forget them by morning.', tag:'random', author:'Owner' },
-      { id:'r27', text:'When you buy something new, get rid of something old. Keeps clutter from slowly taking over your space.', tag:'random', author:'Owner' },
-      { id:'r28', text:'If you want to remember something, say it out loud. Speaking it engages a different part of your brain than just thinking it.', tag:'random', author:'Owner' },
+      {id:'r1', text:'Drink a glass of water first thing in the morning — your body is dehydrated after sleep.', tag:'life', author:'Owner'},
+      {id:'r2', text:'Make your bed every morning. It takes 2 minutes and makes your whole room feel cleaner instantly.', tag:'life', author:'Owner'},
+      {id:'r3', text:'Tell people when you appreciate them. Most people never say it out loud.', tag:'life', author:'Owner'},
+      {id:'r4', text:'When you feel overwhelmed, write down everything on your mind. Getting it out of your head cuts anxiety in half.', tag:'life', author:'Owner'},
+      {id:'r5', text:'Set your alarm 10 minutes earlier than you need to. That buffer removes all the rushing stress.', tag:'life', author:'Owner'},
+      {id:'r6', text:"If a task takes less than 2 minutes, do it right now. Don't put it on a list — just do it.", tag:'life', author:'Owner'},
+      {id:'r7', text:'Take a 10-minute walk outside after lunch. It boosts your afternoon energy more than coffee.', tag:'life', author:'Owner'},
+      {id:'r8', text:'Add a pinch of salt to your coffee grounds before brewing — it cuts bitterness without changing the flavor.', tag:'food', author:'Owner'},
+      {id:'r9', text:'Store fresh herbs like flowers — trim stems and put in a glass of water in the fridge. They last 2× longer.', tag:'food', author:'Owner'},
+      {id:'r10',text:'Freeze overripe bananas. Perfect for smoothies and banana bread whenever you need them.', tag:'food', author:'Owner'},
+      {id:'r11',text:'Let your steak rest for 5 minutes after cooking before cutting. The juices redistribute and it stays tender.', tag:'food', author:'Owner'},
+      {id:'r12',text:'Pasta water is liquid gold. Add a ladle to your sauce — the starch makes everything creamy.', tag:'food', author:'Owner'},
+      {id:'r13',text:'Toast your spices in a dry pan for 30 seconds before using them. It doubles the flavor.', tag:'food', author:'Owner'},
+      {id:'r14',text:'Press Ctrl+Shift+T to instantly reopen a closed browser tab.', tag:'tech', author:'Owner'},
+      {id:'r15',text:'Google anything followed by "site:reddit.com" for honest real-world opinions on any topic.', tag:'tech', author:'Owner'},
+      {id:'r16',text:'Use dark mode everywhere. Easier on the eyes at night and saves battery on OLED screens.', tag:'tech', author:'Owner'},
+      {id:'r17',text:'Press Windows+V to open clipboard history and paste anything you copied earlier.', tag:'tech', author:'Owner'},
+      {id:'r18',text:'Use a password manager. One strong master password protects everything else.', tag:'tech', author:'Owner'},
+      {id:'r19',text:'Ctrl+Z undoes mistakes in almost every app — file explorers, design tools, and more.', tag:'tech', author:'Owner'},
+      {id:'r20',text:'If your WiFi is slow, restart your router by unplugging it for 30 seconds. Fixes most issues instantly.', tag:'tech', author:'Owner'},
+      {id:'r21',text:"If you can't decide between two options, flip a coin — not to let chance decide, but to notice which outcome you're hoping for.", tag:'random', author:'Owner'},
+      {id:'r22',text:"If you're bored, clean something. You won't be bored anymore and your space will be better.", tag:'random', author:'Owner'},
+      {id:'r23',text:'Put your phone on the other side of the room at night. Forces you to get up to turn off the alarm.', tag:'random', author:'Owner'},
+      {id:'r24',text:'Keep a small notebook by your bed. Your best ideas come right before sleep.', tag:'random', author:'Owner'},
+      {id:'r25',text:'When you buy something new, get rid of something old. Keeps clutter from slowly taking over.', tag:'random', author:'Owner'},
+      {id:'r26',text:'If you want to remember something, say it out loud. Speaking engages a different part of your brain.', tag:'random', author:'Owner'},
     ],
     public: [
-      { id:'p1', text:'Use "focus mode" on your phone during meals. Even 20 minutes of undistracted eating improves how much you enjoy food.', tag:'life', author:'Admin' },
-      { id:'p2', text:'Freeze leftover fresh ginger — it grates much easier from frozen and lasts for months.', tag:'food', author:'Admin' },
-      { id:'p3', text:'Screenshot important confirmation emails instead of searching for them later.', tag:'tech', author:'Admin' },
-      { id:'p4', text:'Carry a reusable bag folded in your pocket. You will never be stuck at checkout paying for a plastic one again.', tag:'random', author:'Admin' },
-      { id:'p5', text:'When cooking garlic, add it last to the pan — it burns fast and bitter garlic ruins a whole dish.', tag:'food', author:'Admin' },
-      { id:'p6', text:'Mute group chats you never check instead of leaving them. No notifications but you can still read when you want.', tag:'tech', author:'Admin' },
+      {id:'p1',text:'Use focus mode on your phone during meals. Even 20 minutes of undistracted eating makes a difference.', tag:'life', author:'Admin'},
+      {id:'p2',text:'Freeze leftover fresh ginger — it grates much easier from frozen and lasts for months.', tag:'food', author:'Admin'},
+      {id:'p3',text:'Screenshot important confirmation emails instead of searching for them later.', tag:'tech', author:'Admin'},
+      {id:'p4',text:'Mute group chats you never check instead of leaving them. No notifications but you can still read when you want.', tag:'tech', author:'Admin'},
+      {id:'p5',text:'When cooking garlic, add it last to the pan — it burns fast and bitter garlic ruins the whole dish.', tag:'food', author:'Admin'},
+      {id:'p6',text:'Carry a reusable bag folded in your pocket. You will never be stuck at checkout paying for a plastic one again.', tag:'random', author:'Admin'},
     ]
   };
 
-  let currentRank = 'public';
+  let currentRank = sessionStorage.getItem('rank') || 'public';
   let db = { public:[], featured:[], adminboard:[], pending:[], recommended:[], banlist:[], rules:[], members:[], config:{} };
-
   const ALL_SECTIONS = ['recommended','featured','public','pending','adminboard','settings'];
 
   function showSection(id) {
     ALL_SECTIONS.forEach(s => {
       document.getElementById('sec-'+s).classList.remove('visible');
-      const n = document.getElementById('nav-'+s); if (n) n.classList.remove('active');
+      const n=document.getElementById('nav-'+s); if(n) n.classList.remove('active');
     });
     document.getElementById('sec-'+id).classList.add('visible');
-    const n = document.getElementById('nav-'+id); if (n) n.classList.add('active');
-    if (id === 'settings') populateSettings();
+    const n=document.getElementById('nav-'+id); if(n) n.classList.add('active');
+    if(id==='settings') populateSettings();
   }
-
-  function openModal()  { document.getElementById('login-modal').classList.add('open'); document.getElementById('modal-pw').focus(); }
-  function closeModal() { document.getElementById('login-modal').classList.remove('open'); document.getElementById('modal-pw').value=''; document.getElementById('modal-error').style.display='none'; }
-  function tryLogin() {
-    const pw = document.getElementById('modal-pw').value;
-    if      (pw===PASSWORDS.owner) setRank('owner');
-    else if (pw===PASSWORDS.admin) setRank('admin');
-    else if (pw===PASSWORDS.mod)   setRank('mod');
-    else { document.getElementById('modal-error').style.display='block'; return; }
-    closeModal();
-  }
-  document.getElementById('modal-pw').addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
-  function setRank(rank) { currentRank=rank; sessionStorage.setItem('rank',rank); updateUI(); }
 
   function updateUI() {
     const rank=currentRank;
@@ -509,8 +547,13 @@
     const d=document.getElementById('rank-display');
     d.textContent=labels[rank]; d.className='rank-badge '+classes[rank];
     const ab=document.getElementById('auth-btn');
-    if(rank!=='public'){ab.textContent='Logout';ab.onclick=()=>{currentRank='public';sessionStorage.removeItem('rank');updateUI();renderAll();};}
-    else{ab.textContent='Login';ab.onclick=openModal;}
+    if(rank!=='public'){
+      ab.textContent='Logout';
+      ab.onclick=()=>{currentRank='public';sessionStorage.removeItem('rank');location.reload();};
+    } else {
+      ab.textContent='Login';
+      ab.onclick=()=>window.location.href='login.html';
+    }
     const isOwner=rank==='owner', isAdmin=rank==='owner'||rank==='admin', isMod=rank==='owner'||rank==='admin'||rank==='mod';
     document.getElementById('nav-pending').style.display    =isAdmin?'flex':'none';
     document.getElementById('nav-adminboard').style.display =isAdmin?'flex':'none';
@@ -547,12 +590,15 @@
         if(db.config.passwords.admin) PASSWORDS.admin=db.config.passwords.admin;
         if(db.config.passwords.mod)   PASSWORDS.mod  =db.config.passwords.mod;
       }
-      applyAppearance(db.config);
+      applyConfig(db.config);
       let needsSave=false;
-      if(db.recommended.length<SEED_TIPS.recommended.length){db.recommended=SEED_TIPS.recommended;needsSave=true;}
-      if(!db.public.length){db.public=SEED_TIPS.public;needsSave=true;}
+      if(db.recommended.length<SEED.recommended.length){db.recommended=SEED.recommended;needsSave=true;}
+      if(!db.public.length){db.public=SEED.public;needsSave=true;}
       if(needsSave) await saveAll();
-      setStatus('ok','loaded ✓ — hit ↻ to see new tips'); renderAll();
+      const pc=db.pending.length;
+      const pcEl=document.getElementById('pending-count');
+      if(pcEl){pcEl.textContent=pc>0?pc:'';pcEl.style.display=pc>0?'':'none';}
+      setStatus('ok','loaded ✓ — hit ↻ to see new tips'); updateUI();
     }catch(e){console.error(e);setStatus('error','could not load — '+e.message);}
   }
 
@@ -561,36 +607,74 @@
     if(!res.ok) throw new Error('HTTP '+res.status);
   }
 
-  function applyAppearance(cfg){
+  function applyConfig(cfg){
+    if(!cfg) return;
     if(cfg.title){document.getElementById('site-title-el').innerHTML=cfg.title;document.title=cfg.title.replace(/<[^>]*>/g,'')+'  ✦';}
     if(cfg.subtitle) document.getElementById('site-subtitle-el').textContent=cfg.subtitle;
-    if(cfg.accent) document.documentElement.style.setProperty('--accent',cfg.accent);
+    if(cfg.accent)   document.documentElement.style.setProperty('--accent',cfg.accent);
+    if(cfg.bg)       document.documentElement.style.setProperty('--bg',cfg.bg);
+    if(cfg.welcome){
+      let wEl=document.getElementById('welcome-msg');
+      if(!wEl){wEl=document.createElement('p');wEl.id='welcome-msg';wEl.style.cssText='font-size:0.9rem;color:var(--text-2,#5a5750);margin-top:0.5rem;line-height:1.6;';document.querySelector('.divider').after(wEl);}
+      wEl.textContent=cfg.welcome;
+    }
+    if(cfg.announcement && cfg.announcement.show==='yes' && cfg.announcement.text){
+      const banner=document.getElementById('announcement-banner');
+      const textEl=document.getElementById('announcement-text');
+      textEl.textContent=cfg.announcement.text;
+      if(cfg.announcement.color) banner.style.background=cfg.announcement.color;
+      banner.classList.add('show');
+    }
   }
 
   function populateSettings(){
     const cfg=db.config||{};
-    document.getElementById('set-title').value   =(cfg.title||'tips & stuff').replace(/<[^>]*>/g,'').replace('&amp;','&');
+    document.getElementById('set-title').value   =(cfg.title||'').replace(/<[^>]*>/g,'').replace('&amp;','&');
     document.getElementById('set-subtitle').value=cfg.subtitle||'';
     const accent=cfg.accent||'#c8602a';
     document.getElementById('set-accent').value=accent;
     document.getElementById('accent-swatch').style.background=accent;
+    const bg=cfg.bg||'#f5f2eb';
+    document.getElementById('set-bg').value=bg;
+    document.getElementById('bg-swatch').style.background=bg;
     document.getElementById('set-rules').value=Array.isArray(db.rules)?db.rules.join('\n'):'';
+    document.getElementById('set-welcome').value=cfg.welcome||'';
+    const ann=cfg.announcement||{};
+    document.getElementById('set-ann-text').value=ann.text||'';
+    document.getElementById('set-ann-show').value=ann.show||'no';
+    const annColor=ann.color||'#c8602a';
+    document.getElementById('set-ann-color').value=annColor;
+    document.getElementById('ann-color-swatch').style.background=annColor;
+    updateAnnPreview();
     renderMemberList();
   }
+
+  function updateAnnPreview(){
+    const text=document.getElementById('set-ann-text').value;
+    const color=document.getElementById('set-ann-color').value;
+    const wrap=document.getElementById('ann-preview-wrap');
+    const prev=document.getElementById('ann-preview');
+    if(text){wrap.style.display='block';prev.textContent=text;prev.style.background=color;}
+    else wrap.style.display='none';
+  }
+  document.addEventListener('DOMContentLoaded',()=>{
+    const t=document.getElementById('set-ann-text');
+    if(t) t.addEventListener('input',updateAnnPreview);
+  });
 
   function renderMemberList(){
     const list=document.getElementById('member-list');
     if(!db.members||!db.members.length){list.innerHTML='<p style="font-size:0.8rem;color:var(--muted)">No staff members added yet.</p>';return;}
     const rl={owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod'};
     const rc={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod'};
-    list.innerHTML=db.members.map((m,i)=>`<div class="member-row"><span class="member-name">${escHtml(m.name)}</span><span class="rank-badge member-rank ${rc[m.rank]||'rank-public'}">${rl[m.rank]||m.rank}</span><button class="member-del" onclick="removeMember(${i})">✕</button></div>`).join('');
+    list.innerHTML=db.members.map((m,i)=>`<div class="member-row"><span class="member-name">${escHtml(m.name)}</span><span class="rank-badge ${rc[m.rank]||'rank-public'}">${rl[m.rank]||m.rank}</span><button class="member-del" onclick="removeMember(${i})">✕</button></div>`).join('');
   }
 
   function addMember(){
     const name=document.getElementById('new-member-name').value.trim();
     const rank=document.getElementById('new-member-rank').value;
     if(!name){document.getElementById('new-member-name').focus();return;}
-    if(!db.members) db.members=[];
+    if(!db.members)db.members=[];
     db.members.push({name,rank});
     document.getElementById('new-member-name').value='';
     renderMemberList();
@@ -599,54 +683,74 @@
 
   function showToast(id,msg,isError){
     const el=document.getElementById(id);
-    el.textContent=msg; el.className='settings-toast show'+(isError?' error':'');
+    el.textContent=msg;el.className='settings-toast show'+(isError?' error':'');
     setTimeout(()=>el.className='settings-toast',3000);
   }
 
+  async function saveAnnouncement(){
+    if(!db.config)db.config={};
+    db.config.announcement={
+      text: document.getElementById('set-ann-text').value.trim(),
+      show: document.getElementById('set-ann-show').value,
+      color:document.getElementById('set-ann-color').value,
+    };
+    try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');showToast('toast-ann','✓ Banner saved!');}
+    catch(e){showToast('toast-ann','✕ '+e.message,true);setStatus('error','save failed');}
+  }
+
   async function saveAppearance(){
-    const title=document.getElementById('set-title').value.trim()||'tips & stuff';
+    const title   =document.getElementById('set-title').value.trim()||'tips & stuff';
     const subtitle=document.getElementById('set-subtitle').value.trim();
-    const accent=document.getElementById('set-accent').value;
-    if(!db.config) db.config={};
-    db.config.title=escHtml(title); db.config.subtitle=subtitle; db.config.accent=accent;
-    try{setStatus('loading','saving...');await saveAll();applyAppearance(db.config);setStatus('ok','saved ✓');showToast('toast-appearance','✓ Saved!');}
-    catch(e){showToast('toast-appearance','✕ Error: '+e.message,true);setStatus('error','save failed');}
+    const accent  =document.getElementById('set-accent').value;
+    const bg      =document.getElementById('set-bg').value;
+    if(!db.config)db.config={};
+    db.config.title=escHtml(title);db.config.subtitle=subtitle;db.config.accent=accent;db.config.bg=bg;
+    try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');showToast('toast-appearance','✓ Saved!');}
+    catch(e){showToast('toast-appearance','✕ '+e.message,true);setStatus('error','save failed');}
   }
 
   async function savePasswords(){
     const o=document.getElementById('set-pw-owner').value;
     const a=document.getElementById('set-pw-admin').value;
     const m=document.getElementById('set-pw-mod').value;
-    if(!db.config) db.config={}; if(!db.config.passwords) db.config.passwords={};
+    if(!db.config)db.config={};if(!db.config.passwords)db.config.passwords={};
     if(o){db.config.passwords.owner=o;PASSWORDS.owner=o;}
     if(a){db.config.passwords.admin=a;PASSWORDS.admin=a;}
     if(m){db.config.passwords.mod=m;PASSWORDS.mod=m;}
     try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');
-      document.getElementById('set-pw-owner').value='';document.getElementById('set-pw-admin').value='';document.getElementById('set-pw-mod').value='';
+      ['set-pw-owner','set-pw-admin','set-pw-mod'].forEach(id=>document.getElementById(id).value='');
       showToast('toast-passwords','✓ Passwords updated!');}
-    catch(e){showToast('toast-passwords','✕ Error: '+e.message,true);setStatus('error','save failed');}
+    catch(e){showToast('toast-passwords','✕ '+e.message,true);setStatus('error','save failed');}
   }
 
   async function saveMembers(){
-    try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');showToast('toast-members','✓ Staff list saved!');}
-    catch(e){showToast('toast-members','✕ Error: '+e.message,true);}
+    try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');showToast('toast-members','✓ Saved!');}
+    catch(e){showToast('toast-members','✕ '+e.message,true);}
   }
 
   async function saveRules(){
     const raw=document.getElementById('set-rules').value;
     db.rules=raw.split('\n').map(r=>r.trim()).filter(Boolean);
     try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');showToast('toast-rules','✓ Rules saved!');}
-    catch(e){showToast('toast-rules','✕ Error: '+e.message,true);}
+    catch(e){showToast('toast-rules','✕ '+e.message,true);}
+  }
+
+  async function saveWelcome(){
+    const txt=document.getElementById('set-welcome').value.trim();
+    if(!db.config)db.config={};
+    db.config.welcome=txt;
+    try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');showToast('toast-welcome','✓ Saved!');}
+    catch(e){showToast('toast-welcome','✕ '+e.message,true);}
   }
 
   async function dangerClear(section){
-    if(!confirm('Are you sure? This will permanently delete ALL '+section+' tips.')) return;
+    if(!confirm('Are you sure? This will permanently delete ALL '+section+' tips.'))return;
     db[section]=[];
     try{setStatus('loading','clearing...');await saveAll();setStatus('ok','cleared ✓');renderAll();alert('✓ '+section+' tips cleared.');}
     catch(e){setStatus('error','failed: '+e.message);}
   }
 
-  function renderGrid(gridId,tips,canDelete,showPendingControls,isRec){
+  function renderGrid(gridId,tips,canDelete,pendingCtrl,isRec){
     const grid=document.getElementById(gridId);
     if(!tips||!tips.length){grid.innerHTML='<p class="empty">Nothing here yet.</p>';return;}
     const isAdmin=currentRank==='owner'||currentRank==='admin';
@@ -654,8 +758,8 @@
     grid.innerHTML=tips.map(t=>{
       const cfg=TAG_CONFIG[t.tag]||TAG_CONFIG.tip;
       const acts=[];
-      if(showPendingControls&&isAdmin){acts.push(`<button class="action-btn approve-btn" onclick="approveTip('${t.id}')">✓ Approve</button>`);acts.push(`<button class="action-btn deny-btn" onclick="denyTip('${t.id}')">✕ Deny</button>`);}
-      else if(canDelete){acts.push(`<button class="action-btn del-btn" onclick="deleteTip('${gridId}','${t.id}')">✕ delete</button>`);}
+      if(pendingCtrl&&isAdmin){acts.push(`<button class="action-btn approve-btn" onclick="approveTip('${t.id}')">✓ Approve</button>`);acts.push(`<button class="action-btn deny-btn" onclick="denyTip('${t.id}')">✕ Deny</button>`);}
+      else if(canDelete){acts.push(`<button class="action-btn del-btn" onclick="deleteTip('${gridId}','${t.id}')">✕</button>`);}
       const cc=isRec?'rec-card':'tip-card';
       const sa=isRec?'':` style="--card-accent:${cfg.accent}"`;
       return `<article class="${cc}"${sa}><span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span><p class="tip-text">${escHtml(t.text)}</p><div class="tip-footer"><span class="tip-author">${escHtml(t.author)}</span><div class="tip-actions">${acts.join('')}</div></div></article>`;
@@ -718,9 +822,9 @@
     catch(e){db[section]=prev;setStatus('error','could not delete — '+e.message);renderAll();}
   }
 
-  const saved=sessionStorage.getItem('rank');
-  if(saved) currentRank=saved;
   updateUI(); loadAll();
 </script>
 </body>
 </html>
+HTMLEOF
+echo "done"
