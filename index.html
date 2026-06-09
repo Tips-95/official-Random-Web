@@ -1,4 +1,3 @@
-cat << 'HTMLEOF' > /home/claude/index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,77 +131,40 @@ cat << 'HTMLEOF' > /home/claude/index.html
 
     /* ── OWNER SETTINGS PANEL ── */
     .settings-wrap { display: flex; flex-direction: column; gap: 1.5rem; }
-    .settings-card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
-    }
-    .settings-card-header {
-      display: flex; align-items: center; gap: 8px; padding: 0.9rem 1.2rem;
-      background: var(--bg); border-bottom: 1px solid var(--border);
-      font-size: 0.85rem; font-weight: 600; color: var(--text);
-    }
+    .settings-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .settings-card-header { display: flex; align-items: center; gap: 8px; padding: 0.9rem 1.2rem; background: var(--bg); border-bottom: 1px solid var(--border); font-size: 0.85rem; font-weight: 600; color: var(--text); }
     .settings-card-body { padding: 1.2rem; display: flex; flex-direction: column; gap: 12px; }
     .setting-row { display: flex; flex-direction: column; gap: 5px; }
     .setting-row label { font-size: 0.75rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .setting-row input[type="text"],
-    .setting-row input[type="password"],
-    .setting-row input[type="color"] {
-      height: 38px; padding: 0 12px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
-      background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px;
-      color: var(--text); outline: none; width: 100%; transition: border-color 0.15s;
-    }
+    .setting-row input[type="text"], .setting-row input[type="password"], .setting-row input[type="color"] { height: 38px; padding: 0 12px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); outline: none; width: 100%; transition: border-color 0.15s; }
     .setting-row input[type="color"] { padding: 3px 6px; cursor: pointer; }
     .setting-row input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
     .setting-row .hint { font-size: 0.72rem; color: var(--muted); }
     .setting-row-inline { display: flex; gap: 10px; align-items: flex-end; }
     .setting-row-inline .setting-row { flex: 1; }
-    .save-btn {
-      height: 38px; padding: 0 20px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500;
-      background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer;
-      transition: background 0.15s; white-space: nowrap; align-self: flex-end;
-    }
+    .save-btn { height: 38px; padding: 0 20px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.15s; white-space: nowrap; align-self: flex-end; }
     .save-btn:hover { background: #b5521f; }
-    .save-btn.secondary { background: var(--text); }
-    .save-btn.secondary:hover { opacity: 0.8; }
-    .save-btn.danger { background: #c0392b; }
-    .save-btn.danger:hover { background: #96281b; }
-    .settings-toast {
-      display: none; font-size: 0.78rem; color: #2d7a2d; background: #e8f5e9;
-      border: 1px solid #a5d6a7; border-radius: 6px; padding: 6px 12px;
-      margin-top: 4px;
-    }
+    .save-btn.secondary { background: var(--text); } .save-btn.secondary:hover { opacity: 0.8; }
+    .save-btn.danger { background: #c0392b; } .save-btn.danger:hover { background: #96281b; }
+    .settings-toast { display: none; font-size: 0.78rem; color: #2d7a2d; background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 6px; padding: 6px 12px; margin-top: 4px; }
     .settings-toast.show { display: inline-block; }
     .settings-toast.error { color: #c0392b; background: #fce8ec; border-color: #ef9a9a; }
-
-    /* staff member list */
     .member-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
-    .member-row {
-      display: flex; align-items: center; gap: 10px; padding: 8px 12px;
-      background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
-      font-size: 0.85rem;
-    }
+    .member-row { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; }
     .member-name { font-weight: 500; flex: 1; }
     .member-rank { font-size: 0.72rem; }
     .member-del { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.8rem; padding: 2px 6px; border-radius: 4px; transition: all 0.12s; }
     .member-del:hover { color: #c0392b; background: #fce8ec; }
     .add-member-row { display: flex; gap: 8px; flex-wrap: wrap; }
-    .add-member-row input, .add-member-row select {
-      flex: 1; min-width: 110px; height: 36px; padding: 0 10px;
-      font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
-      background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px;
-      color: var(--text); outline: none;
-    }
+    .add-member-row input, .add-member-row select { flex: 1; min-width: 110px; height: 36px; padding: 0 10px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); outline: none; }
     .add-member-row input:focus { border-color: var(--accent); }
-
-    /* color preview swatch */
     .color-preview { display: flex; align-items: center; gap: 10px; }
     .color-swatch { width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-strong); flex-shrink: 0; }
-
     @media (max-width: 700px) { .sidebar { display: none; } .page { padding: 1.5rem 1rem 4rem; } }
   </style>
 </head>
 <body>
 
-<!-- LOGIN MODAL -->
 <div class="modal-overlay" id="login-modal">
   <div class="modal">
     <h2>Staff Login</h2>
@@ -217,8 +179,6 @@ cat << 'HTMLEOF' > /home/claude/index.html
 </div>
 
 <div class="page-wrap">
-
-  <!-- ── SIDEBAR ── -->
   <aside class="sidebar">
     <div class="sb-label">Browse</div>
     <button class="sb-item active" id="nav-recommended" onclick="showSection('recommended')">
@@ -249,7 +209,6 @@ cat << 'HTMLEOF' > /home/claude/index.html
     </button>
   </aside>
 
-  <!-- ── MAIN CONTENT ── -->
   <main class="page">
     <nav>
       <div class="nav-links">
@@ -365,27 +324,18 @@ cat << 'HTMLEOF' > /home/claude/index.html
       <div class="tips-grid" id="adminboard-grid"><p class="empty">No admin tips yet.</p></div>
     </div>
 
-    <!-- ⚙️ OWNER SETTINGS -->
+    <!-- OWNER SETTINGS -->
     <div class="sec-panel" id="sec-settings">
       <div class="section-header" style="margin-bottom:1.5rem">
         <span class="section-title">⚙️ Owner Settings</span>
         <span class="rank-badge rank-owner">👑 Owner Only</span>
       </div>
-
       <div class="settings-wrap">
-
-        <!-- SITE APPEARANCE -->
         <div class="settings-card">
           <div class="settings-card-header">🎨 Site Appearance</div>
           <div class="settings-card-body">
-            <div class="setting-row">
-              <label>Site Title</label>
-              <input type="text" id="set-title" placeholder="tips & stuff" maxlength="40" />
-            </div>
-            <div class="setting-row">
-              <label>Subtitle / Tagline</label>
-              <input type="text" id="set-subtitle" placeholder="a shared board for tips, tricks, and random gems ✦" maxlength="80" />
-            </div>
+            <div class="setting-row"><label>Site Title</label><input type="text" id="set-title" placeholder="tips & stuff" maxlength="40" /></div>
+            <div class="setting-row"><label>Subtitle / Tagline</label><input type="text" id="set-subtitle" placeholder="a shared board for tips, tricks, and random gems ✦" maxlength="80" /></div>
             <div class="setting-row">
               <label>Accent Color</label>
               <div class="color-preview">
@@ -400,30 +350,13 @@ cat << 'HTMLEOF' > /home/claude/index.html
             </div>
           </div>
         </div>
-
-        <!-- PASSWORDS -->
         <div class="settings-card">
           <div class="settings-card-header">🔑 Staff Passwords</div>
           <div class="settings-card-body">
             <div class="hint" style="margin-bottom:4px">These are saved to JSONBin and take effect immediately. Keep them safe!</div>
-            <div class="setting-row-inline">
-              <div class="setting-row">
-                <label>👑 Owner Password</label>
-                <input type="password" id="set-pw-owner" placeholder="current password hidden" autocomplete="new-password" />
-              </div>
-            </div>
-            <div class="setting-row-inline">
-              <div class="setting-row">
-                <label>🛡️ Admin Password</label>
-                <input type="password" id="set-pw-admin" placeholder="current password hidden" autocomplete="new-password" />
-              </div>
-            </div>
-            <div class="setting-row-inline">
-              <div class="setting-row">
-                <label>🔧 Mod Password</label>
-                <input type="password" id="set-pw-mod" placeholder="current password hidden" autocomplete="new-password" />
-              </div>
-            </div>
+            <div class="setting-row-inline"><div class="setting-row"><label>👑 Owner Password</label><input type="password" id="set-pw-owner" placeholder="current password hidden" autocomplete="new-password" /></div></div>
+            <div class="setting-row-inline"><div class="setting-row"><label>🛡️ Admin Password</label><input type="password" id="set-pw-admin" placeholder="current password hidden" autocomplete="new-password" /></div></div>
+            <div class="setting-row-inline"><div class="setting-row"><label>🔧 Mod Password</label><input type="password" id="set-pw-mod" placeholder="current password hidden" autocomplete="new-password" /></div></div>
             <div class="hint">Leave a field blank to keep the current password unchanged.</div>
             <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px">
               <button class="save-btn" onclick="savePasswords()">Save Passwords</button>
@@ -431,8 +364,6 @@ cat << 'HTMLEOF' > /home/claude/index.html
             </div>
           </div>
         </div>
-
-        <!-- STAFF MEMBERS -->
         <div class="settings-card">
           <div class="settings-card-header">👥 Staff Members</div>
           <div class="settings-card-body">
@@ -453,8 +384,6 @@ cat << 'HTMLEOF' > /home/claude/index.html
             </div>
           </div>
         </div>
-
-        <!-- RULES EDITOR -->
         <div class="settings-card">
           <div class="settings-card-header">📜 Site Rules</div>
           <div class="settings-card-body">
@@ -466,435 +395,332 @@ cat << 'HTMLEOF' > /home/claude/index.html
             </div>
           </div>
         </div>
-
-        <!-- DANGER ZONE -->
         <div class="settings-card" style="border-color:rgba(192,57,43,0.3)">
           <div class="settings-card-header" style="color:#c0392b">🗑️ Danger Zone</div>
           <div class="settings-card-body">
             <div style="display:flex;flex-wrap:wrap;gap:10px">
-              <div style="flex:1;min-width:200px">
-                <div style="font-size:0.85rem;font-weight:500;margin-bottom:4px">Clear Pending Queue</div>
-                <div class="hint">Permanently delete all tips awaiting approval.</div>
-              </div>
+              <div style="flex:1;min-width:200px"><div style="font-size:0.85rem;font-weight:500;margin-bottom:4px">Clear Pending Queue</div><div class="hint">Permanently delete all tips awaiting approval.</div></div>
               <button class="save-btn danger" onclick="dangerClear('pending')">Clear Pending</button>
             </div>
             <hr style="border:none;border-top:1px solid var(--border);margin:4px 0">
             <div style="display:flex;flex-wrap:wrap;gap:10px">
-              <div style="flex:1;min-width:200px">
-                <div style="font-size:0.85rem;font-weight:500;margin-bottom:4px">Clear Public Tips</div>
-                <div class="hint">Permanently delete all approved public tips.</div>
-              </div>
+              <div style="flex:1;min-width:200px"><div style="font-size:0.85rem;font-weight:500;margin-bottom:4px">Clear Public Tips</div><div class="hint">Permanently delete all approved public tips.</div></div>
               <button class="save-btn danger" onclick="dangerClear('public')">Clear Public</button>
             </div>
             <hr style="border:none;border-top:1px solid var(--border);margin:4px 0">
             <div style="display:flex;flex-wrap:wrap;gap:10px">
-              <div style="flex:1;min-width:200px">
-                <div style="font-size:0.85rem;font-weight:500;margin-bottom:4px">Clear Featured Tips</div>
-                <div class="hint">Permanently delete all featured tips.</div>
-              </div>
+              <div style="flex:1;min-width:200px"><div style="font-size:0.85rem;font-weight:500;margin-bottom:4px">Clear Featured Tips</div><div class="hint">Permanently delete all featured tips.</div></div>
               <button class="save-btn danger" onclick="dangerClear('featured')">Clear Featured</button>
             </div>
           </div>
         </div>
-
-      </div><!-- /settings-wrap -->
-    </div><!-- /sec-settings -->
+      </div>
+    </div>
 
     <footer class="site-footer"><p id="footer-text">tips & stuff — shared with friends ✦</p></footer>
   </main>
-
 </div>
 
 <script>
   const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
   const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
   const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
-
-  // Default passwords — overridden by db.config if saved
   let PASSWORDS = { owner: '20140314', admin: '382790', mod: '23889' };
-
   const TAG_CONFIG = {
-    tip:    { label: '💡 tip',    bg: 'var(--tag-tip-bg)',    color: 'var(--tag-tip-txt)',    accent: '#4a8a1a' },
-    food:   { label: '🍜 food',   bg: 'var(--tag-food-bg)',   color: 'var(--tag-food-txt)',   accent: '#c8602a' },
-    life:   { label: '✌️ life',   bg: 'var(--tag-life-bg)',   color: 'var(--tag-life-txt)',   accent: '#2a60c8' },
-    tech:   { label: '⚡ tech',   bg: 'var(--tag-tech-bg)',   color: 'var(--tag-tech-txt)',   accent: '#7a2ac8' },
-    random: { label: '🎲 random', bg: 'var(--tag-random-bg)', color: 'var(--tag-random-txt)', accent: '#c82a4a' },
+    tip:    { label:'💡 tip',    bg:'var(--tag-tip-bg)',    color:'var(--tag-tip-txt)',    accent:'#4a8a1a' },
+    food:   { label:'🍜 food',   bg:'var(--tag-food-bg)',   color:'var(--tag-food-txt)',   accent:'#c8602a' },
+    life:   { label:'✌️ life',   bg:'var(--tag-life-bg)',   color:'var(--tag-life-txt)',   accent:'#2a60c8' },
+    tech:   { label:'⚡ tech',   bg:'var(--tag-tech-bg)',   color:'var(--tag-tech-txt)',   accent:'#7a2ac8' },
+    random: { label:'🎲 random', bg:'var(--tag-random-bg)', color:'var(--tag-random-txt)', accent:'#c82a4a' },
   };
   const SEED_TIPS = {
     recommended: [
-      { id: 'r1', text: 'Drink a glass of water first thing in the morning before anything else. Your body is dehydrated after sleep.', tag: 'life', author: 'Owner' },
-      { id: 'r2', text: 'Add a pinch of salt to your coffee grounds before brewing — it cuts bitterness without changing the flavor.', tag: 'food', author: 'Owner' },
-      { id: 'r3', text: 'Press Ctrl+Shift+T to instantly reopen a closed browser tab.', tag: 'tech', author: 'Owner' },
-      { id: 'r4', text: "If you can't decide between two options, flip a coin — not to let chance decide, but to notice which outcome you're hoping for.", tag: 'random', author: 'Owner' },
+      { id:'r1',  text:'Drink a glass of water first thing in the morning — your body is dehydrated after sleep.', tag:'life', author:'Owner' },
+      { id:'r2',  text:'Make your bed every morning. It takes 2 minutes and makes your whole room feel cleaner instantly.', tag:'life', author:'Owner' },
+      { id:'r3',  text:'Tell people when you appreciate them. Most people never say it out loud and everyone wishes someone would.', tag:'life', author:'Owner' },
+      { id:'r4',  text:'When you feel overwhelmed, write down everything on your mind. Getting it out of your head and onto paper cuts anxiety in half.', tag:'life', author:'Owner' },
+      { id:'r5',  text:'Reply to messages as soon as you read them. Letting them sit causes more stress than just answering.', tag:'life', author:'Owner' },
+      { id:'r6',  text:'Set your alarm 10 minutes earlier than you need to. That buffer removes all the rushing-out-the-door stress.', tag:'life', author:'Owner' },
+      { id:'r7',  text:"If a task takes less than 2 minutes, do it right now. Don't put it on a list — just do it.", tag:'life', author:'Owner' },
+      { id:'r8',  text:'Take a 10-minute walk outside after lunch. It boosts your afternoon energy more than coffee does.', tag:'life', author:'Owner' },
+      { id:'r9',  text:'Add a pinch of salt to your coffee grounds before brewing — it cuts bitterness without changing the flavor.', tag:'food', author:'Owner' },
+      { id:'r10', text:'Store fresh herbs like flowers — trim the stems and put them in a glass of water in the fridge. They last 2× longer.', tag:'food', author:'Owner' },
+      { id:'r11', text:'Freeze overripe bananas. They are perfect for smoothies and banana bread whenever you need them.', tag:'food', author:'Owner' },
+      { id:'r12', text:'Let your steak rest for 5 minutes after cooking before cutting. All the juices redistribute and it stays tender.', tag:'food', author:'Owner' },
+      { id:'r13', text:'Pasta water is liquid gold. Add a ladle of it to your sauce — the starch makes everything creamy and helps it stick.', tag:'food', author:'Owner' },
+      { id:'r14', text:'If your soup or stew is too salty, drop a peeled raw potato in and simmer for 15 minutes. It absorbs the excess salt.', tag:'food', author:'Owner' },
+      { id:'r15', text:'Toast your spices in a dry pan for 30 seconds before using them. It doubles the flavor.', tag:'food', author:'Owner' },
+      { id:'r16', text:'Press Ctrl+Shift+T to instantly reopen a closed browser tab.', tag:'tech', author:'Owner' },
+      { id:'r17', text:'Google anything followed by "site:reddit.com" for honest real-world opinions on any product or topic.', tag:'tech', author:'Owner' },
+      { id:'r18', text:'Use dark mode everywhere you can. Easier on the eyes at night and saves battery on OLED screens.', tag:'tech', author:'Owner' },
+      { id:'r19', text:'Press Windows+V to open clipboard history and paste anything you copied earlier in the day.', tag:'tech', author:'Owner' },
+      { id:'r20', text:'Use a password manager. One strong master password protects everything else — stop reusing the same one.', tag:'tech', author:'Owner' },
+      { id:'r21', text:'Ctrl+Z undoes mistakes in almost every app, not just text editors. Works in file explorers, design tools, and more.', tag:'tech', author:'Owner' },
+      { id:'r22', text:'If your WiFi is slow, restart your router by unplugging it for 30 seconds. It fixes most issues instantly.', tag:'tech', author:'Owner' },
+      { id:'r23', text:"If you can't decide between two options, flip a coin — not to let chance decide, but to notice which outcome you're hoping for.", tag:'random', author:'Owner' },
+      { id:'r24', text:"If you're bored, clean something. You won't be bored anymore and your space will be better for it.", tag:'random', author:'Owner' },
+      { id:'r25', text:'Put your phone on the other side of the room at night. Forces you to get up to turn off the alarm — and you actually wake up.', tag:'random', author:'Owner' },
+      { id:'r26', text:'Keep a small notebook by your bed. Your best ideas come right before sleep and you will forget them by morning.', tag:'random', author:'Owner' },
+      { id:'r27', text:'When you buy something new, get rid of something old. Keeps clutter from slowly taking over your space.', tag:'random', author:'Owner' },
+      { id:'r28', text:'If you want to remember something, say it out loud. Speaking it engages a different part of your brain than just thinking it.', tag:'random', author:'Owner' },
     ],
     public: [
-      { id: 'p1', text: 'Make your bed every morning. It starts your day with a small win and makes your room feel instantly cleaner.', tag: 'life', author: 'Admin' },
-      { id: 'p2', text: 'Store fresh herbs like flowers — trim the stems and put them in a glass of water in the fridge. They last 2x longer.', tag: 'food', author: 'Admin' },
-      { id: 'p3', text: 'Use "focus mode" on your phone during meals. Even 20 minutes of undistracted eating improves digestion and enjoyment.', tag: 'life', author: 'Admin' },
-      { id: 'p4', text: 'Google anything followed by "site:reddit.com" for honest real-world reviews and opinions on any topic.', tag: 'tech', author: 'Admin' },
-      { id: 'p5', text: "Freeze overripe bananas — they're perfect for smoothies and banana bread whenever you need them.", tag: 'food', author: 'Admin' },
-      { id: 'p6', text: "If you're bored, clean something. You won't be bored anymore and your space will be cleaner.", tag: 'random', author: 'Admin' },
-      { id: 'p7', text: 'Use dark mode everywhere you can. Easier on the eyes at night and saves battery on OLED screens.', tag: 'tech', author: 'Admin' },
-      { id: 'p8', text: 'Tell people when you appreciate them. Most people never say it out loud.', tag: 'life', author: 'Admin' },
+      { id:'p1', text:'Use "focus mode" on your phone during meals. Even 20 minutes of undistracted eating improves how much you enjoy food.', tag:'life', author:'Admin' },
+      { id:'p2', text:'Freeze leftover fresh ginger — it grates much easier from frozen and lasts for months.', tag:'food', author:'Admin' },
+      { id:'p3', text:'Screenshot important confirmation emails instead of searching for them later.', tag:'tech', author:'Admin' },
+      { id:'p4', text:'Carry a reusable bag folded in your pocket. You will never be stuck at checkout paying for a plastic one again.', tag:'random', author:'Admin' },
+      { id:'p5', text:'When cooking garlic, add it last to the pan — it burns fast and bitter garlic ruins a whole dish.', tag:'food', author:'Admin' },
+      { id:'p6', text:'Mute group chats you never check instead of leaving them. No notifications but you can still read when you want.', tag:'tech', author:'Admin' },
     ]
   };
 
   let currentRank = 'public';
-  let db = {
-    public: [], featured: [], adminboard: [], pending: [], recommended: [],
-    banlist: [], rules: [], members: [],
-    config: { title: '', subtitle: '', accent: '', passwords: {} }
-  };
+  let db = { public:[], featured:[], adminboard:[], pending:[], recommended:[], banlist:[], rules:[], members:[], config:{} };
 
-  // ── SIDEBAR ──
-  const PUBLIC_SECTIONS = ['recommended', 'featured', 'public'];
-  const STAFF_SECTIONS  = ['pending', 'adminboard', 'settings'];
-  const ALL_SECTIONS    = [...PUBLIC_SECTIONS, ...STAFF_SECTIONS];
+  const ALL_SECTIONS = ['recommended','featured','public','pending','adminboard','settings'];
 
   function showSection(id) {
     ALL_SECTIONS.forEach(s => {
-      document.getElementById('sec-' + s).classList.remove('visible');
-      const nav = document.getElementById('nav-' + s);
-      if (nav) nav.classList.remove('active');
+      document.getElementById('sec-'+s).classList.remove('visible');
+      const n = document.getElementById('nav-'+s); if (n) n.classList.remove('active');
     });
-    document.getElementById('sec-' + id).classList.add('visible');
-    const nav = document.getElementById('nav-' + id);
-    if (nav) nav.classList.add('active');
+    document.getElementById('sec-'+id).classList.add('visible');
+    const n = document.getElementById('nav-'+id); if (n) n.classList.add('active');
     if (id === 'settings') populateSettings();
   }
 
-  // ── AUTH ──
   function openModal()  { document.getElementById('login-modal').classList.add('open'); document.getElementById('modal-pw').focus(); }
-  function closeModal() { document.getElementById('login-modal').classList.remove('open'); document.getElementById('modal-pw').value = ''; document.getElementById('modal-error').style.display = 'none'; }
+  function closeModal() { document.getElementById('login-modal').classList.remove('open'); document.getElementById('modal-pw').value=''; document.getElementById('modal-error').style.display='none'; }
   function tryLogin() {
     const pw = document.getElementById('modal-pw').value;
-    if      (pw === PASSWORDS.owner) setRank('owner');
-    else if (pw === PASSWORDS.admin) setRank('admin');
-    else if (pw === PASSWORDS.mod)   setRank('mod');
-    else { document.getElementById('modal-error').style.display = 'block'; return; }
+    if      (pw===PASSWORDS.owner) setRank('owner');
+    else if (pw===PASSWORDS.admin) setRank('admin');
+    else if (pw===PASSWORDS.mod)   setRank('mod');
+    else { document.getElementById('modal-error').style.display='block'; return; }
     closeModal();
   }
-  document.getElementById('modal-pw').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
-  function setRank(rank) { currentRank = rank; sessionStorage.setItem('rank', rank); updateUI(); }
+  document.getElementById('modal-pw').addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
+  function setRank(rank) { currentRank=rank; sessionStorage.setItem('rank',rank); updateUI(); }
 
   function updateUI() {
-    const rank = currentRank;
-    const labels  = { owner: '👑 Owner', admin: '🛡️ Admin', mod: '🔧 Mod', public: 'Public' };
-    const classes = { owner: 'rank-owner', admin: 'rank-admin', mod: 'rank-mod', public: 'rank-public' };
-    const d = document.getElementById('rank-display');
-    d.textContent = labels[rank]; d.className = 'rank-badge ' + classes[rank];
-    const authBtn = document.getElementById('auth-btn');
-    if (rank !== 'public') {
-      authBtn.textContent = 'Logout';
-      authBtn.onclick = () => { currentRank = 'public'; sessionStorage.removeItem('rank'); updateUI(); renderAll(); };
-    } else { authBtn.textContent = 'Login'; authBtn.onclick = openModal; }
-
-    const isOwner = rank === 'owner';
-    const isAdmin = rank === 'owner' || rank === 'admin';
-    const isMod   = rank === 'owner' || rank === 'admin' || rank === 'mod';
-
-    document.getElementById('nav-pending').style.display    = isAdmin ? 'flex' : 'none';
-    document.getElementById('nav-adminboard').style.display = isAdmin ? 'flex' : 'none';
-    document.getElementById('nav-settings').style.display   = isOwner ? 'flex' : 'none';
-
-    document.getElementById('rec-form').style.display   = isAdmin ? 'flex' : 'none';
-    document.getElementById('feat-form').style.display  = isMod   ? 'flex' : 'none';
-    document.getElementById('admin-form').style.display = isAdmin ? 'flex' : 'none';
-
-    // If viewing a staff section without access, bounce back
-    const activeSec = document.querySelector('.sec-panel.visible');
-    if (activeSec) {
-      const activeId = activeSec.id.replace('sec-', '');
-      if ((activeId === 'settings' && !isOwner) ||
-          (['pending','adminboard'].includes(activeId) && !isAdmin)) {
-        showSection('recommended');
-      }
-    }
+    const rank=currentRank;
+    const labels={owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod',public:'Public'};
+    const classes={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
+    const d=document.getElementById('rank-display');
+    d.textContent=labels[rank]; d.className='rank-badge '+classes[rank];
+    const ab=document.getElementById('auth-btn');
+    if(rank!=='public'){ab.textContent='Logout';ab.onclick=()=>{currentRank='public';sessionStorage.removeItem('rank');updateUI();renderAll();};}
+    else{ab.textContent='Login';ab.onclick=openModal;}
+    const isOwner=rank==='owner', isAdmin=rank==='owner'||rank==='admin', isMod=rank==='owner'||rank==='admin'||rank==='mod';
+    document.getElementById('nav-pending').style.display    =isAdmin?'flex':'none';
+    document.getElementById('nav-adminboard').style.display =isAdmin?'flex':'none';
+    document.getElementById('nav-settings').style.display   =isOwner?'flex':'none';
+    document.getElementById('rec-form').style.display   =isAdmin?'flex':'none';
+    document.getElementById('feat-form').style.display  =isMod  ?'flex':'none';
+    document.getElementById('admin-form').style.display =isAdmin?'flex':'none';
+    const activeSec=document.querySelector('.sec-panel.visible');
+    if(activeSec){const aid=activeSec.id.replace('sec-','');
+      if((aid==='settings'&&!isOwner)||(['pending','adminboard'].includes(aid)&&!isAdmin))showSection('recommended');}
     renderAll();
   }
 
-  function setStatus(state, msg) { document.getElementById('status-dot').className = 'status-dot ' + state; document.getElementById('status-text').textContent = msg; }
-  function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function setStatus(state,msg){document.getElementById('status-dot').className='status-dot '+state;document.getElementById('status-text').textContent=msg;}
+  function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
-  // ── LOAD / SAVE ──
-  async function loadAll() {
-    setStatus('loading', 'loading...');
-    try {
-      const res = await fetch(BIN_URL + '/latest', { headers: { 'X-Master-Key': API_KEY, 'X-Bin-Meta': 'false' } });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const raw  = await res.json();
-      const data = raw.record !== undefined ? raw.record : raw;
-      db.public      = Array.isArray(data.public)      ? data.public      : [];
-      db.featured    = Array.isArray(data.featured)    ? data.featured    : [];
-      db.adminboard  = Array.isArray(data.adminboard)  ? data.adminboard  : [];
-      db.pending     = Array.isArray(data.pending)     ? data.pending     : [];
-      db.recommended = Array.isArray(data.recommended) ? data.recommended : [];
-      db.banlist     = Array.isArray(data.banlist)     ? data.banlist     : [];
-      db.rules       = Array.isArray(data.rules)       ? data.rules       : [];
-      db.members     = Array.isArray(data.members)     ? data.members     : [];
-      db.config      = (data.config && typeof data.config === 'object') ? data.config : {};
-
-      // Apply saved config
-      if (db.config.passwords) {
-        if (db.config.passwords.owner) PASSWORDS.owner = db.config.passwords.owner;
-        if (db.config.passwords.admin) PASSWORDS.admin = db.config.passwords.admin;
-        if (db.config.passwords.mod)   PASSWORDS.mod   = db.config.passwords.mod;
+  async function loadAll(){
+    setStatus('loading','loading...');
+    try{
+      const res=await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const raw=await res.json(); const data=raw.record!==undefined?raw.record:raw;
+      db.public      =Array.isArray(data.public)      ?data.public      :[];
+      db.featured    =Array.isArray(data.featured)    ?data.featured    :[];
+      db.adminboard  =Array.isArray(data.adminboard)  ?data.adminboard  :[];
+      db.pending     =Array.isArray(data.pending)     ?data.pending     :[];
+      db.recommended =Array.isArray(data.recommended) ?data.recommended :[];
+      db.banlist     =Array.isArray(data.banlist)     ?data.banlist     :[];
+      db.rules       =Array.isArray(data.rules)       ?data.rules       :[];
+      db.members     =Array.isArray(data.members)     ?data.members     :[];
+      db.config      =(data.config&&typeof data.config==='object')?data.config:{};
+      if(db.config.passwords){
+        if(db.config.passwords.owner) PASSWORDS.owner=db.config.passwords.owner;
+        if(db.config.passwords.admin) PASSWORDS.admin=db.config.passwords.admin;
+        if(db.config.passwords.mod)   PASSWORDS.mod  =db.config.passwords.mod;
       }
       applyAppearance(db.config);
-
-      let needsSave = false;
-      if (db.recommended.length === 0) { db.recommended = SEED_TIPS.recommended; needsSave = true; }
-      if (db.public.length === 0)      { db.public      = SEED_TIPS.public;      needsSave = true; }
-      if (needsSave) await saveAll();
-
-      setStatus('ok', 'loaded ✓ — hit ↻ to see new tips');
-      renderAll();
-    } catch(e) { console.error(e); setStatus('error', 'could not load — ' + e.message); }
+      let needsSave=false;
+      if(db.recommended.length<SEED_TIPS.recommended.length){db.recommended=SEED_TIPS.recommended;needsSave=true;}
+      if(!db.public.length){db.public=SEED_TIPS.public;needsSave=true;}
+      if(needsSave) await saveAll();
+      setStatus('ok','loaded ✓ — hit ↻ to see new tips'); renderAll();
+    }catch(e){console.error(e);setStatus('error','could not load — '+e.message);}
   }
 
-  async function saveAll() {
-    const res = await fetch(BIN_URL, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY }, body: JSON.stringify(db) });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
+  async function saveAll(){
+    const res=await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});
+    if(!res.ok) throw new Error('HTTP '+res.status);
   }
 
-  // ── APPEARANCE ──
-  function applyAppearance(cfg) {
-    if (cfg.title) {
-      document.getElementById('site-title-el').innerHTML = cfg.title;
-      document.title = cfg.title.replace(/<[^>]*>/g,'') + ' ✦';
-    }
-    if (cfg.subtitle) document.getElementById('site-subtitle-el').textContent = cfg.subtitle;
-    if (cfg.accent) {
-      document.documentElement.style.setProperty('--accent', cfg.accent);
-      document.getElementById('footer-text').style.color = '';
-    }
+  function applyAppearance(cfg){
+    if(cfg.title){document.getElementById('site-title-el').innerHTML=cfg.title;document.title=cfg.title.replace(/<[^>]*>/g,'')+'  ✦';}
+    if(cfg.subtitle) document.getElementById('site-subtitle-el').textContent=cfg.subtitle;
+    if(cfg.accent) document.documentElement.style.setProperty('--accent',cfg.accent);
   }
 
-  // ── SETTINGS PANEL ──
-  function populateSettings() {
-    const cfg = db.config || {};
-    // Strip HTML tags for title input
-    const rawTitle = (cfg.title || 'tips & stuff').replace(/<[^>]*>/g,'').replace('&amp;','&');
-    document.getElementById('set-title').value    = rawTitle;
-    document.getElementById('set-subtitle').value = cfg.subtitle || '';
-    const accent = cfg.accent || '#c8602a';
-    document.getElementById('set-accent').value   = accent;
-    document.getElementById('accent-swatch').style.background = accent;
-    // Rules
-    document.getElementById('set-rules').value = Array.isArray(db.rules) ? db.rules.join('\n') : '';
-    // Members
+  function populateSettings(){
+    const cfg=db.config||{};
+    document.getElementById('set-title').value   =(cfg.title||'tips & stuff').replace(/<[^>]*>/g,'').replace('&amp;','&');
+    document.getElementById('set-subtitle').value=cfg.subtitle||'';
+    const accent=cfg.accent||'#c8602a';
+    document.getElementById('set-accent').value=accent;
+    document.getElementById('accent-swatch').style.background=accent;
+    document.getElementById('set-rules').value=Array.isArray(db.rules)?db.rules.join('\n'):'';
     renderMemberList();
   }
 
-  function renderMemberList() {
-    const list = document.getElementById('member-list');
-    if (!db.members || !db.members.length) { list.innerHTML = '<p style="font-size:0.8rem;color:var(--muted)">No staff members added yet.</p>'; return; }
-    const rankLabels = { owner: '👑 Owner', admin: '🛡️ Admin', mod: '🔧 Mod' };
-    const rankClasses = { owner: 'rank-owner', admin: 'rank-admin', mod: 'rank-mod' };
-    list.innerHTML = db.members.map((m, i) => `
-      <div class="member-row">
-        <span class="member-name">${escHtml(m.name)}</span>
-        <span class="rank-badge member-rank ${rankClasses[m.rank] || 'rank-public'}">${rankLabels[m.rank] || m.rank}</span>
-        <button class="member-del" onclick="removeMember(${i})">✕</button>
-      </div>`).join('');
+  function renderMemberList(){
+    const list=document.getElementById('member-list');
+    if(!db.members||!db.members.length){list.innerHTML='<p style="font-size:0.8rem;color:var(--muted)">No staff members added yet.</p>';return;}
+    const rl={owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod'};
+    const rc={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod'};
+    list.innerHTML=db.members.map((m,i)=>`<div class="member-row"><span class="member-name">${escHtml(m.name)}</span><span class="rank-badge member-rank ${rc[m.rank]||'rank-public'}">${rl[m.rank]||m.rank}</span><button class="member-del" onclick="removeMember(${i})">✕</button></div>`).join('');
   }
 
-  function addMember() {
-    const name = document.getElementById('new-member-name').value.trim();
-    const rank = document.getElementById('new-member-rank').value;
-    if (!name) { document.getElementById('new-member-name').focus(); return; }
-    if (!db.members) db.members = [];
-    db.members.push({ name, rank });
-    document.getElementById('new-member-name').value = '';
+  function addMember(){
+    const name=document.getElementById('new-member-name').value.trim();
+    const rank=document.getElementById('new-member-rank').value;
+    if(!name){document.getElementById('new-member-name').focus();return;}
+    if(!db.members) db.members=[];
+    db.members.push({name,rank});
+    document.getElementById('new-member-name').value='';
     renderMemberList();
   }
+  function removeMember(i){db.members.splice(i,1);renderMemberList();}
 
-  function removeMember(i) {
-    db.members.splice(i, 1);
-    renderMemberList();
+  function showToast(id,msg,isError){
+    const el=document.getElementById(id);
+    el.textContent=msg; el.className='settings-toast show'+(isError?' error':'');
+    setTimeout(()=>el.className='settings-toast',3000);
   }
 
-  function showToast(id, msg, isError) {
-    const el = document.getElementById(id);
-    el.textContent = msg;
-    el.className = 'settings-toast show' + (isError ? ' error' : '');
-    setTimeout(() => el.className = 'settings-toast', 3000);
+  async function saveAppearance(){
+    const title=document.getElementById('set-title').value.trim()||'tips & stuff';
+    const subtitle=document.getElementById('set-subtitle').value.trim();
+    const accent=document.getElementById('set-accent').value;
+    if(!db.config) db.config={};
+    db.config.title=escHtml(title); db.config.subtitle=subtitle; db.config.accent=accent;
+    try{setStatus('loading','saving...');await saveAll();applyAppearance(db.config);setStatus('ok','saved ✓');showToast('toast-appearance','✓ Saved!');}
+    catch(e){showToast('toast-appearance','✕ Error: '+e.message,true);setStatus('error','save failed');}
   }
 
-  async function saveAppearance() {
-    const title    = document.getElementById('set-title').value.trim() || 'tips & stuff';
-    const subtitle = document.getElementById('set-subtitle').value.trim();
-    const accent   = document.getElementById('set-accent').value;
-    if (!db.config) db.config = {};
-    // Rebuild title HTML with italic & symbol preserved
-    const cleanTitle = escHtml(title);
-    db.config.title    = cleanTitle;
-    db.config.subtitle = subtitle;
-    db.config.accent   = accent;
-    try {
-      setStatus('loading', 'saving...');
-      await saveAll();
-      applyAppearance(db.config);
-      setStatus('ok', 'saved ✓');
-      showToast('toast-appearance', '✓ Saved!');
-    } catch(e) { showToast('toast-appearance', '✕ Error: ' + e.message, true); setStatus('error', 'save failed'); }
+  async function savePasswords(){
+    const o=document.getElementById('set-pw-owner').value;
+    const a=document.getElementById('set-pw-admin').value;
+    const m=document.getElementById('set-pw-mod').value;
+    if(!db.config) db.config={}; if(!db.config.passwords) db.config.passwords={};
+    if(o){db.config.passwords.owner=o;PASSWORDS.owner=o;}
+    if(a){db.config.passwords.admin=a;PASSWORDS.admin=a;}
+    if(m){db.config.passwords.mod=m;PASSWORDS.mod=m;}
+    try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');
+      document.getElementById('set-pw-owner').value='';document.getElementById('set-pw-admin').value='';document.getElementById('set-pw-mod').value='';
+      showToast('toast-passwords','✓ Passwords updated!');}
+    catch(e){showToast('toast-passwords','✕ Error: '+e.message,true);setStatus('error','save failed');}
   }
 
-  async function savePasswords() {
-    const o = document.getElementById('set-pw-owner').value;
-    const a = document.getElementById('set-pw-admin').value;
-    const m = document.getElementById('set-pw-mod').value;
-    if (!db.config) db.config = {};
-    if (!db.config.passwords) db.config.passwords = {};
-    if (o) { db.config.passwords.owner = o; PASSWORDS.owner = o; }
-    if (a) { db.config.passwords.admin = a; PASSWORDS.admin = a; }
-    if (m) { db.config.passwords.mod   = m; PASSWORDS.mod   = m; }
-    try {
-      setStatus('loading', 'saving...');
-      await saveAll();
-      setStatus('ok', 'saved ✓');
-      document.getElementById('set-pw-owner').value = '';
-      document.getElementById('set-pw-admin').value = '';
-      document.getElementById('set-pw-mod').value   = '';
-      showToast('toast-passwords', '✓ Passwords updated!');
-    } catch(e) { showToast('toast-passwords', '✕ Error: ' + e.message, true); setStatus('error', 'save failed'); }
+  async function saveMembers(){
+    try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');showToast('toast-members','✓ Staff list saved!');}
+    catch(e){showToast('toast-members','✕ Error: '+e.message,true);}
   }
 
-  async function saveMembers() {
-    try {
-      setStatus('loading', 'saving...');
-      await saveAll();
-      setStatus('ok', 'saved ✓');
-      showToast('toast-members', '✓ Staff list saved!');
-    } catch(e) { showToast('toast-members', '✕ Error: ' + e.message, true); }
+  async function saveRules(){
+    const raw=document.getElementById('set-rules').value;
+    db.rules=raw.split('\n').map(r=>r.trim()).filter(Boolean);
+    try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');showToast('toast-rules','✓ Rules saved!');}
+    catch(e){showToast('toast-rules','✕ Error: '+e.message,true);}
   }
 
-  async function saveRules() {
-    const raw = document.getElementById('set-rules').value;
-    db.rules = raw.split('\n').map(r => r.trim()).filter(Boolean);
-    try {
-      setStatus('loading', 'saving...');
-      await saveAll();
-      setStatus('ok', 'saved ✓');
-      showToast('toast-rules', '✓ Rules saved!');
-    } catch(e) { showToast('toast-rules', '✕ Error: ' + e.message, true); }
+  async function dangerClear(section){
+    if(!confirm('Are you sure? This will permanently delete ALL '+section+' tips.')) return;
+    db[section]=[];
+    try{setStatus('loading','clearing...');await saveAll();setStatus('ok','cleared ✓');renderAll();alert('✓ '+section+' tips cleared.');}
+    catch(e){setStatus('error','failed: '+e.message);}
   }
 
-  async function dangerClear(section) {
-    if (!confirm(`Are you sure? This will permanently delete ALL ${section} tips.`)) return;
-    db[section] = [];
-    try {
-      setStatus('loading', 'clearing...');
-      await saveAll();
-      setStatus('ok', 'cleared ✓');
-      renderAll();
-      alert(`✓ ${section} tips cleared.`);
-    } catch(e) { setStatus('error', 'failed: ' + e.message); }
-  }
-
-  // ── RENDER ──
-  function renderGrid(gridId, tips, canDelete, showPendingControls, isRec) {
-    const grid = document.getElementById(gridId);
-    if (!tips || !tips.length) { grid.innerHTML = '<p class="empty">Nothing here yet.</p>'; return; }
-    const isAdmin = currentRank === 'owner' || currentRank === 'admin';
-    const isMod   = currentRank === 'owner' || currentRank === 'admin' || currentRank === 'mod';
-    grid.innerHTML = tips.map(t => {
-      const cfg = TAG_CONFIG[t.tag] || TAG_CONFIG.tip;
-      const actions = [];
-      if (showPendingControls && isAdmin) {
-        actions.push(`<button class="action-btn approve-btn" onclick="approveTip('${t.id}')">✓ Approve</button>`);
-        actions.push(`<button class="action-btn deny-btn" onclick="denyTip('${t.id}')">✕ Deny</button>`);
-      } else if (canDelete) {
-        actions.push(`<button class="action-btn del-btn" onclick="deleteTip('${gridId}','${t.id}')">✕ delete</button>`);
-      }
-      const cardClass = isRec ? 'rec-card' : 'tip-card';
-      const styleAttr = isRec ? '' : `style="--card-accent:${cfg.accent}"`;
-      return `<article class="${cardClass}" ${styleAttr}>
-        <span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span>
-        <p class="tip-text">${escHtml(t.text)}</p>
-        <div class="tip-footer">
-          <span class="tip-author">${escHtml(t.author)}</span>
-          <div class="tip-actions">${actions.join('')}</div>
-        </div>
-      </article>`;
+  function renderGrid(gridId,tips,canDelete,showPendingControls,isRec){
+    const grid=document.getElementById(gridId);
+    if(!tips||!tips.length){grid.innerHTML='<p class="empty">Nothing here yet.</p>';return;}
+    const isAdmin=currentRank==='owner'||currentRank==='admin';
+    const isMod=currentRank==='owner'||currentRank==='admin'||currentRank==='mod';
+    grid.innerHTML=tips.map(t=>{
+      const cfg=TAG_CONFIG[t.tag]||TAG_CONFIG.tip;
+      const acts=[];
+      if(showPendingControls&&isAdmin){acts.push(`<button class="action-btn approve-btn" onclick="approveTip('${t.id}')">✓ Approve</button>`);acts.push(`<button class="action-btn deny-btn" onclick="denyTip('${t.id}')">✕ Deny</button>`);}
+      else if(canDelete){acts.push(`<button class="action-btn del-btn" onclick="deleteTip('${gridId}','${t.id}')">✕ delete</button>`);}
+      const cc=isRec?'rec-card':'tip-card';
+      const sa=isRec?'':` style="--card-accent:${cfg.accent}"`;
+      return `<article class="${cc}"${sa}><span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span><p class="tip-text">${escHtml(t.text)}</p><div class="tip-footer"><span class="tip-author">${escHtml(t.author)}</span><div class="tip-actions">${acts.join('')}</div></div></article>`;
     }).join('');
   }
 
-  function renderAll() {
-    const isAdmin = currentRank === 'owner' || currentRank === 'admin';
-    const isMod   = currentRank === 'owner' || currentRank === 'admin' || currentRank === 'mod';
-    renderGrid('recommended-grid', db.recommended, isAdmin, false, true);
-    renderGrid('public-grid',      db.public,      isAdmin, false, false);
-    renderGrid('featured-grid',    db.featured,    isMod,   false, false);
-    renderGrid('adminboard-grid',  db.adminboard,  isAdmin, false, false);
-    renderGrid('pending-grid',     db.pending,     false,   true,  false);
+  function renderAll(){
+    const isAdmin=currentRank==='owner'||currentRank==='admin';
+    const isMod=currentRank==='owner'||currentRank==='admin'||currentRank==='mod';
+    renderGrid('recommended-grid',db.recommended,isAdmin,false,true);
+    renderGrid('public-grid',     db.public,     isAdmin,false,false);
+    renderGrid('featured-grid',   db.featured,   isMod,  false,false);
+    renderGrid('adminboard-grid', db.adminboard, isAdmin,false,false);
+    renderGrid('pending-grid',    db.pending,    false,  true, false);
   }
 
-  // ── SUBMIT / POST / APPROVE / DENY / DELETE ──
-  async function submitPublicTip() {
-    const text = document.getElementById('pub-text').value.trim();
-    const author = document.getElementById('pub-name').value.trim() || 'anon';
-    const tag  = document.getElementById('pub-tag').value;
-    if (!text) { document.getElementById('pub-text').focus(); return; }
-    setStatus('loading', 'submitting...');
-    try {
-      db.pending.unshift({ id: Date.now(), text, tag, author });
-      await saveAll();
-      document.getElementById('pub-text').value = '';
-      document.getElementById('pub-name').value = '';
-      setStatus('ok', 'submitted ✓ — waiting for approval');
-    } catch(e) { db.pending.shift(); setStatus('error', 'could not submit — ' + e.message); }
+  async function submitPublicTip(){
+    const text=document.getElementById('pub-text').value.trim();
+    const author=document.getElementById('pub-name').value.trim()||'anon';
+    const tag=document.getElementById('pub-tag').value;
+    if(!text){document.getElementById('pub-text').focus();return;}
+    setStatus('loading','submitting...');
+    try{db.pending.unshift({id:Date.now(),text,tag,author});await saveAll();document.getElementById('pub-text').value='';document.getElementById('pub-name').value='';setStatus('ok','submitted ✓ — waiting for approval');}
+    catch(e){db.pending.shift();setStatus('error','could not submit — '+e.message);}
   }
 
-  async function staffPost(section) {
-    const map = { recommended: ['rec-text','rec-author','rec-tag'], featured: ['feat-text','feat-author','feat-tag'], adminboard: ['admin-text','admin-author','admin-tag'] };
-    const [ti, ai, gi] = map[section];
-    const text = document.getElementById(ti).value.trim();
-    const author = document.getElementById(ai).value.trim() || 'Staff';
-    const tag  = document.getElementById(gi).value;
-    if (!text) { document.getElementById(ti).focus(); return; }
-    setStatus('loading', 'posting...');
-    try {
-      db[section].unshift({ id: Date.now(), text, tag, author });
-      await saveAll(); document.getElementById(ti).value = '';
-      setStatus('ok', 'posted ✓'); renderAll();
-    } catch(e) { db[section].shift(); setStatus('error', 'could not post — ' + e.message); }
+  async function staffPost(section){
+    const map={recommended:['rec-text','rec-author','rec-tag'],featured:['feat-text','feat-author','feat-tag'],adminboard:['admin-text','admin-author','admin-tag']};
+    const [ti,ai,gi]=map[section];
+    const text=document.getElementById(ti).value.trim();
+    const author=document.getElementById(ai).value.trim()||'Staff';
+    const tag=document.getElementById(gi).value;
+    if(!text){document.getElementById(ti).focus();return;}
+    setStatus('loading','posting...');
+    try{db[section].unshift({id:Date.now(),text,tag,author});await saveAll();document.getElementById(ti).value='';setStatus('ok','posted ✓');renderAll();}
+    catch(e){db[section].shift();setStatus('error','could not post — '+e.message);}
   }
 
-  async function approveTip(id) {
-    const tip = db.pending.find(t => t.id == id); if (!tip) return;
-    setStatus('loading', 'approving...');
-    try {
-      db.pending = db.pending.filter(t => t.id != id);
-      db.public.unshift({ ...tip, pending: false });
-      await saveAll(); setStatus('ok', 'approved ✓'); renderAll();
-    } catch(e) { setStatus('error', 'could not approve — ' + e.message); await loadAll(); }
+  async function approveTip(id){
+    const tip=db.pending.find(t=>t.id==id);if(!tip)return;
+    setStatus('loading','approving...');
+    try{db.pending=db.pending.filter(t=>t.id!=id);db.public.unshift({...tip,pending:false});await saveAll();setStatus('ok','approved ✓');renderAll();}
+    catch(e){setStatus('error','could not approve — '+e.message);await loadAll();}
   }
 
-  async function denyTip(id) {
-    if (!confirm('Deny and delete this tip?')) return;
-    setStatus('loading', 'denying...');
-    try {
-      db.pending = db.pending.filter(t => t.id != id);
-      await saveAll(); setStatus('ok', 'denied ✓'); renderAll();
-    } catch(e) { setStatus('error', 'could not deny — ' + e.message); await loadAll(); }
+  async function denyTip(id){
+    if(!confirm('Deny and delete this tip?'))return;
+    setStatus('loading','denying...');
+    try{db.pending=db.pending.filter(t=>t.id!=id);await saveAll();setStatus('ok','denied ✓');renderAll();}
+    catch(e){setStatus('error','could not deny — '+e.message);await loadAll();}
   }
 
-  async function deleteTip(gridId, id) {
-    if (!confirm('Delete this tip?')) return;
-    const section = gridId.replace('-grid', '');
-    const prev = [...db[section]];
-    db[section] = db[section].filter(t => t.id != id); renderAll();
-    setStatus('loading', 'deleting...');
-    try { await saveAll(); setStatus('ok', 'deleted ✓'); }
-    catch(e) { db[section] = prev; setStatus('error', 'could not delete — ' + e.message); renderAll(); }
+  async function deleteTip(gridId,id){
+    if(!confirm('Delete this tip?'))return;
+    const section=gridId.replace('-grid','');
+    const prev=[...db[section]];
+    db[section]=db[section].filter(t=>t.id!=id);renderAll();
+    setStatus('loading','deleting...');
+    try{await saveAll();setStatus('ok','deleted ✓');}
+    catch(e){db[section]=prev;setStatus('error','could not delete — '+e.message);renderAll();}
   }
 
-  const saved = sessionStorage.getItem('rank');
-  if (saved) currentRank = saved;
+  const saved=sessionStorage.getItem('rank');
+  if(saved) currentRank=saved;
   updateUI(); loadAll();
 </script>
 </body>
 </html>
-HTMLEOF
-Output
