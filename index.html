@@ -1,3 +1,4 @@
+cat << 'HTMLEOF' > /home/claude/index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,58 +31,35 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       background-size: 200px 200px;
     }
-
-    /* ── LAYOUT ── */
     .page-wrap { position: relative; z-index: 1; display: flex; min-height: 100vh; }
 
     /* ── SIDEBAR ── */
     .sidebar {
       width: 200px; min-width: 200px;
-      background: var(--surface);
-      border-right: 1px solid var(--border);
-      padding: 1.5rem 0 2rem;
-      display: flex; flex-direction: column; gap: 2px;
-      position: sticky; top: 0; height: 100vh;
-      overflow-y: auto;
+      background: var(--surface); border-right: 1px solid var(--border);
+      padding: 1.5rem 0 2rem; display: flex; flex-direction: column; gap: 2px;
+      position: sticky; top: 0; height: 100vh; overflow-y: auto;
     }
-    .sb-label {
-      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--muted);
-      padding: 0 16px 6px; margin-top: 12px;
-    }
+    .sb-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 0 16px 6px; margin-top: 12px; }
     .sb-label:first-child { margin-top: 0; }
     .sb-item {
-      display: flex; align-items: center; gap: 9px;
-      padding: 8px 16px; font-size: 0.82rem; color: var(--muted);
-      cursor: pointer; border-left: 2px solid transparent;
-      transition: background 0.13s, color 0.13s; text-decoration: none;
-      background: none; border-top: none; border-right: none; border-bottom: none;
+      display: flex; align-items: center; gap: 9px; padding: 8px 16px;
+      font-size: 0.82rem; color: var(--muted); cursor: pointer;
+      border-left: 2px solid transparent; transition: background 0.13s, color 0.13s;
+      text-decoration: none; background: none; border-top: none; border-right: none; border-bottom: none;
       font-family: 'DM Sans', sans-serif; text-align: left; width: 100%;
     }
     .sb-item:hover { background: var(--bg); color: var(--text); }
     .sb-item.active { background: var(--bg); color: var(--text); border-left-color: var(--accent); font-weight: 500; }
     .sb-icon { font-size: 0.9rem; width: 16px; text-align: center; flex-shrink: 0; }
-    .sb-badge {
-      margin-left: auto; font-size: 0.62rem; font-weight: 500;
-      padding: 2px 6px; border-radius: 99px; white-space: nowrap;
-    }
+    .sb-badge { margin-left: auto; font-size: 0.62rem; font-weight: 500; padding: 2px 6px; border-radius: 99px; white-space: nowrap; }
     .sb-divider { height: 1px; background: var(--border); margin: 8px 16px; }
 
     /* ── MAIN ── */
     .page { flex: 1; max-width: 900px; margin: 0 auto; padding: 2rem 2rem 5rem; min-width: 0; }
-
-    nav {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
+    nav { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
     .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
-    .nav-btn {
-      font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
-      padding: 6px 14px; border-radius: 99px; border: 1px solid var(--border-strong);
-      background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s;
-      text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
-    }
+    .nav-btn { font-family: 'DM Sans', sans-serif; font-size: 0.82rem; padding: 6px 14px; border-radius: 99px; border: 1px solid var(--border-strong); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.15s; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
     .nav-btn:hover { background: var(--surface); color: var(--text); }
     .nav-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
     .nav-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -99,63 +77,30 @@
     .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; flex-shrink: 0; transition: background 0.3s; }
     .status-dot.ok { background: #3a9c5a; } .status-dot.error { background: #c8602a; } .status-dot.loading { background: #f0a500; }
     .section { margin-bottom: 2.5rem; }
-    .section-header {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; padding: 0.75rem 1rem;
-      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-    }
+    .section-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; padding: 0.75rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
     .section-title { font-size: 1rem; font-weight: 500; display: flex; align-items: center; gap: 8px; }
     .section-lock { font-size: 0.75rem; color: var(--muted); }
     .staff-form { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
-    .staff-form input[type="text"] {
-      flex: 1; min-width: 160px; height: 38px; padding: 0 14px;
-      font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
-      background: var(--surface); border: 1px solid var(--border-strong);
-      border-radius: 8px; color: var(--text); outline: none;
-    }
+    .staff-form input[type="text"] { flex: 1; min-width: 160px; height: 38px; padding: 0 14px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); outline: none; }
     .staff-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
-    select.tag-sel {
-      height: 38px; padding: 0 10px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
-      background: var(--surface); border: 1px solid var(--border-strong);
-      border-radius: 8px; color: var(--text); cursor: pointer; outline: none;
-    }
-    .post-btn {
-      height: 38px; padding: 0 18px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
-      background: var(--accent); color: #fff; border: none; border-radius: 8px;
-      cursor: pointer; transition: background 0.15s, transform 0.1s; white-space: nowrap;
-    }
+    select.tag-sel { height: 38px; padding: 0 10px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); cursor: pointer; outline: none; }
+    .post-btn { height: 38px; padding: 0 18px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: background 0.15s, transform 0.1s; white-space: nowrap; }
     .post-btn:hover { background: #b5521f; } .post-btn:active { transform: scale(0.97); } .post-btn:disabled { background: #ccc; cursor: not-allowed; }
     .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
-    .rec-card {
-      background: linear-gradient(135deg, #fffbf0, #fff8e8);
-      border: 1px solid rgba(200,96,42,0.25); border-radius: 12px; padding: 1rem 1.1rem;
-      display: flex; flex-direction: column; gap: 8px;
-      animation: rise 0.2s ease both; position: relative; overflow: hidden;
-    }
+    .rec-card { background: linear-gradient(135deg, #fffbf0, #fff8e8); border: 1px solid rgba(200,96,42,0.25); border-radius: 12px; padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: 8px; animation: rise 0.2s ease both; position: relative; overflow: hidden; }
     .rec-card::before { content: '⭐'; position: absolute; top: 8px; right: 10px; font-size: 0.7rem; opacity: 0.5; }
     .rec-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); border-radius: 12px 12px 0 0; }
     .public-form { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
     .public-form h3 { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--muted); }
     .form-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
-    .form-row input, .form-row textarea, .form-row select {
-      flex: 1; min-width: 140px; padding: 8px 12px;
-      font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
-      background: var(--bg); border: 1px solid var(--border-strong);
-      border-radius: 8px; color: var(--text); outline: none;
-    }
+    .form-row input, .form-row textarea, .form-row select { flex: 1; min-width: 140px; padding: 8px 12px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; color: var(--text); outline: none; }
     .form-row input { height: 38px; } .form-row textarea { height: 72px; resize: vertical; }
     .form-row input:focus, .form-row textarea:focus, .form-row select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
-    .submit-btn {
-      height: 38px; padding: 0 18px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
-      background: var(--text); color: var(--bg); border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; white-space: nowrap;
-    }
+    .submit-btn { height: 38px; padding: 0 18px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; background: var(--text); color: var(--bg); border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
     .submit-btn:hover { opacity: 0.85; }
     .pending-notice { font-size: 0.8rem; color: var(--muted); margin-top: 6px; padding: 6px 10px; background: #fdecd6; border-radius: 6px; display: inline-block; }
     .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
-    .tip-card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem;
-      display: flex; flex-direction: column; gap: 8px; animation: rise 0.2s ease both; position: relative; overflow: hidden;
-    }
+    .tip-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: 8px; animation: rise 0.2s ease both; position: relative; overflow: hidden; }
     @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
     .tip-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--card-accent, transparent); border-radius: 12px 12px 0 0; }
     .tip-tag { display: inline-flex; align-items: center; gap: 3px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; }
@@ -183,20 +128,81 @@
     .modal-cancel { height: 40px; padding: 0 16px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: transparent; border: 1px solid var(--border-strong); border-radius: 8px; cursor: pointer; color: var(--muted); }
     .modal-error { font-size: 0.8rem; color: #c0392b; margin-bottom: 8px; display: none; }
     .site-footer { margin-top: 3rem; text-align: center; font-size: 0.78rem; color: var(--muted); }
+    .sec-panel { display: none; } .sec-panel.visible { display: block; }
 
-    /* ── SECTION VISIBILITY ── */
-    .sec-panel { display: none; }
-    .sec-panel.visible { display: block; }
-
-    /* ── RESPONSIVE: hide sidebar on small screens ── */
-    @media (max-width: 700px) {
-      .sidebar { display: none; }
-      .page { padding: 1.5rem 1rem 4rem; }
+    /* ── OWNER SETTINGS PANEL ── */
+    .settings-wrap { display: flex; flex-direction: column; gap: 1.5rem; }
+    .settings-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
     }
+    .settings-card-header {
+      display: flex; align-items: center; gap: 8px; padding: 0.9rem 1.2rem;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      font-size: 0.85rem; font-weight: 600; color: var(--text);
+    }
+    .settings-card-body { padding: 1.2rem; display: flex; flex-direction: column; gap: 12px; }
+    .setting-row { display: flex; flex-direction: column; gap: 5px; }
+    .setting-row label { font-size: 0.75rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .setting-row input[type="text"],
+    .setting-row input[type="password"],
+    .setting-row input[type="color"] {
+      height: 38px; padding: 0 12px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+      background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px;
+      color: var(--text); outline: none; width: 100%; transition: border-color 0.15s;
+    }
+    .setting-row input[type="color"] { padding: 3px 6px; cursor: pointer; }
+    .setting-row input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,96,42,0.12); }
+    .setting-row .hint { font-size: 0.72rem; color: var(--muted); }
+    .setting-row-inline { display: flex; gap: 10px; align-items: flex-end; }
+    .setting-row-inline .setting-row { flex: 1; }
+    .save-btn {
+      height: 38px; padding: 0 20px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500;
+      background: var(--accent); color: #fff; border: none; border-radius: 8px; cursor: pointer;
+      transition: background 0.15s; white-space: nowrap; align-self: flex-end;
+    }
+    .save-btn:hover { background: #b5521f; }
+    .save-btn.secondary { background: var(--text); }
+    .save-btn.secondary:hover { opacity: 0.8; }
+    .save-btn.danger { background: #c0392b; }
+    .save-btn.danger:hover { background: #96281b; }
+    .settings-toast {
+      display: none; font-size: 0.78rem; color: #2d7a2d; background: #e8f5e9;
+      border: 1px solid #a5d6a7; border-radius: 6px; padding: 6px 12px;
+      margin-top: 4px;
+    }
+    .settings-toast.show { display: inline-block; }
+    .settings-toast.error { color: #c0392b; background: #fce8ec; border-color: #ef9a9a; }
+
+    /* staff member list */
+    .member-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
+    .member-row {
+      display: flex; align-items: center; gap: 10px; padding: 8px 12px;
+      background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+      font-size: 0.85rem;
+    }
+    .member-name { font-weight: 500; flex: 1; }
+    .member-rank { font-size: 0.72rem; }
+    .member-del { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.8rem; padding: 2px 6px; border-radius: 4px; transition: all 0.12s; }
+    .member-del:hover { color: #c0392b; background: #fce8ec; }
+    .add-member-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .add-member-row input, .add-member-row select {
+      flex: 1; min-width: 110px; height: 36px; padding: 0 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+      background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px;
+      color: var(--text); outline: none;
+    }
+    .add-member-row input:focus { border-color: var(--accent); }
+
+    /* color preview swatch */
+    .color-preview { display: flex; align-items: center; gap: 10px; }
+    .color-swatch { width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-strong); flex-shrink: 0; }
+
+    @media (max-width: 700px) { .sidebar { display: none; } .page { padding: 1.5rem 1rem 4rem; } }
   </style>
 </head>
 <body>
 
+<!-- LOGIN MODAL -->
 <div class="modal-overlay" id="login-modal">
   <div class="modal">
     <h2>Staff Login</h2>
@@ -215,35 +221,32 @@
   <!-- ── SIDEBAR ── -->
   <aside class="sidebar">
     <div class="sb-label">Browse</div>
-
     <button class="sb-item active" id="nav-recommended" onclick="showSection('recommended')">
       <span class="sb-icon">⭐</span> Recommended
       <span class="sb-badge rank-admin">Staff Picks</span>
     </button>
-
     <button class="sb-item" id="nav-featured" onclick="showSection('featured')">
       <span class="sb-icon">🔥</span> Featured
       <span class="sb-badge rank-mod">Mod+</span>
     </button>
-
     <button class="sb-item" id="nav-public" onclick="showSection('public')">
       <span class="sb-icon">📢</span> Public Tips
       <span class="sb-badge rank-public">All</span>
     </button>
-
     <div class="sb-divider"></div>
     <div class="sb-label">Staff Only</div>
-
     <button class="sb-item" id="nav-pending" onclick="showSection('pending')" style="display:none">
       <span class="sb-icon">⏳</span> Pending
       <span class="sb-badge rank-admin">Review</span>
     </button>
-
     <button class="sb-item" id="nav-adminboard" onclick="showSection('adminboard')" style="display:none">
       <span class="sb-icon">🔒</span> Admin Board
       <span class="sb-badge rank-admin">Admin+</span>
     </button>
-
+    <button class="sb-item" id="nav-settings" onclick="showSection('settings')" style="display:none">
+      <span class="sb-icon">⚙️</span> Settings
+      <span class="sb-badge rank-owner">Owner</span>
+    </button>
   </aside>
 
   <!-- ── MAIN CONTENT ── -->
@@ -263,8 +266,8 @@
     </nav>
 
     <header class="header">
-      <h1 class="site-title">tips <em>&</em> stuff</h1>
-      <p class="subtitle">A shared board for tips, tricks, and random gems. ALL RIGHTS RESERVED @RANDOM STUDIOS ✦</p>
+      <h1 class="site-title" id="site-title-el">tips <em>&</em> stuff</h1>
+      <p class="subtitle" id="site-subtitle-el">a shared board for tips, tricks, and random gems ✦</p>
       <hr class="divider" />
     </header>
 
@@ -273,7 +276,7 @@
       <span id="status-text">loading...</span>
     </div>
 
-    <!-- RECOMMENDED (always visible) -->
+    <!-- RECOMMENDED -->
     <div class="section sec-panel visible" id="sec-recommended">
       <div class="section-header">
         <span class="section-title">⭐ Recommended Tips <span class="section-lock">Curated by Owner &amp; Admins</span></span>
@@ -292,7 +295,7 @@
       <div class="rec-grid" id="recommended-grid"><p class="empty">No recommended tips yet.</p></div>
     </div>
 
-    <!-- FEATURED (always visible) -->
+    <!-- FEATURED -->
     <div class="section sec-panel" id="sec-featured">
       <div class="section-header">
         <span class="section-title">🔥 Featured Tips <span class="section-lock">Mod+ only</span></span>
@@ -311,7 +314,7 @@
       <div class="tips-grid" id="featured-grid"><p class="empty">No featured tips yet.</p></div>
     </div>
 
-    <!-- PUBLIC TIPS (always visible) -->
+    <!-- PUBLIC TIPS -->
     <div class="section sec-panel" id="sec-public">
       <div class="section-header">
         <span class="section-title">📢 Public Tips <span class="section-lock">Everyone can submit</span></span>
@@ -334,7 +337,7 @@
       <div class="tips-grid" id="public-grid"><p class="empty">No approved tips yet.</p></div>
     </div>
 
-    <!-- PENDING (staff only) -->
+    <!-- PENDING -->
     <div class="section sec-panel" id="sec-pending">
       <div class="section-header">
         <span class="section-title">⏳ Pending Approval <span class="section-lock">Owner &amp; Admin only</span></span>
@@ -343,7 +346,7 @@
       <div class="tips-grid" id="pending-grid"><p class="empty">No pending tips.</p></div>
     </div>
 
-    <!-- ADMIN BOARD (staff only) -->
+    <!-- ADMIN BOARD -->
     <div class="section sec-panel" id="sec-adminboard">
       <div class="section-header">
         <span class="section-title">🔒 Admin Board <span class="section-lock">Admin+ only</span></span>
@@ -362,16 +365,154 @@
       <div class="tips-grid" id="adminboard-grid"><p class="empty">No admin tips yet.</p></div>
     </div>
 
-    <footer class="site-footer"><p>tips & stuff — shared with friends ✦</p></footer>
+    <!-- ⚙️ OWNER SETTINGS -->
+    <div class="sec-panel" id="sec-settings">
+      <div class="section-header" style="margin-bottom:1.5rem">
+        <span class="section-title">⚙️ Owner Settings</span>
+        <span class="rank-badge rank-owner">👑 Owner Only</span>
+      </div>
+
+      <div class="settings-wrap">
+
+        <!-- SITE APPEARANCE -->
+        <div class="settings-card">
+          <div class="settings-card-header">🎨 Site Appearance</div>
+          <div class="settings-card-body">
+            <div class="setting-row">
+              <label>Site Title</label>
+              <input type="text" id="set-title" placeholder="tips & stuff" maxlength="40" />
+            </div>
+            <div class="setting-row">
+              <label>Subtitle / Tagline</label>
+              <input type="text" id="set-subtitle" placeholder="a shared board for tips, tricks, and random gems ✦" maxlength="80" />
+            </div>
+            <div class="setting-row">
+              <label>Accent Color</label>
+              <div class="color-preview">
+                <input type="color" id="set-accent" value="#c8602a" style="width:80px" oninput="document.getElementById('accent-swatch').style.background=this.value" />
+                <div class="color-swatch" id="accent-swatch" style="background:#c8602a"></div>
+                <span class="hint">Used for buttons, highlights, and borders</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+              <button class="save-btn" onclick="saveAppearance()">Save Appearance</button>
+              <span class="settings-toast" id="toast-appearance"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASSWORDS -->
+        <div class="settings-card">
+          <div class="settings-card-header">🔑 Staff Passwords</div>
+          <div class="settings-card-body">
+            <div class="hint" style="margin-bottom:4px">These are saved to JSONBin and take effect immediately. Keep them safe!</div>
+            <div class="setting-row-inline">
+              <div class="setting-row">
+                <label>👑 Owner Password</label>
+                <input type="password" id="set-pw-owner" placeholder="current password hidden" autocomplete="new-password" />
+              </div>
+            </div>
+            <div class="setting-row-inline">
+              <div class="setting-row">
+                <label>🛡️ Admin Password</label>
+                <input type="password" id="set-pw-admin" placeholder="current password hidden" autocomplete="new-password" />
+              </div>
+            </div>
+            <div class="setting-row-inline">
+              <div class="setting-row">
+                <label>🔧 Mod Password</label>
+                <input type="password" id="set-pw-mod" placeholder="current password hidden" autocomplete="new-password" />
+              </div>
+            </div>
+            <div class="hint">Leave a field blank to keep the current password unchanged.</div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px">
+              <button class="save-btn" onclick="savePasswords()">Save Passwords</button>
+              <span class="settings-toast" id="toast-passwords"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STAFF MEMBERS -->
+        <div class="settings-card">
+          <div class="settings-card-header">👥 Staff Members</div>
+          <div class="settings-card-body">
+            <div class="hint">Visible roster of staff — displayed on the Ranks page.</div>
+            <div class="member-list" id="member-list"></div>
+            <div class="add-member-row">
+              <input type="text" id="new-member-name" placeholder="Name" maxlength="30" />
+              <select id="new-member-rank">
+                <option value="owner">👑 Owner</option>
+                <option value="admin">🛡️ Admin</option>
+                <option value="mod">🔧 Mod</option>
+              </select>
+              <button class="save-btn secondary" onclick="addMember()" style="height:36px;padding:0 14px">+ Add</button>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px">
+              <button class="save-btn" onclick="saveMembers()">Save Members</button>
+              <span class="settings-toast" id="toast-members"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RULES EDITOR -->
+        <div class="settings-card">
+          <div class="settings-card-header">📜 Site Rules</div>
+          <div class="settings-card-body">
+            <div class="hint">One rule per line. These appear on the Rules page.</div>
+            <textarea id="set-rules" style="width:100%;height:160px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;resize:vertical;margin-top:6px" placeholder="e.g. Be respectful to others&#10;No spam or self-promotion&#10;Keep tips on-topic"></textarea>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px">
+              <button class="save-btn" onclick="saveRules()">Save Rules</button>
+              <span class="settings-toast" id="toast-rules"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DANGER ZONE -->
+        <div class="settings-card" style="border-color:rgba(192,57,43,0.3)">
+          <div class="settings-card-header" style="color:#c0392b">🗑️ Danger Zone</div>
+          <div class="settings-card-body">
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+              <div style="flex:1;min-width:200px">
+                <div style="font-size:0.85rem;font-weight:500;margin-bottom:4px">Clear Pending Queue</div>
+                <div class="hint">Permanently delete all tips awaiting approval.</div>
+              </div>
+              <button class="save-btn danger" onclick="dangerClear('pending')">Clear Pending</button>
+            </div>
+            <hr style="border:none;border-top:1px solid var(--border);margin:4px 0">
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+              <div style="flex:1;min-width:200px">
+                <div style="font-size:0.85rem;font-weight:500;margin-bottom:4px">Clear Public Tips</div>
+                <div class="hint">Permanently delete all approved public tips.</div>
+              </div>
+              <button class="save-btn danger" onclick="dangerClear('public')">Clear Public</button>
+            </div>
+            <hr style="border:none;border-top:1px solid var(--border);margin:4px 0">
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+              <div style="flex:1;min-width:200px">
+                <div style="font-size:0.85rem;font-weight:500;margin-bottom:4px">Clear Featured Tips</div>
+                <div class="hint">Permanently delete all featured tips.</div>
+              </div>
+              <button class="save-btn danger" onclick="dangerClear('featured')">Clear Featured</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /settings-wrap -->
+    </div><!-- /sec-settings -->
+
+    <footer class="site-footer"><p id="footer-text">tips & stuff — shared with friends ✦</p></footer>
   </main>
 
-</div><!-- /page-wrap -->
+</div>
 
 <script>
   const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
   const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
   const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
-  const PASSWORDS = { owner: '20140314', admin: '382790', mod: '23889' };
+
+  // Default passwords — overridden by db.config if saved
+  let PASSWORDS = { owner: '20140314', admin: '382790', mod: '23889' };
+
   const TAG_CONFIG = {
     tip:    { label: '💡 tip',    bg: 'var(--tag-tip-bg)',    color: 'var(--tag-tip-txt)',    accent: '#4a8a1a' },
     food:   { label: '🍜 food',   bg: 'var(--tag-food-bg)',   color: 'var(--tag-food-txt)',   accent: '#c8602a' },
@@ -379,7 +520,6 @@
     tech:   { label: '⚡ tech',   bg: 'var(--tag-tech-bg)',   color: 'var(--tag-tech-txt)',   accent: '#7a2ac8' },
     random: { label: '🎲 random', bg: 'var(--tag-random-bg)', color: 'var(--tag-random-txt)', accent: '#c82a4a' },
   };
-
   const SEED_TIPS = {
     recommended: [
       { id: 'r1', text: 'Drink a glass of water first thing in the morning before anything else. Your body is dehydrated after sleep.', tag: 'life', author: 'Owner' },
@@ -400,12 +540,16 @@
   };
 
   let currentRank = 'public';
-  let db = { public: [], featured: [], adminboard: [], pending: [], recommended: [], banlist: [], rules: [], members: [] };
+  let db = {
+    public: [], featured: [], adminboard: [], pending: [], recommended: [],
+    banlist: [], rules: [], members: [],
+    config: { title: '', subtitle: '', accent: '', passwords: {} }
+  };
 
-  // ── SIDEBAR NAVIGATION ──
-  const PUBLIC_SECTIONS  = ['recommended', 'featured', 'public'];
-  const STAFF_SECTIONS   = ['pending', 'adminboard'];
-  const ALL_SECTIONS     = [...PUBLIC_SECTIONS, ...STAFF_SECTIONS];
+  // ── SIDEBAR ──
+  const PUBLIC_SECTIONS = ['recommended', 'featured', 'public'];
+  const STAFF_SECTIONS  = ['pending', 'adminboard', 'settings'];
+  const ALL_SECTIONS    = [...PUBLIC_SECTIONS, ...STAFF_SECTIONS];
 
   function showSection(id) {
     ALL_SECTIONS.forEach(s => {
@@ -416,6 +560,7 @@
     document.getElementById('sec-' + id).classList.add('visible');
     const nav = document.getElementById('nav-' + id);
     if (nav) nav.classList.add('active');
+    if (id === 'settings') populateSettings();
   }
 
   // ── AUTH ──
@@ -430,7 +575,6 @@
     closeModal();
   }
   document.getElementById('modal-pw').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
-
   function setRank(rank) { currentRank = rank; sessionStorage.setItem('rank', rank); updateUI(); }
 
   function updateUI() {
@@ -439,38 +583,40 @@
     const classes = { owner: 'rank-owner', admin: 'rank-admin', mod: 'rank-mod', public: 'rank-public' };
     const d = document.getElementById('rank-display');
     d.textContent = labels[rank]; d.className = 'rank-badge ' + classes[rank];
-
     const authBtn = document.getElementById('auth-btn');
     if (rank !== 'public') {
       authBtn.textContent = 'Logout';
       authBtn.onclick = () => { currentRank = 'public'; sessionStorage.removeItem('rank'); updateUI(); renderAll(); };
     } else { authBtn.textContent = 'Login'; authBtn.onclick = openModal; }
 
+    const isOwner = rank === 'owner';
     const isAdmin = rank === 'owner' || rank === 'admin';
     const isMod   = rank === 'owner' || rank === 'admin' || rank === 'mod';
 
-    // Show/hide staff sidebar nav items
     document.getElementById('nav-pending').style.display    = isAdmin ? 'flex' : 'none';
     document.getElementById('nav-adminboard').style.display = isAdmin ? 'flex' : 'none';
+    document.getElementById('nav-settings').style.display   = isOwner ? 'flex' : 'none';
 
-    // Show/hide staff post forms
     document.getElementById('rec-form').style.display   = isAdmin ? 'flex' : 'none';
     document.getElementById('feat-form').style.display  = isMod   ? 'flex' : 'none';
     document.getElementById('admin-form').style.display = isAdmin ? 'flex' : 'none';
 
-    // If currently viewing a staff section but lost access, jump back to recommended
+    // If viewing a staff section without access, bounce back
     const activeSec = document.querySelector('.sec-panel.visible');
     if (activeSec) {
       const activeId = activeSec.id.replace('sec-', '');
-      if (STAFF_SECTIONS.includes(activeId) && !isAdmin) showSection('recommended');
+      if ((activeId === 'settings' && !isOwner) ||
+          (['pending','adminboard'].includes(activeId) && !isAdmin)) {
+        showSection('recommended');
+      }
     }
-
     renderAll();
   }
 
   function setStatus(state, msg) { document.getElementById('status-dot').className = 'status-dot ' + state; document.getElementById('status-text').textContent = msg; }
   function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
+  // ── LOAD / SAVE ──
   async function loadAll() {
     setStatus('loading', 'loading...');
     try {
@@ -486,6 +632,15 @@
       db.banlist     = Array.isArray(data.banlist)     ? data.banlist     : [];
       db.rules       = Array.isArray(data.rules)       ? data.rules       : [];
       db.members     = Array.isArray(data.members)     ? data.members     : [];
+      db.config      = (data.config && typeof data.config === 'object') ? data.config : {};
+
+      // Apply saved config
+      if (db.config.passwords) {
+        if (db.config.passwords.owner) PASSWORDS.owner = db.config.passwords.owner;
+        if (db.config.passwords.admin) PASSWORDS.admin = db.config.passwords.admin;
+        if (db.config.passwords.mod)   PASSWORDS.mod   = db.config.passwords.mod;
+      }
+      applyAppearance(db.config);
 
       let needsSave = false;
       if (db.recommended.length === 0) { db.recommended = SEED_TIPS.recommended; needsSave = true; }
@@ -502,10 +657,147 @@
     if (!res.ok) throw new Error('HTTP ' + res.status);
   }
 
+  // ── APPEARANCE ──
+  function applyAppearance(cfg) {
+    if (cfg.title) {
+      document.getElementById('site-title-el').innerHTML = cfg.title;
+      document.title = cfg.title.replace(/<[^>]*>/g,'') + ' ✦';
+    }
+    if (cfg.subtitle) document.getElementById('site-subtitle-el').textContent = cfg.subtitle;
+    if (cfg.accent) {
+      document.documentElement.style.setProperty('--accent', cfg.accent);
+      document.getElementById('footer-text').style.color = '';
+    }
+  }
+
+  // ── SETTINGS PANEL ──
+  function populateSettings() {
+    const cfg = db.config || {};
+    // Strip HTML tags for title input
+    const rawTitle = (cfg.title || 'tips & stuff').replace(/<[^>]*>/g,'').replace('&amp;','&');
+    document.getElementById('set-title').value    = rawTitle;
+    document.getElementById('set-subtitle').value = cfg.subtitle || '';
+    const accent = cfg.accent || '#c8602a';
+    document.getElementById('set-accent').value   = accent;
+    document.getElementById('accent-swatch').style.background = accent;
+    // Rules
+    document.getElementById('set-rules').value = Array.isArray(db.rules) ? db.rules.join('\n') : '';
+    // Members
+    renderMemberList();
+  }
+
+  function renderMemberList() {
+    const list = document.getElementById('member-list');
+    if (!db.members || !db.members.length) { list.innerHTML = '<p style="font-size:0.8rem;color:var(--muted)">No staff members added yet.</p>'; return; }
+    const rankLabels = { owner: '👑 Owner', admin: '🛡️ Admin', mod: '🔧 Mod' };
+    const rankClasses = { owner: 'rank-owner', admin: 'rank-admin', mod: 'rank-mod' };
+    list.innerHTML = db.members.map((m, i) => `
+      <div class="member-row">
+        <span class="member-name">${escHtml(m.name)}</span>
+        <span class="rank-badge member-rank ${rankClasses[m.rank] || 'rank-public'}">${rankLabels[m.rank] || m.rank}</span>
+        <button class="member-del" onclick="removeMember(${i})">✕</button>
+      </div>`).join('');
+  }
+
+  function addMember() {
+    const name = document.getElementById('new-member-name').value.trim();
+    const rank = document.getElementById('new-member-rank').value;
+    if (!name) { document.getElementById('new-member-name').focus(); return; }
+    if (!db.members) db.members = [];
+    db.members.push({ name, rank });
+    document.getElementById('new-member-name').value = '';
+    renderMemberList();
+  }
+
+  function removeMember(i) {
+    db.members.splice(i, 1);
+    renderMemberList();
+  }
+
+  function showToast(id, msg, isError) {
+    const el = document.getElementById(id);
+    el.textContent = msg;
+    el.className = 'settings-toast show' + (isError ? ' error' : '');
+    setTimeout(() => el.className = 'settings-toast', 3000);
+  }
+
+  async function saveAppearance() {
+    const title    = document.getElementById('set-title').value.trim() || 'tips & stuff';
+    const subtitle = document.getElementById('set-subtitle').value.trim();
+    const accent   = document.getElementById('set-accent').value;
+    if (!db.config) db.config = {};
+    // Rebuild title HTML with italic & symbol preserved
+    const cleanTitle = escHtml(title);
+    db.config.title    = cleanTitle;
+    db.config.subtitle = subtitle;
+    db.config.accent   = accent;
+    try {
+      setStatus('loading', 'saving...');
+      await saveAll();
+      applyAppearance(db.config);
+      setStatus('ok', 'saved ✓');
+      showToast('toast-appearance', '✓ Saved!');
+    } catch(e) { showToast('toast-appearance', '✕ Error: ' + e.message, true); setStatus('error', 'save failed'); }
+  }
+
+  async function savePasswords() {
+    const o = document.getElementById('set-pw-owner').value;
+    const a = document.getElementById('set-pw-admin').value;
+    const m = document.getElementById('set-pw-mod').value;
+    if (!db.config) db.config = {};
+    if (!db.config.passwords) db.config.passwords = {};
+    if (o) { db.config.passwords.owner = o; PASSWORDS.owner = o; }
+    if (a) { db.config.passwords.admin = a; PASSWORDS.admin = a; }
+    if (m) { db.config.passwords.mod   = m; PASSWORDS.mod   = m; }
+    try {
+      setStatus('loading', 'saving...');
+      await saveAll();
+      setStatus('ok', 'saved ✓');
+      document.getElementById('set-pw-owner').value = '';
+      document.getElementById('set-pw-admin').value = '';
+      document.getElementById('set-pw-mod').value   = '';
+      showToast('toast-passwords', '✓ Passwords updated!');
+    } catch(e) { showToast('toast-passwords', '✕ Error: ' + e.message, true); setStatus('error', 'save failed'); }
+  }
+
+  async function saveMembers() {
+    try {
+      setStatus('loading', 'saving...');
+      await saveAll();
+      setStatus('ok', 'saved ✓');
+      showToast('toast-members', '✓ Staff list saved!');
+    } catch(e) { showToast('toast-members', '✕ Error: ' + e.message, true); }
+  }
+
+  async function saveRules() {
+    const raw = document.getElementById('set-rules').value;
+    db.rules = raw.split('\n').map(r => r.trim()).filter(Boolean);
+    try {
+      setStatus('loading', 'saving...');
+      await saveAll();
+      setStatus('ok', 'saved ✓');
+      showToast('toast-rules', '✓ Rules saved!');
+    } catch(e) { showToast('toast-rules', '✕ Error: ' + e.message, true); }
+  }
+
+  async function dangerClear(section) {
+    if (!confirm(`Are you sure? This will permanently delete ALL ${section} tips.`)) return;
+    db[section] = [];
+    try {
+      setStatus('loading', 'clearing...');
+      await saveAll();
+      setStatus('ok', 'cleared ✓');
+      renderAll();
+      alert(`✓ ${section} tips cleared.`);
+    } catch(e) { setStatus('error', 'failed: ' + e.message); }
+  }
+
+  // ── RENDER ──
   function renderGrid(gridId, tips, canDelete, showPendingControls, isRec) {
     const grid = document.getElementById(gridId);
     if (!tips || !tips.length) { grid.innerHTML = '<p class="empty">Nothing here yet.</p>'; return; }
     const isAdmin = currentRank === 'owner' || currentRank === 'admin';
+    const isMod   = currentRank === 'owner' || currentRank === 'admin' || currentRank === 'mod';
     grid.innerHTML = tips.map(t => {
       const cfg = TAG_CONFIG[t.tag] || TAG_CONFIG.tip;
       const actions = [];
@@ -538,6 +830,7 @@
     renderGrid('pending-grid',     db.pending,     false,   true,  false);
   }
 
+  // ── SUBMIT / POST / APPROVE / DENY / DELETE ──
   async function submitPublicTip() {
     const text = document.getElementById('pub-text').value.trim();
     const author = document.getElementById('pub-name').value.trim() || 'anon';
@@ -604,3 +897,4 @@
 </body>
 </html>
 HTMLEOF
+Output
