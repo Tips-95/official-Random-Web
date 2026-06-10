@@ -213,6 +213,8 @@
 
 <header class="topnav">
   <a href="index.html" class="topnav-logo">tips <em>&</em> stuff</a>
+  <!-- LOGIN: left side, visible to public users -->
+  <a href="login.html" class="topnav-btn" id="login-link">Login</a>
   <div class="topnav-links">
     <a href="index.html"   class="topnav-link active">📋 Tips</a>
     <a href="ranks.html"   class="topnav-link">🏅 Ranks</a>
@@ -221,9 +223,6 @@
   </div>
   <div class="topnav-right">
     <span id="rank-display" class="rank-badge rank-public">Public</span>
-    <!-- shown when public, goes to login page to upgrade to staff -->
-    <a href="login.html" class="topnav-btn" id="login-link" style="display:none">Login</a>
-    <!-- shown when logged in as staff -->
     <button class="topnav-btn" id="logout-btn" style="display:none" onclick="doLogout()">Logout</button>
     <button class="topnav-btn" onclick="loadAll()" title="Refresh">↻</button>
   </div>
