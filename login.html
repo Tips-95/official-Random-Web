@@ -261,7 +261,8 @@
 <script>
   // If already logged in, skip login page
   const existingRank = sessionStorage.getItem('rank');
-  if (existingRank) window.location.replace('index.html');
+  // Only auto-skip if already logged in as staff (not public)
+  if (existingRank && existingRank !== 'public') window.location.replace('index.html');
  
   const PASSWORDS = { owner: '20140314', admin: '382790', mod: '23889' };
   let selectedRank = 'owner';
