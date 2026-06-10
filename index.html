@@ -222,7 +222,7 @@
   <div class="topnav-right">
     <span id="rank-display" class="rank-badge rank-public">Public</span>
     <!-- shown when public, goes to login page to upgrade to staff -->
-    <a href="login.html" class="topnav-btn" id="login-link" style="display:none">Login as Staff</a>
+    <a href="login.html" class="topnav-btn" id="login-link" style="display:none">Login</a>
     <!-- shown when logged in as staff -->
     <button class="topnav-btn" id="logout-btn" style="display:none" onclick="doLogout()">Logout</button>
     <button class="topnav-btn" onclick="loadAll()" title="Refresh">↻</button>
@@ -249,6 +249,8 @@
       <hr class="divider"/>
     </div>
     <div class="status-bar"><div class="status-dot loading" id="status-dot"></div><span id="status-text">loading...</span></div>
+
+
 
     <div class="section sec-panel visible" id="sec-recommended">
       <div class="section-header"><span class="section-title">⭐ Recommended Tips <span class="section-lock">Owner &amp; Admins</span></span><span class="rank-badge rank-admin">Staff Picks</span></div>
@@ -507,7 +509,7 @@ function applyRankUI() {
   const rd = document.getElementById('rank-display');
   rd.textContent = labels[rank]; rd.className = 'rank-badge ' + classes[rank];
 
-  // Public users see "Login as Staff"; staff see "Logout"
+  // Show login link for public; logout button for staff
   document.getElementById('login-link').style.display  = rank === 'public' ? '' : 'none';
   document.getElementById('logout-btn').style.display  = rank !== 'public' ? '' : 'none';
 
