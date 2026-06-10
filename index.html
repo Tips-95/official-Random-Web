@@ -299,7 +299,8 @@
   </div>
   <div class="topnav-right">
     <span id="rank-display" class="rank-badge rank-public">Public</span>
-    <button class="topnav-btn" id="auth-btn" onclick="window.location.href='login.html'">Login</button>
+    <a href="login.html" class="topnav-btn" id="auth-btn-link">Login</a>
+    <button class="topnav-btn" id="auth-btn" style="display:none" onclick="logoutUser()">Logout</button>
     <button class="topnav-btn" onclick="loadAll()" title="Refresh">↻</button>
   </div>
 </header>
@@ -613,13 +614,15 @@
     const classes={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
     const d=document.getElementById('rank-display');
     d.textContent=labels[rank]; d.className='rank-badge '+classes[rank];
-    const ab=document.getElementById('auth-btn');
+    // Login link vs Logout button
+    const loginLink = document.getElementById('auth-btn-link');
+    const logoutBtn = document.getElementById('auth-btn');
     if(rank!=='public'){
-      ab.textContent='Logout';
-      ab.onclick=()=>{currentRank='public';sessionStorage.removeItem('rank');location.reload();};
+      if(loginLink)  loginLink.style.display  = 'none';
+      if(logoutBtn)  { logoutBtn.style.display = 'inline-flex'; logoutBtn.onclick = ()=>{currentRank='public';sessionStorage.removeItem('rank');location.reload();}; }
     } else {
-      ab.textContent='Login';
-      ab.onclick=()=>window.location.href='login.html';
+      if(loginLink)  loginLink.style.display  = '';
+      if(logoutBtn)  logoutBtn.style.display  = 'none';
     }
     const isOwner=rank==='owner', isAdmin=rank==='owner'||rank==='admin', isMod=rank==='owner'||rank==='admin'||rank==='mod';
     document.getElementById('nav-pending').style.display    =isAdmin?'flex':'none';
