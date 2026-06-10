@@ -614,15 +614,15 @@
     const classes={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
     const d=document.getElementById('rank-display');
     d.textContent=labels[rank]; d.className='rank-badge '+classes[rank];
-    // Login link vs Logout button
+      // Login link vs Logout button
     const loginLink = document.getElementById('auth-btn-link');
     const logoutBtn = document.getElementById('auth-btn');
-    if(rank!=='public'){
-      if(loginLink)  loginLink.style.display  = 'none';
-      if(logoutBtn)  { logoutBtn.style.display = 'inline-flex'; logoutBtn.onclick = ()=>{currentRank='public';sessionStorage.removeItem('rank');location.reload();}; }
+    if (rank !== 'public') {
+      if (loginLink) loginLink.style.display = 'none';
+      if (logoutBtn) logoutBtn.style.display = 'inline-flex';
     } else {
-      if(loginLink)  loginLink.style.display  = '';
-      if(logoutBtn)  logoutBtn.style.display  = 'none';
+      if (loginLink) loginLink.style.display = '';
+      if (logoutBtn) logoutBtn.style.display = 'none';
     }
     const isOwner=rank==='owner', isAdmin=rank==='owner'||rank==='admin', isMod=rank==='owner'||rank==='admin'||rank==='mod';
     document.getElementById('nav-pending').style.display    =isAdmin?'flex':'none';
@@ -635,6 +635,7 @@
     if(activeSec){const aid=activeSec.id.replace('sec-','');
       if((aid==='settings'&&!isOwner)||(['pending','adminboard'].includes(aid)&&!isAdmin))showSection('recommended');}
     renderAll();
+    syncMobNav();
   }
 
   function setStatus(state,msg){document.getElementById('status-dot').className='status-dot '+state;document.getElementById('status-text').textContent=msg;}
@@ -669,7 +670,7 @@
       const pc=db.pending.length;
       const pcEl=document.getElementById('pending-count');
       if(pcEl){pcEl.textContent=pc>0?pc:'';pcEl.style.display=pc>0?'':'none';}
-      setStatus('ok','loaded ✓ — hit ↻ to see new tips'); updateUI();
+      setStatus('ok','loaded ✓ — hit ↻ to see new tips'); updateUI(); syncMobPending();
     }catch(e){console.error(e);setStatus('error','could not load — '+e.message);}
   }
 
@@ -893,6 +894,12 @@
     catch(e){db[section]=prev;setStatus('error','could not delete — '+e.message);renderAll();}
   }
 
+  function logoutUser() {
+    currentRank = 'public';
+    sessionStorage.removeItem('rank');
+    location.reload();
+  }
+
   updateUI(); loadAll();
 </script>
 
@@ -1087,29 +1094,24 @@ if (chatName) {
   document.getElementById('chat-name-gate').style.display = 'none';
 }
 
-// sync mob nav visibility with staff rank
-const _origUpdateUI = updateUI;
-window.updateUI = function() {
-  _origUpdateUI();
+// sync mob nav visibility (called after updateUI)
+function syncMobNav() {
   const isAdmin = currentRank === 'owner' || currentRank === 'admin';
   const isOwner = currentRank === 'owner';
-  const isMod   = currentRank === 'owner' || currentRank === 'admin' || currentRank === 'mod';
   const pe = document.getElementById('mob-pending');
   const ae = document.getElementById('mob-adminboard');
   const se = document.getElementById('mob-settings');
   if (pe) pe.style.display = isAdmin ? 'flex' : 'none';
   if (ae) ae.style.display = isAdmin ? 'flex' : 'none';
   if (se) se.style.display = isOwner ? 'flex' : 'none';
-};
+}
 
-// sync pending badge to mobile too
-const _origLoadAll = loadAll;
-window.loadAll = async function() {
-  await _origLoadAll();
+// sync pending badge to mobile
+function syncMobPending() {
   const pc = (db.pending || []).length;
   const mb = document.getElementById('mob-pending-badge');
   if (mb) { mb.textContent = pc > 0 ? pc : ''; mb.style.display = pc > 0 ? 'flex' : 'none'; }
-};
+}
 </script>
 </body>
 </html>
