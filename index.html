@@ -56,7 +56,7 @@
     .sidebar{width:188px;min-width:188px;background:var(--surface);border-right:1px solid var(--border);padding:1.1rem 0 2rem;display:flex;flex-direction:column;gap:2px;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
     .sb-label{font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:0 14px 4px;margin-top:10px}
     .sb-label:first-child{margin-top:0}
-    .sb-item{display:flex;align-items:center;gap:8px;padding:8px 14px;font-size:0.82rem;color:var(--muted);cursor:pointer;border-left:2px solid transparent;transition:background 0.13s,color 0.13s;background:none;border-top:none;border-right:none;border-bottom:none;font-family:'DM Sans',sans-serif;text-align:left;width:100%}
+    .sb-item{display:flex;align-items:center;gap:8px;padding:8px 14px;font-size:0.82rem;color:var(--muted);cursor:pointer;border-left:2px solid transparent;transition:background 0.13s,color 0.13s;background:none;border-top:none;border-right:none;border-bottom:none;font-family:'DM Sans',sans-serif;text-align:left;width:100%;text-decoration:none}
     .sb-item:hover{background:var(--bg);color:var(--text)}
     .sb-item.active{background:var(--bg);color:var(--text);border-left-color:var(--accent);font-weight:500}
     .sb-icon{font-size:0.88rem;width:16px;text-align:center;flex-shrink:0}
@@ -147,7 +147,7 @@
 
     /* MOBILE BOTTOM NAV */
     .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:40;background:var(--text);height:60px;align-items:center;justify-content:space-around;border-top:1px solid rgba(255,255,255,0.08)}
-    .mob-btn{flex:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.5);font-family:'DM Sans',sans-serif;font-size:0.58rem;position:relative;white-space:nowrap}
+    .mob-btn{flex:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.5);font-family:'DM Sans',sans-serif;font-size:0.58rem;position:relative;white-space:nowrap;text-decoration:none}
     .mob-btn .mi{font-size:1.1rem;line-height:1}
     .mob-btn.active{color:#fff}
     .mob-btn.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:2px;background:var(--accent);border-radius:2px 2px 0 0}
@@ -268,6 +268,7 @@
     <button class="sb-item" id="nav-pending"    onclick="showSec('pending')"    style="display:none"><span class="sb-icon">⏳</span>Pending<span class="sb-badge rank-admin" id="pending-ct"></span></button>
     <button class="sb-item" id="nav-adminboard" onclick="showSec('adminboard')" style="display:none"><span class="sb-icon">🔒</span>Admin Board<span class="sb-badge rank-admin">Admin+</span></button>
     <button class="sb-item" id="nav-news"        onclick="showSec('news')"><span class="sb-icon">📰</span>News<span class="sb-badge" style="background:#2a60c8;color:#fff">Latest</span></button>
+    <a href="version.html" class="sb-item"><span class="sb-icon">🔖</span>Version<span class="sb-badge" style="background:#1a4a1a;color:#60d090">History</span></a>
     <button class="sb-item" id="nav-settings"   onclick="showSec('settings')"   style="display:none"><span class="sb-icon">⚙️</span>Settings<span class="sb-badge rank-owner">Owner</span></button>
   </aside>
 
@@ -458,6 +459,7 @@
   <button class="mob-btn" id="mob-pending"    onclick="mobGo('pending',this)"    style="display:none"><span class="mi">⏳</span>Pending<span class="mob-badge" id="mob-pending-badge"></span></button>
   <button class="mob-btn" id="mob-adminboard" onclick="mobGo('adminboard',this)" style="display:none"><span class="mi">🔒</span>Admin</button>
   <button class="mob-btn" id="mob-news"        onclick="mobGo('news',this)"><span class="mi">📰</span>News</button>
+  <a href="version.html" class="mob-btn"><span class="mi">🔖</span>Version</a>
   <button class="mob-btn" id="mob-settings"   onclick="mobGo('settings',this)"   style="display:none"><span class="mi">⚙️</span>Settings</button>
 </nav>
 
