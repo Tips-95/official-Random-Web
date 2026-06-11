@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>News ✦ tips & stuff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#f5f2eb;--surface:#fffdf8;
+      --border:rgba(60,50,30,0.12);--border-strong:rgba(60,50,30,0.22);
+      --text:#1a1612;--muted:#7a7060;--accent:#c8602a;
+      --owner-bg:#1a1612;--owner-txt:#f0c060;
+      --admin-bg:#2a1a4a;--admin-txt:#c090ff;
+      --mod-bg:#0a2a1a;--mod-txt:#60d090;
+      --pub-bg:#2a2a2a;--pub-txt:#cccccc;
+    }
+    html{font-size:16px}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");background-size:200px 200px}
+
+    /* TOP NAV */
+    .topnav{position:sticky;top:0;z-index:30;background:var(--text);display:flex;align-items:center;padding:0 1.25rem;height:52px;flex-shrink:0}
+    .topnav-logo{font-family:'Instrument Serif',serif;font-size:1.1rem;color:#fff;text-decoration:none;margin-right:1.25rem;white-space:nowrap;flex-shrink:0}
+    .topnav-logo em{font-style:italic;color:var(--accent)}
+    .topnav-links{display:flex;align-items:center;gap:2px;flex:1}
+    .topnav-link{font-size:0.8rem;color:rgba(255,255,255,0.6);text-decoration:none;padding:6px 10px;border-radius:6px;transition:all 0.13s;white-space:nowrap}
+    .topnav-link:hover{color:#fff;background:rgba(255,255,255,0.08)}
+    .topnav-link.active{color:#fff;background:rgba(255,255,255,0.12)}
+    .topnav-right{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0}
+    .rank-badge{font-size:0.68rem;font-weight:500;letter-spacing:0.05em;padding:3px 9px;border-radius:99px;text-transform:uppercase;white-space:nowrap}
+    .rank-owner{background:var(--owner-bg);color:var(--owner-txt)}
+    .rank-admin{background:var(--admin-bg);color:var(--admin-txt)}
+    .rank-mod{background:var(--mod-bg);color:var(--mod-txt)}
+    .rank-public{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)}
+    .topnav-btn{font-size:0.8rem;padding:5px 11px;border-radius:6px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.8);cursor:pointer;transition:all 0.13s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;font-family:'DM Sans',sans-serif}
+    .topnav-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
+
+    /* PAGE */
+    .page{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:2.5rem 2rem 5rem;width:100%;flex:1}
+
+    /* HERO */
+    .news-hero{margin-bottom:2rem}
+    .news-hero h1{font-family:'Instrument Serif',serif;font-size:clamp(2rem,5vw,3.2rem);line-height:1;letter-spacing:-0.02em}
+    .news-hero h1 em{font-style:italic;color:var(--accent)}
+    .news-hero p{font-size:0.875rem;color:var(--muted);margin-top:0.4rem}
+    .divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0}
+
+    /* STATUS */
+    .status-bar{display:flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--muted);margin-bottom:1.5rem}
+    .status-dot{width:7px;height:7px;border-radius:50%;background:#ccc;flex-shrink:0;transition:background 0.3s}
+    .status-dot.ok{background:#3a9c5a}.status-dot.error{background:#c8602a}.status-dot.loading{background:#f0a500}
+
+    /* COMPOSE FORM */
+    .news-compose{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:2rem;display:flex;flex-direction:column;gap:10px}
+    .news-compose h2{font-size:0.9rem;font-weight:600;margin-bottom:2px}
+    .news-title-in{height:44px;padding:0 14px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;width:100%}
+    .news-title-in:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,96,42,0.1)}
+    .news-form-row{display:flex;gap:8px;flex-wrap:wrap}
+    .news-cat-sel,.news-author-in{height:38px;padding:0 12px;font-family:'DM Sans',sans-serif;font-size:0.875rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none}
+    .news-cat-sel{cursor:pointer}
+    .news-author-in{flex:1;min-width:130px}
+    .news-cat-sel:focus,.news-author-in:focus{border-color:var(--accent)}
+    .news-body-in{width:100%;min-height:120px;resize:vertical;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:0.875rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;line-height:1.55}
+    .news-body-in:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,96,42,0.1)}
+    .post-btn{height:40px;padding:0 20px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:background 0.15s;white-space:nowrap;align-self:flex-start}
+    .post-btn:hover{background:#b5521f}
+
+    /* FILTER BAR */
+    .filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem}
+    .filter-btn{font-size:0.78rem;padding:5px 13px;border-radius:99px;border:1px solid var(--border-strong);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.13s;font-family:'DM Sans',sans-serif}
+    .filter-btn:hover{background:var(--surface);color:var(--text)}
+    .filter-btn.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+    /* NEWS CARDS */
+    .news-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;animation:rise 0.2s ease both;position:relative}
+    @keyframes rise{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+    .news-card-accent{height:3px;background:var(--news-color,var(--accent))}
+    .news-card-body{padding:1.1rem 1.3rem 1.2rem}
+    .news-card-top{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+    .news-cat-badge{font-size:0.68rem;font-weight:600;padding:3px 9px;border-radius:99px;letter-spacing:0.04em;text-transform:uppercase}
+    .news-date{font-size:0.72rem;color:var(--muted)}
+    .news-author-tag{font-size:0.72rem;color:var(--muted);font-style:italic;margin-left:auto}
+    .news-headline{font-family:'Instrument Serif',serif;font-size:1.25rem;font-weight:400;line-height:1.3;margin-bottom:8px;letter-spacing:-0.01em}
+    .news-text{font-size:0.9rem;color:var(--text);line-height:1.65;white-space:pre-wrap}
+    .news-del-btn{position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:0.75rem;padding:3px 8px;border-radius:5px;display:none}
+    .news-del-btn.show{display:inline-block}
+    .news-del-btn:hover{color:#c0392b;background:#fce8ec}
+    .empty{text-align:center;padding:3rem 0;color:var(--muted);font-size:0.9rem}
+
+    .site-footer{margin-top:2rem;text-align:center;font-size:0.75rem;color:var(--muted);padding-bottom:2rem}
+
+    @media(max-width:600px){.page{padding:1.25rem 1rem 4rem}}
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<header class="topnav">
+  <a href="index.html" class="topnav-logo">tips <em>&</em> stuff</a>
+  <div class="topnav-links">
+    <a href="index.html"   class="topnav-link">📋 Tips</a>
+    <a href="ranks.html"   class="topnav-link">🏅 Ranks</a>
+    <a href="rules.html"   class="topnav-link">📜 Rules</a>
+    <a href="banlist.html" class="topnav-link">🚫 Bans</a>
+    <a href="news.html"    class="topnav-link active">📰 News</a>
+  </div>
+  <div class="topnav-right">
+    <span id="rank-display" class="rank-badge rank-public">Public</span>
+    <a href="login.html" class="topnav-btn" id="login-link">Login</a>
+    <button class="topnav-btn" id="logout-btn" style="display:none" onclick="doLogout()">Logout</button>
+    <button class="topnav-btn" onclick="loadData()" title="Refresh">↻</button>
+  </div>
+</header>
+
+<main class="page">
+  <div class="news-hero">
+    <h1>📰 <em>news</em></h1>
+    <p>latest updates, announcements &amp; events from the team ✦</p>
+  </div>
+  <hr class="divider"/>
+
+  <div class="status-bar"><div class="status-dot loading" id="status-dot"></div><span id="status-text">loading...</span></div>
+
+  <!-- COMPOSE (admin+ only) -->
+  <div class="news-compose" id="news-form" style="display:none">
+    <h2>✍️ Write a News Post</h2>
+    <input type="text" class="news-title-in" id="news-title" placeholder="Headline..." maxlength="100"/>
+    <div class="news-form-row">
+      <select class="news-cat-sel" id="news-cat">
+        <option value="update">📣 Update</option>
+        <option value="announcement">🎉 Announcement</option>
+        <option value="warning">⚠️ Warning</option>
+        <option value="event">📅 Event</option>
+        <option value="other">💬 Other</option>
+      </select>
+      <input type="text" class="news-author-in" id="news-author" placeholder="Your name" maxlength="30"/>
+    </div>
+    <textarea class="news-body-in" id="news-body" placeholder="Write the full news post here..." maxlength="1000"></textarea>
+    <button class="post-btn" onclick="postNews()">📰 Publish</button>
+  </div>
+
+  <!-- FILTER -->
+  <div class="filter-bar" id="filter-bar"></div>
+
+  <!-- NEWS LIST -->
+  <div id="news-list"><p class="empty">Loading news...</p></div>
+
+  <footer class="site-footer">tips & stuff — shared with friends ✦</footer>
+</main>
+
+<script>
+const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
+const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
+const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
+let PASSWORDS = { owner:'20140314', admin:'382790', mod:'23889' };
+
+const NEWS_CATS = {
+  update:       {label:'📣 Update',       bg:'#e0eaf8', color:'#1a3d6b', accent:'#2a60c8'},
+  announcement: {label:'🎉 Announcement', bg:'#e8f0e0', color:'#2d5016', accent:'#4a8a1a'},
+  warning:      {label:'⚠️ Warning',      bg:'#fdecd6', color:'#7a3a0a', accent:'#c8602a'},
+  event:        {label:'📅 Event',        bg:'#ece0f8', color:'#4a1f7a', accent:'#7a2ac8'},
+  other:        {label:'💬 Other',        bg:'#fce8ec', color:'#7a1a2e', accent:'#c82a4a'},
+};
+
+let rank   = sessionStorage.getItem('rank') || 'public';
+let db     = {};
+let activeFilter = 'all';
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function setStatus(s,m){document.getElementById('status-dot').className='status-dot '+s;document.getElementById('status-text').textContent=m}
+
+// AUTH
+function doLogout(){rank='public';sessionStorage.removeItem('rank');location.reload();}
+function applyRankUI(){
+  const labels  = {owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod',public:'Public'};
+  const classes = {owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
+  const rd = document.getElementById('rank-display');
+  rd.textContent=labels[rank]; rd.className='rank-badge '+classes[rank];
+  document.getElementById('login-link').style.display  = rank==='public' ? '' : 'none';
+  document.getElementById('logout-btn').style.display  = rank!=='public' ? '' : 'none';
+  const isAdmin = rank==='owner'||rank==='admin';
+  document.getElementById('news-form').style.display   = isAdmin ? 'block' : 'none';
+}
+
+// DATA
+async function loadData(){
+  setStatus('loading','loading...');
+  try{
+    const res  = await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const raw  = await res.json(); const data = raw.record!==undefined?raw.record:raw;
+    db = data;
+    db.news = Array.isArray(data.news) ? data.news : [];
+    if(data.config && data.config.passwords){
+      if(data.config.passwords.owner) PASSWORDS.owner=data.config.passwords.owner;
+      if(data.config.passwords.admin) PASSWORDS.admin=data.config.passwords.admin;
+      if(data.config.passwords.mod)   PASSWORDS.mod  =data.config.passwords.mod;
+    }
+    setStatus('ok','loaded ✓');
+    applyRankUI(); buildFilters(); renderNews();
+  }catch(e){console.error(e);setStatus('error','could not load — '+e.message);}
+}
+
+async function saveAll(){
+  const res = await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});
+  if(!res.ok) throw new Error('HTTP '+res.status);
+}
+
+// FILTERS
+function buildFilters(){
+  const news = db.news || [];
+  const used = ['all', ...Object.keys(NEWS_CATS).filter(k => news.some(n=>n.cat===k))];
+  const bar  = document.getElementById('filter-bar');
+  bar.innerHTML = used.map(k => {
+    const isAll   = k === 'all';
+    const label   = isAll ? `All (${news.length})` : `${NEWS_CATS[k].label} (${news.filter(n=>n.cat===k).length})`;
+    const active  = activeFilter === k ? ' active' : '';
+    return `<button class="filter-btn${active}" onclick="setFilter('${k}')">${label}</button>`;
+  }).join('');
+}
+function setFilter(k){ activeFilter=k; buildFilters(); renderNews(); }
+
+// RENDER
+function renderNews(){
+  const list    = document.getElementById('news-list');
+  const isAdmin = rank==='owner'||rank==='admin';
+  const news    = (db.news||[]).filter(n => activeFilter==='all' || n.cat===activeFilter);
+  if(!news.length){ list.innerHTML='<p class="empty">No news yet'+(activeFilter!=='all'?' in this category':'')+' — check back soon!</p>'; return; }
+  list.innerHTML = news.map(n => {
+    const cat  = NEWS_CATS[n.cat] || NEWS_CATS.other;
+    const date = n.ts ? new Date(n.ts).toLocaleDateString([],{weekday:'short',month:'short',day:'numeric',year:'numeric'}) : '';
+    const del  = isAdmin ? `<button class="news-del-btn show" onclick="deleteNews('${n.id}')">✕ delete</button>` : '';
+    return `<div class="news-card" style="--news-color:${cat.accent}">
+      <div class="news-card-accent"></div>
+      <div class="news-card-body">
+        <div class="news-card-top">
+          <span class="news-cat-badge" style="background:${cat.bg};color:${cat.color}">${cat.label}</span>
+          <span class="news-date">${date}</span>
+          <span class="news-author-tag">by ${esc(n.author||'Staff')}</span>
+        </div>
+        <div class="news-headline">${esc(n.title)}</div>
+        <div class="news-text">${esc(n.body)}</div>
+        ${del}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// POST
+async function postNews(){
+  const title  = document.getElementById('news-title').value.trim();
+  const body   = document.getElementById('news-body').value.trim();
+  const cat    = document.getElementById('news-cat').value;
+  const author = document.getElementById('news-author').value.trim() || 'Staff';
+  if(!title){ document.getElementById('news-title').focus(); return; }
+  if(!body) { document.getElementById('news-body').focus();  return; }
+  setStatus('loading','publishing...');
+  try{
+    if(!Array.isArray(db.news)) db.news=[];
+    db.news.unshift({id:Date.now(),title,body,cat,author,ts:Date.now()});
+    await saveAll();
+    document.getElementById('news-title').value  = '';
+    document.getElementById('news-body').value   = '';
+    document.getElementById('news-author').value = '';
+    setStatus('ok','published ✓'); buildFilters(); renderNews();
+  }catch(e){ db.news.shift(); setStatus('error','could not publish — '+e.message); }
+}
+
+// DELETE
+async function deleteNews(id){
+  if(!confirm('Delete this news post?')) return;
+  const prev=[...db.news]; db.news=db.news.filter(n=>n.id!=id); renderNews();
+  try{ await saveAll(); setStatus('ok','deleted ✓'); buildFilters(); }
+  catch(e){ db.news=prev; setStatus('error','could not delete — '+e.message); renderNews(); }
+}
+
+// INIT
+applyRankUI(); loadData();
+</script>
+</body>
+</html>
