@@ -36,7 +36,7 @@
         radial-gradient(ellipse at 20% 10%, rgba(255,180,80,0.18) 0%, transparent 55%),
         radial-gradient(ellipse at 80% 90%, rgba(200,96,42,0.12) 0%, transparent 50%);
     }
- 
+
     .login-wrap {
       width: 100%;
       max-width: 500px;
@@ -46,7 +46,7 @@
       padding: 3rem 3rem 2.5rem;
       box-shadow: 0 4px 32px rgba(180,80,20,0.10), 0 1px 4px rgba(0,0,0,0.06);
     }
- 
+
     /* HEADER */
     .login-header { margin-bottom: 2rem; }
     .login-logo {
@@ -65,7 +65,7 @@
       text-transform: uppercase;
       color: var(--muted);
     }
- 
+
     /* ERROR BANNER */
     .error-banner {
       display: none;
@@ -79,7 +79,7 @@
       border-radius: 8px;
     }
     .error-banner.show { display: block; }
- 
+
     /* PUBLIC ENTRY */
     .public-entry {
       background: var(--bg);
@@ -110,7 +110,7 @@
       white-space: nowrap;
     }
     .public-btn:hover { opacity: 0.82; }
- 
+
     /* OR DIVIDER */
     .or-divider {
       display: flex; align-items: center; gap: 1rem;
@@ -120,7 +120,7 @@
     .or-divider::before, .or-divider::after {
       content: ''; flex: 1; height: 1px; background: rgba(60,30,10,0.14);
     }
- 
+
     /* FIELDS */
     .field { margin-bottom: 1.75rem; }
     .field label {
@@ -148,7 +148,7 @@
     }
     .field input:focus { border-bottom-color: var(--accent); }
     .field input::placeholder { color: #d4b090; }
- 
+
     /* RANK SELECTOR */
     .rank-selector { margin-bottom: 1.75rem; }
     .rank-selector label {
@@ -177,7 +177,7 @@
     }
     .rank-opt:hover { border-color: var(--text); color: var(--text); }
     .rank-opt.selected { border-color: var(--accent); background: var(--accent); color: #fff; }
- 
+
     /* CONTINUE BTN */
     .continue-btn {
       width: 100%;
@@ -195,7 +195,7 @@
     }
     .continue-btn:hover { background: #b5521f; }
     .continue-btn:active { transform: scale(0.98); }
- 
+
     .site-note {
       font-family: 'DM Mono', monospace;
       font-size: 0.68rem;
@@ -203,7 +203,7 @@
       text-align: center;
       line-height: 1.6;
     }
- 
+
     @media (max-width: 560px) {
       .login-wrap { padding: 2rem 1.5rem 2rem; }
     }
@@ -211,14 +211,14 @@
 </head>
 <body>
 <div class="login-wrap">
- 
+
   <div class="login-header">
     <div class="login-logo">tips <em>&</em> stuff</div>
     <div class="login-eyebrow">Sign in to continue ✦</div>
   </div>
- 
+
   <div class="error-banner" id="error-banner">Incorrect password. Please try again.</div>
- 
+
   <!-- PUBLIC ENTRY -->
   <div class="public-entry">
     <div class="public-entry-text">
@@ -227,21 +227,21 @@
     </div>
     <button class="public-btn" onclick="goPublic()">Enter →</button>
   </div>
- 
+
   <div class="or-divider">staff login</div>
- 
+
   <!-- NAME -->
   <div class="field">
     <label>Name</label>
     <input type="text" id="login-name" placeholder="your name" autocomplete="off" />
   </div>
- 
+
   <!-- PASSWORD -->
   <div class="field">
     <label>Password</label>
     <input type="password" id="login-pw" placeholder="••••••••" />
   </div>
- 
+
   <!-- RANK SELECTOR -->
   <div class="rank-selector">
     <label>Login as</label>
@@ -251,22 +251,22 @@
       <button class="rank-opt"          data-rank="mod"   onclick="selectRank(this)">🔧 Mod</button>
     </div>
   </div>
- 
+
   <button class="continue-btn" onclick="doLogin()">Continue as Staff →</button>
- 
+
   <p class="site-note">This site uses password-based staff ranks.<br/>Public visitors can enter freely without a password.</p>
- 
+
 </div>
- 
+
 <script>
   // If already logged in, skip login page
   const existingRank = sessionStorage.getItem('rank');
   // Only auto-skip if already logged in as staff (not public)
   if (existingRank && existingRank !== 'public') window.location.replace('index.html');
- 
+
   const PASSWORDS = { owner: '20140314', admin: '382790', mod: '23889' };
   let selectedRank = 'owner';
- 
+
   // Load updated passwords from JSONBin
   const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
   const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
@@ -280,18 +280,18 @@
       if (data.config.passwords.mod)   PASSWORDS.mod   = data.config.passwords.mod;
     }
   }).catch(() => {});
- 
+
   function goPublic() {
     sessionStorage.setItem('rank', 'public');
     window.location.href = 'index.html';
   }
- 
+
   function selectRank(el) {
     document.querySelectorAll('.rank-opt').forEach(b => b.classList.remove('selected'));
     el.classList.add('selected');
     selectedRank = el.dataset.rank;
   }
- 
+
   function doLogin() {
     const pw = document.getElementById('login-pw').value;
     const banner = document.getElementById('error-banner');
@@ -305,11 +305,11 @@
       document.getElementById('login-pw').focus();
     }
   }
- 
+
   document.getElementById('login-pw').addEventListener('keydown', e => {
     if (e.key === 'Enter') doLogin();
   });
 </script>
+<script src="transition.js"></script>
 </body>
 </html>
- 
