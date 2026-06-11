@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome ✦ tips & stuff</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f2eb;
+      --surface: #fffdf8;
+      --text: #1a1612;
+      --muted: #7a7060;
+      --accent: #c8602a;
+      --border: rgba(60,50,30,0.12);
+    }
+    html { font-size: 16px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* warm radial glows */
+    body::after {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse at 15% 20%, rgba(200,96,42,0.09) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 80%, rgba(240,192,96,0.08) 0%, transparent 50%);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.15rem; letter-spacing: -0.01em;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-logo em { font-style: italic; color: var(--accent); }
+    .nav-enter {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem; letter-spacing: 0.06em;
+      padding: 7px 16px;
+      border: 1.5px solid rgba(60,50,30,0.22);
+      border-radius: 8px;
+      background: transparent; color: var(--muted);
+      text-decoration: none; cursor: pointer;
+      transition: all 0.15s;
+    }
+    .nav-enter:hover { background: var(--text); color: #fff; border-color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; z-index: 1;
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      gap: 0;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      opacity: 0; transform: translateY(8px);
+      animation: up 0.6s ease 0.1s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 0.95; letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      opacity: 0; transform: translateY(12px);
+      animation: up 0.7s ease 0.2s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--accent); }
+
+    .hero-desc {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--muted);
+      max-width: 440px;
+      line-height: 1.65;
+      margin-bottom: 2.5rem;
+      opacity: 0; transform: translateY(10px);
+      animation: up 0.65s ease 0.35s forwards;
+    }
+
+    .hero-actions {
+      display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+      opacity: 0; transform: translateY(10px);
+      animation: up 0.65s ease 0.5s forwards;
+    }
+    .btn-primary {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 500;
+      padding: 0.8rem 2.2rem;
+      background: var(--text); color: var(--bg);
+      border: none; border-radius: 10px;
+      text-decoration: none; cursor: pointer;
+      transition: opacity 0.15s, transform 0.12s;
+    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-secondary {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 400;
+      padding: 0.8rem 2.2rem;
+      background: transparent; color: var(--text);
+      border: 1.5px solid rgba(60,50,30,0.22); border-radius: 10px;
+      text-decoration: none; cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-secondary:hover { background: var(--surface); border-color: rgba(60,50,30,0.4); transform: translateY(-1px); }
+
+    /* ── FEATURE STRIP ── */
+    .features {
+      position: relative; z-index: 1;
+      display: flex; gap: 1px;
+      border-top: 1px solid var(--border);
+      opacity: 0;
+      animation: up 0.7s ease 0.7s forwards;
+    }
+    .feature {
+      flex: 1; min-width: 0;
+      padding: 1.5rem 1.75rem;
+      border-right: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .feature:last-child { border-right: none; }
+    .feature-icon { font-size: 1.3rem; margin-bottom: 8px; }
+    .feature-title { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+    .feature-desc  { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── SCROLL HINT ── */
+    .scroll-hint {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      animation: up 0.5s ease 1s forwards;
+    }
+
+    @keyframes up {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 1.25rem; }
+      .hero { padding: 3rem 1.25rem 2rem; }
+      .features { flex-direction: column; gap: 0; }
+      .feature { border-right: none; border-bottom: 1px solid var(--border); }
+      .feature:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="welcome.html" class="nav-logo">tips <em>&</em> stuff</a>
+    <a href="login.html" class="nav-enter">Enter the board →</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-eyebrow">✦ shared with friends</div>
+    <h1 class="hero-title">tips <em>&</em><br/>stuff</h1>
+    <p class="hero-desc">
+      A community board for tips, tricks, and random gems. Browse what others have found, or share something useful of your own.
+    </p>
+    <div class="hero-actions">
+      <a href="login.html" class="btn-primary">Enter the board</a>
+      <a href="rules.html" class="btn-secondary">Read the rules</a>
+    </div>
+  </section>
+
+  <div class="scroll-hint">what's inside ↓</div>
+
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">⭐</div>
+      <div class="feature-title">Recommended Tips</div>
+      <div class="feature-desc">Hand-picked by staff — the best of the best, curated for you.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔥</div>
+      <div class="feature-title">Featured</div>
+      <div class="feature-desc">Highlighted posts chosen by mods for being especially useful.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📢</div>
+      <div class="feature-title">Public Tips</div>
+      <div class="feature-desc">Submit your own tip for review. If approved, it shows up here.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">💬</div>
+      <div class="feature-title">Group Chat</div>
+      <div class="feature-desc">Talk to others on the board in real time — no account needed.</div>
+    </div>
+  </div>
+
+<script src="transition.js"></script>
+</body>
+</html>
