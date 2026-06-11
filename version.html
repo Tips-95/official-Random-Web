@@ -128,6 +128,14 @@
 
     .empty{text-align:center;padding:3rem 0;color:var(--muted);font-size:0.9rem}
     .site-footer{margin-top:2rem;text-align:center;font-size:0.75rem;color:var(--muted);padding-bottom:2rem}
+    /* STATUS LEGEND */
+    .status-legend{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;margin-top:1rem;text-align:left}
+    .legend-title{font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:0.85rem}
+    .legend-grid{display:flex;flex-direction:column;gap:10px}
+    .legend-item{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
+    .legend-item .status-pill{flex-shrink:0;margin-top:1px}
+    .legend-desc{font-size:0.82rem;color:var(--muted);line-height:1.5;flex:1;min-width:200px}
+
 
     @media(max-width:600px){
       .page{padding:1.25rem 1rem 4rem}
@@ -205,7 +213,7 @@
       <textarea id="ver-notes" placeholder="• Added new feature&#10;• Fixed bug with X&#10;• Improved performance of Y&#10;• Removed Z"></textarea>
     </div>
     <div class="compose-footer">
-      <button class="btn-publish" onclick="publishVersion()">🔖 Publish Version</button>
+      <button class="btn-publish" id="btn-publish" onclick="publishVersion()">🔖 Publish Version</button>
       <button class="btn-cancel" id="cancel-edit-btn" onclick="cancelEdit()">Cancel Edit</button>
       <span class="form-toast" id="form-toast"></span>
     </div>
@@ -219,7 +227,30 @@
     <p class="empty">Loading versions...</p>
   </div>
 
-  <footer class="site-footer">tips & stuff — shared with friends ✦</footer>
+  <footer class="site-footer">
+    <p style="margin-bottom:1rem">tips &amp; stuff — shared with friends ✦</p>
+    <div class="status-legend">
+      <div class="legend-title">What do the statuses mean?</div>
+      <div class="legend-grid">
+        <div class="legend-item">
+          <span class="status-pill status-stable">✅ Stable</span>
+          <span class="legend-desc">Fully tested and working. Safe for everyone to use. This is the recommended version.</span>
+        </div>
+        <div class="legend-item">
+          <span class="status-pill status-beta">🧪 Beta</span>
+          <span class="legend-desc">Mostly working but still being tested. Some bugs may exist. Use with caution.</span>
+        </div>
+        <div class="legend-item">
+          <span class="status-pill status-alpha">⚗️ Alpha</span>
+          <span class="legend-desc">Early stage — features are incomplete and things may break. For testing only.</span>
+        </div>
+        <div class="legend-item">
+          <span class="status-pill status-deprecated">🗄️ Deprecated</span>
+          <span class="legend-desc">No longer supported or maintained. This version should not be used anymore.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
 </main>
 
 <script>
@@ -366,7 +397,7 @@
     setStatus('loading', editingId ? 'updating...' : 'publishing...');
     try {
       if(!Array.isArray(db.versions)) db.versions=[];
-      if(editingId !== null){
+      if(editingId !== null && editingId !== undefined){
         db.versions = db.versions.map(v => v.id===editingId ? {...v,version,date,status,notes} : v);
       } else {
         db.versions.unshift({id:Date.now(),version,date,status,notes,ts:Date.now()});
@@ -384,22 +415,27 @@
   }
 
   function startEdit(id){
-    const v = (db.versions||[]).find(v=>v.id==id); if(!v) return;
-    editingId = id;
-    document.getElementById('ver-num').value    = v.version;
-    document.getElementById('ver-date').value   = v.date||'';
-    document.getElementById('ver-status').value = v.status||'stable';
-    document.getElementById('ver-notes').value  = v.notes;
-    document.getElementById('compose-title').textContent = '✏️ Edit Version';
+    const v = (db.versions||[]).find(v => String(v.id) === String(id));
+    if(!v){ alert('Could not find that version. Try refreshing.'); return; }
+    editingId = String(id);
+    document.getElementById('ver-num').value    = v.version || '';
+    document.getElementById('ver-date').value   = v.date    || '';
+    document.getElementById('ver-status').value = v.status  || 'stable';
+    document.getElementById('ver-notes').value  = v.notes   || '';
+    document.getElementById('compose-title').textContent     = '✏️ Edit Version';
     document.getElementById('cancel-edit-btn').style.display = 'inline-flex';
-    document.getElementById('compose-card').scrollIntoView({behavior:'smooth', block:'start'});
+    document.getElementById('btn-publish').textContent       = '🔖 Save Changes';
+    const card = document.getElementById('compose-card');
+    card.style.display = 'block';
+    setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'start'}), 50);
   }
 
   function cancelEdit(){
     editingId = null;
     clearForm();
-    document.getElementById('compose-title').textContent = '✍️ Add a New Version';
+    document.getElementById('compose-title').textContent     = '✍️ Add a New Version';
     document.getElementById('cancel-edit-btn').style.display = 'none';
+    document.getElementById('btn-publish').textContent       = '🔖 Publish Version';
   }
 
   function clearForm(){
