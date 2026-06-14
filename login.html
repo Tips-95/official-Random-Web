@@ -1,314 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login ✦ tips & stuff</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #fdf0e4;
-      --bg2: #fae3cc;
-      --text: #1a1208;
-      --muted: #9a7a5a;
-      --border: #1a1208;
-      --accent: #c8602a;
-      --surface: #fff9f4;
-      --error-bg: #fff0ee;
-      --error-border: #e5a09a;
-      --error-txt: #c0392b;
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#fdf0e4;--surface:#fff9f4;
+      --text:#1a1208;--muted:#9a7a5a;
+      --border:rgba(60,30,10,0.14);--border-strong:rgba(60,30,10,0.24);
+      --accent:#c8602a;
     }
-    html { font-size: 16px; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 3rem 1.5rem;
-      /* subtle warm texture */
+    html{font-size:16px}
+    body{
+      font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);
+      min-height:100vh;display:flex;align-items:center;justify-content:center;
+      padding:2rem 1.25rem;
       background-image:
-        radial-gradient(ellipse at 20% 10%, rgba(255,180,80,0.18) 0%, transparent 55%),
-        radial-gradient(ellipse at 80% 90%, rgba(200,96,42,0.12) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 10%,rgba(255,180,80,0.18) 0%,transparent 55%),
+        radial-gradient(ellipse at 80% 90%,rgba(200,96,42,0.12) 0%,transparent 50%);
     }
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");background-size:200px 200px}
 
-    .login-wrap {
-      width: 100%;
-      max-width: 500px;
-      background: var(--surface);
-      border: 1.5px solid rgba(60,30,10,0.14);
-      border-radius: 16px;
-      padding: 3rem 3rem 2.5rem;
-      box-shadow: 0 4px 32px rgba(180,80,20,0.10), 0 1px 4px rgba(0,0,0,0.06);
-    }
+    .card{position:relative;z-index:1;width:100%;max-width:460px;background:var(--surface);border:1.5px solid var(--border);border-radius:18px;padding:2.25rem 2.25rem 2rem;box-shadow:0 6px 40px rgba(180,80,20,0.10)}
 
-    /* HEADER */
-    .login-header { margin-bottom: 2rem; }
-    .login-logo {
-      font-family: 'Instrument Serif', serif;
-      font-size: 1.9rem;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-    .login-logo em { font-style: italic; color: var(--accent); }
-    .login-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
+    /* LOGO */
+    .logo{font-family:'Instrument Serif',serif;font-size:1.75rem;letter-spacing:-0.02em;margin-bottom:1.5rem;color:var(--text)}
+    .logo em{font-style:italic;color:var(--accent)}
 
-    /* ERROR BANNER */
-    .error-banner {
-      display: none;
-      border: 1px solid var(--error-border);
-      background: var(--error-bg);
-      color: var(--error-txt);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.82rem;
-      padding: 0.85rem 1rem;
-      margin-bottom: 1.5rem;
-      border-radius: 8px;
-    }
-    .error-banner.show { display: block; }
-
-    /* PUBLIC ENTRY */
-    .public-entry {
-      background: var(--bg);
-      border: 1.5px solid rgba(60,30,10,0.12);
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 1.75rem;
-      flex-wrap: wrap;
-    }
-    .public-entry-text { flex: 1; min-width: 160px; }
-    .public-entry-text strong { font-size: 0.9rem; font-weight: 500; display: block; margin-bottom: 2px; }
-    .public-entry-text span { font-size: 0.78rem; color: var(--muted); }
-    .public-btn {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.8rem;
-      font-weight: 500;
-      padding: 0.55rem 1.2rem;
-      background: var(--text);
-      color: #fff;
-      border: none;
-      border-radius: 7px;
-      cursor: pointer;
-      transition: opacity 0.13s;
-      white-space: nowrap;
-    }
-    .public-btn:hover { opacity: 0.82; }
-
-    /* OR DIVIDER */
-    .or-divider {
-      display: flex; align-items: center; gap: 1rem;
-      color: var(--muted); font-family: 'DM Mono', monospace;
-      font-size: 0.72rem; margin-bottom: 1.75rem;
-    }
-    .or-divider::before, .or-divider::after {
-      content: ''; flex: 1; height: 1px; background: rgba(60,30,10,0.14);
-    }
+    /* TABS */
+    .tabs{display:flex;gap:0;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.5rem}
+    .tab{flex:1;padding:0.6rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;background:transparent;border:none;cursor:pointer;color:var(--muted);transition:all 0.15s}
+    .tab.active{background:var(--text);color:#fff}
 
     /* FIELDS */
-    .field { margin-bottom: 1.75rem; }
-    .field label {
-      display: block;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-    }
-    .field input {
-      width: 100%;
-      border: none;
-      border-bottom: 1.5px solid rgba(60,30,10,0.25);
-      background: transparent;
-      font-family: 'DM Mono', monospace;
-      font-size: 1rem;
-      color: var(--text);
-      padding: 0.4rem 0 0.65rem;
-      outline: none;
-      transition: border-color 0.15s;
-      border-radius: 0;
-    }
-    .field input:focus { border-bottom-color: var(--accent); }
-    .field input::placeholder { color: #d4b090; }
+    .field{margin-bottom:1.1rem}
+    .field label{display:block;font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.45rem}
+    .field input{width:100%;height:42px;padding:0 14px;font-family:'DM Sans',sans-serif;font-size:0.9rem;background:var(--bg);border:1.5px solid var(--border-strong);border-radius:9px;color:var(--text);outline:none;transition:border-color 0.15s}
+    .field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,96,42,0.1)}
+    .field input::placeholder{color:#d4b090}
+
+    /* HINT */
+    .field-hint{font-size:0.72rem;color:var(--muted);margin-top:4px}
+
+    /* ERROR / SUCCESS */
+    .banner{display:none;font-size:0.82rem;padding:0.7rem 1rem;border-radius:8px;margin-bottom:1rem}
+    .banner.show{display:block}
+    .banner.error{background:#fff0ee;border:1px solid #e5a09a;color:#c0392b}
+    .banner.success{background:#e8f5e9;border:1px solid #a5d6a7;color:#2d7a2d}
+
+    /* BTN */
+    .btn-main{width:100%;height:44px;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:background 0.15s;margin-top:0.25rem}
+    .btn-main:hover{background:#b5521f}
+    .btn-main:disabled{background:#ccc;cursor:not-allowed}
+    .btn-main.secondary{background:var(--text)}
+    .btn-main.secondary:hover{opacity:0.82}
+
+    /* DIVIDER */
+    .or{display:flex;align-items:center;gap:10px;color:var(--muted);font-family:'DM Mono',monospace;font-size:0.7rem;margin:1.4rem 0}
+    .or::before,.or::after{content:'';flex:1;height:1px;background:var(--border)}
 
     /* RANK SELECTOR */
-    .rank-selector { margin-bottom: 1.75rem; }
-    .rank-selector label {
-      display: block;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-    }
-    .rank-options { display: flex; gap: 8px; flex-wrap: wrap; }
-    .rank-opt {
-      flex: 1; min-width: 90px;
-      border: 1.5px solid rgba(60,30,10,0.18);
-      background: transparent;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      padding: 0.55rem 0.6rem;
-      cursor: pointer;
-      transition: all 0.13s;
-      text-align: center;
-      border-radius: 8px;
-      color: var(--muted);
-    }
-    .rank-opt:hover { border-color: var(--text); color: var(--text); }
-    .rank-opt.selected { border-color: var(--accent); background: var(--accent); color: #fff; }
+    .rank-opts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
+    .rank-opt{flex:1;min-width:80px;border:1.5px solid var(--border-strong);background:transparent;font-family:'DM Mono',monospace;font-size:0.74rem;padding:0.5rem 0.5rem;cursor:pointer;transition:all 0.13s;text-align:center;border-radius:8px;color:var(--muted)}
+    .rank-opt:hover{border-color:var(--text);color:var(--text)}
+    .rank-opt.selected{border-color:var(--accent);background:var(--accent);color:#fff}
 
-    /* CONTINUE BTN */
-    .continue-btn {
-      width: 100%;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.9rem;
-      font-weight: 500;
-      padding: 0.85rem 2rem;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.13s, transform 0.1s;
-      margin-bottom: 1.5rem;
-    }
-    .continue-btn:hover { background: #b5521f; }
-    .continue-btn:active { transform: scale(0.98); }
+    .note{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);text-align:center;margin-top:1rem;line-height:1.6}
 
-    .site-note {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 560px) {
-      .login-wrap { padding: 2rem 1.5rem 2rem; }
-    }
+    /* LOADING SPINNER */
+    .spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.6s linear infinite;vertical-align:middle;margin-right:6px}
+    @keyframes spin{to{transform:rotate(360deg)}}
   </style>
 </head>
 <body>
-<div class="login-wrap">
+<div class="card">
 
-  <div class="login-header">
-    <div class="login-logo">tips <em>&</em> stuff</div>
-    <div class="login-eyebrow">Sign in to continue ✦</div>
+  <div class="logo">tips <em>&</em> stuff</div>
+
+  <!-- BANNER -->
+  <div class="banner" id="banner"></div>
+
+  <!-- PUBLIC TABS: Sign In / Register -->
+  <div class="tabs">
+    <button class="tab active" id="tab-signin" onclick="switchTab('signin')">Sign In</button>
+    <button class="tab"        id="tab-register" onclick="switchTab('register')">Create Account</button>
   </div>
 
-  <div class="error-banner" id="error-banner">Incorrect password. Please try again.</div>
-
-  <!-- PUBLIC ENTRY -->
-  <div class="public-entry">
-    <div class="public-entry-text">
-      <strong>👤 Continue as Public</strong>
-      <span>Browse tips without a staff account</span>
+  <!-- SIGN IN FORM -->
+  <div id="form-signin">
+    <div class="field">
+      <label>Username</label>
+      <input type="text" id="si-user" placeholder="your username" autocomplete="username" maxlength="30"/>
     </div>
-    <button class="public-btn" onclick="goPublic()">Enter →</button>
-  </div>
-
-  <div class="or-divider">staff login</div>
-
-  <!-- NAME -->
-  <div class="field">
-    <label>Name</label>
-    <input type="text" id="login-name" placeholder="your name" autocomplete="off" />
-  </div>
-
-  <!-- PASSWORD -->
-  <div class="field">
-    <label>Password</label>
-    <input type="password" id="login-pw" placeholder="••••••••" />
-  </div>
-
-  <!-- RANK SELECTOR -->
-  <div class="rank-selector">
-    <label>Login as</label>
-    <div class="rank-options">
-      <button class="rank-opt selected" data-rank="owner" onclick="selectRank(this)">👑 Owner</button>
-      <button class="rank-opt"          data-rank="admin" onclick="selectRank(this)">🛡️ Admin</button>
-      <button class="rank-opt"          data-rank="mod"   onclick="selectRank(this)">🔧 Mod</button>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="si-pass" placeholder="••••••••" autocomplete="current-password"/>
     </div>
+    <button class="btn-main" id="si-btn" onclick="doSignIn()">Sign In</button>
   </div>
 
-  <button class="continue-btn" onclick="doLogin()">Continue as Staff →</button>
+  <!-- REGISTER FORM -->
+  <div id="form-register" style="display:none">
+    <div class="field">
+      <label>Username</label>
+      <input type="text" id="reg-user" placeholder="choose a username" autocomplete="username" maxlength="30"/>
+      <div class="field-hint">3–30 characters. Letters, numbers, underscores only.</div>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="reg-pass" placeholder="choose a password" autocomplete="new-password" maxlength="50"/>
+      <div class="field-hint">At least 4 characters.</div>
+    </div>
+    <div class="field">
+      <label>Confirm Password</label>
+      <input type="password" id="reg-pass2" placeholder="repeat your password" autocomplete="new-password" maxlength="50"/>
+    </div>
+    <button class="btn-main" id="reg-btn" onclick="doRegister()">Create Account</button>
+  </div>
 
-  <p class="site-note">This site uses password-based staff ranks.<br/>Public visitors can enter freely without a password.</p>
+  <!-- STAFF LOGIN -->
+  <div class="or">staff login</div>
 
+  <div class="rank-opts">
+    <button class="rank-opt selected" data-rank="owner"  onclick="selectRank(this)">👑 Owner</button>
+    <button class="rank-opt"          data-rank="admin"  onclick="selectRank(this)">🛡️ Admin</button>
+    <button class="rank-opt"          data-rank="mod"    onclick="selectRank(this)">🔧 Mod</button>
+  </div>
+  <div class="field">
+    <label>Staff Password</label>
+    <input type="password" id="staff-pass" placeholder="••••••••" autocomplete="off"/>
+  </div>
+  <button class="btn-main secondary" onclick="doStaffLogin()">Login as Staff →</button>
+
+  <p class="note">Public accounts are for the community.<br/>Staff ranks require a password from the Owner.</p>
 </div>
 
 <script>
-  // If already logged in, skip login page
-  const existingRank = sessionStorage.getItem('rank');
-  // Only auto-skip if already logged in as staff (not public)
-  if (existingRank && existingRank !== 'public') window.location.replace('index.html');
+  // ── Skip if already logged in as staff ──
+  const ex = sessionStorage.getItem('rank');
+  if(ex && ex !== 'public') window.location.replace('index.html');
 
-  const PASSWORDS = { owner: '20140314', admin: '382790', mod: '23889' };
-  let selectedRank = 'owner';
-
-  // Load updated passwords from JSONBin
   const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
   const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
-  fetch('https://api.jsonbin.io/v3/b/' + BIN_ID + '/latest', {
-    headers: { 'X-Master-Key': API_KEY, 'X-Bin-Meta': 'false' }
-  }).then(r => r.json()).then(raw => {
-    const data = raw.record !== undefined ? raw.record : raw;
-    if (data.config && data.config.passwords) {
-      if (data.config.passwords.owner) PASSWORDS.owner = data.config.passwords.owner;
-      if (data.config.passwords.admin) PASSWORDS.admin = data.config.passwords.admin;
-      if (data.config.passwords.mod)   PASSWORDS.mod   = data.config.passwords.mod;
-    }
-  }).catch(() => {});
+  const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
+  let PASSWORDS = { owner:'20140314', admin:'382790', mod:'23889' };
+  let dbCache   = null;
+  let selectedRank = 'owner';
 
-  function goPublic() {
-    sessionStorage.setItem('rank', 'public');
-    window.location.href = 'index.html';
+  // Load db once on page load
+  async function getDB() {
+    if(dbCache) return dbCache;
+    const res  = await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
+    const raw  = await res.json();
+    dbCache    = raw.record !== undefined ? raw.record : raw;
+    if(!Array.isArray(dbCache.accounts)) dbCache.accounts = [];
+    // Load custom passwords if set
+    if(dbCache.config && dbCache.config.passwords) {
+      if(dbCache.config.passwords.owner) PASSWORDS.owner = dbCache.config.passwords.owner;
+      if(dbCache.config.passwords.admin) PASSWORDS.admin = dbCache.config.passwords.admin;
+      if(dbCache.config.passwords.mod)   PASSWORDS.mod   = dbCache.config.passwords.mod;
+    }
+    return dbCache;
   }
 
+  async function saveDB(db) {
+    await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});
+  }
+
+  // ── UI ──
+  function switchTab(t) {
+    document.getElementById('tab-signin').classList.toggle('active',   t==='signin');
+    document.getElementById('tab-register').classList.toggle('active', t==='register');
+    document.getElementById('form-signin').style.display   = t==='signin'   ? 'block' : 'none';
+    document.getElementById('form-register').style.display = t==='register' ? 'block' : 'none';
+    hideBanner();
+  }
+
+  function showBanner(msg, type='error') {
+    const b = document.getElementById('banner');
+    b.textContent = msg; b.className = 'banner show ' + type;
+  }
+  function hideBanner() {
+    document.getElementById('banner').className = 'banner';
+  }
+
+  function setLoading(btnId, loading) {
+    const btn = document.getElementById(btnId);
+    btn.disabled = loading;
+    btn.innerHTML = loading ? '<span class="spin"></span>Please wait…' : btn.dataset.label;
+  }
+
+  // Store original labels
+  document.getElementById('si-btn').dataset.label  = 'Sign In';
+  document.getElementById('reg-btn').dataset.label = 'Create Account';
+
   function selectRank(el) {
-    document.querySelectorAll('.rank-opt').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('.rank-opt').forEach(b=>b.classList.remove('selected'));
     el.classList.add('selected');
     selectedRank = el.dataset.rank;
   }
 
-  function doLogin() {
-    const pw = document.getElementById('login-pw').value;
-    const banner = document.getElementById('error-banner');
-    if (pw === PASSWORDS[selectedRank]) {
-      sessionStorage.setItem('rank', selectedRank);
-      window.location.href = 'index.html';
-    } else {
-      banner.textContent = 'Incorrect password. Please try again.';
-      banner.classList.add('show');
-      document.getElementById('login-pw').value = '';
-      document.getElementById('login-pw').focus();
+  // ── SIGN IN ──
+  async function doSignIn() {
+    const user = document.getElementById('si-user').value.trim();
+    const pass = document.getElementById('si-pass').value;
+    if(!user || !pass) { showBanner('Please fill in both fields.'); return; }
+    setLoading('si-btn', true);
+    try {
+      const db = await getDB();
+      const account = db.accounts.find(a => a.username.toLowerCase() === user.toLowerCase());
+      if(!account) { showBanner('No account found with that username.'); return; }
+      if(account.password !== pass) { showBanner('Incorrect password.'); return; }
+      // Success
+      sessionStorage.setItem('rank', 'public');
+      sessionStorage.setItem('username', account.username);
+      window.location.replace('index.html');
+    } catch(e) {
+      showBanner('Could not connect. Try again.');
+    } finally {
+      setLoading('si-btn', false);
     }
   }
 
-  document.getElementById('login-pw').addEventListener('keydown', e => {
-    if (e.key === 'Enter') doLogin();
-  });
+  // ── REGISTER ──
+  async function doRegister() {
+    const user  = document.getElementById('reg-user').value.trim();
+    const pass  = document.getElementById('reg-pass').value;
+    const pass2 = document.getElementById('reg-pass2').value;
+    // Validate
+    if(!user || !pass) { showBanner('Please fill in all fields.'); return; }
+    if(!/^[a-zA-Z0-9_]{3,30}$/.test(user)) { showBanner('Username must be 3–30 characters: letters, numbers, underscores only.'); return; }
+    if(pass.length < 4) { showBanner('Password must be at least 4 characters.'); return; }
+    if(pass !== pass2)  { showBanner('Passwords do not match.'); return; }
+    setLoading('reg-btn', true);
+    try {
+      const db = await getDB();
+      // Check duplicate
+      if(db.accounts.find(a => a.username.toLowerCase() === user.toLowerCase())) {
+        showBanner('That username is already taken. Choose another.'); return;
+      }
+      // Save new account
+      db.accounts.push({ id: Date.now(), username: user, password: pass, joined: Date.now() });
+      await saveDB(db);
+      // Auto-login
+      sessionStorage.setItem('rank', 'public');
+      sessionStorage.setItem('username', user);
+      showBanner('Account created! Taking you in…', 'success');
+      setTimeout(() => window.location.replace('index.html'), 800);
+    } catch(e) {
+      showBanner('Could not create account. Try again.');
+    } finally {
+      setLoading('reg-btn', false);
+    }
+  }
+
+  // ── STAFF LOGIN ──
+  function doStaffLogin() {
+    const pass = document.getElementById('staff-pass').value;
+    if(pass === PASSWORDS[selectedRank]) {
+      sessionStorage.setItem('rank', selectedRank);
+      sessionStorage.removeItem('username');
+      window.location.replace('index.html');
+    } else {
+      showBanner('Incorrect staff password.');
+    }
+  }
+
+  // ── KEYBOARD ──
+  document.getElementById('si-pass').addEventListener('keydown',   e=>{ if(e.key==='Enter') doSignIn(); });
+  document.getElementById('si-user').addEventListener('keydown',   e=>{ if(e.key==='Enter') doSignIn(); });
+  document.getElementById('reg-pass2').addEventListener('keydown', e=>{ if(e.key==='Enter') doRegister(); });
+  document.getElementById('staff-pass').addEventListener('keydown',e=>{ if(e.key==='Enter') doStaffLogin(); });
+
+  // Pre-load db silently
+  getDB().catch(()=>{});
 </script>
 <script src="transition.js"></script>
 </body>
