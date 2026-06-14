@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donate ✦ tips & stuff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#f5f2eb;--surface:#fffdf8;
+      --border:rgba(60,50,30,0.12);--border-strong:rgba(60,50,30,0.22);
+      --text:#1a1612;--muted:#7a7060;--accent:#c8602a;
+      --owner-bg:#1a1612;--owner-txt:#f0c060;
+      --admin-bg:#2a1a4a;--admin-txt:#c090ff;
+      --mod-bg:#0a2a1a;--mod-txt:#60d090;
+      --pub-bg:#2a2a2a;--pub-txt:#cccccc;
+    }
+    html{font-size:16px}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-size:200px 200px}
+
+    /* TOP NAV */
+    .topnav{position:sticky;top:0;z-index:30;background:var(--text);display:flex;align-items:center;padding:0 1.25rem;height:52px;flex-shrink:0}
+    .topnav-logo{font-family:'Instrument Serif',serif;font-size:1.1rem;color:#fff;text-decoration:none;margin-right:1.25rem;white-space:nowrap;flex-shrink:0}
+    .topnav-logo em{font-style:italic;color:var(--accent)}
+    .topnav-links{display:flex;align-items:center;gap:2px;flex:1;overflow:hidden}
+    .topnav-link{font-size:0.8rem;color:rgba(255,255,255,0.6);text-decoration:none;padding:6px 10px;border-radius:6px;transition:all 0.13s;white-space:nowrap}
+    .topnav-link:hover{color:#fff;background:rgba(255,255,255,0.08)}
+    .topnav-link.active{color:#fff;background:rgba(255,255,255,0.12)}
+    .topnav-right{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0}
+    .rank-badge{font-size:0.68rem;font-weight:500;letter-spacing:0.05em;padding:3px 9px;border-radius:99px;text-transform:uppercase;white-space:nowrap}
+    .rank-owner{background:var(--owner-bg);color:var(--owner-txt)}
+    .rank-admin{background:var(--admin-bg);color:var(--admin-txt)}
+    .rank-mod{background:var(--mod-bg);color:var(--mod-txt)}
+    .rank-public{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)}
+    .topnav-btn{font-size:0.8rem;padding:5px 11px;border-radius:6px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.8);cursor:pointer;transition:all 0.13s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;font-family:'DM Sans',sans-serif}
+    .topnav-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
+
+    /* PAGE */
+    .page{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:2.5rem 2rem 5rem;width:100%;flex:1}
+
+    /* HERO */
+    .hero{text-align:center;margin-bottom:2.5rem}
+    .hero-icon{font-size:3rem;margin-bottom:0.75rem;display:block}
+    .hero h1{font-family:'Instrument Serif',serif;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.1;letter-spacing:-0.02em}
+    .hero h1 em{font-style:italic;color:var(--accent)}
+    .hero p{font-size:0.9rem;color:var(--muted);margin-top:0.5rem;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.6}
+    .divider{border:none;border-top:1px solid var(--border);margin:1.5rem 0}
+
+    /* AMOUNT SELECTOR */
+    .amount-section{margin-bottom:2rem}
+    .amount-section h2{font-size:0.78rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:0.85rem}
+    .amount-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+    .amount-btn{height:48px;border:1.5px solid var(--border-strong);border-radius:10px;background:var(--surface);font-family:'DM Mono',monospace;font-size:0.95rem;font-weight:500;color:var(--text);cursor:pointer;transition:all 0.13s}
+    .amount-btn:hover{border-color:var(--accent);color:var(--accent);background:#fff8f5}
+    .amount-btn.selected{border-color:var(--accent);background:var(--accent);color:#fff}
+    .custom-amount-wrap{position:relative}
+    .custom-amount-wrap span{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:'DM Mono',monospace;font-size:0.95rem;color:var(--muted);pointer-events:none}
+    .custom-input{width:100%;height:48px;padding:0 14px 0 28px;font-family:'DM Mono',monospace;font-size:0.95rem;background:var(--surface);border:1.5px solid var(--border-strong);border-radius:10px;color:var(--text);outline:none;transition:border-color 0.13s}
+    .custom-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,96,42,0.1)}
+    .custom-input::placeholder{color:var(--muted)}
+
+    /* PLATFORM CARDS */
+    .platforms-section h2{font-size:0.78rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:0.85rem}
+    .platforms-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:2rem}
+    .platform-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;transition:all 0.15s;text-decoration:none;position:relative;overflow:hidden}
+    .platform-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--platform-color);border-radius:14px 14px 0 0;opacity:0;transition:opacity 0.15s}
+    .platform-card:hover{border-color:var(--platform-color);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.08)}
+    .platform-card:hover::before{opacity:1}
+    .platform-card:active{transform:translateY(0)}
+    .platform-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
+    .platform-name{font-size:0.95rem;font-weight:600;color:var(--text)}
+    .platform-handle{font-size:0.78rem;color:var(--muted);font-family:'DM Mono',monospace}
+    .platform-desc{font-size:0.75rem;color:var(--muted);text-align:center;line-height:1.4}
+    .platform-arrow{font-size:0.8rem;color:var(--muted);margin-top:auto}
+
+    /* PAYPAL */
+    .paypal-card{--platform-color:#003087}
+    .paypal-icon{background:#e8f0ff}
+
+    /* CASH APP */
+    .cashapp-card{--platform-color:#00d64f}
+    .cashapp-icon{background:#e6fff0}
+
+    /* VENMO */
+    .venmo-card{--platform-color:#008cff}
+    .venmo-icon{background:#e6f4ff}
+
+    /* KO-FI */
+    .kofi-card{--platform-color:#ff5e5b}
+    .kofi-icon{background:#fff0f0}
+
+    /* THANK YOU OVERLAY */
+    .thankyou-overlay{
+      display:none;position:fixed;inset:0;z-index:200;
+      background:rgba(0,0,0,0.5);align-items:center;justify-content:center;
+    }
+    .thankyou-overlay.show{display:flex;animation:fadeIn 0.2s ease}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .thankyou-card{
+      background:var(--surface);border-radius:20px;
+      padding:2.5rem 2rem;max-width:380px;width:90%;
+      text-align:center;animation:popIn 0.25s ease;
+      border:1px solid var(--border);
+    }
+    @keyframes popIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+    .thankyou-emoji{font-size:3.5rem;display:block;margin-bottom:1rem}
+    .thankyou-card h2{font-family:'Instrument Serif',serif;font-size:1.8rem;margin-bottom:0.5rem}
+    .thankyou-card h2 em{font-style:italic;color:var(--accent)}
+    .thankyou-card p{font-size:0.875rem;color:var(--muted);line-height:1.6;margin-bottom:1.5rem}
+    .thankyou-close{height:42px;padding:0 24px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:background 0.13s}
+    .thankyou-close:hover{background:#b5521f}
+
+    /* INFO BOX */
+    .info-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;margin-bottom:2rem;font-size:0.82rem;color:var(--muted);line-height:1.6;display:flex;gap:10px;align-items:flex-start}
+    .info-box-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+
+    .site-footer{margin-top:2rem;text-align:center;font-size:0.75rem;color:var(--muted);padding-bottom:2rem}
+
+    @media(max-width:500px){
+      .page{padding:1.25rem 1rem 4rem}
+      .platforms-grid{grid-template-columns:1fr}
+      .amount-grid{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<header class="topnav">
+  <a href="index.html" class="topnav-logo">tips <em>&</em> stuff</a>
+  <div class="topnav-links">
+    <a href="index.html"   class="topnav-link">📋 Tips</a>
+    <a href="ranks.html"   class="topnav-link">🏅 Ranks</a>
+    <a href="rules.html"   class="topnav-link">📜 Rules</a>
+    <a href="banlist.html" class="topnav-link">🚫 Bans</a>
+    <a href="news.html"    class="topnav-link">📰 News</a>
+    <a href="version.html" class="topnav-link">🔖 Version</a>
+    <a href="donate.html"  class="topnav-link active">💛 Donate</a>
+  </div>
+  <div class="topnav-right">
+    <a href="login.html" class="topnav-btn" id="login-link">Login</a>
+    <button class="topnav-btn" id="logout-btn" style="display:none" onclick="doLogout()">Logout</button>
+  </div>
+</header>
+
+<!-- THANK YOU OVERLAY -->
+<div class="thankyou-overlay" id="thankyou-overlay">
+  <div class="thankyou-card">
+    <span class="thankyou-emoji">💛</span>
+    <h2>Thank <em>you!</em></h2>
+    <p>Your support means everything to us. Every donation helps keep tips &amp; stuff running and growing for the whole group.</p>
+    <p style="margin-top:-0.5rem">You're an absolute legend. 🙌</p>
+    <button class="thankyou-close" onclick="closeThankYou()">Back to donating</button>
+  </div>
+</div>
+
+<main class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="hero-icon">💛</span>
+    <h1>support <em>tips &amp; stuff</em></h1>
+    <p>If you enjoy the site and want to help keep it going, any donation is hugely appreciated — big or small, it all means a lot!</p>
+  </div>
+  <hr class="divider"/>
+
+  <!-- AMOUNT SELECTOR -->
+  <div class="amount-section">
+    <h2>Choose an amount</h2>
+    <div class="amount-grid">
+      <button class="amount-btn" onclick="selectAmount(1,  this)">$1</button>
+      <button class="amount-btn" onclick="selectAmount(5,  this)">$5</button>
+      <button class="amount-btn selected" onclick="selectAmount(10, this)">$10</button>
+      <button class="amount-btn" onclick="selectAmount(25, this)">$25</button>
+    </div>
+    <div class="custom-amount-wrap">
+      <span>$</span>
+      <input type="number" class="custom-input" id="custom-amount" placeholder="Custom amount" min="1" oninput="onCustomInput()"/>
+    </div>
+  </div>
+
+  <!-- INFO BOX -->
+  <div class="info-box">
+    <span class="info-box-icon">ℹ️</span>
+    <span>Pick your amount above, then tap your preferred platform below. You'll be taken to their site to complete the donation. Come back here to see the thank you message!</span>
+  </div>
+
+  <!-- PLATFORM CARDS -->
+  <div class="platforms-section">
+    <h2>Choose a platform</h2>
+    <div class="platforms-grid">
+
+      <!-- PAYPAL -->
+      <!-- 🔧 REPLACE: Change YOUR_PAYPAL_USERNAME to your actual PayPal.me username -->
+      <a class="platform-card paypal-card" href="https://paypal.me/YOUR_PAYPAL_USERNAME" target="_blank" onclick="showThankYou('PayPal')" id="paypal-link">
+        <div class="platform-icon paypal-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z" fill="#003087"/>
+          </svg>
+        </div>
+        <span class="platform-name">PayPal</span>
+        <span class="platform-handle">@YOUR_PAYPAL_USERNAME</span>
+        <span class="platform-desc">Fast &amp; secure. Works with any card or bank account.</span>
+        <span class="platform-arrow">Donate via PayPal →</span>
+      </a>
+
+      <!-- CASH APP -->
+      <!-- 🔧 REPLACE: Change YOUR_CASHTAG to your actual Cash App $cashtag -->
+      <a class="platform-card cashapp-card" href="https://cash.app/$YOUR_CASHTAG" target="_blank" onclick="showThankYou('Cash App')" id="cashapp-link">
+        <div class="platform-icon cashapp-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#00d64f">
+            <path d="M23.59 3.42A4 4 0 0 0 20.58.41C19.24 0 12 0 12 0S4.76 0 3.42.41A4 4 0 0 0 .41 3.42C0 4.76 0 12 0 12s0 7.24.41 8.58a4 4 0 0 0 3.01 3.01C4.76 24 12 24 12 24s7.24 0 8.58-.41a4 4 0 0 0 3.01-3.01C24 19.24 24 12 24 12s0-7.24-.41-8.58zm-7.07 7.56l-.82.82a.5.5 0 0 1-.55.11 4.65 4.65 0 0 0-1.77-.35 2.1 2.1 0 0 0-1.16.27.77.77 0 0 0-.34.62c0 .4.22.67 1.26 1 2 .56 2.9 1.38 2.9 2.93a3.14 3.14 0 0 1-.87 2.2 4 4 0 0 1-2.14 1v.92a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-.93a6.34 6.34 0 0 1-2.82-.93.5.5 0 0 1-.1-.73l.86-.93a.5.5 0 0 1 .65-.07 4.72 4.72 0 0 0 2.41.72 2 2 0 0 0 1.22-.32.87.87 0 0 0 .38-.71c0-.46-.2-.73-1.4-1.08C9.2 14.24 8.42 13.37 8.42 12a3 3 0 0 1 .84-2.1 3.67 3.67 0 0 1 2-.95v-.95a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5V9a5.75 5.75 0 0 1 2.33.7.5.5 0 0 1 .12.73z"/>
+          </svg>
+        </div>
+        <span class="platform-name">Cash App</span>
+        <span class="platform-handle">$YOUR_CASHTAG</span>
+        <span class="platform-desc">Quick and easy. Great for instant transfers.</span>
+        <span class="platform-arrow">Donate via Cash App →</span>
+      </a>
+
+      <!-- VENMO -->
+      <!-- 🔧 REPLACE: Change YOUR_VENMO_USERNAME to your actual Venmo username -->
+      <a class="platform-card venmo-card" href="https://venmo.com/YOUR_VENMO_USERNAME" target="_blank" onclick="showThankYou('Venmo')" id="venmo-link">
+        <div class="platform-icon venmo-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#008cff">
+            <path d="M19.07.75c.42.7.61 1.42.61 2.33 0 2.9-2.48 6.68-4.49 9.34H11.1L9.1 1.87 4.92 2.24.75 2.61c0 0 1.9 11.94 2.12 13.31.26 1.64.79 2.15 1.55 2.15.76 0 4.06-.58 5.26-.78 1.2-.2 1.64-.58 2.07-1.72.43-1.14 6.59-12.38 7.72-13.97.6-.84.94-1.63.6-1.84z"/>
+          </svg>
+        </div>
+        <span class="platform-name">Venmo</span>
+        <span class="platform-handle">@YOUR_VENMO_USERNAME</span>
+        <span class="platform-desc">Popular and simple. Used by millions.</span>
+        <span class="platform-arrow">Donate via Venmo →</span>
+      </a>
+
+      <!-- KO-FI -->
+      <!-- 🔧 REPLACE: Change YOUR_KOFI_USERNAME to your actual Ko-fi username -->
+      <a class="platform-card kofi-card" href="https://ko-fi.com/YOUR_KOFI_USERNAME" target="_blank" onclick="showThankYou('Ko-fi')" id="kofi-link">
+        <div class="platform-icon kofi-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#ff5e5b">
+            <path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/>
+          </svg>
+        </div>
+        <span class="platform-name">Ko-fi</span>
+        <span class="platform-handle">ko-fi.com/YOUR_KOFI_USERNAME</span>
+        <span class="platform-desc">Buy us a coffee! Great for recurring support.</span>
+        <span class="platform-arrow">Donate via Ko-fi →</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- BOTTOM NOTE -->
+  <div class="info-box" style="background:linear-gradient(135deg,#fffbf0,#fff8e8);border-color:rgba(200,96,42,0.2)">
+    <span class="info-box-icon">💛</span>
+    <span>Donations are completely voluntary and go directly to the site owner. Even sharing the site with a friend is a huge help. Thank you for being part of the community!</span>
+  </div>
+
+  <footer class="site-footer">tips &amp; stuff — shared with friends ✦</footer>
+</main>
+
+<script>
+  let selectedAmount = 10;
+
+  function selectAmount(amt, btn) {
+    selectedAmount = amt;
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('custom-amount').value = '';
+    updateLinks(amt);
+  }
+
+  function onCustomInput() {
+    const val = parseFloat(document.getElementById('custom-amount').value);
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    if (val && val > 0) { selectedAmount = val; updateLinks(val); }
+  }
+
+  function updateLinks(amt) {
+    const rounded = parseFloat(amt).toFixed(2);
+    // PayPal supports amount in URL
+    const ppBase = document.getElementById('paypal-link').href.split('?')[0].split('/').slice(0,-1).join('/');
+    // Only PayPal supports amount param natively in paypal.me
+    const ppHandle = document.getElementById('paypal-link').href.match(/paypal\.me\/([^?]+)/)?.[1] || 'YOUR_PAYPAL_USERNAME';
+    document.getElementById('paypal-link').href = `https://paypal.me/${ppHandle}/${rounded}`;
+  }
+
+  function showThankYou(platform) {
+    // Small delay so the link opens first
+    setTimeout(() => {
+      document.getElementById('thankyou-overlay').classList.add('show');
+    }, 400);
+  }
+
+  function closeThankYou() {
+    document.getElementById('thankyou-overlay').classList.remove('show');
+  }
+
+  // Close overlay on background click
+  document.getElementById('thankyou-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeThankYou();
+  });
+
+  // Auth
+  const rank = sessionStorage.getItem('rank') || 'public';
+  function doLogout() { sessionStorage.removeItem('rank'); location.reload(); }
+  (function applyRank(){
+    const labels  = {owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod',public:'Public'};
+    const classes = {owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
+    document.getElementById('login-link').style.display  = rank === 'public' ? '' : 'none';
+    document.getElementById('logout-btn').style.display  = rank !== 'public' ? '' : 'none';
+  })();
+
+  // Init amount
+  updateLinks(selectedAmount);
+</script>
+</body>
+</html>
