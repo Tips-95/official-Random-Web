@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leaderboard ✦ tips & stuff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#f5f2eb;--surface:#fffdf8;
+      --border:rgba(60,50,30,0.12);--border-strong:rgba(60,50,30,0.22);
+      --text:#1a1612;--muted:#7a7060;--accent:#c8602a;
+      --gold:#b8860b;--silver:#707070;--bronze:#8B4513;
+      --owner-bg:#1a1612;--owner-txt:#f0c060;
+      --admin-bg:#2a1a4a;--admin-txt:#c090ff;
+      --mod-bg:#0a2a1a;--mod-txt:#60d090;
+    }
+    html{font-size:16px}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-size:200px 200px}
+
+    /* TOP NAV */
+    .topnav{position:sticky;top:0;z-index:30;background:var(--text);display:flex;align-items:center;padding:0 1.25rem;height:52px;flex-shrink:0}
+    .topnav-logo{font-family:'Instrument Serif',serif;font-size:1.1rem;color:#fff;text-decoration:none;margin-right:1.25rem;white-space:nowrap;flex-shrink:0}
+    .topnav-logo em{font-style:italic;color:var(--accent)}
+    .topnav-links{display:flex;align-items:center;gap:2px;flex:1;overflow:hidden}
+    .topnav-link{font-size:0.8rem;color:rgba(255,255,255,0.6);text-decoration:none;padding:6px 10px;border-radius:6px;transition:all 0.13s;white-space:nowrap}
+    .topnav-link:hover{color:#fff;background:rgba(255,255,255,0.08)}
+    .topnav-link.active{color:#fff;background:rgba(255,255,255,0.12)}
+    .topnav-right{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0}
+    .rank-badge{font-size:0.68rem;font-weight:500;letter-spacing:0.05em;padding:3px 9px;border-radius:99px;text-transform:uppercase;white-space:nowrap}
+    .rank-owner{background:var(--owner-bg);color:var(--owner-txt)}
+    .rank-admin{background:var(--admin-bg);color:var(--admin-txt)}
+    .rank-mod{background:var(--mod-bg);color:var(--mod-txt)}
+    .rank-public{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)}
+    .topnav-btn{font-size:0.8rem;padding:5px 11px;border-radius:6px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.8);cursor:pointer;transition:all 0.13s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;font-family:'DM Sans',sans-serif}
+    .topnav-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
+
+    /* PAGE */
+    .page{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:2.5rem 2rem 5rem;width:100%;flex:1}
+
+    /* HERO */
+    .hero{margin-bottom:2rem}
+    .hero h1{font-family:'Instrument Serif',serif;font-size:clamp(2rem,5vw,3rem);line-height:1;letter-spacing:-0.02em}
+    .hero h1 em{font-style:italic;color:var(--accent)}
+    .hero p{font-size:0.875rem;color:var(--muted);margin-top:0.4rem}
+    .divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0}
+
+    /* STATUS */
+    .status-bar{display:flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--muted);margin-bottom:1.5rem}
+    .status-dot{width:7px;height:7px;border-radius:50%;background:#ccc;flex-shrink:0;transition:background 0.3s}
+    .status-dot.ok{background:#3a9c5a}.status-dot.error{background:#c8602a}.status-dot.loading{background:#f0a500}
+
+    /* TOP 3 PODIUM */
+    .podium{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin-bottom:2rem;min-height:140px}
+    .podium-slot{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;max-width:180px}
+    .podium-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;border:3px solid transparent;flex-shrink:0}
+    .podium-name{font-size:0.82rem;font-weight:600;text-align:center;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .podium-time{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted)}
+    .podium-block{width:100%;border-radius:10px 10px 0 0;display:flex;align-items:center;justify-content:center;font-size:1.4rem;padding:8px 0}
+    .podium-rank-label{font-family:'DM Mono',monospace;font-size:0.65rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-top:2px}
+
+    /* 1st place */
+    .podium-1 .podium-avatar{border-color:#f0c060;background:#fdf8e8}
+    .podium-1 .podium-block{background:linear-gradient(135deg,#f0c060,#d4a020);height:90px}
+    .podium-1 .podium-rank-label{color:var(--gold)}
+
+    /* 2nd place */
+    .podium-2 .podium-avatar{border-color:#b0b0b0;background:#f5f5f5}
+    .podium-2 .podium-block{background:linear-gradient(135deg,#c0c0c0,#909090);height:68px}
+    .podium-2 .podium-rank-label{color:var(--silver)}
+
+    /* 3rd place */
+    .podium-3 .podium-avatar{border-color:#cd7f32;background:#fdf0e8}
+    .podium-3 .podium-block{background:linear-gradient(135deg,#cd7f32,#9a5c20);height:50px}
+    .podium-3 .podium-rank-label{color:var(--bronze)}
+
+    /* LEADERBOARD TABLE */
+    .lb-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.5rem}
+    .lb-header{padding:0.9rem 1.25rem;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .lb-header-title{font-size:0.85rem;font-weight:600;display:flex;align-items:center;gap:7px}
+    .lb-row{display:flex;align-items:center;gap:12px;padding:11px 1.25rem;border-bottom:1px solid var(--border);transition:background 0.13s;animation:rise 0.2s ease both}
+    .lb-row:last-child{border-bottom:none}
+    .lb-row:hover{background:var(--bg)}
+    @keyframes rise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+    .lb-pos{font-family:'DM Mono',monospace;font-size:0.8rem;font-weight:600;color:var(--muted);width:28px;flex-shrink:0;text-align:center}
+    .lb-pos.top1{color:var(--gold)}
+    .lb-pos.top2{color:var(--silver)}
+    .lb-pos.top3{color:var(--bronze)}
+    .lb-avatar{width:34px;height:34px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+    .lb-info{flex:1;min-width:0}
+    .lb-name{font-size:0.88rem;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .lb-visits{font-size:0.72rem;color:var(--muted);margin-top:1px}
+    .lb-time{font-family:'DM Mono',monospace;font-size:0.85rem;font-weight:500;color:var(--text);flex-shrink:0;text-align:right}
+    .lb-bar-wrap{width:80px;height:5px;background:var(--bg);border-radius:99px;flex-shrink:0;overflow:hidden}
+    .lb-bar{height:100%;background:var(--accent);border-radius:99px;transition:width 0.6s ease}
+
+    /* STATS ROW */
+    .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:2rem}
+    .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;text-align:center}
+    .stat-num{font-family:'Instrument Serif',serif;font-size:1.8rem;font-style:italic;color:var(--accent);line-height:1}
+    .stat-lbl{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px}
+
+    /* ADMIN CONTROLS */
+    .admin-controls{background:var(--surface);border:1px solid rgba(192,57,43,0.25);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .admin-controls p{font-size:0.82rem;color:var(--muted);flex:1}
+    .clear-lb-btn{height:36px;padding:0 16px;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:500;background:#fce8ec;color:#c0392b;border:1px solid #f0b0b8;border-radius:8px;cursor:pointer;transition:all 0.13s;white-space:nowrap}
+    .clear-lb-btn:hover{background:#c0392b;color:#fff}
+
+    .empty{text-align:center;padding:3rem 0;color:var(--muted);font-size:0.9rem}
+    .site-footer{margin-top:2rem;text-align:center;font-size:0.75rem;color:var(--muted);padding-bottom:2rem}
+
+    @media(max-width:500px){
+      .page{padding:1.25rem 1rem 4rem}
+      .podium{gap:6px}
+      .stats-row{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="index.html" class="topnav-logo">tips <em>&</em> stuff</a>
+  <div class="topnav-links">
+    <a href="index.html"        class="topnav-link">📋 Tips</a>
+    <a href="ranks.html"        class="topnav-link">🏅 Ranks</a>
+    <a href="rules.html"        class="topnav-link">📜 Rules</a>
+    <a href="news.html"         class="topnav-link">📰 News</a>
+    <a href="version.html"      class="topnav-link">🔖 Version</a>
+    <a href="leaderboard.html"  class="topnav-link active">🏆 Leaderboard</a>
+    <a href="donate.html"       class="topnav-link">💛 Donate</a>
+  </div>
+  <div class="topnav-right">
+    <span id="rank-display" class="rank-badge rank-public">Public</span>
+    <a href="login.html" class="topnav-btn" id="login-link">Login</a>
+    <button class="topnav-btn" id="logout-btn" style="display:none" onclick="doLogout()">Logout</button>
+    <button class="topnav-btn" onclick="loadData()">↻</button>
+  </div>
+</header>
+
+<main class="page">
+  <div class="hero">
+    <h1>🏆 <em>leaderboard</em></h1>
+    <p>most dedicated visitors ranked by time spent on the site ✦</p>
+  </div>
+  <hr class="divider"/>
+
+  <div class="status-bar"><div class="status-dot loading" id="status-dot"></div><span id="status-text">loading...</span></div>
+
+  <!-- STATS ROW -->
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num" id="stat-members">—</div><div class="stat-lbl">Visitors Tracked</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-total-time">—</div><div class="stat-lbl">Total Hours</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-top-time">—</div><div class="stat-lbl">Top Visitor Time</div></div>
+  </div>
+
+  <!-- PODIUM (top 3) -->
+  <div class="podium" id="podium" style="display:none"></div>
+
+  <!-- ADMIN CLEAR BUTTON -->
+  <div class="admin-controls" id="admin-controls" style="display:none">
+    <p>⚠️ As an admin you can reset the leaderboard. This permanently deletes all visit data.</p>
+    <button class="clear-lb-btn" onclick="clearLeaderboard()">🗑️ Reset Leaderboard</button>
+  </div>
+
+  <!-- FULL LEADERBOARD TABLE -->
+  <div class="lb-card">
+    <div class="lb-header">
+      <span class="lb-header-title">🏆 All Visitors</span>
+      <span id="lb-count" style="font-size:0.78rem;color:var(--muted)"></span>
+    </div>
+    <div id="lb-list"><p class="empty">Loading...</p></div>
+  </div>
+
+  <footer class="site-footer">tips & stuff — shared with friends ✦</footer>
+</main>
+
+<script>
+  const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
+  const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
+  const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
+  let db   = {};
+  let rank = localStorage.getItem('rank') || 'public';
+
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+  function setStatus(s,m){ document.getElementById('status-dot').className='status-dot '+s; document.getElementById('status-text').textContent=m }
+  function doLogout(){ rank='public'; localStorage.removeItem('rank'); location.reload(); }
+
+  function fmtTime(ms) {
+    if (!ms || ms < 0) return '0s';
+    const s = Math.floor(ms / 1000);
+    const m = Math.floor(s / 60);
+    const h = Math.floor(m / 60);
+    if (h > 0)  return `${h}h ${m % 60}m`;
+    if (m > 0)  return `${m}m ${s % 60}s`;
+    return `${s}s`;
+  }
+
+  function fmtHours(ms) {
+    const h = ms / 3600000;
+    return h >= 1 ? h.toFixed(1) + 'h' : Math.floor(ms / 60000) + 'm';
+  }
+
+  function getEmoji(name) {
+    if (name.includes('Owner'))  return '👑';
+    if (name.includes('Admin'))  return '🛡️';
+    if (name.includes('Mod'))    return '🔧';
+    const emojis = ['😊','🎯','⚡','🌟','🎮','🦊','🐺','🔥','🌈','🎸'];
+    let hash = 0;
+    for (let c of name) hash = (hash << 5) - hash + c.charCodeAt(0);
+    return emojis[Math.abs(hash) % emojis.length];
+  }
+
+  function applyRankUI() {
+    const labels  = {owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod',public:'Public'};
+    const classes = {owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
+    const rd = document.getElementById('rank-display');
+    rd.textContent = labels[rank]; rd.className = 'rank-badge ' + classes[rank];
+    document.getElementById('login-link').style.display  = rank === 'public' ? '' : 'none';
+    document.getElementById('logout-btn').style.display  = rank !== 'public' ? '' : 'none';
+    const isAdmin = rank === 'owner' || rank === 'admin';
+    document.getElementById('admin-controls').style.display = isAdmin ? 'flex' : 'none';
+  }
+
+  async function loadData() {
+    setStatus('loading','loading...');
+    try {
+      const res  = await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const raw  = await res.json();
+      db = raw.record !== undefined ? raw.record : raw;
+      db.leaderboard = (db.leaderboard && typeof db.leaderboard==='object') ? db.leaderboard : {};
+      setStatus('ok','loaded ✓');
+      applyRankUI(); render();
+    } catch(e) { console.error(e); setStatus('error','could not load — '+e.message); }
+  }
+
+  function render() {
+    const lb = db.leaderboard || {};
+    const entries = Object.entries(lb)
+      .map(([name, data]) => ({ name, totalMs: data.totalMs||0, visits: data.visits||0, lastSeen: data.lastSeen||0 }))
+      .sort((a, b) => b.totalMs - a.totalMs);
+
+    // Stats row
+    const totalMs = entries.reduce((s, e) => s + e.totalMs, 0);
+    const topMs   = entries[0]?.totalMs || 0;
+    document.getElementById('stat-members').textContent  = entries.length;
+    document.getElementById('stat-total-time').textContent = fmtHours(totalMs);
+    document.getElementById('stat-top-time').textContent   = fmtHours(topMs);
+    document.getElementById('lb-count').textContent = entries.length ? `${entries.length} visitor${entries.length!==1?'s':''}` : '';
+
+    if (!entries.length) {
+      document.getElementById('podium').style.display = 'none';
+      document.getElementById('lb-list').innerHTML = '<p class="empty">No visit data yet — come back after exploring the site!</p>';
+      return;
+    }
+
+    // PODIUM (top 3)
+    const top3    = entries.slice(0, 3);
+    const podOrder = top3.length === 1 ? [top3[0]] : top3.length === 2 ? [top3[1], top3[0]] : [top3[1], top3[0], top3[2]];
+    const podClass = top3.length === 1 ? ['podium-1'] : top3.length === 2 ? ['podium-2','podium-1'] : ['podium-2','podium-1','podium-3'];
+    const medals   = ['🥇','🥈','🥉'];
+    const rankLabels = ['1st','2nd','3rd'];
+
+    document.getElementById('podium').style.display = 'flex';
+    document.getElementById('podium').innerHTML = podOrder.map((e, i) => {
+      const realRank = top3.indexOf(e);
+      return `<div class="podium-slot ${podClass[i]}">
+        <div class="podium-avatar">${getEmoji(e.name)}</div>
+        <div class="podium-name">${esc(e.name)}</div>
+        <div class="podium-time">${fmtTime(e.totalMs)}</div>
+        <div class="podium-block">${medals[realRank]}</div>
+        <div class="podium-rank-label">${rankLabels[realRank]}</div>
+      </div>`;
+    }).join('');
+
+    // FULL TABLE
+    document.getElementById('lb-list').innerHTML = entries.map((e, i) => {
+      const pct     = topMs > 0 ? Math.round((e.totalMs / topMs) * 100) : 0;
+      const posClass = i === 0 ? 'top1' : i === 1 ? 'top2' : i === 2 ? 'top3' : '';
+      const posLabel = i < 3 ? ['🥇','🥈','🥉'][i] : `#${i+1}`;
+      const lastDate = e.lastSeen ? new Date(e.lastSeen).toLocaleDateString([],{month:'short',day:'numeric'}) : '—';
+      return `<div class="lb-row" style="animation-delay:${i*0.04}s">
+        <div class="lb-pos ${posClass}">${posLabel}</div>
+        <div class="lb-avatar">${getEmoji(e.name)}</div>
+        <div class="lb-info">
+          <div class="lb-name">${esc(e.name)}</div>
+          <div class="lb-visits">${e.visits} visit${e.visits!==1?'s':''} · last seen ${lastDate}</div>
+        </div>
+        <div class="lb-bar-wrap"><div class="lb-bar" style="width:${pct}%"></div></div>
+        <div class="lb-time">${fmtTime(e.totalMs)}</div>
+      </div>`;
+    }).join('');
+  }
+
+  async function clearLeaderboard() {
+    if (!confirm('Reset the entire leaderboard? This cannot be undone.')) return;
+    setStatus('loading','clearing...');
+    try {
+      const res  = await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
+      const raw  = await res.json();
+      const data = raw.record !== undefined ? raw.record : raw;
+      data.leaderboard = {};
+      await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(data)});
+      db.leaderboard = {};
+      setStatus('ok','leaderboard cleared ✓'); render();
+    } catch(e) { setStatus('error','could not clear — '+e.message); }
+  }
+
+  applyRankUI(); loadData();
+</script>
+</body>
+</html>
