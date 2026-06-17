@@ -974,3 +974,388 @@ loadAll();
 <script src="transition.js"></script>
 </body>
 </html>
+lang_js = r"""
+// ══════════════════════════════════════════════
+//  LANGUAGE SYSTEM
+// ══════════════════════════════════════════════
+const LANGS = {
+  en: {
+    flag:'🇺🇸', code:'EN', name:'English',
+    // Nav
+    'nav.tips':'📋 Tips','nav.ranks':'🏅 Ranks','nav.rules':'📜 Rules',
+    'nav.bans':'🚫 Bans','nav.news':'📰 News','nav.version':'🔖 Version',
+    'nav.donate':'💛 Donate','nav.leaderboard':'🏆 Leaderboard',
+    'nav.login':'Login','nav.logout':'Logout','nav.refresh':'↻',
+    // Sidebar labels
+    'sb.browse':'Browse','sb.staff':'Staff',
+    'sb.recommended':'Recommended','sb.featured':'Featured',
+    'sb.public':'Public Tips','sb.pending':'Pending',
+    'sb.adminboard':'Admin Board','sb.complaints':'Complaints',
+    'sb.version':'Version','sb.donate':'Donate',
+    'sb.leaderboard':'Leaderboard','sb.settings':'Settings',
+    'sb.online':'online now','sb.visits':'total visits',
+    // Section headers
+    'sec.rec':'⭐ Recommended Tips','sec.rec.sub':'Curated by Owner & Admins',
+    'sec.feat':'🔥 Featured Tips','sec.feat.sub':'Mod+ only',
+    'sec.pub':'📢 Public Tips','sec.pub.sub':'Everyone can submit',
+    'sec.pend':'⏳ Pending Approval','sec.pend.sub':'Owner & Admin only',
+    'sec.admin':'🔒 Admin Board','sec.admin.sub':'Admin+ only',
+    'sec.news':'📰 News','sec.news.sub':'Posted by Owner & Admins',
+    'sec.complaints':'📝 Complaints','sec.complaints.sub':'Submit a complaint · Staff review privately',
+    // Forms
+    'ph.rec.tip':'Add a recommended tip...','ph.rec.author':'Your name',
+    'ph.feat.tip':'Add a featured tip...','ph.feat.author':'Your name',
+    'ph.admin.tip':'Add an admin tip...','ph.admin.author':'Your name',
+    'ph.pub.name':'Your name','ph.pub.tip':'Write your tip here...',
+    'btn.post':'+ Post','btn.submit':'Submit for Review',
+    'note.pending':'⏳ Tips are reviewed before posting — Owner & Admins approve or deny.',
+    // Chat
+    'chat.title':'💬 Group Chat','chat.gate':'Enter your name to start chatting',
+    'chat.join':'Join','chat.ph':'Type a message...','chat.empty':'No messages yet — say hi! 👋',
+    'chat.auto':'Auto-refreshes every 15s','chat.refresh':'refresh now',
+    // Visitor bar
+    'vis.online':'online now','vis.total':'total visits',
+    // Status
+    'status.loading':'loading...','status.loaded':'loaded ✓ — hit ↻ to refresh',
+    // Site identity
+    'site.subtitle':'a shared board for tips, tricks, and random gems ✦',
+    // Complaint form
+    'cf.head':'📬 Submit a Complaint','cf.note':'Your complaint will be reviewed privately by staff.',
+    'cf.name':'Your Name','cf.type':'Complaint Type','cf.desc':'Describe your complaint',
+    'ph.cf.name':'Your name...','ph.cf.text':'Explain what happened in as much detail as possible...',
+    'btn.cf':'📬 Submit Complaint',
+    // Badges
+    'badge.picks':'Staff Picks','badge.mod':'Mod+','badge.all':'All',
+    'badge.review':'Review','badge.admin+':'Admin+','badge.owner':'Owner',
+  },
+  es: {
+    flag:'🇪🇸', code:'ES', name:'Español',
+    'nav.tips':'📋 Consejos','nav.ranks':'🏅 Rangos','nav.rules':'📜 Reglas',
+    'nav.bans':'🚫 Bans','nav.news':'📰 Noticias','nav.version':'🔖 Versión',
+    'nav.donate':'💛 Donar','nav.leaderboard':'🏆 Clasificación',
+    'nav.login':'Iniciar sesión','nav.logout':'Cerrar sesión','nav.refresh':'↻',
+    'sb.browse':'Explorar','sb.staff':'Personal',
+    'sb.recommended':'Recomendados','sb.featured':'Destacados',
+    'sb.public':'Consejos Públicos','sb.pending':'Pendiente',
+    'sb.adminboard':'Panel Admin','sb.complaints':'Quejas',
+    'sb.version':'Versión','sb.donate':'Donar',
+    'sb.leaderboard':'Clasificación','sb.settings':'Ajustes',
+    'sb.online':'en línea ahora','sb.visits':'visitas totales',
+    'sec.rec':'⭐ Consejos Recomendados','sec.rec.sub':'Curados por Owner y Admins',
+    'sec.feat':'🔥 Consejos Destacados','sec.feat.sub':'Solo Mod+',
+    'sec.pub':'📢 Consejos Públicos','sec.pub.sub':'Todos pueden enviar',
+    'sec.pend':'⏳ Aprobación Pendiente','sec.pend.sub':'Solo Owner y Admin',
+    'sec.admin':'🔒 Panel Admin','sec.admin.sub':'Solo Admin+',
+    'sec.news':'📰 Noticias','sec.news.sub':'Publicado por Owner y Admins',
+    'sec.complaints':'📝 Quejas','sec.complaints.sub':'Envía una queja · El personal la revisa',
+    'ph.rec.tip':'Añadir un consejo recomendado...','ph.rec.author':'Tu nombre',
+    'ph.feat.tip':'Añadir un consejo destacado...','ph.feat.author':'Tu nombre',
+    'ph.admin.tip':'Añadir un consejo admin...','ph.admin.author':'Tu nombre',
+    'ph.pub.name':'Tu nombre','ph.pub.tip':'Escribe tu consejo aquí...',
+    'btn.post':'+ Publicar','btn.submit':'Enviar para revisión',
+    'note.pending':'⏳ Los consejos se revisan antes de publicarse.',
+    'chat.title':'💬 Chat del Grupo','chat.gate':'Escribe tu nombre para chatear',
+    'chat.join':'Entrar','chat.ph':'Escribe un mensaje...','chat.empty':'¡Sin mensajes aún — di hola! 👋',
+    'chat.auto':'Se actualiza cada 15s','chat.refresh':'actualizar ahora',
+    'vis.online':'en línea ahora','vis.total':'visitas totales',
+    'status.loading':'cargando...','status.loaded':'cargado ✓ — presiona ↻ para actualizar',
+    'site.subtitle':'un tablero compartido de consejos, trucos y curiosidades ✦',
+    'cf.head':'📬 Enviar una Queja','cf.note':'Tu queja será revisada en privado por el personal.',
+    'cf.name':'Tu Nombre','cf.type':'Tipo de Queja','cf.desc':'Describe tu queja',
+    'ph.cf.name':'Tu nombre...','ph.cf.text':'Explica lo que ocurrió con el mayor detalle posible...',
+    'btn.cf':'📬 Enviar Queja',
+    'badge.picks':'Selección Staff','badge.mod':'Mod+','badge.all':'Todo',
+    'badge.review':'Revisar','badge.admin+':'Admin+','badge.owner':'Propietario',
+  },
+  fr: {
+    flag:'🇫🇷', code:'FR', name:'Français',
+    'nav.tips':'📋 Conseils','nav.ranks':'🏅 Rangs','nav.rules':'📜 Règles',
+    'nav.bans':'🚫 Bans','nav.news':'📰 Actualités','nav.version':'🔖 Version',
+    'nav.donate':'💛 Donner','nav.leaderboard':'🏆 Classement',
+    'nav.login':'Connexion','nav.logout':'Déconnexion','nav.refresh':'↻',
+    'sb.browse':'Explorer','sb.staff':'Équipe',
+    'sb.recommended':'Recommandés','sb.featured':'En vedette',
+    'sb.public':'Conseils publics','sb.pending':'En attente',
+    'sb.adminboard':'Panneau Admin','sb.complaints':'Plaintes',
+    'sb.version':'Version','sb.donate':'Donner',
+    'sb.leaderboard':'Classement','sb.settings':'Paramètres',
+    'sb.online':'en ligne maintenant','sb.visits':'visites totales',
+    'sec.rec':'⭐ Conseils Recommandés','sec.rec.sub':'Sélectionnés par Owner et Admins',
+    'sec.feat':'🔥 Conseils en Vedette','sec.feat.sub':'Mod+ seulement',
+    'sec.pub':'📢 Conseils Publics','sec.pub.sub':'Tout le monde peut soumettre',
+    'sec.pend':'⏳ Approbation en attente','sec.pend.sub':'Owner et Admin seulement',
+    'sec.admin':'🔒 Panneau Admin','sec.admin.sub':'Admin+ seulement',
+    'sec.news':'📰 Actualités','sec.news.sub':'Publié par Owner et Admins',
+    'sec.complaints':'📝 Plaintes','sec.complaints.sub':'Soumettre une plainte · Examinée par le personnel',
+    'ph.rec.tip':'Ajouter un conseil recommandé...','ph.rec.author':'Votre nom',
+    'ph.feat.tip':'Ajouter un conseil en vedette...','ph.feat.author':'Votre nom',
+    'ph.admin.tip':'Ajouter un conseil admin...','ph.admin.author':'Votre nom',
+    'ph.pub.name':'Votre nom','ph.pub.tip':'Écrivez votre conseil ici...',
+    'btn.post':'+ Publier','btn.submit':'Soumettre pour révision',
+    'note.pending':'⏳ Les conseils sont examinés avant publication.',
+    'chat.title':'💬 Chat du Groupe','chat.gate':'Entrez votre nom pour chatter',
+    'chat.join':'Rejoindre','chat.ph':'Tapez un message...','chat.empty':'Pas encore de messages — dites bonjour! 👋',
+    'chat.auto':'Mise à jour toutes les 15s','chat.refresh':'actualiser maintenant',
+    'vis.online':'en ligne maintenant','vis.total':'visites totales',
+    'status.loading':'chargement...','status.loaded':'chargé ✓ — appuyez ↻ pour actualiser',
+    'site.subtitle':'un tableau partagé de conseils, astuces et curiosités ✦',
+    'cf.head':'📬 Soumettre une Plainte','cf.note':'Votre plainte sera examinée en privé.',
+    'cf.name':'Votre Nom','cf.type':'Type de Plainte','cf.desc':'Décrivez votre plainte',
+    'ph.cf.name':'Votre nom...','ph.cf.text':'Expliquez ce qui s\'est passé en détail...',
+    'btn.cf':'📬 Soumettre la Plainte',
+    'badge.picks':'Sélection Staff','badge.mod':'Mod+','badge.all':'Tout',
+    'badge.review':'Réviser','badge.admin+':'Admin+','badge.owner':'Propriétaire',
+  },
+ pt: {
+    flag:'🇧🇷', code:'PT', name:'Português',
+    'nav.tips':'📋 Dicas','nav.ranks':'🏅 Ranks','nav.rules':'📜 Regras',
+    'nav.bans':'🚫 Bans','nav.news':'📰 Notícias','nav.version':'🔖 Versão',
+    'nav.donate':'💛 Doar','nav.leaderboard':'🏆 Classificação',
+    'nav.login':'Entrar','nav.logout':'Sair','nav.refresh':'↻',
+    'sb.browse':'Explorar','sb.staff':'Equipe',
+    'sb.recommended':'Recomendados','sb.featured':'Destaque',
+    'sb.public':'Dicas Públicas','sb.pending':'Pendente',
+    'sb.adminboard':'Painel Admin','sb.complaints':'Reclamações',
+    'sb.version':'Versão','sb.donate':'Doar',
+    'sb.leaderboard':'Classificação','sb.settings':'Configurações',
+    'sb.online':'online agora','sb.visits':'visitas totais',
+    'sec.rec':'⭐ Dicas Recomendadas','sec.rec.sub':'Curadas pelo Owner e Admins',
+    'sec.feat':'🔥 Dicas em Destaque','sec.feat.sub':'Apenas Mod+',
+    'sec.pub':'📢 Dicas Públicas','sec.pub.sub':'Todos podem enviar',
+    'sec.pend':'⏳ Aprovação Pendente','sec.pend.sub':'Apenas Owner e Admin',
+    'sec.admin':'🔒 Painel Admin','sec.admin.sub':'Apenas Admin+',
+    'sec.news':'📰 Notícias','sec.news.sub':'Publicado pelo Owner e Admins',
+    'sec.complaints':'📝 Reclamações','sec.complaints.sub':'Envie uma reclamação · Revisada pela equipe',
+    'ph.rec.tip':'Adicionar uma dica recomendada...','ph.rec.author':'Seu nome',
+    'ph.feat.tip':'Adicionar uma dica em destaque...','ph.feat.author':'Seu nome',
+    'ph.admin.tip':'Adicionar uma dica admin...','ph.admin.author':'Seu nome',
+    'ph.pub.name':'Seu nome','ph.pub.tip':'Escreva sua dica aqui...',
+    'btn.post':'+ Postar','btn.submit':'Enviar para revisão',
+    'note.pending':'⏳ As dicas são revisadas antes de serem publicadas.',
+    'chat.title':'💬 Chat do Grupo','chat.gate':'Digite seu nome para conversar',
+    'chat.join':'Entrar','chat.ph':'Digite uma mensagem...','chat.empty':'Sem mensagens ainda — diga oi! 👋',
+    'chat.auto':'Atualiza a cada 15s','chat.refresh':'atualizar agora',
+    'vis.online':'online agora','vis.total':'visitas totais',
+    'status.loading':'carregando...','status.loaded':'carregado ✓ — pressione ↻ para atualizar',
+    'site.subtitle':'um quadro compartilhado de dicas, truques e curiosidades ✦',
+    'cf.head':'📬 Enviar uma Reclamação','cf.note':'Sua reclamação será revisada pela equipe.',
+    'cf.name':'Seu Nome','cf.type':'Tipo de Reclamação','cf.desc':'Descreva sua reclamação',
+    'ph.cf.name':'Seu nome...','ph.cf.text':'Explique o que aconteceu com o máximo de detalhes...',
+    'btn.cf':'📬 Enviar Reclamação',
+    'badge.picks':'Seleção Staff','badge.mod':'Mod+','badge.all':'Tudo',
+    'badge.review':'Revisar','badge.admin+':'Admin+','badge.owner':'Proprietário',
+  },
+  ja: {
+    flag:'🇯🇵', code:'JA', name:'日本語',
+    'nav.tips':'📋 ヒント','nav.ranks':'🏅 ランク','nav.rules':'📜 ルール',
+    'nav.bans':'🚫 BAN','nav.news':'📰 ニュース','nav.version':'🔖 バージョン',
+    'nav.donate':'💛 寄付','nav.leaderboard':'🏆 ランキング',
+    'nav.login':'ログイン','nav.logout':'ログアウト','nav.refresh':'↻',
+    'sb.browse':'参照','sb.staff':'スタッフ',
+    'sb.recommended':'おすすめ','sb.featured':'注目',
+    'sb.public':'みんなのヒント','sb.pending':'審査中',
+    'sb.adminboard':'管理ボード','sb.complaints':'苦情',
+    'sb.version':'バージョン','sb.donate':'寄付',
+    'sb.leaderboard':'ランキング','sb.settings':'設定',
+    'sb.online':'現在オンライン','sb.visits':'総訪問数',
+    'sec.rec':'⭐ おすすめヒント','sec.rec.sub':'オーナー・管理者が厳選',
+    'sec.feat':'🔥 注目ヒント','sec.feat.sub':'Mod以上限定',
+    'sec.pub':'📢 みんなのヒント','sec.pub.sub':'誰でも投稿できます',
+    'sec.pend':'⏳ 承認待ち','sec.pend.sub':'オーナー・管理者のみ',
+    'sec.admin':'🔒 管理ボード','sec.admin.sub':'管理者以上限定',
+    'sec.news':'📰 ニュース','sec.news.sub':'オーナー・管理者が投稿',
+    'sec.complaints':'📝 苦情','sec.complaints.sub':'苦情を送信 · スタッフが非公開で審査',
+    'ph.rec.tip':'おすすめヒントを追加...','ph.rec.author':'お名前',
+    'ph.feat.tip':'注目ヒントを追加...','ph.feat.author':'お名前',
+    'ph.admin.tip':'管理者ヒントを追加...','ph.admin.author':'お名前',
+    'ph.pub.name':'お名前','ph.pub.tip':'ヒントをここに書いてください...',
+    'btn.post':'+ 投稿','btn.submit':'レビューのために送信',
+    'note.pending':'⏳ ヒントは公開前に審査されます。',
+    'chat.title':'💬 グループチャット','chat.gate':'チャットを始めるには名前を入力',
+    'chat.join':'参加','chat.ph':'メッセージを入力...','chat.empty':'まだメッセージがありません — こんにちは！ 👋',
+    'chat.auto':'15秒ごとに自動更新','chat.refresh':'今すぐ更新',
+    'vis.online':'現在オンライン','vis.total':'総訪問数',
+    'status.loading':'読み込み中...','status.loaded':'読み込み完了 ✓',
+    'site.subtitle':'ヒント、コツ、豆知識を共有するボード ✦',
+    'cf.head':'📬 苦情を送信','cf.note':'苦情はスタッフが非公開で審査します。',
+    'cf.name':'お名前','cf.type':'苦情の種類','cf.desc':'苦情の内容',
+    'ph.cf.name':'お名前...','ph.cf.text':'何が起きたか詳しく説明してください...',
+    'btn.cf':'📬 苦情を送信',
+    'badge.picks':'スタッフのおすすめ','badge.mod':'Mod+','badge.all':'すべて',
+    'badge.review':'審査','badge.admin+':'Admin+','badge.owner':'オーナー',
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'en';
+
+function t(key) {
+  return (LANGS[currentLang] && LANGS[currentLang][key]) || (LANGS.en && LANGS.en[key]) || key;
+}
+
+function toggleLangMenu() {
+  const menu = document.getElementById('lang-menu');
+  const btn  = document.getElementById('lang-btn');
+  const open = menu.classList.toggle('open');
+  btn.classList.toggle('open', open);
+}
+
+function setLang(lang) {
+  if (!LANGS[lang]) return;
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.getElementById('lang-menu').classList.remove('open');
+  document.getElementById('lang-btn').classList.remove('open');
+  applyLang();
+}
+
+function applyLang() {
+  const L = LANGS[currentLang];
+  if (!L) return;
+
+  // Update lang current indicator
+  const lc = document.getElementById('lang-current'); if(lc) lc.textContent = L.code;
+  // Mark active lang option
+  document.querySelectorAll('.lang-opt').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === currentLang);
+  });
+
+  // ── SUBTITLE ──
+  const sub = document.getElementById('site-subtitle-el'); if(sub) sub.textContent = t('site.subtitle');
+
+  // ── TOP NAV LINKS ──
+  const navMap = [
+    ['📋','nav.tips'],['🏅','nav.ranks'],['📜','nav.rules'],['🚫','nav.bans'],
+    ['📰','nav.news'],['🔖','nav.version'],['💛','nav.donate'],['🏆','nav.leaderboard']
+  ];
+  document.querySelectorAll('.topnav-link').forEach(el => {
+    navMap.forEach(([em,key]) => {
+      if(el.textContent.trim().startsWith(em)) el.textContent = t(key);
+    });
+  });
+  const loginLink = document.getElementById('login-link'); if(loginLink) loginLink.textContent = t('nav.login');
+  const logoutBtn = document.getElementById('logout-btn'); if(logoutBtn) logoutBtn.textContent = t('nav.logout');
+
+  // ── SIDEBAR LABELS ──
+  document.querySelectorAll('.sb-label').forEach((el,i) => {
+    if(i===0) el.textContent = t('sb.browse');
+    if(i===1) el.textContent = t('sb.staff');
+  });
+
+  // ── SIDEBAR ITEMS ── (match by icon)
+  const sbMap = [
+    ['⭐','sb.recommended'],['🔥','sb.featured'],['📢','sb.public'],
+    ['⏳','sb.pending'],['🔒','sb.adminboard'],['📝','sb.complaints'],
+    ['🔖','sb.version'],['💛','sb.donate'],['🏆','sb.leaderboard'],['⚙️','sb.settings']
+  ];
+  document.querySelectorAll('.sb-item').forEach(el => {
+    const icon = el.querySelector('.sb-icon');
+    if(!icon) return;
+    const em = icon.textContent.trim();
+    sbMap.forEach(([e,key]) => {
+      if(e===em) {
+        // Replace text node (not the icon or badge spans)
+        el.childNodes.forEach(n => {
+          if(n.nodeType===3 && n.textContent.trim()) n.textContent = t(key) + ' ';
+        });
+      }
+    });
+  });
+
+  // ── SIDEBAR STATS ──
+  const onlineStat = document.querySelector('.sb-stat:first-child .sb-stat-label');
+  const totalStat  = document.querySelector('.sb-stat:last-child .sb-stat-label');
+  if(onlineStat) {
+    const onlineCount = document.getElementById('online-count');
+    if(onlineStat) onlineStat.innerHTML = (onlineCount ? onlineCount.outerHTML : '<span id="online-count">—</span>') + ' ' + t('sb.online');
+  }
+  if(totalStat) {
+    const totalVisits = document.getElementById('total-visits');
+    if(totalStat) totalStat.innerHTML = (totalVisits ? totalVisits.outerHTML : '<span id="total-visits">—</span>') + ' ' + t('sb.visits');
+  }
+
+  // ── VISITOR BAR ──
+  const vbOnline = document.querySelector('#visitor-bar .visitor-stat:first-child span:last-child');
+  const vbTotal  = document.querySelector('#visitor-bar .visitor-stat:last-child span:last-child');
+  if(vbOnline) vbOnline.innerHTML = '<strong id="vbar-online">'+(document.getElementById('vbar-online')?.textContent||'—')+'</strong> '+t('vis.online');
+  if(vbTotal)  vbTotal.innerHTML  = '<strong id="vbar-total">'+(document.getElementById('vbar-total')?.textContent||'—')+'</strong> '+t('vis.total');
+
+  // ── SECTION HEADERS ──
+  const secHeaders = {
+    'sec-recommended': ['sec.rec','sec.rec.sub'],
+    'sec-featured':    ['sec.feat','sec.feat.sub'],
+    'sec-public':      ['sec.pub','sec.pub.sub'],
+    'sec-pending':     ['sec.pend','sec.pend.sub'],
+    'sec-adminboard':  ['sec.admin','sec.admin.sub'],
+    'sec-news':        ['sec.news','sec.news.sub'],
+    'sec-complaints':  ['sec.complaints','sec.complaints.sub'],
+  };
+  Object.entries(secHeaders).forEach(([secId,[titleKey,subKey]]) => {
+    const sec = document.getElementById(secId); if(!sec) return;
+    const title = sec.querySelector('.section-title'); if(!title) return;
+    const lock  = title.querySelector('.section-lock');
+    const firstNode = title.childNodes[0];
+    if(firstNode && firstNode.nodeType===3) firstNode.textContent = t(titleKey)+' ';
+    if(lock) lock.textContent = t(subKey);
+  });
+
+  // ── FORM PLACEHOLDERS ──
+  const phMap = {
+    'rec-text':t('ph.rec.tip'),'rec-author':t('ph.rec.author'),
+    'feat-text':t('ph.feat.tip'),'feat-author':t('ph.feat.author'),
+    'admin-text':t('ph.admin.tip'),'admin-author':t('ph.admin.author'),
+    'pub-name':t('ph.pub.name'),'pub-text':t('ph.pub.tip'),
+    'cf-name':t('ph.cf.name'),'cf-text':t('ph.cf.text'),
+    'chat-input':t('chat.ph'),'gate-name':t('chat.gate'),
+  };
+  Object.entries(phMap).forEach(([id,ph]) => {
+    const el = document.getElementById(id); if(el) el.placeholder = ph;
+  });
+
+  // ── BUTTONS ──
+  document.querySelectorAll('.post-btn').forEach(b => b.textContent = t('btn.post'));
+  const submitBtn = document.querySelector('.submit-btn'); if(submitBtn) submitBtn.textContent = t('btn.submit');
+  const pendNote  = document.querySelector('.pending-notice'); if(pendNote) pendNote.textContent = t('note.pending');
+  const cfSubmit  = document.querySelector('.cf-submit-btn'); if(cfSubmit) cfSubmit.textContent = t('btn.cf');
+  const cfHead    = document.querySelector('.complaint-form-head'); if(cfHead) cfHead.textContent = t('cf.head');
+  const cfNote    = document.querySelector('.complaint-form-note'); if(cfNote) cfNote.textContent = t('cf.note');
+
+  // ── CHAT ──
+  const chatTitle = document.querySelector('.chat-head-title'); if(chatTitle) chatTitle.textContent = t('chat.title');
+  const chatGateP = document.querySelector('.chat-gate p'); if(chatGateP) chatGateP.textContent = t('chat.gate');
+  const chatJoin  = document.querySelector('.chat-gate-btn'); if(chatJoin) chatJoin.textContent = t('chat.join');
+  const chatAuto  = document.querySelector('.chat-footer-note');
+  if(chatAuto) chatAuto.innerHTML = t('chat.auto')+' · <button onclick="loadChat()">'+t('chat.refresh')+'</button>';
+
+  // ── STATUS (only if currently showing loading) ──
+  const statusTxt = document.getElementById('status-text');
+  if(statusTxt && statusTxt.textContent.includes('↻')) statusTxt.textContent = t('status.loaded');
+
+  // ── HTML LANG ATTR ──
+  const langCodes = {en:'en',es:'es',fr:'fr',pt:'pt',ja:'ja'};
+  document.documentElement.lang = langCodes[currentLang]||'en';
+}
+
+// Close lang menu on outside click
+document.addEventListener('click', e => {
+  if(!e.target.closest('#lang-switcher')) {
+    document.getElementById('lang-menu')?.classList.remove('open');
+    document.getElementById('lang-btn')?.classList.remove('open');
+  }
+});
+
+"""
+
+with open('/mnt/user-data/outputs/tips-site/index.html', 'r') as f:
+    content = f.read()
+
+content = content.replace('// ── INIT ──', lang_js + '// ── INIT ──')
+
+# Call applyLang() after initial load
+content = content.replace(
+    'applyRankUI();\nloadAll();\ninitPresence();',
+    'applyRankUI();\nloadAll();\ninitPresence();\napplyLang();'
+)
+
+with open('/mnt/user-data/outputs/tips-site/index.html', 'w') as f:
+    f.write(content)
+    
