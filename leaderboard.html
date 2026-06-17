@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Leaderboard ✦ tips & stuff</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <title>🏆 Leaderboard ✦ tips & stuff</title>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -12,306 +11,460 @@
       --bg:#f5f2eb;--surface:#fffdf8;
       --border:rgba(60,50,30,0.12);--border-strong:rgba(60,50,30,0.22);
       --text:#1a1612;--muted:#7a7060;--accent:#c8602a;
-      --gold:#b8860b;--silver:#707070;--bronze:#8B4513;
+      --gold:#b8860b;--silver:#6a6a7a;--bronze:#8a5a2a;
       --owner-bg:#1a1612;--owner-txt:#f0c060;
       --admin-bg:#2a1a4a;--admin-txt:#c090ff;
       --mod-bg:#0a2a1a;--mod-txt:#60d090;
     }
     html{font-size:16px}
     body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
-    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      background-size:200px 200px}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");background-size:200px 200px}
 
-    /* TOP NAV */
-    .topnav{position:sticky;top:0;z-index:30;background:var(--text);display:flex;align-items:center;padding:0 1.25rem;height:52px;flex-shrink:0}
-    .topnav-logo{font-family:'Instrument Serif',serif;font-size:1.1rem;color:#fff;text-decoration:none;margin-right:1.25rem;white-space:nowrap;flex-shrink:0}
+    /* NAV */
+    .topnav{position:sticky;top:0;z-index:30;background:var(--text);display:flex;align-items:center;padding:0 1.5rem;height:52px;gap:8px;flex-shrink:0}
+    .topnav-logo{font-family:'Instrument Serif',serif;font-size:1.15rem;color:#fff;text-decoration:none;white-space:nowrap;flex-shrink:0;margin-right:6px}
     .topnav-logo em{font-style:italic;color:var(--accent)}
     .topnav-links{display:flex;align-items:center;gap:2px;flex:1;overflow:hidden}
-    .topnav-link{font-size:0.8rem;color:rgba(255,255,255,0.6);text-decoration:none;padding:6px 10px;border-radius:6px;transition:all 0.13s;white-space:nowrap}
+    .topnav-link{font-size:0.78rem;color:rgba(255,255,255,0.55);text-decoration:none;padding:5px 9px;border-radius:6px;transition:all 0.13s;white-space:nowrap}
     .topnav-link:hover{color:#fff;background:rgba(255,255,255,0.08)}
     .topnav-link.active{color:#fff;background:rgba(255,255,255,0.12)}
-    .topnav-right{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0}
-    .rank-badge{font-size:0.68rem;font-weight:500;letter-spacing:0.05em;padding:3px 9px;border-radius:99px;text-transform:uppercase;white-space:nowrap}
+    .topnav-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+    .topnav-btn{font-size:0.78rem;padding:5px 11px;border-radius:6px;border:1px solid rgba(255,255,255,0.18);background:transparent;color:rgba(255,255,255,0.75);cursor:pointer;transition:all 0.13s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;font-family:'DM Sans',sans-serif}
+    .topnav-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
+    .rank-badge{font-size:0.67rem;font-weight:500;letter-spacing:0.04em;padding:3px 9px;border-radius:99px;text-transform:uppercase;white-space:nowrap}
+    .rank-public{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)}
     .rank-owner{background:var(--owner-bg);color:var(--owner-txt)}
     .rank-admin{background:var(--admin-bg);color:var(--admin-txt)}
     .rank-mod{background:var(--mod-bg);color:var(--mod-txt)}
-    .rank-public{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)}
-    .topnav-btn{font-size:0.8rem;padding:5px 11px;border-radius:6px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.8);cursor:pointer;transition:all 0.13s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;font-family:'DM Sans',sans-serif}
-    .topnav-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
+
+    /* LANG SWITCHER */
+    .lang-switcher{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,0.07);border-radius:8px;padding:3px}
+    .lang-btn{background:none;border:none;font-size:1rem;cursor:pointer;padding:3px 5px;border-radius:5px;transition:background 0.13s;line-height:1}
+    .lang-btn:hover{background:rgba(255,255,255,0.12)}
+    .lang-btn.active{background:rgba(255,255,255,0.2)}
 
     /* PAGE */
-    .page{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:2.5rem 2rem 5rem;width:100%;flex:1}
+    .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:2rem 1.5rem 5rem;width:100%}
 
     /* HERO */
-    .hero{margin-bottom:2rem}
-    .hero h1{font-family:'Instrument Serif',serif;font-size:clamp(2rem,5vw,3rem);line-height:1;letter-spacing:-0.02em}
-    .hero h1 em{font-style:italic;color:var(--accent)}
-    .hero p{font-size:0.875rem;color:var(--muted);margin-top:0.4rem}
-    .divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0}
+    .lb-hero{text-align:center;padding:2rem 0 1.5rem}
+    .lb-hero h1{font-family:'Instrument Serif',serif;font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-0.02em}
+    .lb-hero h1 em{font-style:italic;color:var(--accent)}
+    .lb-hero p{color:var(--muted);font-size:0.875rem;margin-top:0.4rem}
 
-    /* STATUS */
-    .status-bar{display:flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--muted);margin-bottom:1.5rem}
-    .status-dot{width:7px;height:7px;border-radius:50%;background:#ccc;flex-shrink:0;transition:background 0.3s}
-    .status-dot.ok{background:#3a9c5a}.status-dot.error{background:#c8602a}.status-dot.loading{background:#f0a500}
+    /* MY CARD */
+    .my-card{background:var(--surface);border:1.5px solid var(--accent);border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:1.75rem;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .my-card-left{flex:1;min-width:160px}
+    .my-card-name{font-size:1rem;font-weight:600}
+    .my-card-sub{font-size:0.78rem;color:var(--muted);margin-top:2px}
+    .my-timer{font-family:'DM Mono',monospace;font-size:2rem;font-weight:500;color:var(--accent);letter-spacing:0.04em}
+    .my-timer-label{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px}
+    .my-card-rank{font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--muted);text-align:right}
+    .my-card-rank strong{display:block;font-size:1.4rem;color:var(--text)}
 
-    /* TOP 3 PODIUM */
-    .podium{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin-bottom:2rem;min-height:140px}
-    .podium-slot{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;max-width:180px}
-    .podium-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;border:3px solid transparent;flex-shrink:0}
-    .podium-name{font-size:0.82rem;font-weight:600;text-align:center;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .podium-time{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted)}
-    .podium-block{width:100%;border-radius:10px 10px 0 0;display:flex;align-items:center;justify-content:center;font-size:1.4rem;padding:8px 0}
-    .podium-rank-label{font-family:'DM Mono',monospace;font-size:0.65rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-top:2px}
+    /* TABS */
+    .lb-tabs{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap}
+    .lb-tab{padding:7px 16px;border-radius:8px;border:1px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;font-size:0.82rem;color:var(--muted);cursor:pointer;transition:all 0.13s}
+    .lb-tab:hover{background:var(--surface);color:var(--text)}
+    .lb-tab.active{background:var(--text);color:#fff;border-color:var(--text)}
 
-    /* 1st place */
-    .podium-1 .podium-avatar{border-color:#f0c060;background:#fdf8e8}
-    .podium-1 .podium-block{background:linear-gradient(135deg,#f0c060,#d4a020);height:90px}
-    .podium-1 .podium-rank-label{color:var(--gold)}
+    /* TABLE */
+    .lb-wrap{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+    .lb-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    .lb-header-title{font-size:0.9rem;font-weight:600;display:flex;align-items:center;gap:6px}
+    .lb-count{font-size:0.72rem;color:var(--muted)}
+    table{width:100%;border-collapse:collapse}
+    thead th{font-size:0.7rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;padding:10px 14px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+    tbody tr{border-bottom:1px solid var(--border);transition:background 0.12s}
+    tbody tr:last-child{border-bottom:none}
+    tbody tr:hover td{background:rgba(200,96,42,0.03)}
+    tbody tr.is-me td{background:rgba(200,96,42,0.06)}
+    td{padding:12px 14px;font-size:0.875rem;vertical-align:middle}
+    .td-rank{font-family:'DM Mono',monospace;font-size:0.9rem;font-weight:700;width:44px}
+    .gold{color:var(--gold)}.silver{color:var(--silver)}.bronze{color:var(--bronze)}
+    .td-medal{font-size:1.1rem;width:32px}
+    .td-name{font-weight:500}
+    .td-name .you-badge{font-size:0.6rem;background:var(--accent);color:#fff;padding:1px 5px;border-radius:99px;margin-left:5px;vertical-align:middle}
+    .td-time{font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--accent)}
+    .td-sessions{font-size:0.78rem;color:var(--muted)}
+    .td-last{font-size:0.72rem;color:var(--muted)}
+    .rank-pip{display:inline-block;font-size:0.6rem;padding:2px 6px;border-radius:99px;font-weight:500;vertical-align:middle;margin-left:4px}
 
-    /* 2nd place */
-    .podium-2 .podium-avatar{border-color:#b0b0b0;background:#f5f5f5}
-    .podium-2 .podium-block{background:linear-gradient(135deg,#c0c0c0,#909090);height:68px}
-    .podium-2 .podium-rank-label{color:var(--silver)}
-
-    /* 3rd place */
-    .podium-3 .podium-avatar{border-color:#cd7f32;background:#fdf0e8}
-    .podium-3 .podium-block{background:linear-gradient(135deg,#cd7f32,#9a5c20);height:50px}
-    .podium-3 .podium-rank-label{color:var(--bronze)}
-
-    /* LEADERBOARD TABLE */
-    .lb-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.5rem}
-    .lb-header{padding:0.9rem 1.25rem;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-    .lb-header-title{font-size:0.85rem;font-weight:600;display:flex;align-items:center;gap:7px}
-    .lb-row{display:flex;align-items:center;gap:12px;padding:11px 1.25rem;border-bottom:1px solid var(--border);transition:background 0.13s;animation:rise 0.2s ease both}
-    .lb-row:last-child{border-bottom:none}
-    .lb-row:hover{background:var(--bg)}
-    @keyframes rise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-    .lb-pos{font-family:'DM Mono',monospace;font-size:0.8rem;font-weight:600;color:var(--muted);width:28px;flex-shrink:0;text-align:center}
-    .lb-pos.top1{color:var(--gold)}
-    .lb-pos.top2{color:var(--silver)}
-    .lb-pos.top3{color:var(--bronze)}
-    .lb-avatar{width:34px;height:34px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-    .lb-info{flex:1;min-width:0}
-    .lb-name{font-size:0.88rem;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .lb-visits{font-size:0.72rem;color:var(--muted);margin-top:1px}
-    .lb-time{font-family:'DM Mono',monospace;font-size:0.85rem;font-weight:500;color:var(--text);flex-shrink:0;text-align:right}
-    .lb-bar-wrap{width:80px;height:5px;background:var(--bg);border-radius:99px;flex-shrink:0;overflow:hidden}
-    .lb-bar{height:100%;background:var(--accent);border-radius:99px;transition:width 0.6s ease}
-
-    /* STATS ROW */
-    .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:2rem}
-    .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;text-align:center}
-    .stat-num{font-family:'Instrument Serif',serif;font-size:1.8rem;font-style:italic;color:var(--accent);line-height:1}
-    .stat-lbl{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px}
+    .lb-empty{text-align:center;padding:3rem;color:var(--muted);font-size:0.875rem}
+    .lb-loading{text-align:center;padding:2.5rem;color:var(--muted);font-family:'DM Mono',monospace;font-size:0.8rem;letter-spacing:0.06em}
 
     /* ADMIN CONTROLS */
-    .admin-controls{background:var(--surface);border:1px solid rgba(192,57,43,0.25);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-    .admin-controls p{font-size:0.82rem;color:var(--muted);flex:1}
-    .clear-lb-btn{height:36px;padding:0 16px;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:500;background:#fce8ec;color:#c0392b;border:1px solid #f0b0b8;border-radius:8px;cursor:pointer;transition:all 0.13s;white-space:nowrap}
-    .clear-lb-btn:hover{background:#c0392b;color:#fff}
+    .admin-strip{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.85rem 1.2rem;margin-bottom:1.25rem;display:none;align-items:center;gap:10px;flex-wrap:wrap;font-size:0.82rem}
+    .admin-strip.show{display:flex}
+    .admin-label{color:var(--muted);flex:1}
+    .admin-btn{font-size:0.78rem;padding:5px 12px;border-radius:6px;border:1px solid var(--border-strong);background:transparent;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.13s}
+    .admin-btn:hover{background:#fce8ec;color:#c0392b;border-color:#fce8ec}
+    .admin-btn.safe:hover{background:#e8f0e0;color:#2d7a2d;border-color:#e8f0e0}
 
-    .empty{text-align:center;padding:3rem 0;color:var(--muted);font-size:0.9rem}
-    .site-footer{margin-top:2rem;text-align:center;font-size:0.75rem;color:var(--muted);padding-bottom:2rem}
+    .site-footer{margin-top:2.5rem;text-align:center;font-size:0.75rem;color:var(--muted);padding-bottom:2rem}
 
-    @media(max-width:500px){
-      .page{padding:1.25rem 1rem 4rem}
-      .podium{gap:6px}
-      .stats-row{grid-template-columns:1fr 1fr}
+    @media(max-width:640px){
+      .topnav-links{display:none}
+      .my-card{flex-direction:column;align-items:flex-start}
+      .my-card-rank{text-align:left}
+      td:nth-child(5),th:nth-child(5){display:none}
     }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
 <header class="topnav">
   <a href="index.html" class="topnav-logo">tips <em>&</em> stuff</a>
   <div class="topnav-links">
-    <a href="index.html"        class="topnav-link">📋 Tips</a>
-    <a href="ranks.html"        class="topnav-link">🏅 Ranks</a>
-    <a href="rules.html"        class="topnav-link">📜 Rules</a>
-    <a href="news.html"         class="topnav-link">📰 News</a>
-    <a href="version.html"      class="topnav-link">🔖 Version</a>
-    <a href="leaderboard.html"  class="topnav-link active">🏆 Leaderboard</a>
-    <a href="donate.html"       class="topnav-link">💛 Donate</a>
+    <a href="index.html"       class="topnav-link">📋 Tips</a>
+    <a href="ranks.html"       class="topnav-link">🏅 Ranks</a>
+    <a href="rules.html"       class="topnav-link">📜 Rules</a>
+    <a href="banlist.html"     class="topnav-link">🚫 Bans</a>
+    <a href="leaderboard.html" class="topnav-link active">🏆 Leaderboard</a>
+    <a href="donate.html"      class="topnav-link">💛 Donate</a>
   </div>
   <div class="topnav-right">
+    <!-- Language Switcher -->
+    <div class="lang-switcher" id="lang-sw">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
+      <button class="lang-btn" data-lang="ko" onclick="setLang('ko')" title="Korean">🇰🇷</button>
+      <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Spanish">🇪🇸</button>
+      <button class="lang-btn" data-lang="de" onclick="setLang('de')" title="German">🇩🇪</button>
+    </div>
     <span id="rank-display" class="rank-badge rank-public">Public</span>
-    <a href="login.html" class="topnav-btn" id="login-link">Login</a>
-    <button class="topnav-btn" id="logout-btn" style="display:none" onclick="doLogout()">Logout</button>
-    <button class="topnav-btn" onclick="loadData()">↻</button>
+    <a href="index.html" class="topnav-btn" id="back-btn">← Back</a>
   </div>
 </header>
 
-<main class="page">
-  <div class="hero">
-    <h1>🏆 <em>leaderboard</em></h1>
-    <p>most dedicated visitors ranked by time spent on the site ✦</p>
-  </div>
-  <hr class="divider"/>
+<div class="page">
 
-  <div class="status-bar"><div class="status-dot loading" id="status-dot"></div><span id="status-text">loading...</span></div>
-
-  <!-- STATS ROW -->
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-num" id="stat-members">—</div><div class="stat-lbl">Visitors Tracked</div></div>
-    <div class="stat-card"><div class="stat-num" id="stat-total-time">—</div><div class="stat-lbl">Total Hours</div></div>
-    <div class="stat-card"><div class="stat-num" id="stat-top-time">—</div><div class="stat-lbl">Top Visitor Time</div></div>
+  <!-- HERO -->
+  <div class="lb-hero">
+    <h1>🏆 <em id="t-title">Leaderboard</em></h1>
+    <p id="t-subtitle">See who's spent the most time on tips & stuff</p>
   </div>
 
-  <!-- PODIUM (top 3) -->
-  <div class="podium" id="podium" style="display:none"></div>
-
-  <!-- ADMIN CLEAR BUTTON -->
-  <div class="admin-controls" id="admin-controls" style="display:none">
-    <p>⚠️ As an admin you can reset the leaderboard. This permanently deletes all visit data.</p>
-    <button class="clear-lb-btn" onclick="clearLeaderboard()">🗑️ Reset Leaderboard</button>
-  </div>
-
-  <!-- FULL LEADERBOARD TABLE -->
-  <div class="lb-card">
-    <div class="lb-header">
-      <span class="lb-header-title">🏆 All Visitors</span>
-      <span id="lb-count" style="font-size:0.78rem;color:var(--muted)"></span>
+  <!-- MY CARD -->
+  <div class="my-card" id="my-card" style="display:none">
+    <div class="my-card-left">
+      <div class="my-card-name" id="my-name">—</div>
+      <div class="my-card-sub" id="t-your-session">Your current session</div>
     </div>
-    <div id="lb-list"><p class="empty">Loading...</p></div>
+    <div style="text-align:center">
+      <div class="my-timer" id="my-live-timer">00:00:00</div>
+      <div class="my-timer-label" id="t-time-today">Time today</div>
+    </div>
+    <div class="my-card-rank">
+      <div id="t-rank-label" style="font-size:0.72rem;color:var(--muted)">Your rank</div>
+      <strong id="my-rank-num">#—</strong>
+    </div>
   </div>
 
-  <footer class="site-footer">tips & stuff — shared with friends ✦</footer>
-</main>
+  <!-- ADMIN STRIP -->
+  <div class="admin-strip" id="admin-strip">
+    <span class="admin-label" id="t-admin-label">🛡️ Admin controls</span>
+    <button class="admin-btn" onclick="resetMyTime()" id="t-reset-me">Reset my time</button>
+    <button class="admin-btn" onclick="clearAllTimes()" id="t-clear-all">Clear all times</button>
+  </div>
+
+  <!-- TABS -->
+  <div class="lb-tabs">
+    <button class="lb-tab active" id="tab-time"     onclick="switchTab('time')"    id="t-tab-time">⏱ Time on Site</button>
+    <button class="lb-tab"        id="tab-sessions" onclick="switchTab('sessions')" id="t-tab-sess">📅 Sessions</button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="lb-wrap">
+    <div class="lb-header">
+      <div class="lb-header-title">🏆 <span id="t-table-title">All-Time Rankings</span></div>
+      <div class="lb-count" id="lb-count"></div>
+    </div>
+    <div id="lb-body"><div class="lb-loading" id="t-loading">loading…</div></div>
+  </div>
+
+  <div class="site-footer"><p>tips & stuff — shared with friends ✦</p></div>
+</div>
 
 <script>
-  const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
-  const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
-  const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
-  let db   = {};
-  let rank = localStorage.getItem('rank') || 'public';
+// ── CONFIG ──
+const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
+const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
+const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
 
-  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
-  function setStatus(s,m){ document.getElementById('status-dot').className='status-dot '+s; document.getElementById('status-text').textContent=m }
-  function doLogout(){ rank='public'; localStorage.removeItem('rank'); location.reload(); }
+// ── TRANSLATIONS ──
+const LANGS = {
+  en: {
+    title:'Leaderboard', subtitle:'See who\'s spent the most time on tips & stuff',
+    yourSession:'Your current session', timeToday:'Time today', rankLabel:'Your rank',
+    adminLabel:'🛡️ Admin controls', resetMe:'Reset my time', clearAll:'Clear all times',
+    tabTime:'⏱ Time on Site', tabSess:'📅 Sessions', tableTitle:'All-Time Rankings',
+    loading:'loading…', empty:'No data yet — be the first!',
+    colRank:'Rank', colName:'Player', colTime:'Total Time', colSess:'Sessions', colLast:'Last Seen',
+    you:'you', back:'← Back',
+  },
+  ko: {
+    title:'리더보드', subtitle:'팁스 & 스터프에서 가장 오래 머문 사람을 확인하세요',
+    yourSession:'현재 세션', timeToday:'오늘 시간', rankLabel:'내 순위',
+    adminLabel:'🛡️ 관리자 메뉴', resetMe:'내 기록 초기화', clearAll:'전체 기록 초기화',
+    tabTime:'⏱ 사이트 체류 시간', tabSess:'📅 세션 수', tableTitle:'전체 순위',
+    loading:'불러오는 중…', empty:'아직 데이터가 없습니다!',
+    colRank:'순위', colName:'플레이어', colTime:'총 시간', colSess:'세션', colLast:'마지막 방문',
+    you:'나', back:'← 돌아가기',
+  },
+  es: {
+    title:'Tabla de líderes', subtitle:'Mira quién ha pasado más tiempo en tips & stuff',
+    yourSession:'Tu sesión actual', timeToday:'Tiempo hoy', rankLabel:'Tu posición',
+    adminLabel:'🛡️ Controles de admin', resetMe:'Reiniciar mi tiempo', clearAll:'Borrar todo',
+    tabTime:'⏱ Tiempo en el sitio', tabSess:'📅 Sesiones', tableTitle:'Clasificación general',
+    loading:'cargando…', empty:'¡Sin datos todavía — sé el primero!',
+    colRank:'Posición', colName:'Jugador', colTime:'Tiempo total', colSess:'Sesiones', colLast:'Última vez',
+    you:'tú', back:'← Volver',
+  },
+  de: {
+    title:'Rangliste', subtitle:'Sieh, wer die meiste Zeit auf tips & stuff verbracht hat',
+    yourSession:'Aktuelle Sitzung', timeToday:'Zeit heute', rankLabel:'Dein Rang',
+    adminLabel:'🛡️ Admin-Steuerung', resetMe:'Meine Zeit zurücksetzen', clearAll:'Alles löschen',
+    tabTime:'⏱ Zeit auf der Seite', tabSess:'📅 Sitzungen', tableTitle:'Gesamtrangliste',
+    loading:'Lade…', empty:'Noch keine Daten — sei der Erste!',
+    colRank:'Rang', colName:'Spieler', colTime:'Gesamtzeit', colSess:'Sitzungen', colLast:'Zuletzt gesehen',
+    you:'ich', back:'← Zurück',
+  },
+};
 
-  function fmtTime(ms) {
-    if (!ms || ms < 0) return '0s';
-    const s = Math.floor(ms / 1000);
-    const m = Math.floor(s / 60);
-    const h = Math.floor(m / 60);
-    if (h > 0)  return `${h}h ${m % 60}m`;
-    if (m > 0)  return `${m}m ${s % 60}s`;
-    return `${s}s`;
+let lang = localStorage.getItem('lang') || 'en';
+let T = LANGS[lang];
+
+function setLang(l) {
+  lang = l; T = LANGS[l];
+  localStorage.setItem('lang', l);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+  applyTranslations();
+  renderTable();
+}
+
+function applyTranslations() {
+  const s = (id, txt) => { const el = document.getElementById(id); if(el) el.textContent = txt; };
+  s('t-title',        T.title);
+  s('t-subtitle',     T.subtitle);
+  s('t-your-session', T.yourSession);
+  s('t-time-today',   T.timeToday);
+  s('t-rank-label',   T.rankLabel);
+  s('t-admin-label',  T.adminLabel);
+  s('t-reset-me',     T.resetMe);
+  s('t-clear-all',    T.clearAll);
+  s('tab-time',       T.tabTime);
+  s('tab-sessions',   T.tabSess);
+  s('t-table-title',  T.tableTitle);
+  s('t-loading',      T.loading);
+  s('back-btn',       T.back);
+  document.title = '🏆 ' + T.title + ' ✦ tips & stuff';
+}
+
+// ── STATE ──
+const rank = sessionStorage.getItem('rank') || 'public';
+const username = sessionStorage.getItem('username') || localStorage.getItem('chat_name') || '';
+let db = {};
+let leaderboard = []; // array of { id, name, totalMs, sessions, lastSeen }
+let activeTab = 'time';
+let sessionStartMs = Date.now();
+let liveInterval = null;
+let saveInterval = null;
+let myEntry = null;
+
+// ── INIT ──
+const RANK_LABELS = {owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod'};
+const RANK_CLASSES = {owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
+const isAdmin = rank === 'owner' || rank === 'admin';
+
+window.addEventListener('DOMContentLoaded', () => {
+  applyTranslations();
+  setLang(lang);
+
+  // Show rank badge
+  const rd = document.getElementById('rank-display');
+  const rankLabel = RANK_LABELS[rank] || (username ? '👤 '+username : 'Public');
+  rd.textContent = rankLabel;
+  rd.className = 'rank-badge ' + (RANK_CLASSES[rank] || 'rank-public');
+
+  // Show admin controls
+  if(isAdmin) document.getElementById('admin-strip').classList.add('show');
+
+  // Show my card if logged in with username
+  if(username) {
+    document.getElementById('my-card').style.display = 'flex';
+    document.getElementById('my-name').textContent = username;
   }
 
-  function fmtHours(ms) {
-    const h = ms / 3600000;
-    return h >= 1 ? h.toFixed(1) + 'h' : Math.floor(ms / 60000) + 'm';
-  }
+  loadData();
+});
 
-  function getEmoji(name) {
-    if (name.includes('Owner'))  return '👑';
-    if (name.includes('Admin'))  return '🛡️';
-    if (name.includes('Mod'))    return '🔧';
-    const emojis = ['😊','🎯','⚡','🌟','🎮','🦊','🐺','🔥','🌈','🎸'];
-    let hash = 0;
-    for (let c of name) hash = (hash << 5) - hash + c.charCodeAt(0);
-    return emojis[Math.abs(hash) % emojis.length];
-  }
+// ── DATA ──
+async function loadData() {
+  try {
+    const res = await fetch(BIN_URL + '/latest', { headers: { 'X-Master-Key': API_KEY, 'X-Bin-Meta': 'false' } });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const raw = await res.json();
+    const data = raw.record !== undefined ? raw.record : raw;
+    db = data;
+    leaderboard = Array.isArray(data.leaderboard) ? data.leaderboard : [];
 
-  function applyRankUI() {
-    const labels  = {owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod',public:'Public'};
-    const classes = {owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
-    const rd = document.getElementById('rank-display');
-    rd.textContent = labels[rank]; rd.className = 'rank-badge ' + classes[rank];
-    document.getElementById('login-link').style.display  = rank === 'public' ? '' : 'none';
-    document.getElementById('logout-btn').style.display  = rank !== 'public' ? '' : 'none';
-    const isAdmin = rank === 'owner' || rank === 'admin';
-    document.getElementById('admin-controls').style.display = isAdmin ? 'flex' : 'none';
-  }
+    if(username) {
+      // Find or create entry for this user
+      myEntry = leaderboard.find(e => e.name.toLowerCase() === username.toLowerCase());
+      if(!myEntry) {
+        myEntry = { id: 'lb_' + Date.now(), name: username, totalMs: 0, sessions: 0, lastSeen: Date.now() };
+        leaderboard.push(myEntry);
+      }
+      // Start a new session
+      myEntry.sessions = (myEntry.sessions || 0) + 1;
+      myEntry.lastSeen = Date.now();
+      sessionStartMs = Date.now();
 
-  async function loadData() {
-    setStatus('loading','loading...');
-    try {
-      const res  = await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
-      if(!res.ok) throw new Error('HTTP '+res.status);
-      const raw  = await res.json();
-      db = raw.record !== undefined ? raw.record : raw;
-      db.leaderboard = (db.leaderboard && typeof db.leaderboard==='object') ? db.leaderboard : {};
-      setStatus('ok','loaded ✓');
-      applyRankUI(); render();
-    } catch(e) { console.error(e); setStatus('error','could not load — '+e.message); }
-  }
-
-  function render() {
-    const lb = db.leaderboard || {};
-    const entries = Object.entries(lb)
-      .map(([name, data]) => ({ name, totalMs: data.totalMs||0, visits: data.visits||0, lastSeen: data.lastSeen||0 }))
-      .sort((a, b) => b.totalMs - a.totalMs);
-
-    // Stats row
-    const totalMs = entries.reduce((s, e) => s + e.totalMs, 0);
-    const topMs   = entries[0]?.totalMs || 0;
-    document.getElementById('stat-members').textContent  = entries.length;
-    document.getElementById('stat-total-time').textContent = fmtHours(totalMs);
-    document.getElementById('stat-top-time').textContent   = fmtHours(topMs);
-    document.getElementById('lb-count').textContent = entries.length ? `${entries.length} visitor${entries.length!==1?'s':''}` : '';
-
-    if (!entries.length) {
-      document.getElementById('podium').style.display = 'none';
-      document.getElementById('lb-list').innerHTML = '<p class="empty">No visit data yet — come back after exploring the site!</p>';
-      return;
+      // Live timer
+      liveInterval = setInterval(updateLiveTimer, 1000);
+      // Save time every 30 seconds
+      saveInterval = setInterval(saveMyTime, 30000);
+      // Save when leaving
+      window.addEventListener('beforeunload', saveMyTime);
     }
 
-    // PODIUM (top 3)
-    const top3    = entries.slice(0, 3);
-    const podOrder = top3.length === 1 ? [top3[0]] : top3.length === 2 ? [top3[1], top3[0]] : [top3[1], top3[0], top3[2]];
-    const podClass = top3.length === 1 ? ['podium-1'] : top3.length === 2 ? ['podium-2','podium-1'] : ['podium-2','podium-1','podium-3'];
-    const medals   = ['🥇','🥈','🥉'];
-    const rankLabels = ['1st','2nd','3rd'];
+    renderTable();
+  } catch(e) {
+    document.getElementById('lb-body').innerHTML =
+      `<div class="lb-loading">⚠️ Could not load — ${e.message}</div>`;
+  }
+}
 
-    document.getElementById('podium').style.display = 'flex';
-    document.getElementById('podium').innerHTML = podOrder.map((e, i) => {
-      const realRank = top3.indexOf(e);
-      return `<div class="podium-slot ${podClass[i]}">
-        <div class="podium-avatar">${getEmoji(e.name)}</div>
-        <div class="podium-name">${esc(e.name)}</div>
-        <div class="podium-time">${fmtTime(e.totalMs)}</div>
-        <div class="podium-block">${medals[realRank]}</div>
-        <div class="podium-rank-label">${rankLabels[realRank]}</div>
-      </div>`;
-    }).join('');
+async function saveMyTime() {
+  if(!myEntry || !username) return;
+  const elapsed = Date.now() - sessionStartMs;
+  myEntry.totalMs = (myEntry.totalMs || 0) + elapsed;
+  myEntry.lastSeen = Date.now();
+  sessionStartMs = Date.now(); // reset so we don't double-count
+  db.leaderboard = leaderboard;
+  try {
+    await fetch(BIN_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+      body: JSON.stringify(db)
+    });
+  } catch(e) {}
+  renderTable();
+}
 
-    // FULL TABLE
-    document.getElementById('lb-list').innerHTML = entries.map((e, i) => {
-      const pct     = topMs > 0 ? Math.round((e.totalMs / topMs) * 100) : 0;
-      const posClass = i === 0 ? 'top1' : i === 1 ? 'top2' : i === 2 ? 'top3' : '';
-      const posLabel = i < 3 ? ['🥇','🥈','🥉'][i] : `#${i+1}`;
-      const lastDate = e.lastSeen ? new Date(e.lastSeen).toLocaleDateString([],{month:'short',day:'numeric'}) : '—';
-      return `<div class="lb-row" style="animation-delay:${i*0.04}s">
-        <div class="lb-pos ${posClass}">${posLabel}</div>
-        <div class="lb-avatar">${getEmoji(e.name)}</div>
-        <div class="lb-info">
-          <div class="lb-name">${esc(e.name)}</div>
-          <div class="lb-visits">${e.visits} visit${e.visits!==1?'s':''} · last seen ${lastDate}</div>
-        </div>
-        <div class="lb-bar-wrap"><div class="lb-bar" style="width:${pct}%"></div></div>
-        <div class="lb-time">${fmtTime(e.totalMs)}</div>
-      </div>`;
-    }).join('');
+function updateLiveTimer() {
+  const elapsed = Date.now() - sessionStartMs;
+  const running = (myEntry ? myEntry.totalMs : 0) + elapsed;
+  document.getElementById('my-live-timer').textContent = formatMs(running);
+
+  // Update my rank
+  const sorted = [...leaderboard].sort((a,b) => (b.totalMs||0)-(a.totalMs||0));
+  const pos = sorted.findIndex(e => e.name.toLowerCase() === username.toLowerCase());
+  document.getElementById('my-rank-num').textContent = pos >= 0 ? '#' + (pos+1) : '#—';
+}
+
+// ── RENDER ──
+function switchTab(t) {
+  activeTab = t;
+  document.getElementById('tab-time').classList.toggle('active', t==='time');
+  document.getElementById('tab-sessions').classList.toggle('active', t==='sessions');
+  renderTable();
+}
+
+function renderTable() {
+  const body = document.getElementById('lb-body');
+  if(!leaderboard.length) {
+    body.innerHTML = `<div class="lb-empty">${T.empty}</div>`;
+    document.getElementById('lb-count').textContent = '';
+    return;
   }
 
-  async function clearLeaderboard() {
-    if (!confirm('Reset the entire leaderboard? This cannot be undone.')) return;
-    setStatus('loading','clearing...');
-    try {
-      const res  = await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
-      const raw  = await res.json();
-      const data = raw.record !== undefined ? raw.record : raw;
-      data.leaderboard = {};
-      await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(data)});
-      db.leaderboard = {};
-      setStatus('ok','leaderboard cleared ✓'); render();
-    } catch(e) { setStatus('error','could not clear — '+e.message); }
-  }
+  // Sort
+  const sorted = [...leaderboard].sort((a,b) =>
+    activeTab === 'time'
+      ? (b.totalMs||0) - (a.totalMs||0)
+      : (b.sessions||0) - (a.sessions||0)
+  );
 
-  applyRankUI(); loadData();
+  document.getElementById('lb-count').textContent = sorted.length + ' players';
+
+  const medals = ['🥇','🥈','🥉'];
+  const rankCls = ['gold','silver','bronze'];
+  const isMe = name => username && name.toLowerCase() === username.toLowerCase();
+
+  body.innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th style="width:44px">${T.colRank}</th>
+          <th style="width:32px"></th>
+          <th>${T.colName}</th>
+          <th>${T.colTime}</th>
+          <th>${T.colSess}</th>
+          <th>${T.colLast}</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${sorted.map((e, i) => {
+          const medal = i < 3 ? medals[i] : '';
+          const rc    = i < 3 ? rankCls[i] : '';
+          const me    = isMe(e.name);
+          const rk    = sessionStorage.getItem('rank') || '';
+          const pip   = RANK_LABELS[rk] && me
+            ? `<span class="rank-pip ${RANK_CLASSES[rk]||''}">${RANK_LABELS[rk]}</span>`
+            : '';
+          const youBadge = me ? `<span class="you-badge">${T.you}</span>` : '';
+          const last = e.lastSeen
+            ? new Date(e.lastSeen).toLocaleDateString([], {month:'short',day:'numeric'})
+            : '—';
+          return `<tr class="${me ? 'is-me' : ''}">
+            <td class="td-rank ${rc}">${i+1}</td>
+            <td class="td-medal">${medal}</td>
+            <td class="td-name">${esc(e.name)}${youBadge}${pip}</td>
+            <td class="td-time">${formatMs(e.totalMs||0)}</td>
+            <td class="td-sessions">${e.sessions||0}</td>
+            <td class="td-last">${last}</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>`;
+}
+
+// ── ADMIN ──
+async function resetMyTime() {
+  if(!username || !confirm('Reset your time to 0?')) return;
+  myEntry = leaderboard.find(e => e.name.toLowerCase() === username.toLowerCase());
+  if(myEntry) { myEntry.totalMs = 0; myEntry.sessions = 0; }
+  sessionStartMs = Date.now();
+  db.leaderboard = leaderboard;
+  try { await fetch(BIN_URL, { method:'PUT', headers:{'Content-Type':'application/json','X-Master-Key':API_KEY}, body:JSON.stringify(db) }); }
+  catch(e) {}
+  renderTable();
+}
+
+async function clearAllTimes() {
+  if(!confirm('Clear ALL leaderboard times? This cannot be undone.')) return;
+  leaderboard = [];
+  db.leaderboard = [];
+  try { await fetch(BIN_URL, { method:'PUT', headers:{'Content-Type':'application/json','X-Master-Key':API_KEY}, body:JSON.stringify(db) }); }
+  catch(e) {}
+  renderTable();
+}
+
+// ── UTILS ──
+function formatMs(ms) {
+  if(!ms || ms < 0) return '00:00:00';
+  const s = Math.floor(ms / 1000);
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
+  return [h, m, sec].map(v => String(v).padStart(2,'0')).join(':');
+}
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
 </script>
+<script src="transition.js"></script>
 </body>
 </html>
