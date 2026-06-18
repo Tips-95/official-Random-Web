@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎮 Games ✦ tips & stuff</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#f5f2eb;--surface:#fffdf8;
+      --border:rgba(60,50,30,0.12);--border-strong:rgba(60,50,30,0.22);
+      --text:#1a1612;--muted:#7a7060;--accent:#c8602a;
+      --owner-bg:#1a1612;--owner-txt:#f0c060;
+      --admin-bg:#2a1a4a;--admin-txt:#c090ff;
+      --mod-bg:#0a2a1a;--mod-txt:#60d090;
+    }
+    html{font-size:16px}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");background-size:200px 200px}
+
+    /* NAV */
+    .topnav{position:sticky;top:0;z-index:30;background:var(--text);display:flex;align-items:center;padding:0 1.5rem;height:52px;gap:8px;flex-shrink:0}
+    .topnav-logo{font-family:'Instrument Serif',serif;font-size:1.15rem;color:#fff;text-decoration:none;white-space:nowrap;flex-shrink:0;margin-right:6px}
+    .topnav-logo em{font-style:italic;color:var(--accent)}
+    .topnav-links{display:flex;align-items:center;gap:2px;flex:1;overflow:hidden}
+    .topnav-link{font-size:0.78rem;color:rgba(255,255,255,0.55);text-decoration:none;padding:5px 9px;border-radius:6px;transition:all 0.13s;white-space:nowrap}
+    .topnav-link:hover{color:#fff;background:rgba(255,255,255,0.08)}
+    .topnav-link.active{color:#fff;background:rgba(255,255,255,0.12)}
+    .topnav-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+    .rank-badge{font-size:0.67rem;font-weight:500;letter-spacing:0.04em;padding:3px 9px;border-radius:99px;text-transform:uppercase;white-space:nowrap}
+    .rank-public{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)}
+    .rank-owner{background:var(--owner-bg);color:var(--owner-txt)}
+    .rank-admin{background:var(--admin-bg);color:var(--admin-txt)}
+    .rank-mod{background:var(--mod-bg);color:var(--mod-txt)}
+    .topnav-btn{font-size:0.78rem;padding:5px 11px;border-radius:6px;border:1px solid rgba(255,255,255,0.18);background:transparent;color:rgba(255,255,255,0.75);cursor:pointer;transition:all 0.13s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;font-family:'DM Sans',sans-serif}
+    .topnav-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
+    .lang-switcher{display:flex;align-items:center;gap:3px;background:rgba(255,255,255,0.07);border-radius:8px;padding:3px}
+    .lang-btn{background:none;border:none;font-size:0.95rem;cursor:pointer;padding:3px 5px;border-radius:5px;transition:background 0.13s;line-height:1}
+    .lang-btn:hover{background:rgba(255,255,255,0.12)}
+    .lang-btn.active{background:rgba(255,255,255,0.22)}
+
+    /* PAGE */
+    .page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:2rem 1.5rem 5rem;width:100%;flex:1}
+
+    /* HERO */
+    .hero{text-align:center;padding:1.75rem 0 1.5rem}
+    .hero h1{font-family:'Instrument Serif',serif;font-size:clamp(2rem,5vw,3rem);letter-spacing:-0.02em}
+    .hero h1 em{font-style:italic;color:var(--accent)}
+    .hero p{color:var(--muted);font-size:0.875rem;margin-top:0.4rem}
+
+    /* GAME CARDS HUB */
+    .games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:2.5rem}
+    .game-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:1.5rem 1.25rem;cursor:pointer;transition:all 0.18s;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;position:relative;overflow:hidden}
+    .game-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 24px rgba(200,96,42,0.12)}
+    .game-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--card-accent,var(--accent));border-radius:0 0 12px 12px;opacity:0;transition:opacity 0.18s}
+    .game-card:hover::after{opacity:1}
+    .game-icon{font-size:2.5rem;line-height:1}
+    .game-name{font-weight:600;font-size:0.95rem}
+    .game-desc{font-size:0.78rem;color:var(--muted);line-height:1.45}
+    .game-hiscore{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--accent);background:#fdecd6;padding:2px 8px;border-radius:99px;margin-top:2px}
+
+    /* GAME SCREEN */
+    .game-screen{display:none;animation:fadeIn 0.2s ease}
+    .game-screen.active{display:block}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    .game-topbar{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;flex-wrap:wrap}
+    .game-back-btn{font-family:'DM Mono',monospace;font-size:0.78rem;padding:6px 12px;border-radius:7px;border:1px solid var(--border-strong);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.13s}
+    .game-back-btn:hover{background:var(--surface);color:var(--text)}
+    .game-title{font-family:'Instrument Serif',serif;font-size:1.4rem;flex:1}
+    .game-score-badge{font-family:'DM Mono',monospace;font-size:0.82rem;padding:4px 12px;border-radius:99px;background:var(--text);color:#fff}
+    .game-action-btn{height:38px;padding:0 18px;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:background 0.15s}
+    .game-action-btn:hover{background:#b5521f}
+    .game-action-btn.ghost{background:transparent;border:1px solid var(--border-strong);color:var(--muted)}
+    .game-action-btn.ghost:hover{background:var(--surface);color:var(--text)}
+
+    /* SNAKE */
+    .snake-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+    #snake-canvas{border:2px solid var(--border);border-radius:10px;background:#1a1612;display:block;max-width:100%}
+    .snake-info{display:flex;gap:16px;font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--muted)}
+    .snake-info span strong{color:var(--text)}
+    .snake-controls{display:grid;grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,44px);gap:4px;margin-top:4px}
+    .dpad-btn{width:44px;height:44px;border-radius:8px;border:1px solid var(--border-strong);background:var(--surface);font-size:1.1rem;cursor:pointer;transition:background 0.1s;display:flex;align-items:center;justify-content:center}
+    .dpad-btn:active{background:var(--border)}
+    .snake-msg{font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--muted);text-align:center;letter-spacing:0.06em}
+
+    /* TIC-TAC-TOE */
+    .ttt-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+    .ttt-board{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:100%;max-width:300px}
+    .ttt-cell{aspect-ratio:1;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-size:2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.13s;line-height:1}
+    .ttt-cell:hover:not(.taken){background:#fdecd6}
+    .ttt-cell.taken{cursor:default}
+    .ttt-cell.win{background:#fdecd6;border-color:var(--accent)}
+    .ttt-status{font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--muted);text-align:center;min-height:20px}
+    .ttt-stats{display:flex;gap:20px;font-family:'DM Mono',monospace;font-size:0.82rem;text-align:center}
+    .ttt-stat{display:flex;flex-direction:column;gap:2px}
+    .ttt-stat strong{font-size:1.4rem;color:var(--text)}
+    .ttt-stat span{color:var(--muted);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em}
+    .ttt-stat.win-col strong{color:#2d7a2d}
+    .ttt-stat.loss-col strong{color:#c0392b}
+
+    /* MEMORY */
+    .mem-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+    .mem-board{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;max-width:360px}
+    .mem-card{aspect-ratio:1;background:var(--text);border-radius:10px;cursor:pointer;transition:transform 0.3s;transform-style:preserve-3d;position:relative;font-size:1.6rem}
+    .mem-card.flipped,.mem-card.matched{transform:rotateY(180deg)}
+    .mem-card.matched{cursor:default;opacity:0.7}
+    .mem-front,.mem-back{position:absolute;inset:0;border-radius:10px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden}
+    .mem-front{background:var(--text);color:var(--accent);font-size:1.2rem}
+    .mem-back{background:var(--surface);border:1.5px solid var(--border);transform:rotateY(180deg)}
+    .mem-info{display:flex;gap:20px;font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--muted)}
+    .mem-info span strong{color:var(--text)}
+    .mem-msg{font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--muted);text-align:center}
+
+    /* TRIVIA */
+    .trivia-wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+    .trivia-progress{height:4px;background:var(--border);border-radius:99px;overflow:hidden}
+    .trivia-progress-fill{height:100%;background:var(--accent);border-radius:99px;transition:width 0.4s ease}
+    .trivia-q-num{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase}
+    .trivia-question{font-size:1.05rem;font-weight:500;line-height:1.55;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+    .trivia-options{display:flex;flex-direction:column;gap:8px}
+    .trivia-opt{padding:0.75rem 1rem;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;font-size:0.9rem;background:var(--surface);transition:all 0.15s;text-align:left;font-family:'DM Sans',sans-serif;color:var(--text)}
+    .trivia-opt:hover:not(.answered){border-color:var(--accent);background:#fdecd6}
+    .trivia-opt.correct{background:#e8f5e9;border-color:#2d7a2d;color:#2d7a2d;font-weight:500}
+    .trivia-opt.wrong{background:#fce8ec;border-color:#c0392b;color:#c0392b}
+    .trivia-opt.show-correct{background:#e8f5e9;border-color:#2d7a2d}
+    .trivia-opt.answered{cursor:default}
+    .trivia-feedback{font-size:0.85rem;color:var(--muted);padding:8px 12px;border-radius:8px;background:var(--bg);min-height:20px}
+    .trivia-next-btn{align-self:flex-end;height:38px;padding:0 20px;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;background:var(--text);color:var(--bg);border:none;border-radius:8px;cursor:pointer;transition:opacity 0.15s;display:none}
+    .trivia-next-btn:hover{opacity:0.82}
+    .trivia-result{text-align:center;padding:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;gap:10px;align-items:center}
+    .trivia-result .big-score{font-family:'DM Mono',monospace;font-size:3rem;font-weight:500;color:var(--accent);line-height:1}
+    .trivia-result p{color:var(--muted);font-size:0.9rem}
+
+    /* SCORE SAVED TOAST */
+    .score-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(60px);background:var(--text);color:#fff;font-family:'DM Mono',monospace;font-size:0.8rem;padding:10px 20px;border-radius:99px;box-shadow:0 4px 16px rgba(0,0,0,0.18);transition:transform 0.3s ease,opacity 0.3s ease;opacity:0;z-index:100;white-space:nowrap}
+    .score-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+    /* MINI LEADERBOARD */
+    .mini-lb{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:1rem}
+    .mini-lb-head{padding:0.7rem 1rem;background:var(--bg);border-bottom:1px solid var(--border);font-size:0.82rem;font-weight:600;display:flex;align-items:center;gap:6px}
+    .mini-lb-row{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--border);font-size:0.82rem}
+    .mini-lb-row:last-child{border-bottom:none}
+    .mini-lb-row.is-me{background:rgba(200,96,42,0.06)}
+    .mini-lb-pos{font-family:'DM Mono',monospace;font-size:0.8rem;font-weight:700;width:24px;color:var(--muted)}
+    .mini-lb-name{flex:1;font-weight:500}
+    .mini-lb-score{font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--accent)}
+    .mini-lb-empty{padding:1rem;text-align:center;color:var(--muted);font-size:0.82rem}
+
+    .site-footer{margin-top:2rem;text-align:center;font-size:0.75rem;color:var(--muted);padding-bottom:2rem}
+    @media(max-width:640px){.topnav-links{display:none}.mem-board{max-width:280px}.mem-card{font-size:1.2rem}}
+  </style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="index.html" class="topnav-logo">tips <em>&</em> stuff</a>
+  <div class="topnav-links">
+    <a href="index.html"       class="topnav-link">📋 Tips</a>
+    <a href="ranks.html"       class="topnav-link">🏅 Ranks</a>
+    <a href="rules.html"       class="topnav-link">📜 Rules</a>
+    <a href="leaderboard.html" class="topnav-link">🏆 Leaderboard</a>
+    <a href="games.html"       class="topnav-link active">🎮 Games</a>
+    <a href="donate.html"      class="topnav-link">💛 Donate</a>
+  </div>
+  <div class="topnav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
+      <button class="lang-btn" data-lang="ko" onclick="setLang('ko')" title="Korean">🇰🇷</button>
+      <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Spanish">🇪🇸</button>
+      <button class="lang-btn" data-lang="de" onclick="setLang('de')" title="German">🇩🇪</button>
+    </div>
+    <span id="rank-display" class="rank-badge rank-public">Public</span>
+    <a href="index.html" class="topnav-btn">← Back</a>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- HUB -->
+  <div id="hub">
+    <div class="hero">
+      <h1>🎮 <em id="t-title">Games</em></h1>
+      <p id="t-subtitle">Play mini games & trivia — scores go on the leaderboard!</p>
+    </div>
+    <div class="games-grid">
+      <div class="game-card" onclick="openGame('snake')" style="--card-accent:#3a9c5a">
+        <div class="game-icon">🐍</div>
+        <div class="game-name" data-t="snakeName">Snake</div>
+        <div class="game-desc" data-t="snakeDesc">Classic snake — eat food, grow longer, don't crash!</div>
+        <div class="game-hiscore" id="hs-snake">Best: —</div>
+      </div>
+      <div class="game-card" onclick="openGame('ttt')" style="--card-accent:#7a2ac8">
+        <div class="game-icon">⭕</div>
+        <div class="game-name" data-t="tttName">Tic-Tac-Toe</div>
+        <div class="game-desc" data-t="tttDesc">You vs the computer. Can you beat the AI?</div>
+        <div class="game-hiscore" id="hs-ttt">Wins: —</div>
+      </div>
+      <div class="game-card" onclick="openGame('memory')" style="--card-accent:#2a60c8">
+        <div class="game-icon">🃏</div>
+        <div class="game-name" data-t="memName">Memory</div>
+        <div class="game-desc" data-t="memDesc">Flip cards to find matching pairs. Fewest moves wins!</div>
+        <div class="game-hiscore" id="hs-memory">Best: —</div>
+      </div>
+      <div class="game-card" onclick="openGame('trivia')" style="--card-accent:#c8602a">
+        <div class="game-icon">💡</div>
+        <div class="game-name" data-t="triviaName">Tips Trivia</div>
+        <div class="game-desc" data-t="triviaDesc">Test your knowledge of life hacks, food tips & tech tricks!</div>
+        <div class="game-hiscore" id="hs-trivia">Best: —</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SNAKE ── -->
+  <div id="screen-snake" class="game-screen">
+    <div class="game-topbar">
+      <button class="game-back-btn" onclick="closeGame('snake')">← Back</button>
+      <div class="game-title">🐍 <span data-t="snakeName">Snake</span></div>
+      <div class="game-score-badge">Score: <span id="snake-score">0</span></div>
+      <button class="game-action-btn" onclick="snakeStart()">▶ Start</button>
+    </div>
+    <div class="snake-wrap">
+      <canvas id="snake-canvas" width="320" height="320"></canvas>
+      <div class="snake-info">
+        <span>Score: <strong id="snake-score2">0</strong></span>
+        <span>Best: <strong id="snake-best">0</strong></span>
+        <span id="snake-state">Press Start</span>
+      </div>
+      <!-- D-pad for mobile -->
+      <div class="snake-controls">
+        <div></div>
+        <button class="dpad-btn" onclick="snakeDir(0,-1)">▲</button>
+        <div></div>
+        <button class="dpad-btn" onclick="snakeDir(-1,0)">◀</button>
+        <button class="dpad-btn" onclick="snakePause()">⏸</button>
+        <button class="dpad-btn" onclick="snakeDir(1,0)">▶</button>
+        <div></div>
+        <button class="dpad-btn" onclick="snakeDir(0,1)">▼</button>
+        <div></div>
+      </div>
+    </div>
+    <div class="mini-lb" id="snake-lb"></div>
+  </div>
+
+  <!-- ── TIC-TAC-TOE ── -->
+  <div id="screen-ttt" class="game-screen">
+    <div class="game-topbar">
+      <button class="game-back-btn" onclick="closeGame('ttt')">← Back</button>
+      <div class="game-title">⭕ <span data-t="tttName">Tic-Tac-Toe</span></div>
+      <button class="game-action-btn" onclick="tttReset()">↺ New Game</button>
+    </div>
+    <div class="ttt-wrap">
+      <div class="ttt-stats">
+        <div class="ttt-stat win-col"><strong id="ttt-wins">0</strong><span data-t="tttWins">Wins</span></div>
+        <div class="ttt-stat"><strong id="ttt-draws">0</strong><span data-t="tttDraws">Draws</span></div>
+        <div class="ttt-stat loss-col"><strong id="ttt-losses">0</strong><span data-t="tttLosses">Losses</span></div>
+      </div>
+      <div class="ttt-board" id="ttt-board"></div>
+      <div class="ttt-status" id="ttt-status">Your turn — you are ✕</div>
+    </div>
+    <div class="mini-lb" id="ttt-lb"></div>
+  </div>
+
+  <!-- ── MEMORY ── -->
+  <div id="screen-memory" class="game-screen">
+    <div class="game-topbar">
+      <button class="game-back-btn" onclick="closeGame('memory')">← Back</button>
+      <div class="game-title">🃏 <span data-t="memName">Memory</span></div>
+      <button class="game-action-btn" onclick="memReset()">↺ Shuffle</button>
+    </div>
+    <div class="mem-wrap">
+      <div class="mem-info">
+        <span data-t="memMoves">Moves: <strong id="mem-moves">0</strong></span>
+        <span data-t="memMatched">Matched: <strong id="mem-matched">0</strong>/8</span>
+        <span data-t="memBest">Best: <strong id="mem-best">—</strong></span>
+      </div>
+      <div class="mem-board" id="mem-board"></div>
+      <div class="mem-msg" id="mem-msg"></div>
+    </div>
+    <div class="mini-lb" id="memory-lb"></div>
+  </div>
+
+  <!-- ── TRIVIA ── -->
+  <div id="screen-trivia" class="game-screen">
+    <div class="game-topbar">
+      <button class="game-back-btn" onclick="closeGame('trivia')">← Back</button>
+      <div class="game-title">💡 <span data-t="triviaName">Tips Trivia</span></div>
+      <div class="game-score-badge">Score: <span id="trivia-score">0</span></div>
+    </div>
+    <div class="trivia-wrap">
+      <div class="trivia-progress"><div class="trivia-progress-fill" id="trivia-prog"></div></div>
+      <div class="trivia-q-num" id="trivia-qnum">Question 1 of 10</div>
+      <div class="trivia-question" id="trivia-question"></div>
+      <div class="trivia-options" id="trivia-options"></div>
+      <div class="trivia-feedback" id="trivia-feedback"></div>
+      <button class="trivia-next-btn" id="trivia-next" onclick="triviaNext()">Next →</button>
+      <div id="trivia-result" style="display:none" class="trivia-result">
+        <div class="big-score" id="trivia-final-score">0/10</div>
+        <p id="trivia-result-msg"></p>
+        <button class="game-action-btn" onclick="triviaStart()">Play Again</button>
+      </div>
+    </div>
+    <div class="mini-lb" id="trivia-lb"></div>
+  </div>
+
+  <div class="site-footer"><p>tips & stuff — shared with friends ✦</p></div>
+</div>
+
+<!-- SCORE TOAST -->
+<div class="score-toast" id="score-toast"></div>
+
+<script>
+// ── CONFIG ──
+const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
+const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
+const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
+
+const username  = sessionStorage.getItem('username') || localStorage.getItem('chat_name') || 'Guest';
+const rankStr   = sessionStorage.getItem('rank') || 'public';
+const RANK_LABELS = {owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod'};
+const RANK_CLASSES = {owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
+
+let dbFull = {};
+let gameScores = {}; // { snake:[], ttt:[], memory:[], trivia:[] }
+
+// ── LANG ──
+const LANGS = {
+  en:{ title:'Games', subtitle:'Play mini games & trivia — scores go on the leaderboard!',
+    snakeName:'Snake', snakeDesc:'Classic snake — eat food, grow longer, don\'t crash!',
+    tttName:'Tic-Tac-Toe', tttDesc:'You vs the computer. Can you beat the AI?',
+    memName:'Memory', memDesc:'Flip cards to find matching pairs. Fewest moves wins!',
+    triviaName:'Tips Trivia', triviaDesc:'Test your knowledge of life hacks, food tips & tech tricks!',
+    tttWins:'Wins', tttDraws:'Draws', tttLosses:'Losses',
+    memMoves:'Moves:', memMatched:'Matched:', memBest:'Best:',
+    scoreSaved:'🏆 Score saved to leaderboard!',
+  },
+  ko:{ title:'게임', subtitle:'미니 게임과 퀴즈를 즐기세요 — 점수가 리더보드에 저장됩니다!',
+    snakeName:'스네이크', snakeDesc:'클래식 스네이크 — 먹이를 먹고 더 길어지세요!',
+    tttName:'틱택토', tttDesc:'컴퓨터와 대결하세요. AI를 이길 수 있나요?',
+    memName:'메모리', memDesc:'카드를 뒤집어 짝을 맞추세요. 적은 횟수가 승리!',
+    triviaName:'팁스 퀴즈', triviaDesc:'생활 팁, 음식, 기술 지식을 테스트하세요!',
+    tttWins:'승리', tttDraws:'무승부', tttLosses:'패배',
+    memMoves:'이동:', memMatched:'맞춤:', memBest:'최고:',
+    scoreSaved:'🏆 점수가 리더보드에 저장되었습니다!',
+  },
+  es:{ title:'Juegos', subtitle:'¡Juega mini juegos y trivia — los puntajes van al marcador!',
+    snakeName:'Snake', snakeDesc:'Snake clásico — ¡come comida, crece y no choques!',
+    tttName:'Tres en raya', tttDesc:'Tú vs la computadora. ¿Puedes vencer a la IA?',
+    memName:'Memoria', memDesc:'Voltea cartas para encontrar pares. ¡Menos movimientos gana!',
+    triviaName:'Trivia de Tips', triviaDesc:'¡Pon a prueba tus conocimientos sobre tips de vida, comida y tecnología!',
+    tttWins:'Victorias', tttDraws:'Empates', tttLosses:'Derrotas',
+    memMoves:'Movimientos:', memMatched:'Parejas:', memBest:'Mejor:',
+    scoreSaved:'🏆 ¡Puntuación guardada en el marcador!',
+  },
+  de:{ title:'Spiele', subtitle:'Spiel Mini-Spiele & Trivia — Punkte kommen auf die Rangliste!',
+    snakeName:'Snake', snakeDesc:'Klassisches Snake — iss Futter, werde länger, kein Absturz!',
+    tttName:'Tic-Tac-Toe', tttDesc:'Du gegen den Computer. Kannst du die KI schlagen?',
+    memName:'Memory', memDesc:'Karten umdrehen und Paare finden. Wenigste Züge gewinnen!',
+    triviaName:'Tipps-Trivia', triviaDesc:'Teste dein Wissen über Lebenstipps, Essen und Technik!',
+    tttWins:'Siege', tttDraws:'Unentschieden', tttLosses:'Niederlagen',
+    memMoves:'Züge:', memMatched:'Gefunden:', memBest:'Bestzeit:',
+    scoreSaved:'🏆 Punktzahl auf Rangliste gespeichert!',
+  },
+};
+let lang = localStorage.getItem('lang') || 'en';
+let T = LANGS[lang];
+
+function setLang(l) {
+  lang = l; T = LANGS[l];
+  localStorage.setItem('lang', l);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+  applyLang();
+}
+function applyLang() {
+  document.getElementById('t-title').textContent    = T.title;
+  document.getElementById('t-subtitle').textContent = T.subtitle;
+  document.title = '🎮 ' + T.title + ' ✦ tips & stuff';
+  document.querySelectorAll('[data-t]').forEach(el => {
+    const k = el.dataset.t; if(T[k]) el.textContent = T[k];
+  });
+}
+
+// ── INIT ──
+window.addEventListener('DOMContentLoaded', () => {
+  applyLang();
+  const rd = document.getElementById('rank-display');
+  rd.textContent = RANK_LABELS[rankStr] || (username !== 'Guest' ? '👤 '+username : 'Public');
+  rd.className = 'rank-badge ' + (RANK_CLASSES[rankStr] || 'rank-public');
+  loadScores();
+});
+
+// ── DATA ──
+async function loadScores() {
+  try {
+    const res = await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
+    const raw = await res.json(); const data = raw.record !== undefined ? raw.record : raw;
+    dbFull = data;
+    gameScores = (data.gamescores && typeof data.gamescores === 'object') ? data.gamescores : {};
+    if(!Array.isArray(gameScores.snake))  gameScores.snake  = [];
+    if(!Array.isArray(gameScores.ttt))    gameScores.ttt    = [];
+    if(!Array.isArray(gameScores.memory)) gameScores.memory = [];
+    if(!Array.isArray(gameScores.trivia)) gameScores.trivia = [];
+    updateHiScores();
+  } catch(e) {}
+}
+
+async function saveScore(game, score, label) {
+  const entry = { name: username, score, ts: Date.now() };
+  gameScores[game] = gameScores[game] || [];
+  // Keep only top 20 per game
+  gameScores[game].push(entry);
+  gameScores[game].sort((a,b) => {
+    // memory = lower is better, others = higher is better
+    if(game === 'memory') return a.score - b.score;
+    return b.score - a.score;
+  });
+  gameScores[game] = gameScores[game].slice(0, 20);
+  dbFull.gamescores = gameScores;
+  try {
+    await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(dbFull)});
+    showToast(T.scoreSaved + ' ' + label);
+    updateHiScores();
+    renderMiniLb(game);
+  } catch(e) {}
+}
+
+function updateHiScores() {
+  const mySnake  = gameScores.snake.filter(e=>e.name===username).sort((a,b)=>b.score-a.score)[0];
+  const myTtt    = gameScores.ttt.filter(e=>e.name===username).reduce((a,b)=>a+b.score,0);
+  const myMem    = gameScores.memory.filter(e=>e.name===username).sort((a,b)=>a.score-b.score)[0];
+  const myTrivia = gameScores.trivia.filter(e=>e.name===username).sort((a,b)=>b.score-a.score)[0];
+  document.getElementById('hs-snake').textContent  = 'Best: ' + (mySnake  ? mySnake.score  : '—');
+  document.getElementById('hs-ttt').textContent    = 'Wins: ' + (myTtt    ? myTtt         : '—');
+  document.getElementById('hs-memory').textContent = 'Best: ' + (myMem    ? myMem.score+' moves' : '—');
+  document.getElementById('hs-trivia').textContent = 'Best: ' + (myTrivia ? myTrivia.score+'/10' : '—');
+  // update snake best in game
+  const sb = document.getElementById('snake-best');
+  if(sb) sb.textContent = mySnake ? mySnake.score : 0;
+  const mb = document.getElementById('mem-best');
+  if(mb) mb.textContent = myMem ? myMem.score : '—';
+}
+
+function renderMiniLb(game) {
+  const el = document.getElementById(game+'-lb');
+  if(!el) return;
+  const scores = gameScores[game] || [];
+  const isLower = game === 'memory';
+  const sorted = [...scores].sort((a,b) => isLower ? a.score-b.score : b.score-a.score).slice(0,5);
+  if(!sorted.length) { el.innerHTML = `<div class="mini-lb-head">🏆 Top Scores</div><div class="mini-lb-empty">No scores yet!</div>`; return; }
+  const medals = ['🥇','🥈','🥉','4.','5.'];
+  el.innerHTML = `<div class="mini-lb-head">🏆 Top Scores</div>` +
+    sorted.map((e,i) => `<div class="mini-lb-row${e.name===username?' is-me':''}">
+      <div class="mini-lb-pos">${medals[i]||i+1}</div>
+      <div class="mini-lb-name">${esc(e.name)}${e.name===username?'<span style="font-size:0.6rem;background:var(--accent);color:#fff;padding:1px 5px;border-radius:99px;margin-left:4px">you</span>':''}</div>
+      <div class="mini-lb-score">${game==='memory'?e.score+' moves':game==='trivia'?e.score+'/10':e.score}</div>
+    </div>`).join('');
+}
+
+// ── NAVIGATION ──
+function openGame(game) {
+  document.getElementById('hub').style.display = 'none';
+  document.querySelectorAll('.game-screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-'+game).classList.add('active');
+  renderMiniLb(game === 'ttt' ? 'ttt' : game);
+  if(game==='snake')  { snakeInit(); }
+  if(game==='ttt')    { tttInit(); }
+  if(game==='memory') { memReset(); }
+  if(game==='trivia') { triviaStart(); }
+}
+function closeGame(game) {
+  if(game==='snake') snakeStop();
+  document.getElementById('hub').style.display = 'block';
+  document.querySelectorAll('.game-screen').forEach(s => s.classList.remove('active'));
+  loadScores();
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('score-toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+// ════════════════════════════════════════
+// 🐍 SNAKE
+// ════════════════════════════════════════
+const GRID = 16; // cells
+let snakeBody=[], snakeVel={x:1,y:0}, snakePendingVel={x:1,y:0};
+let snakeFood={x:5,y:5}, snakeScoreVal=0, snakeBestVal=0;
+let snakeLoop=null, snakePlaying=false, snakeGS=false;
+const CELL = 320/GRID;
+
+function snakeInit() {
+  const canvas = document.getElementById('snake-canvas');
+  canvas.width = canvas.height = 320;
+  snakeBody = [{x:8,y:8},{x:7,y:8},{x:6,y:8}];
+  snakeVel = {x:1,y:0}; snakePendingVel = {x:1,y:0};
+  snakeScoreVal = 0; snakePlaying = false; snakeGS = false;
+  snakePlaceFood();
+  snakeDraw();
+  document.getElementById('snake-score').textContent  = 0;
+  document.getElementById('snake-score2').textContent = 0;
+  document.getElementById('snake-state').textContent  = 'Press Start';
+}
+
+function snakeStart() {
+  if(snakePlaying && !snakeGS) return;
+  snakeInit();
+  snakePlaying = true; snakeGS = false;
+  document.getElementById('snake-state').textContent = 'Playing…';
+  snakeLoop = setInterval(snakeTick, 130);
+}
+
+function snakePause() {
+  if(!snakePlaying || snakeGS) return;
+  clearInterval(snakeLoop); snakeLoop = null; snakePlaying = false;
+  document.getElementById('snake-state').textContent = 'Paused';
+}
+
+function snakeStop() { clearInterval(snakeLoop); snakeLoop = null; snakePlaying = false; }
+
+function snakeDir(dx, dy) {
+  if(snakeVel.x === -dx && snakeVel.y === -dy) return;
+  snakePendingVel = {x:dx, y:dy};
+  if(!snakePlaying || snakeGS) snakeStart();
+}
+
+function snakeTick() {
+  snakeVel = snakePendingVel;
+  const head = { x: snakeBody[0].x + snakeVel.x, y: snakeBody[0].y + snakeVel.y };
+  // wall collision
+  if(head.x<0||head.x>=GRID||head.y<0||head.y>=GRID) return snakeGameOver();
+  // self collision
+  if(snakeBody.some(s=>s.x===head.x&&s.y===head.y)) return snakeGameOver();
+  snakeBody.unshift(head);
+  if(head.x===snakeFood.x && head.y===snakeFood.y) {
+    snakeScoreVal++;
+    document.getElementById('snake-score').textContent  = snakeScoreVal;
+    document.getElementById('snake-score2').textContent = snakeScoreVal;
+    snakePlaceFood();
+    // Speed up every 5 points
+    if(snakeScoreVal % 5 === 0) {
+      clearInterval(snakeLoop);
+      snakeLoop = setInterval(snakeTick, Math.max(60, 130 - snakeScoreVal * 5));
+    }
+  } else { snakeBody.pop(); }
+  snakeDraw();
+}
+
+function snakePlaceFood() {
+  let pos;
+  do { pos={x:Math.floor(Math.random()*GRID),y:Math.floor(Math.random()*GRID)}; }
+  while(snakeBody.some(s=>s.x===pos.x&&s.y===pos.y));
+  snakeFood=pos;
+}
+
+function snakeDraw() {
+  const canvas=document.getElementById('snake-canvas');
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#1a1612'; ctx.fillRect(0,0,320,320);
+  // Grid dots
+  ctx.fillStyle='rgba(255,255,255,0.04)';
+  for(let x=0;x<GRID;x++) for(let y=0;y<GRID;y++) ctx.fillRect(x*CELL+CELL/2-1,y*CELL+CELL/2-1,2,2);
+  // Food
+  ctx.fillStyle='#c8602a';
+  ctx.beginPath(); ctx.arc(snakeFood.x*CELL+CELL/2, snakeFood.y*CELL+CELL/2, CELL/2-2, 0, Math.PI*2); ctx.fill();
+  // Snake
+  snakeBody.forEach((s,i) => {
+    ctx.fillStyle = i===0 ? '#f0c060' : (i%2===0?'#3a9c5a':'#2d7a48');
+    const r = i===0?4:3;
+    ctx.beginPath(); ctx.roundRect(s.x*CELL+2, s.y*CELL+2, CELL-4, CELL-4, r); ctx.fill();
+  });
+}
+
+function snakeGameOver() {
+  clearInterval(snakeLoop); snakeLoop=null; snakePlaying=false; snakeGS=true;
+  document.getElementById('snake-state').textContent='Game Over! Press Start to retry';
+  if(snakeScoreVal > 0) {
+    if(snakeScoreVal > snakeBestVal) snakeBestVal = snakeScoreVal;
+    document.getElementById('snake-best').textContent = snakeBestVal;
+    saveScore('snake', snakeScoreVal, snakeScoreVal + ' pts');
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if(!document.getElementById('screen-snake').classList.contains('active')) return;
+  const map = { ArrowLeft:[-1,0], ArrowRight:[1,0], ArrowUp:[0,-1], ArrowDown:[0,1],
+                a:[-1,0], d:[1,0], w:[0,-1], s:[0,1] };
+  const k = e.key === 'ArrowLeft'?'ArrowLeft':e.key==='ArrowRight'?'ArrowRight':e.key==='ArrowUp'?'ArrowUp':e.key==='ArrowDown'?'ArrowDown':e.key.toLowerCase();
+  if(map[k]) { e.preventDefault(); snakeDir(...map[k]); }
+  if(e.key === ' ') { e.preventDefault(); snakePlaying ? snakePause() : snakeStart(); }
+});
+
+// ════════════════════════════════════════
+// ⭕ TIC-TAC-TOE
+// ════════════════════════════════════════
+let tttBoard=[], tttWins=0, tttDraws=0, tttLosses=0, tttGameOver=false;
+
+function tttInit() { tttReset(); }
+
+function tttReset() {
+  tttBoard = Array(9).fill(null); tttGameOver = false;
+  document.getElementById('ttt-status').textContent = 'Your turn — you are ✕';
+  renderTTT();
+}
+
+function renderTTT() {
+  const el = document.getElementById('ttt-board');
+  el.innerHTML = tttBoard.map((cell,i) => `
+    <div class="ttt-cell ${cell?'taken':''}" onclick="tttMove(${i})">
+      ${cell==='X'?'✕':cell==='O'?'⭕':''}
+    </div>`).join('');
+}
+
+function tttMove(i) {
+  if(tttBoard[i] || tttGameOver) return;
+  tttBoard[i] = 'X';
+  const win = tttCheck('X');
+  if(win) { tttEnd('X', win); return; }
+  if(tttBoard.every(c=>c)) { tttEnd(null); return; }
+  renderTTT();
+  document.getElementById('ttt-status').textContent = 'Computer thinking…';
+  setTimeout(tttAI, 350);
+}
+
+function tttAI() {
+  // Try to win, then block, then random
+  let move = tttFindWin('O') ?? tttFindWin('X') ?? tttCenter() ?? tttRandom();
+  tttBoard[move] = 'O';
+  const win = tttCheck('O');
+  if(win) { tttEnd('O', win); return; }
+  if(tttBoard.every(c=>c)) { tttEnd(null); return; }
+  renderTTT();
+  document.getElementById('ttt-status').textContent = 'Your turn — you are ✕';
+}
+
+function tttFindWin(p) {
+  const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  for(const [a,b,c] of lines) {
+    if(tttBoard[a]===p&&tttBoard[b]===p&&!tttBoard[c]) return c;
+    if(tttBoard[a]===p&&tttBoard[c]===p&&!tttBoard[b]) return b;
+    if(tttBoard[b]===p&&tttBoard[c]===p&&!tttBoard[a]) return a;
+  }
+  return null;
+}
+function tttCenter() { return !tttBoard[4] ? 4 : null; }
+function tttRandom() {
+  const e=tttBoard.map((v,i)=>v?null:i).filter(v=>v!==null);
+  return e[Math.floor(Math.random()*e.length)];
+}
+function tttCheck(p) {
+  const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  return lines.find(([a,b,c])=>tttBoard[a]===p&&tttBoard[b]===p&&tttBoard[c]===p)||null;
+}
+function tttEnd(winner, winLine) {
+  tttGameOver = true;
+  const cells = document.querySelectorAll('.ttt-cell');
+  if(winLine) winLine.forEach(i => cells[i]?.classList.add('win'));
+  if(winner==='X') {
+    tttWins++;
+    document.getElementById('ttt-status').textContent = '🎉 You win!';
+    document.getElementById('ttt-wins').textContent = tttWins;
+    saveScore('ttt', tttWins, tttWins + ' wins');
+  } else if(winner==='O') {
+    tttLosses++;
+    document.getElementById('ttt-status').textContent = '😅 Computer wins!';
+    document.getElementById('ttt-losses').textContent = tttLosses;
+  } else {
+    tttDraws++;
+    document.getElementById('ttt-status').textContent = "🤝 It's a draw!";
+    document.getElementById('ttt-draws').textContent = tttDraws;
+  }
+  setTimeout(tttReset, 2200);
+}
+
+// ════════════════════════════════════════
+// 🃏 MEMORY
+// ════════════════════════════════════════
+const MEM_EMOJIS = ['🍕','🎸','🐙','🌈','🚀','⚡','🍀','🦊'];
+let memCards=[], memFlipped=[], memMovesVal=0, memMatchedVal=0, memLocked=false;
+
+function memReset() {
+  const pairs = [...MEM_EMOJIS, ...MEM_EMOJIS];
+  pairs.sort(()=>Math.random()-0.5);
+  memCards = pairs.map((emoji,i)=>({id:i,emoji,flipped:false,matched:false}));
+  memFlipped=[]; memMovesVal=0; memMatchedVal=0; memLocked=false;
+  document.getElementById('mem-moves').textContent   = 0;
+  document.getElementById('mem-matched').textContent = 0;
+  document.getElementById('mem-msg').textContent     = '';
+  renderMem();
+}
+
+function renderMem() {
+  const board = document.getElementById('mem-board');
+  board.innerHTML = memCards.map(c=>`
+    <div class="mem-card ${c.flipped||c.matched?'flipped':''} ${c.matched?'matched':''}"
+         onclick="memFlip(${c.id})">
+      <div class="mem-front">✦</div>
+      <div class="mem-back">${c.emoji}</div>
+    </div>`).join('');
+}
+
+function memFlip(id) {
+  if(memLocked) return;
+  const card = memCards[id];
+  if(card.flipped || card.matched) return;
+  card.flipped = true;
+  memFlipped.push(id);
+  renderMem();
+  if(memFlipped.length===2) {
+    memMovesVal++;
+    document.getElementById('mem-moves').textContent = memMovesVal;
+    memLocked = true;
+    const [a,b] = memFlipped;
+    if(memCards[a].emoji === memCards[b].emoji) {
+      memCards[a].matched = memCards[b].matched = true;
+      memMatchedVal++;
+      document.getElementById('mem-matched').textContent = memMatchedVal;
+      memFlipped=[]; memLocked=false;
+      if(memMatchedVal===8) memWin();
+    } else {
+      setTimeout(()=>{
+        memCards[a].flipped = memCards[b].flipped = false;
+        memFlipped=[]; memLocked=false; renderMem();
+      },900);
+    }
+  }
+}
+
+function memWin() {
+  document.getElementById('mem-msg').textContent = `✨ Finished in ${memMovesVal} moves!`;
+  saveScore('memory', memMovesVal, memMovesVal + ' moves');
+  const best = gameScores.memory?.filter(e=>e.name===username).sort((a,b)=>a.score-b.score)[0];
+  document.getElementById('mem-best').textContent = best ? best.score : memMovesVal;
+}
+
+// ════════════════════════════════════════
+// 💡 TRIVIA
+// ════════════════════════════════════════
+const TRIVIA_QUESTIONS = [
+  { q:"What does pressing Ctrl+Shift+T do in most browsers?",
+    opts:["Reopens the last closed tab","Opens browser settings","Opens download history","Takes a screenshot"],
+    a:0, fact:"Super handy when you accidentally close a tab!" },
+  { q:"When storing fresh herbs in the fridge, how should you keep them to last 2x longer?",
+    opts:["In a glass of water like flowers","Wrapped in a paper towel","In a sealed plastic bag","Loose in the crisper drawer"],
+    a:0, fact:"Treat them like a bouquet and they'll stay fresh much longer." },
+  { q:"What does adding a pinch of salt to coffee grounds do?",
+    opts:["Cuts the bitterness","Makes it taste sweeter","Increases caffeine","Changes the color"],
+    a:0, fact:"A tiny pinch neutralizes bitter compounds without affecting the flavor." },
+  { q:"Which Windows keyboard shortcut opens your clipboard history?",
+    opts:["Windows + V","Ctrl + V","Alt + V","Shift + Insert"],
+    a:0, fact:"Press Win+V and paste anything you copied earlier in your session." },
+  { q:"How long should you let a steak rest after cooking before cutting it?",
+    opts:["5 minutes","30 seconds","15 minutes","1 hour"],
+    a:0, fact:"Resting lets juices redistribute so your steak stays tender and juicy." },
+  { q:"What does adding 'site:reddit.com' to a Google search do?",
+    opts:["Searches only Reddit results","Blocks Reddit results","Searches social media only","Filters to news only"],
+    a:0, fact:"Great for finding real user opinions and reviews on anything." },
+  { q:"What should you add to pasta sauce to make it creamy and thick?",
+    opts:["Starchy pasta water","Milk","Butter","Plain flour"],
+    a:0, fact:"Pasta water starch is liquid gold — it binds and emulsifies the sauce perfectly." },
+  { q:"What is the 'two-minute rule' about?",
+    opts:["If a task takes under 2 min, do it now","Take a 2-min break every hour","Walk for 2 minutes after eating","Rest for 2 mins before deciding"],
+    a:0, fact:"Immediate action on tiny tasks keeps your to-do list clean." },
+  { q:"How should you toast spices before using them?",
+    opts:["In a dry pan for 30 seconds","Bake them at 180°C","Microwave for 10 seconds","Soak in hot water"],
+    a:0, fact:"Heat releases the essential oils and roughly doubles the flavor intensity." },
+  { q:"To freeze overripe bananas for the best result, what stage should they be at?",
+    opts:["Overripe with brown spots","Perfectly yellow","Slightly green","Fully black"],
+    a:0, fact:"The riper the banana, the sweeter and more flavorful it is once frozen." },
+  { q:"What does the 'Ctrl+Z' shortcut do in almost every app?",
+    opts:["Undo the last action","Redo the last action","Save the file","Close the window"],
+    a:0, fact:"Works in Word, Photoshop, file explorers, and most other apps." },
+  { q:"When cooking with garlic, when should you add it to the pan?",
+    opts:["Last, after other ingredients","First, before everything","At the same time as onions","Never — add it raw at the end"],
+    a:0, fact:"Garlic burns in seconds and turns bitter, so add it late in the cook." },
+];
+
+let triviaQ=[], triviaIdx=0, triviaScoreVal=0, triviaAnswered=false;
+
+function triviaStart() {
+  triviaQ = [...TRIVIA_QUESTIONS].sort(()=>Math.random()-0.5).slice(0,10);
+  triviaIdx=0; triviaScoreVal=0; triviaAnswered=false;
+  document.getElementById('trivia-score').textContent = 0;
+  document.getElementById('trivia-result').style.display = 'none';
+  document.getElementById('trivia-next').style.display  = 'none';
+  document.querySelectorAll('.trivia-progress,.trivia-q-num,.trivia-question,.trivia-options,.trivia-feedback').forEach(e=>e.style.display='');
+  triviaShowQ();
+}
+
+function triviaShowQ() {
+  const q = triviaQ[triviaIdx];
+  const pct = (triviaIdx / triviaQ.length) * 100;
+  document.getElementById('trivia-prog').style.width = pct + '%';
+  document.getElementById('trivia-qnum').textContent = `Question ${triviaIdx+1} of ${triviaQ.length}`;
+  document.getElementById('trivia-question').textContent = q.q;
+  document.getElementById('trivia-feedback').textContent = '';
+  document.getElementById('trivia-next').style.display = 'none';
+  triviaAnswered = false;
+  document.getElementById('trivia-options').innerHTML = q.opts.map((opt,i)=>
+    `<button class="trivia-opt" onclick="triviaAnswer(${i})">${opt}</button>`).join('');
+}
+
+function triviaAnswer(i) {
+  if(triviaAnswered) return;
+  triviaAnswered = true;
+  const q = triviaQ[triviaIdx];
+  const opts = document.querySelectorAll('.trivia-opt');
+  opts.forEach(o=>o.classList.add('answered'));
+  opts[q.a].classList.add('show-correct');
+  if(i===q.a) {
+    opts[i].classList.add('correct');
+    triviaScoreVal++;
+    document.getElementById('trivia-score').textContent = triviaScoreVal;
+    document.getElementById('trivia-feedback').textContent = '✅ Correct! ' + q.fact;
+    document.getElementById('trivia-feedback').style.color = '#2d7a2d';
+  } else {
+    opts[i].classList.add('wrong');
+    document.getElementById('trivia-feedback').textContent = '❌ Not quite! ' + q.fact;
+    document.getElementById('trivia-feedback').style.color = '#c0392b';
+  }
+  document.getElementById('trivia-next').style.display = 'block';
+  document.getElementById('trivia-next').textContent = triviaIdx+1 < triviaQ.length ? 'Next →' : 'See Results →';
+}
+
+function triviaNext() {
+  triviaIdx++;
+  if(triviaIdx < triviaQ.length) {
+    triviaShowQ();
+  } else {
+    // Results
+    document.querySelectorAll('.trivia-progress,.trivia-q-num,.trivia-question,.trivia-options,.trivia-feedback,.trivia-next').forEach(e=>e.style.display='none');
+    document.getElementById('trivia-result').style.display = 'flex';
+    document.getElementById('trivia-final-score').textContent = triviaScoreVal + '/' + triviaQ.length;
+    const pct = triviaScoreVal / triviaQ.length;
+    const msgs = [
+      [0.9, "🏆 Incredible! You're a tips master!"],
+      [0.7, "🌟 Great job! You know your stuff."],
+      [0.5, "👍 Not bad! A bit more practice and you'll nail it."],
+      [0,   "😅 Keep reading those tips — you'll get there!"],
+    ];
+    document.getElementById('trivia-result-msg').textContent = msgs.find(([t])=>pct>=t)[1];
+    document.getElementById('trivia-prog').style.width = '100%';
+    if(triviaScoreVal > 0) saveScore('trivia', triviaScoreVal, triviaScoreVal + '/10');
+    renderMiniLb('trivia');
+  }
+}
+</script>
+<script src="transition.js"></script>
+</body>
+</html>
