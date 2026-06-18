@@ -141,7 +141,14 @@
 <script>
   // ── Skip if already logged in as staff ──
   const ex = sessionStorage.getItem('rank');
-  if(ex && ex !== 'public') window.location.replace('index.html');
+  // Only skip login page if already logged in as STAFF (not public)
+  // If they're public, clear it so the login page shows correctly
+  if(ex && ex !== 'public') {
+    window.location.replace('index.html');
+  } else if(ex === 'public') {
+    // They came here intentionally (clicked Login) — let them see the page
+    // Don't redirect back
+  }
 
   const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
   const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
