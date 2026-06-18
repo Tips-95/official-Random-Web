@@ -26,13 +26,13 @@
     body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
     body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");background-size:200px 200px}
 
-    /* ── ANNOUNCEMENT ── */
+    /* ANNOUNCEMENT */
     .announcement{display:none;position:relative;z-index:20;padding:9px 2.5rem;font-size:0.82rem;font-family:'DM Mono',monospace;text-align:center;background:var(--accent);color:#fff;line-height:1.4}
     .announcement.show{display:block}
     .ann-close{position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;cursor:pointer;font-size:1rem;opacity:0.7;padding:2px 6px}
     .ann-close:hover{opacity:1}
 
-    /* ── TOP NAV ── */
+    /* TOP NAV */
     .topnav{position:sticky;top:0;z-index:30;background:var(--text);display:flex;align-items:center;padding:0 1.5rem;height:52px;gap:8px;flex-shrink:0}
     .topnav-logo{font-family:'Instrument Serif',serif;font-size:1.15rem;color:#fff;text-decoration:none;white-space:nowrap;flex-shrink:0;margin-right:6px}
     .topnav-logo em{font-style:italic;color:var(--accent)}
@@ -49,10 +49,10 @@
     .topnav-btn{font-size:0.78rem;padding:5px 11px;border-radius:6px;border:1px solid rgba(255,255,255,0.18);background:transparent;color:rgba(255,255,255,0.75);cursor:pointer;transition:all 0.13s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;font-family:'DM Sans',sans-serif}
     .topnav-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
 
-    /* ── MAIN WRAPPER ── */
+    /* MAIN WRAPPER */
     .page-wrap{position:relative;z-index:1;flex:1;width:100%;max-width:980px;margin:0 auto;padding:0 1.5rem 5rem}
 
-    /* ── PAGE HEADER ── */
+    /* PAGE HEADER */
     .page-header{padding:1.75rem 0 0}
     .header-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:0.5rem}
     .site-title{font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1;letter-spacing:-0.02em}
@@ -63,7 +63,7 @@
     .status-dot.ok{background:#3a9c5a}.status-dot.error{background:#c8602a}.status-dot.loading{background:#f0a500}
     .status-text{font-size:0.72rem;color:var(--muted)}
 
-    /* ── HORIZONTAL TAB BAR ── */
+    /* TAB BAR */
     .tab-bar-wrap{position:sticky;top:52px;z-index:20;background:var(--bg);padding:10px 0 0;margin:0 -1.5rem;padding-left:1.5rem;padding-right:1.5rem}
     .tab-bar{display:flex;gap:4px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;border-bottom:1px solid var(--border)}
     .tab-bar::-webkit-scrollbar{display:none}
@@ -71,20 +71,18 @@
     .tab-btn:hover{background:var(--surface);color:var(--text);border-color:var(--border)}
     .tab-btn.active{background:var(--text);color:#fff;border-color:var(--text)}
     .tab-btn .tb-badge{font-size:0.6rem;font-weight:600;padding:1px 5px;border-radius:99px;background:var(--accent);color:#fff}
-    .tab-btn.active .tb-badge{background:rgba(255,255,255,0.25);color:#fff}
+    .tab-btn.active .tb-badge{background:rgba(255,255,255,0.25)}
     .tab-divider{width:1px;background:var(--border);margin:4px 2px;align-self:stretch;flex-shrink:0}
 
-    /* ── CONTENT ── */
+    /* CONTENT */
     .content{padding-top:1.5rem}
     .sec-panel{display:none}.sec-panel.visible{display:block}
-
-    /* ── SECTIONS ── */
     .section{margin-bottom:2rem}
     .section-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:1rem;padding:0.7rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:10px}
     .section-title{font-size:0.95rem;font-weight:500;display:flex;align-items:center;gap:8px}
     .section-lock{font-size:0.72rem;color:var(--muted)}
 
-    /* ── GRIDS ── */
+    /* GRIDS */
     .rec-grid,.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
     .rec-card{background:linear-gradient(135deg,#fffbf0,#fff8e8);border:1px solid rgba(200,96,42,0.22);border-radius:12px;padding:0.9rem 1rem;display:flex;flex-direction:column;gap:8px;animation:rise 0.2s ease both;position:relative;overflow:hidden}
     .rec-card::before{content:'⭐';position:absolute;top:8px;right:9px;font-size:0.65rem;opacity:0.45}
@@ -103,7 +101,7 @@
     .deny-btn{color:#c0392b}.deny-btn:hover{background:#fce8ec}
     .empty{text-align:center;padding:2.5rem 0;color:var(--muted);font-size:0.875rem;grid-column:1/-1}
 
-    /* ── FORMS ── */
+    /* FORMS */
     .staff-form{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
     .staff-form input[type="text"]{flex:1;min-width:150px;height:38px;padding:0 12px;font-family:'DM Sans',sans-serif;font-size:0.875rem;background:var(--surface);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none}
     .staff-form input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,96,42,0.1)}
@@ -120,22 +118,7 @@
     .submit-btn:hover{opacity:0.85}
     .pending-notice{font-size:0.78rem;color:var(--muted);margin-top:5px;padding:5px 10px;background:#fdecd6;border-radius:6px;display:inline-block}
 
-    /* ── LEADERBOARD ── */
-    .lb-table{width:100%;border-collapse:collapse}
-    .lb-table th{font-size:0.72rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;padding:8px 12px;border-bottom:1px solid var(--border);text-align:left}
-    .lb-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:0.875rem}
-    .lb-table tr:last-child td{border-bottom:none}
-    .lb-table tr:hover td{background:var(--surface)}
-    .lb-rank{font-family:'DM Mono',monospace;font-size:0.85rem;font-weight:500;width:40px}
-    .lb-gold{color:#b8860b;font-weight:700}.lb-silver{color:#7a7a8a;font-weight:700}.lb-bronze{color:#8a5a2a;font-weight:700}
-    .lb-name{font-weight:500}
-    .lb-score{font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--accent)}
-    .lb-badge-wrap{display:flex;gap:4px;flex-wrap:wrap}
-    .lb-badge{font-size:0.65rem;padding:2px 6px;border-radius:99px;font-weight:500}
-    .lb-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-    .lb-empty{text-align:center;padding:3rem;color:var(--muted);font-size:0.875rem}
-
-    /* ── NEWS ── */
+    /* NEWS */
     .news-compose{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem}
     .news-title-in{height:42px;padding:0 14px;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;width:100%}
     .news-title-in:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,96,42,0.1)}
@@ -158,9 +141,9 @@
     .news-del-btn.show{display:inline-block}
     .news-del-btn:hover{color:#c0392b;background:#fce8ec}
 
-    /* ── COMPLAINTS ── */
+    /* COMPLAINTS */
     .complaint-form-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1rem}
-    .complaint-form-head{padding:0.85rem 1.2rem;background:var(--bg);border-bottom:1px solid var(--border);font-size:0.88rem;font-weight:600;display:flex;align-items:center;gap:7px}
+    .complaint-form-head{padding:0.85rem 1.2rem;background:var(--bg);border-bottom:1px solid var(--border);font-size:0.88rem;font-weight:600}
     .complaint-form-body{padding:1.2rem;display:flex;flex-direction:column;gap:12px}
     .complaint-form-note{font-size:0.8rem;color:var(--muted);padding:8px 12px;background:#fdecd6;border-radius:7px}
     .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -194,10 +177,10 @@
     .complaint-del-btn:hover{background:#c0392b;color:#fff}
     @media(max-width:600px){.cf-row{grid-template-columns:1fr}}
 
-    /* ── SETTINGS ── */
+    /* SETTINGS */
     .settings-wrap{display:flex;flex-direction:column;gap:1.5rem}
     .settings-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-    .settings-card-header{display:flex;align-items:center;gap:8px;padding:0.85rem 1.2rem;background:var(--bg);border-bottom:1px solid var(--border);font-size:0.85rem;font-weight:600;color:var(--text)}
+    .settings-card-header{display:flex;align-items:center;gap:8px;padding:0.85rem 1.2rem;background:var(--bg);border-bottom:1px solid var(--border);font-size:0.85rem;font-weight:600}
     .settings-card-body{padding:1.2rem;display:flex;flex-direction:column;gap:12px}
     .setting-row{display:flex;flex-direction:column;gap:5px}
     .setting-row label{font-size:0.72rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
@@ -226,7 +209,7 @@
     .color-swatch{width:32px;height:32px;border-radius:6px;border:1px solid var(--border-strong);flex-shrink:0}
     .ann-preview{border-radius:8px;padding:8px 14px;font-size:0.82rem;margin-top:4px;font-family:'DM Mono',monospace;color:#fff}
 
-    /* ── CHAT FAB ── */
+    /* CHAT FAB */
     .chat-fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:50;width:52px;height:52px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:1.4rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.18);transition:transform 0.15s}
     .chat-fab:hover{transform:scale(1.08)}
     .chat-fab-badge{position:absolute;top:-2px;right:-2px;background:#e74c3c;color:#fff;font-size:0.6rem;font-weight:700;min-width:16px;height:16px;border-radius:99px;display:none;align-items:center;justify-content:center;padding:0 3px;border:2px solid var(--bg)}
@@ -258,7 +241,7 @@
     .chat-footer-note{font-size:0.65rem;color:var(--muted);padding:3px 12px 6px;background:var(--bg);text-align:center;flex-shrink:0}
     .chat-footer-note button{background:none;border:none;cursor:pointer;color:var(--accent);font-size:0.65rem}
 
-    /* ── MOBILE BOTTOM NAV ── */
+    /* MOBILE NAV */
     .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:40;background:var(--text);align-items:center;justify-content:space-around;border-top:1px solid rgba(255,255,255,0.08);height:56px}
     .mob-btn{flex:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.45);font-family:'DM Sans',sans-serif;font-size:0.55rem;position:relative;white-space:nowrap;text-decoration:none;min-width:0}
     .mob-btn .mi{font-size:1.05rem;line-height:1}
@@ -266,6 +249,41 @@
     .mob-btn.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:2px;background:var(--accent);border-radius:2px 2px 0 0}
     .mob-badge{position:absolute;top:5px;right:calc(50% - 20px);background:var(--accent);color:#fff;font-size:0.5rem;font-weight:600;min-width:13px;height:13px;border-radius:99px;display:none;align-items:center;justify-content:center;padding:0 3px}
     .mob-badge.show{display:flex}
+
+    /* LANG SWITCHER */
+    .lang-switcher{display:flex;align-items:center;gap:3px;background:rgba(255,255,255,0.07);border-radius:8px;padding:3px}
+    .lang-btn{background:none;border:none;font-size:0.95rem;cursor:pointer;padding:3px 5px;border-radius:5px;transition:background 0.13s;line-height:1}
+    .lang-btn:hover{background:rgba(255,255,255,0.12)}
+    .lang-btn.active{background:rgba(255,255,255,0.22)}
+
+    /* UPDATE SYSTEM */
+    .update-bar{position:relative;z-index:25;display:none;align-items:center;justify-content:center;gap:10px;padding:9px 1.5rem;background:linear-gradient(90deg,#1a1612,#2a1a0a);color:#f0c060;font-family:'DM Mono',monospace;font-size:0.8rem;text-align:center;flex-wrap:wrap}
+    .update-bar.show{display:flex}
+    .update-bar strong{color:#fff}
+    .update-bar-btn{font-family:'DM Mono',monospace;font-size:0.78rem;font-weight:500;padding:5px 14px;border-radius:6px;border:1.5px solid #f0c060;background:transparent;color:#f0c060;cursor:pointer;transition:all 0.15s;white-space:nowrap}
+    .update-bar-btn:hover{background:#f0c060;color:#1a1612}
+    .update-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:24px}
+    .update-overlay.show{display:flex}
+    .update-logo{font-family:'Instrument Serif',serif;font-size:2.2rem;letter-spacing:-0.02em;color:var(--text)}
+    .update-logo em{font-style:italic;color:var(--accent)}
+    .update-overlay-label{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
+    .update-prog-wrap{width:220px;height:3px;background:rgba(60,50,30,0.14);border-radius:99px;overflow:hidden}
+    .update-prog-fill{height:100%;width:0%;background:var(--accent);border-radius:99px;transition:width 0.25s linear}
+    .update-countdown-ring{position:relative}
+    .update-countdown-ring svg{transform:rotate(-90deg)}
+    .update-countdown-circle{stroke:var(--accent);stroke-width:3;fill:none;stroke-dasharray:125.6;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear;stroke-linecap:round}
+    .update-countdown-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:1.3rem;font-weight:500;color:var(--text)}
+    .whats-new-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;padding:1.5rem}
+    .whats-new-overlay.show{display:flex}
+    .whats-new-modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;width:100%;max-width:480px;box-shadow:0 16px 48px rgba(0,0,0,0.18);display:flex;flex-direction:column;gap:16px;animation:rise 0.3s ease both}
+    .whats-new-top{display:flex;align-items:center;gap:10px}
+    .whats-new-icon{font-size:1.6rem}
+    .whats-new-heading{font-family:'Instrument Serif',serif;font-size:1.5rem;letter-spacing:-0.01em}
+    .whats-new-version{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);background:#fdecd6;padding:3px 10px;border-radius:99px;display:inline-block}
+    .whats-new-divider{height:1px;background:var(--border)}
+    .whats-new-body{font-size:0.9rem;line-height:1.75;color:var(--text);white-space:pre-wrap;max-height:260px;overflow-y:auto}
+    .whats-new-dismiss{height:42px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;background:var(--text);color:var(--bg);border:none;border-radius:10px;cursor:pointer;transition:opacity 0.15s}
+    .whats-new-dismiss:hover{opacity:0.82}
 
     .site-footer{margin-top:2rem;text-align:center;font-size:0.75rem;color:var(--muted);padding-bottom:2rem}
 
@@ -277,97 +295,29 @@
       .chat-fab{bottom:4.5rem;right:1rem;width:46px;height:46px;font-size:1.2rem}
       .chat-panel{bottom:7.5rem;right:0.75rem;width:calc(100vw - 1.5rem)}
     }
-    /* ── LANG SWITCHER ── */
-    .lang-switcher{display:flex;align-items:center;gap:3px;background:rgba(255,255,255,0.07);border-radius:8px;padding:3px}
-    .lang-btn{background:none;border:none;font-size:0.95rem;cursor:pointer;padding:3px 5px;border-radius:5px;transition:background 0.13s;line-height:1}
-    .lang-btn:hover{background:rgba(255,255,255,0.12)}
-    .lang-btn.active{background:rgba(255,255,255,0.22)}
-
-    /* ── UPDATE SYSTEM ── */
-    .update-bar{
-      position:relative;z-index:25;
-      display:none;align-items:center;justify-content:center;gap:10px;
-      padding:9px 1.5rem;
-      background:linear-gradient(90deg,#1a1612,#2a1a0a);
-      color:#f0c060;font-family:'DM Mono',monospace;font-size:0.8rem;
-      text-align:center;flex-wrap:wrap;
-    }
-    .update-bar.show{display:flex}
-    .update-bar strong{color:#fff}
-    .update-bar-btn{
-      font-family:'DM Mono',monospace;font-size:0.78rem;font-weight:500;
-      padding:5px 14px;border-radius:6px;border:1.5px solid #f0c060;
-      background:transparent;color:#f0c060;cursor:pointer;transition:all 0.15s;
-      white-space:nowrap;
-    }
-    .update-bar-btn:hover{background:#f0c060;color:#1a1612}
-
-    /* FULL-SCREEN LOADING OVERLAY */
-    .update-overlay{
-      position:fixed;inset:0;z-index:9999;
-      background:var(--bg);
-      display:none;flex-direction:column;align-items:center;justify-content:center;gap:24px;
-    }
-    .update-overlay.show{display:flex}
-    .update-overlay::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-size:200px 200px;pointer-events:none}
-    .update-logo{font-family:'Instrument Serif',serif;font-size:2.2rem;letter-spacing:-0.02em;color:var(--text);position:relative;z-index:1}
-    .update-logo em{font-style:italic;color:var(--accent)}
-    .update-overlay-label{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);position:relative;z-index:1}
-    .update-prog-wrap{width:220px;height:3px;background:rgba(60,50,30,0.14);border-radius:99px;overflow:hidden;position:relative;z-index:1}
-    .update-prog-fill{height:100%;width:0%;background:var(--accent);border-radius:99px;transition:width 0.25s linear}
-    .update-countdown-ring{position:relative;z-index:1}
-    .update-countdown-ring svg{transform:rotate(-90deg)}
-    .update-countdown-circle{stroke:var(--accent);stroke-width:3;fill:none;stroke-dasharray:125.6;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear;stroke-linecap:round}
-    .update-countdown-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:1.3rem;font-weight:500;color:var(--text)}
-
-    /* WHAT'S NEW MODAL */
-    .whats-new-overlay{
-      position:fixed;inset:0;z-index:9999;
-      background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);
-      display:none;align-items:center;justify-content:center;padding:1.5rem;
-    }
-    .whats-new-overlay.show{display:flex}
-    .whats-new-modal{
-      background:var(--surface);border:1px solid var(--border);
-      border-radius:16px;padding:2rem;width:100%;max-width:480px;
-      box-shadow:0 16px 48px rgba(0,0,0,0.18);
-      display:flex;flex-direction:column;gap:16px;
-      animation:rise 0.3s ease both;
-    }
-    .whats-new-top{display:flex;align-items:center;gap:10px}
-    .whats-new-icon{font-size:1.6rem}
-    .whats-new-heading{font-family:'Instrument Serif',serif;font-size:1.5rem;letter-spacing:-0.01em}
-    .whats-new-version{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);background:#fdecd6;padding:3px 10px;border-radius:99px;display:inline-block}
-    .whats-new-divider{height:1px;background:var(--border)}
-    .whats-new-body{font-size:0.9rem;line-height:1.75;color:var(--text);white-space:pre-wrap;max-height:260px;overflow-y:auto}
-    .whats-new-body::-webkit-scrollbar{width:4px}
-    .whats-new-body::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:99px}
-    .whats-new-dismiss{
-      height:42px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;
-      background:var(--text);color:var(--bg);border:none;border-radius:10px;
-      cursor:pointer;transition:opacity 0.15s;
-    }
-    .whats-new-dismiss:hover{opacity:0.82}
   </style>
 </head>
 <body>
 
-<!-- REDIRECT GUARD -->
+<!-- REDIRECT: must be logged in -->
 <script>
-  (function(){var r=sessionStorage.getItem('rank');if(!r)window.location.replace('login.html');})();
+(function(){
+  var r = localStorage.getItem('rank');
+  if(!r || r === 'public') window.location.replace('login.html');
+})();
 </script>
 
-<!-- UPDATE OUTDATED BAR -->
+<!-- UPDATE BAR -->
 <div class="update-bar" id="update-bar">
   <span>⚡ A new update is available —</span>
   <strong id="update-bar-version"></strong>
   <button class="update-bar-btn" onclick="startUpdate()">Update Now →</button>
 </div>
 
-<!-- 10-SECOND LOADING OVERLAY -->
+<!-- UPDATE OVERLAY -->
 <div class="update-overlay" id="update-overlay">
   <div class="update-logo">tips <em>&</em> stuff</div>
-  <div class="update-overlay-label">Installing update…</div>
+  <div class="update-overlay-label" id="update-overlay-label">Installing update…</div>
   <div class="update-countdown-ring">
     <svg width="64" height="64" viewBox="0 0 44 44">
       <circle cx="22" cy="22" r="20" stroke="rgba(60,50,30,0.12)" stroke-width="3" fill="none"/>
@@ -375,26 +325,26 @@
     </svg>
     <div class="update-countdown-num" id="update-num">10</div>
   </div>
-  <div class="update-prog-wrap">
-    <div class="update-prog-fill" id="update-prog"></div>
-  </div>
+  <div class="update-prog-wrap"><div class="update-prog-fill" id="update-prog"></div></div>
 </div>
 
-<!-- WHAT'S NEW MODAL -->
+<!-- WHAT'S NEW -->
 <div class="whats-new-overlay" id="whats-new-overlay">
   <div class="whats-new-modal">
     <div class="whats-new-top">
       <div class="whats-new-icon">✨</div>
       <div>
-        <div class="whats-new-heading">What's New</div>
+        <div class="whats-new-heading" id="whats-new-heading">What's New</div>
         <span class="whats-new-version" id="whats-new-ver"></span>
       </div>
     </div>
     <div class="whats-new-divider"></div>
-    <div class="whats-new-body" id="whats-new-body">Loading changelog…</div>
-    <button class="whats-new-dismiss" onclick="dismissUpdate()">Got it — let's go! →</button>
+    <div class="whats-new-body" id="whats-new-body">Loading…</div>
+    <button class="whats-new-dismiss" id="whats-new-dismiss" onclick="dismissUpdate()">Got it — let's go! →</button>
   </div>
 </div>
+
+<!-- ANNOUNCEMENT -->
 <div class="announcement" id="ann-bar">
   <span id="ann-txt"></span>
   <button class="ann-close" onclick="document.getElementById('ann-bar').classList.remove('show')">✕</button>
@@ -403,33 +353,33 @@
 <!-- TOP NAV -->
 <header class="topnav">
   <a href="index.html" class="topnav-logo">tips <em>&</em> stuff</a>
-  <a href="login.html" class="topnav-btn" id="login-link">Login</a>
+  <a href="login.html" class="topnav-btn" id="login-link" style="display:none">Login</a>
   <div class="topnav-links">
-    <a href="index.html"      class="topnav-link active">📋 Tips</a>
-    <a href="ranks.html"      class="topnav-link">🏅 Ranks</a>
-    <a href="rules.html"      class="topnav-link">📜 Rules</a>
-    <a href="banlist.html"    class="topnav-link">🚫 Bans</a>
+    <a href="index.html"       class="topnav-link active">📋 Tips</a>
+    <a href="ranks.html"       class="topnav-link">🏅 Ranks</a>
+    <a href="rules.html"       class="topnav-link">📜 Rules</a>
+    <a href="banlist.html"     class="topnav-link">🚫 Bans</a>
+    <a href="news.html"        class="topnav-link">📰 News</a>
     <a href="leaderboard.html" class="topnav-link">🏆 Leaderboard</a>
-    <a href="version.html"    class="topnav-link">🔖 Version</a>
-    <a href="donate.html"     class="topnav-link">💛 Donate</a>
+    <a href="version.html"     class="topnav-link">🔖 Version</a>
+    <a href="donate.html"      class="topnav-link">💛 Donate</a>
   </div>
   <div class="topnav-right">
+    <!-- Language switcher -->
     <div class="lang-switcher" id="lang-sw">
       <button class="lang-btn active" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
-      <button class="lang-btn" data-lang="ko" onclick="setLang('ko')" title="Korean">🇰🇷</button>
       <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Spanish">🇪🇸</button>
-      <button class="lang-btn" data-lang="de" onclick="setLang('de')" title="German">🇩🇪</button>
+      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')" title="French">🇫🇷</button>
+      <button class="lang-btn" data-lang="pt" onclick="setLang('pt')" title="Portuguese">🇧🇷</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" title="Japanese">🇯🇵</button>
     </div>
-    <span id="rank-display" class="rank-badge rank-public">Public</span>
-    <button class="topnav-btn" id="logout-btn" style="display:none" onclick="doLogout()">Logout</button>
+    <span id="rank-display" class="rank-badge rank-public">…</span>
+    <button class="topnav-btn" id="logout-btn" onclick="doLogout()">Logout</button>
     <button class="topnav-btn" onclick="loadAll()" title="Refresh">↻</button>
   </div>
 </header>
 
-<!-- MAIN -->
 <div class="page-wrap">
-
-  <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="header-top">
       <div>
@@ -443,24 +393,22 @@
     </div>
   </div>
 
-  <!-- HORIZONTAL TAB BAR -->
+  <!-- TAB BAR -->
   <div class="tab-bar-wrap">
-    <div class="tab-bar" id="tab-bar">
+    <div class="tab-bar">
       <button class="tab-btn active" id="tab-recommended" onclick="showSec('recommended')">⭐ Recommended</button>
-      <button class="tab-btn" id="tab-featured"    onclick="showSec('featured')">🔥 Featured</button>
-      <button class="tab-btn" id="tab-public"      onclick="showSec('public')">📢 Public</button>
-      <button class="tab-btn" id="tab-news"        onclick="showSec('news')">📰 News</button>
-      <button class="tab-btn" id="tab-complaints"  onclick="showSec('complaints')">📝 Complaints <span class="tb-badge" id="complaint-ct" style="display:none"></span></button>
+      <button class="tab-btn" id="tab-featured"   onclick="showSec('featured')">🔥 Featured</button>
+      <button class="tab-btn" id="tab-public"     onclick="showSec('public')">📢 Public</button>
+      <button class="tab-btn" id="tab-news"       onclick="showSec('news')">📰 News</button>
+      <button class="tab-btn" id="tab-complaints" onclick="showSec('complaints')">📝 Complaints <span class="tb-badge" id="complaint-ct" style="display:none"></span></button>
       <a href="leaderboard.html" class="tab-btn">🏆 Leaderboard</a>
       <div class="tab-divider"></div>
-      <!-- Staff tabs (hidden by default) -->
       <button class="tab-btn" id="tab-pending"    onclick="showSec('pending')"    style="display:none">⏳ Pending <span class="tb-badge" id="pending-ct" style="display:none"></span></button>
       <button class="tab-btn" id="tab-adminboard" onclick="showSec('adminboard')" style="display:none">🔒 Admin Board</button>
       <button class="tab-btn" id="tab-settings"   onclick="showSec('settings')"   style="display:none">⚙️ Settings</button>
     </div>
   </div>
 
-  <!-- CONTENT -->
   <div class="content">
 
     <!-- RECOMMENDED -->
@@ -577,17 +525,17 @@
     <div class="sec-panel" id="sec-settings">
       <div class="section-header" style="margin-bottom:1.5rem"><span class="section-title">⚙️ Owner Settings</span><span class="rank-badge rank-owner">👑 Owner Only</span></div>
       <div class="settings-wrap">
-        <div class="settings-card"><div class="settings-card-header">📢 Announcement Banner</div><div class="settings-card-body"><div class="setting-row"><label>Message</label><textarea id="set-ann-text" placeholder="e.g. 🎉 Welcome! Read the rules before posting." maxlength="200"></textarea></div><div class="setting-row"><label>Banner Color</label><div class="color-row"><input type="color" id="set-ann-color" value="#c8602a" style="width:80px" oninput="updateAnnPreview()"/><div class="color-swatch" id="ann-swatch" style="background:#c8602a"></div></div></div><div id="ann-preview-wrap" style="display:none"><div class="ann-preview" id="ann-preview"></div></div><div class="setting-row"><label>Visibility</label><select id="set-ann-show"><option value="yes">✅ Visible to everyone</option><option value="no">🚫 Hidden</option></select></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveAnn()">Save Banner</button><span class="settings-toast" id="toast-ann"></span></div></div></div>
-        <div class="settings-card"><div class="settings-card-header">🎨 Site Appearance</div><div class="settings-card-body"><div class="settings-row-2"><div class="setting-row"><label>Site Title</label><input type="text" id="set-title" placeholder="tips & stuff" maxlength="40"/></div><div class="setting-row"><label>Subtitle</label><input type="text" id="set-subtitle" maxlength="80"/></div></div><div class="settings-row-2"><div class="setting-row"><label>Accent Color</label><div class="color-row"><input type="color" id="set-accent" value="#c8602a" style="width:80px" oninput="document.getElementById('accent-sw').style.background=this.value"/><div class="color-swatch" id="accent-sw" style="background:#c8602a"></div></div></div><div class="setting-row"><label>Background Color</label><div class="color-row"><input type="color" id="set-bg" value="#f5f2eb" style="width:80px" oninput="document.getElementById('bg-sw').style.background=this.value"/><div class="color-swatch" id="bg-sw" style="background:#f5f2eb"></div></div></div></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveAppearance()">Save Appearance</button><span class="settings-toast" id="toast-appearance"></span></div></div></div>
-        <div class="settings-card"><div class="settings-card-header">🔑 Staff Passwords</div><div class="settings-card-body"><p class="hint">Leave blank to keep current. Takes effect immediately.</p><div class="settings-row-2"><div class="setting-row"><label>👑 Owner Password</label><input type="password" id="set-pw-owner" placeholder="new password..." autocomplete="new-password"/></div><div class="setting-row"><label>🛡️ Admin Password</label><input type="password" id="set-pw-admin" placeholder="new password..." autocomplete="new-password"/></div></div><div class="setting-row"><label>🔧 Mod Password</label><input type="password" id="set-pw-mod" placeholder="new password..." autocomplete="new-password"/></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="savePasswords()">Save Passwords</button><span class="settings-toast" id="toast-passwords"></span></div></div></div>
+        <div class="settings-card"><div class="settings-card-header">📢 Announcement Banner</div><div class="settings-card-body"><div class="setting-row"><label>Message</label><textarea id="set-ann-text" placeholder="e.g. 🎉 Welcome!" maxlength="200"></textarea></div><div class="setting-row"><label>Banner Color</label><div class="color-row"><input type="color" id="set-ann-color" value="#c8602a" style="width:80px" oninput="updateAnnPreview()"/><div class="color-swatch" id="ann-swatch" style="background:#c8602a"></div></div></div><div id="ann-preview-wrap" style="display:none"><div class="ann-preview" id="ann-preview"></div></div><div class="setting-row"><label>Visibility</label><select id="set-ann-show"><option value="yes">✅ Visible to everyone</option><option value="no">🚫 Hidden</option></select></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveAnn()">Save Banner</button><span class="settings-toast" id="toast-ann"></span></div></div></div>
+        <div class="settings-card"><div class="settings-card-header">🎨 Site Appearance</div><div class="settings-card-body"><div class="settings-row-2"><div class="setting-row"><label>Site Title</label><input type="text" id="set-title" placeholder="tips & stuff" maxlength="40"/></div><div class="setting-row"><label>Subtitle</label><input type="text" id="set-subtitle" maxlength="80"/></div></div><div class="settings-row-2"><div class="setting-row"><label>Accent Color</label><div class="color-row"><input type="color" id="set-accent" value="#c8602a" style="width:80px" oninput="document.getElementById('accent-sw').style.background=this.value"/><div class="color-swatch" id="accent-sw" style="background:#c8602a"></div></div></div><div class="setting-row"><label>Background</label><div class="color-row"><input type="color" id="set-bg" value="#f5f2eb" style="width:80px" oninput="document.getElementById('bg-sw').style.background=this.value"/><div class="color-swatch" id="bg-sw" style="background:#f5f2eb"></div></div></div></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveAppearance()">Save Appearance</button><span class="settings-toast" id="toast-appearance"></span></div></div></div>
+        <div class="settings-card"><div class="settings-card-header">🔑 Staff Passwords</div><div class="settings-card-body"><p class="hint">Leave blank to keep current.</p><div class="settings-row-2"><div class="setting-row"><label>👑 Owner Password</label><input type="password" id="set-pw-owner" placeholder="new password..." autocomplete="new-password"/></div><div class="setting-row"><label>🛡️ Admin Password</label><input type="password" id="set-pw-admin" placeholder="new password..." autocomplete="new-password"/></div></div><div class="setting-row"><label>🔧 Mod Password</label><input type="password" id="set-pw-mod" placeholder="new password..." autocomplete="new-password"/></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="savePasswords()">Save Passwords</button><span class="settings-toast" id="toast-passwords"></span></div></div></div>
         <div class="settings-card"><div class="settings-card-header">👥 Staff Members</div><div class="settings-card-body"><p class="hint">Roster shown on the Ranks page.</p><div class="member-list" id="member-list"></div><div class="add-row"><input type="text" id="new-member-name" placeholder="Name" maxlength="30"/><select id="new-member-rank"><option value="owner">👑 Owner</option><option value="admin">🛡️ Admin</option><option value="mod">🔧 Mod</option></select><button class="save-btn secondary" onclick="addMember()" style="height:36px;padding:0 12px">+ Add</button></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px"><button class="save-btn" onclick="saveMembers()">Save Members</button><span class="settings-toast" id="toast-members"></span></div></div></div>
-        <div class="settings-card"><div class="settings-card-header">📜 Site Rules</div><div class="settings-card-body"><p class="hint">One rule per line. Shown on the Rules page.</p><div class="setting-row"><textarea id="set-rules" style="min-height:130px" placeholder="e.g. Be respectful&#10;No spam&#10;Keep tips on-topic"></textarea></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveRules()">Save Rules</button><span class="settings-toast" id="toast-rules"></span></div></div></div>
-        <div class="settings-card"><div class="settings-card-header">👋 Welcome Message</div><div class="settings-card-body"><p class="hint">Shown below the site title.</p><div class="setting-row"><textarea id="set-welcome" placeholder="Welcome to tips & stuff!..." maxlength="300"></textarea></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveWelcome()">Save Welcome</button><span class="settings-toast" id="toast-welcome"></span></div></div></div>
-        <div class="settings-card"><div class="settings-card-header">🔄 Version &amp; Changelog</div><div class="settings-card-body"><p class="hint">Set the current version number. When users visit and their saved version doesn't match, they'll see an "Update Available" banner.</p><div class="setting-row"><label>Version Number</label><input type="text" id="set-version" placeholder="e.g. 1.0, 2.3, June Update"/></div><div class="setting-row"><label>What's New (shown after updating)</label><textarea id="set-changelog" style="min-height:120px" placeholder="✦ Added leaderboard&#10;✦ Fixed chat bug&#10;✦ New complaint form"></textarea></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveVersion()">Save &amp; Push Update</button><span class="settings-toast" id="toast-version"></span></div></div></div>
+        <div class="settings-card"><div class="settings-card-header">📜 Site Rules</div><div class="settings-card-body"><p class="hint">One rule per line.</p><div class="setting-row"><textarea id="set-rules" style="min-height:130px" placeholder="e.g. Be respectful&#10;No spam"></textarea></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveRules()">Save Rules</button><span class="settings-toast" id="toast-rules"></span></div></div></div>
+        <div class="settings-card"><div class="settings-card-header">👋 Welcome Message</div><div class="settings-card-body"><p class="hint">Shown below the site title.</p><div class="setting-row"><textarea id="set-welcome" placeholder="Welcome!..." maxlength="300"></textarea></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveWelcome()">Save Welcome</button><span class="settings-toast" id="toast-welcome"></span></div></div></div>
+        <div class="settings-card"><div class="settings-card-header">🔄 Version &amp; Changelog</div><div class="settings-card-body"><p class="hint">When the version changes, users see an "Update Available" banner.</p><div class="setting-row"><label>Version Number</label><input type="text" id="set-version" placeholder="e.g. 1.0, 2.3"/></div><div class="setting-row"><label>What's New</label><textarea id="set-changelog" style="min-height:120px" placeholder="✦ New feature&#10;✦ Bug fix"></textarea></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveVersion()">Save &amp; Push Update</button><span class="settings-toast" id="toast-version"></span></div></div></div>
         <div class="settings-card" style="border-color:rgba(192,57,43,0.3)"><div class="settings-card-header" style="color:#c0392b">🗑️ Danger Zone</div><div class="settings-card-body">
           <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><div style="flex:1;min-width:160px"><b style="font-size:0.85rem">Clear Pending</b><p class="hint">Delete all tips awaiting approval.</p></div><button class="save-btn danger" onclick="dangerClear('pending')">Clear Pending</button></div>
           <hr style="border:none;border-top:1px solid var(--border)">
-          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><div style="flex:1;min-width:160px"><b style="font-size:0.85rem">Clear Public Tips</b><p class="hint">Delete all approved public tips.</p></div><button class="save-btn danger" onclick="dangerClear('public')">Clear Public</button></div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><div style="flex:1;min-width:160px"><b style="font-size:0.85rem">Clear Public</b><p class="hint">Delete all approved public tips.</p></div><button class="save-btn danger" onclick="dangerClear('public')">Clear Public</button></div>
           <hr style="border:none;border-top:1px solid var(--border)">
           <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><div style="flex:1;min-width:160px"><b style="font-size:0.85rem">Clear Featured</b><p class="hint">Delete all featured tips.</p></div><button class="save-btn danger" onclick="dangerClear('featured')">Clear Featured</button></div>
           <hr style="border:none;border-top:1px solid var(--border)">
@@ -600,7 +548,7 @@
   </div>
 </div>
 
-<!-- MOBILE BOTTOM NAV -->
+<!-- MOBILE NAV -->
 <nav class="mobile-nav">
   <button class="mob-btn active" id="mob-recommended" onclick="mobGo('recommended',this)"><span class="mi">⭐</span>Picks</button>
   <button class="mob-btn" id="mob-featured"   onclick="mobGo('featured',this)"><span class="mi">🔥</span>Hot</button>
@@ -629,6 +577,10 @@ const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
 const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
 let PASSWORDS = { owner:'20140314', admin:'382790', mod:'23889' };
 
+// ── ACCOUNT: read from localStorage so it persists across sessions ──
+let rank     = localStorage.getItem('rank')    || 'public';
+let username = localStorage.getItem('username') || '';
+
 const TAG = {
   tip:    {label:'💡 tip',    bg:'var(--tag-tip-bg)',    color:'var(--tag-tip-txt)',    accent:'#4a8a1a'},
   food:   {label:'🍜 food',   bg:'var(--tag-food-bg)',   color:'var(--tag-food-txt)',   accent:'#c8602a'},
@@ -636,19 +588,14 @@ const TAG = {
   tech:   {label:'⚡ tech',   bg:'var(--tag-tech-bg)',   color:'var(--tag-tech-txt)',   accent:'#7a2ac8'},
   random: {label:'🎲 random', bg:'var(--tag-random-bg)', color:'var(--tag-random-txt)', accent:'#c82a4a'},
 };
-const SEED={recommended:[{id:'r1',text:'Drink a glass of water first thing in the morning — your body is dehydrated after sleep.',tag:'life',author:'Owner'},{id:'r2',text:'Make your bed every morning. It takes 2 minutes and makes your whole room feel cleaner instantly.',tag:'life',author:'Owner'},{id:'r3',text:'Tell people when you appreciate them. Most people never say it out loud.',tag:'life',author:'Owner'},{id:'r4',text:'When you feel overwhelmed, write down everything on your mind. Getting it out of your head cuts anxiety in half.',tag:'life',author:'Owner'},{id:'r5',text:"Set your alarm 10 minutes earlier than you need to. That buffer removes all the rushing stress.",tag:'life',author:'Owner'},{id:'r6',text:"If a task takes less than 2 minutes, do it right now. Don't put it on a list.",tag:'life',author:'Owner'},{id:'r7',text:'Take a 10-minute walk outside after lunch. It boosts your afternoon energy more than coffee.',tag:'life',author:'Owner'},{id:'r8',text:'Add a pinch of salt to your coffee grounds before brewing — it cuts bitterness without changing the flavor.',tag:'food',author:'Owner'},{id:'r9',text:'Store fresh herbs like flowers — trim stems and put in a glass of water in the fridge. They last 2x longer.',tag:'food',author:'Owner'},{id:'r10',text:'Freeze overripe bananas. Perfect for smoothies and banana bread whenever you need them.',tag:'food',author:'Owner'},{id:'r11',text:'Let your steak rest for 5 minutes after cooking before cutting. The juices redistribute and it stays tender.',tag:'food',author:'Owner'},{id:'r12',text:'Pasta water is liquid gold. Add a ladle to your sauce — the starch makes everything creamy.',tag:'food',author:'Owner'},{id:'r13',text:'Toast your spices in a dry pan for 30 seconds before using them. It doubles the flavor.',tag:'food',author:'Owner'},{id:'r14',text:'Press Ctrl+Shift+T to instantly reopen a closed browser tab.',tag:'tech',author:'Owner'},{id:'r15',text:'Google anything followed by "site:reddit.com" for honest real-world opinions on any topic.',tag:'tech',author:'Owner'},{id:'r16',text:'Use dark mode everywhere. Easier on the eyes at night and saves battery on OLED screens.',tag:'tech',author:'Owner'},{id:'r17',text:'Press Windows+V to open clipboard history and paste anything you copied earlier.',tag:'tech',author:'Owner'},{id:'r18',text:'Use a password manager. One strong master password protects everything else.',tag:'tech',author:'Owner'},{id:'r19',text:'Ctrl+Z undoes mistakes in almost every app — file explorers, design tools, and more.',tag:'tech',author:'Owner'},{id:'r20',text:'If your WiFi is slow, restart your router by unplugging it for 30 seconds. Fixes most issues.',tag:'tech',author:'Owner'},{id:'r21',text:"If you can't decide between two options, flip a coin — to notice which outcome you're hoping for.",tag:'random',author:'Owner'},{id:'r22',text:"If you're bored, clean something. You won't be bored anymore and your space will be better.",tag:'random',author:'Owner'},{id:'r23',text:'Put your phone on the other side of the room at night. Forces you to get up to turn off the alarm.',tag:'random',author:'Owner'},{id:'r24',text:'Keep a small notebook by your bed. Your best ideas come right before sleep.',tag:'random',author:'Owner'},{id:'r25',text:'When you buy something new, get rid of something old. Keeps clutter from taking over.',tag:'random',author:'Owner'},{id:'r26',text:'If you want to remember something, say it out loud. Speaking engages a different part of your brain.',tag:'random',author:'Owner'}],public:[{id:'p1',text:'Use focus mode on your phone during meals. Even 20 minutes of undistracted eating makes a difference.',tag:'life',author:'Admin'},{id:'p2',text:'Freeze leftover fresh ginger — it grates much easier from frozen and lasts for months.',tag:'food',author:'Admin'},{id:'p3',text:'Screenshot important confirmation emails instead of searching for them later.',tag:'tech',author:'Admin'},{id:'p4',text:'Mute group chats you never check instead of leaving them.',tag:'tech',author:'Admin'},{id:'p5',text:'When cooking garlic, add it last to the pan — it burns fast and bitter garlic ruins the dish.',tag:'food',author:'Admin'},{id:'p6',text:'Carry a reusable bag folded in your pocket. Never stuck at checkout again.',tag:'random',author:'Admin'}]};
 
-let rank = sessionStorage.getItem('rank') || 'public';
-let db = {public:[],featured:[],adminboard:[],pending:[],recommended:[],banlist:[],rules:[],members:[],config:{},chat:[],news:[],complaints:[],accounts:[]};
+const SEED={recommended:[{id:'r1',text:'Drink a glass of water first thing in the morning — your body is dehydrated after sleep.',tag:'life',author:'Owner'},{id:'r2',text:'Make your bed every morning. It takes 2 minutes and makes your whole room feel cleaner instantly.',tag:'life',author:'Owner'},{id:'r3',text:'Tell people when you appreciate them. Most people never say it out loud.',tag:'life',author:'Owner'},{id:'r4',text:'When you feel overwhelmed, write down everything on your mind. Getting it out of your head cuts anxiety in half.',tag:'life',author:'Owner'},{id:'r5',text:"Set your alarm 10 minutes earlier than you need to.",tag:'life',author:'Owner'},{id:'r6',text:"If a task takes less than 2 minutes, do it right now.",tag:'life',author:'Owner'},{id:'r7',text:'Take a 10-minute walk outside after lunch.',tag:'life',author:'Owner'},{id:'r8',text:'Add a pinch of salt to your coffee grounds before brewing.',tag:'food',author:'Owner'},{id:'r9',text:'Store fresh herbs in a glass of water in the fridge. They last 2x longer.',tag:'food',author:'Owner'},{id:'r10',text:'Freeze overripe bananas for smoothies and banana bread.',tag:'food',author:'Owner'},{id:'r11',text:'Let your steak rest 5 minutes before cutting.',tag:'food',author:'Owner'},{id:'r12',text:'Pasta water is liquid gold — add a ladle to your sauce.',tag:'food',author:'Owner'},{id:'r13',text:'Toast spices in a dry pan for 30 seconds. It doubles the flavor.',tag:'food',author:'Owner'},{id:'r14',text:'Press Ctrl+Shift+T to reopen a closed browser tab.',tag:'tech',author:'Owner'},{id:'r15',text:'Google anything + "site:reddit.com" for honest real-world opinions.',tag:'tech',author:'Owner'},{id:'r16',text:'Use dark mode everywhere. Saves battery on OLED screens.',tag:'tech',author:'Owner'},{id:'r17',text:'Press Windows+V to open clipboard history.',tag:'tech',author:'Owner'},{id:'r18',text:'Use a password manager. One master password protects everything.',tag:'tech',author:'Owner'},{id:'r19',text:'Ctrl+Z undoes mistakes in almost every app.',tag:'tech',author:'Owner'},{id:'r20',text:'Restart your router by unplugging 30 seconds. Fixes most WiFi issues.',tag:'tech',author:'Owner'},{id:'r21',text:"Flip a coin to notice which outcome you're hoping for.",tag:'random',author:'Owner'},{id:'r22',text:"If you're bored, clean something.",tag:'random',author:'Owner'},{id:'r23',text:'Put your phone on the other side of the room at night.',tag:'random',author:'Owner'},{id:'r24',text:'Keep a notebook by your bed. Best ideas come before sleep.',tag:'random',author:'Owner'},{id:'r25',text:'When you buy something new, get rid of something old.',tag:'random',author:'Owner'},{id:'r26',text:'Say things out loud to remember them better.',tag:'random',author:'Owner'}],
+public:[{id:'p1',text:'Use focus mode on your phone during meals.',tag:'life',author:'Admin'},{id:'p2',text:'Freeze leftover ginger — grates easier from frozen.',tag:'food',author:'Admin'},{id:'p3',text:'Screenshot important confirmation emails.',tag:'tech',author:'Admin'},{id:'p4',text:'Mute group chats you never check instead of leaving them.',tag:'tech',author:'Admin'},{id:'p5',text:'Add garlic last to the pan — it burns fast.',tag:'food',author:'Admin'},{id:'p6',text:'Carry a reusable bag folded in your pocket.',tag:'random',author:'Admin'}]};
+
+let db = {public:[],featured:[],adminboard:[],pending:[],recommended:[],banlist:[],rules:[],members:[],config:{},chat:[],news:[],complaints:[]};
 const SECS = ['recommended','featured','public','news','complaints','pending','adminboard','settings'];
 
-// ── USERNAME from session (auto-fills chat) ──
-const username = sessionStorage.getItem('username') || '';
-// chatName is set immediately so chat knows who is typing
-const chatName = { val: username || localStorage.getItem('chat_name') || '' };
-if(username) localStorage.setItem('chat_name', username); // keep in sync
-
-function showSec(id) {
+function showSec(id){
   SECS.forEach(s=>{
     document.getElementById('sec-'+s).classList.remove('visible');
     const t=document.getElementById('tab-'+s); if(t) t.classList.remove('active');
@@ -659,37 +606,49 @@ function showSec(id) {
   const m=document.getElementById('mob-'+id); if(m) m.classList.add('active');
   if(id==='settings') populateSettings();
 }
-function mobGo(id){showSec(id);}
+function mobGo(id,btn){showSec(id);}
 
 function doLogout(){
-  sessionStorage.removeItem('rank');
-  sessionStorage.removeItem('username');
-  localStorage.removeItem('chat_name');
+  // Clear all account data from localStorage
+  localStorage.removeItem('rank');
+  localStorage.removeItem('username');
   window.location.replace('login.html');
 }
 
 function applyRankUI(){
-  const labels ={owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod',public:username?'👤 '+username:'Public'};
-  const classes={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
-  const rd=document.getElementById('rank-display');
-  rd.textContent=labels[rank]; rd.className='rank-badge '+classes[rank];
-  document.getElementById('login-link').style.display  = rank==='public' ? '' : 'none';
-  document.getElementById('logout-btn').style.display  = rank!=='public' ? '' : 'none';
-  const isOwner=rank==='owner', isAdmin=rank==='owner'||rank==='admin', isMod=rank==='owner'||rank==='admin'||rank==='mod';
+  // Build display label: shows username if set, otherwise rank name
+  const rankIcons = {owner:'👑', admin:'🛡️', mod:'🔧', public:'👤'};
+  const rankNames = {owner:'Owner', admin:'Admin', mod:'Mod', public:'Public'};
+  const icon  = rankIcons[rank] || '👤';
+  const rname = rankNames[rank] || 'Public';
+  const label = username ? `${icon} ${username}` : `${icon} ${rname}`;
+  const classes = {owner:'rank-owner', admin:'rank-admin', mod:'rank-mod', public:'rank-public'};
+  const rd = document.getElementById('rank-display');
+  rd.textContent = label; rd.className = 'rank-badge ' + (classes[rank]||'rank-public');
+
+  const isOwner = rank==='owner';
+  const isAdmin = rank==='owner'||rank==='admin';
+  const isMod   = rank==='owner'||rank==='admin'||rank==='mod';
+
+  // Auto-fill author fields with username
+  if(username){
+    ['rec-author','feat-author','admin-author','news-author'].forEach(id=>{
+      const el=document.getElementById(id); if(el&&!el.value) el.value=username;
+    });
+    const cfName=document.getElementById('cf-name'); if(cfName&&!cfName.value) cfName.value=username;
+    const pubName=document.getElementById('pub-name'); if(pubName&&!pubName.value) pubName.value=username;
+  }
+
   // Show/hide staff tabs
   ['pending','adminboard','settings'].forEach(id=>{
     const t=document.getElementById('tab-'+id); if(t) t.style.display='none';
     const m=document.getElementById('mob-'+id); if(m) m.style.display='none';
   });
   if(isAdmin){
-    const tp=document.getElementById('tab-pending');    if(tp) tp.style.display='';
-    const ta=document.getElementById('tab-adminboard'); if(ta) ta.style.display='';
-    const mp=document.getElementById('mob-pending');    if(mp) mp.style.display='';
-    const ma=document.getElementById('mob-adminboard'); if(ma) ma.style.display='';
+    ['tab-pending','tab-adminboard','mob-pending','mob-adminboard'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='';});
   }
   if(isOwner){
-    const ts=document.getElementById('tab-settings'); if(ts) ts.style.display='';
-    const ms=document.getElementById('mob-settings'); if(ms) ms.style.display='';
+    ['tab-settings','mob-settings'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='';});
   }
   document.getElementById('rec-form').style.display   = isAdmin ? 'flex'  : 'none';
   document.getElementById('news-form').style.display  = isAdmin ? 'block' : 'none';
@@ -710,19 +669,18 @@ async function loadAll(){
     const res=await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
     if(!res.ok) throw new Error('HTTP '+res.status);
     const raw=await res.json(); const data=raw.record!==undefined?raw.record:raw;
-    db.public      = Array.isArray(data.public)      ? data.public      : [];
-    db.featured    = Array.isArray(data.featured)     ? data.featured    : [];
-    db.adminboard  = Array.isArray(data.adminboard)   ? data.adminboard  : [];
-    db.pending     = Array.isArray(data.pending)      ? data.pending     : [];
-    db.recommended = Array.isArray(data.recommended)  ? data.recommended : [];
-    db.banlist     = Array.isArray(data.banlist)      ? data.banlist     : [];
-    db.rules       = Array.isArray(data.rules)        ? data.rules       : [];
-    db.members     = Array.isArray(data.members)      ? data.members     : [];
-    db.chat        = Array.isArray(data.chat)         ? data.chat        : [];
-    db.news        = Array.isArray(data.news)         ? data.news        : [];
-    db.complaints  = Array.isArray(data.complaints)   ? data.complaints  : [];
-    db.accounts    = Array.isArray(data.accounts)     ? data.accounts    : []; // ← accounts preserved
-    db.config      = (data.config&&typeof data.config==='object')?data.config:{};
+    db.public     =Array.isArray(data.public)     ?data.public     :[];
+    db.featured   =Array.isArray(data.featured)   ?data.featured   :[];
+    db.adminboard =Array.isArray(data.adminboard) ?data.adminboard :[];
+    db.pending    =Array.isArray(data.pending)    ?data.pending    :[];
+    db.recommended=Array.isArray(data.recommended)?data.recommended:[];
+    db.banlist    =Array.isArray(data.banlist)    ?data.banlist    :[];
+    db.rules      =Array.isArray(data.rules)      ?data.rules      :[];
+    db.members    =Array.isArray(data.members)    ?data.members    :[];
+    db.chat       =Array.isArray(data.chat)       ?data.chat       :[];
+    db.news       =Array.isArray(data.news)       ?data.news       :[];
+    db.complaints =Array.isArray(data.complaints) ?data.complaints :[];
+    db.config     =(data.config&&typeof data.config==='object')?data.config:{};
     if(db.config.passwords){
       if(db.config.passwords.owner) PASSWORDS.owner=db.config.passwords.owner;
       if(db.config.passwords.admin) PASSWORDS.admin=db.config.passwords.admin;
@@ -734,17 +692,14 @@ async function loadAll(){
     if(!db.public.length)     {db.public=SEED.public;dirty=true;}
     if(dirty) await saveAll();
     const pc=db.pending.length;
-    const pct=document.getElementById('pending-ct');
-    if(pct){pct.textContent=pc>0?pc:'';pct.style.display=pc>0?'inline':'none';}
-    const mpb=document.getElementById('mob-pending-badge');
-    if(mpb){mpb.textContent=pc>0?pc:'';mpb.classList.toggle('show',pc>0);}
+    const pct=document.getElementById('pending-ct');if(pct){pct.textContent=pc>0?pc:'';pct.style.display=pc>0?'inline':'none';}
+    const mpb=document.getElementById('mob-pending-badge');if(mpb){mpb.textContent=pc>0?pc:'';mpb.classList.toggle('show',pc>0);}
     setStatus('ok','loaded ✓');
     applyRankUI();
-    checkForUpdates(); // ← check after data is loaded
+    checkForUpdates();
   }catch(e){console.error(e);setStatus('error','could not load — '+e.message);}
 }
 
-// ── saveAll always includes accounts so they are never lost ──
 async function saveAll(){
   const res=await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});
   if(!res.ok) throw new Error('HTTP '+res.status);
@@ -763,42 +718,52 @@ function applyConfig(cfg){
 function renderGrid(gridId,tips,canDel,isPending,isRec){
   const grid=document.getElementById(gridId);
   if(!tips||!tips.length){grid.innerHTML='<p class="empty">Nothing here yet.</p>';return;}
-  const isAdmin=rank==='owner'||rank==='admin', isMod=rank==='owner'||rank==='admin'||rank==='mod';
+  const isAdmin=rank==='owner'||rank==='admin',isMod=rank==='owner'||rank==='admin'||rank==='mod';
   grid.innerHTML=tips.map(t=>{
-    const cfg=TAG[t.tag]||TAG.tip; const acts=[];
+    const cfg=TAG[t.tag]||TAG.tip;const acts=[];
     if(isPending&&isAdmin){acts.push(`<button class="action-btn approve-btn" onclick="approveTip('${t.id}')">✓ Approve</button>`);acts.push(`<button class="action-btn deny-btn" onclick="denyTip('${t.id}')">✕ Deny</button>`);}
     else if(canDel){acts.push(`<button class="action-btn del-btn" onclick="deleteTip('${gridId}','${t.id}')">✕</button>`);}
-    const cc=isRec?'rec-card':'tip-card'; const sa=isRec?'':` style="--card-accent:${cfg.accent}"`;
+    const cc=isRec?'rec-card':'tip-card';const sa=isRec?'':` style="--card-accent:${cfg.accent}"`;
     return `<article class="${cc}"${sa}><span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span><p class="tip-text">${esc(t.text)}</p><div class="tip-footer"><span class="tip-author">${esc(t.author)}</span><div class="tip-actions">${acts.join('')}</div></div></article>`;
   }).join('');
 }
 function renderAll(){
-  const isAdmin=rank==='owner'||rank==='admin', isMod=rank==='owner'||rank==='admin'||rank==='mod';
+  const isAdmin=rank==='owner'||rank==='admin',isMod=rank==='owner'||rank==='admin'||rank==='mod';
   renderGrid('recommended-grid',db.recommended,isAdmin,false,true);
   renderGrid('public-grid',db.public,isAdmin,false,false);
   renderGrid('featured-grid',db.featured,isMod,false,false);
   renderGrid('adminboard-grid',db.adminboard,isAdmin,false,false);
   renderGrid('pending-grid',db.pending,false,true,false);
-  renderNews(); renderComplaints(); updateComplaintBadge();
+  renderNews();renderComplaints();updateComplaintBadge();
 }
-async function submitPublic(){const text=document.getElementById('pub-text').value.trim();const auth=document.getElementById('pub-name').value.trim()||username||'anon';const tag=document.getElementById('pub-tag').value;if(!text){document.getElementById('pub-text').focus();return;}setStatus('loading','submitting...');try{db.pending.unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById('pub-text').value='';document.getElementById('pub-name').value='';setStatus('ok','submitted ✓ — waiting for approval');}catch(e){db.pending.shift();setStatus('error','could not submit — '+e.message);}}
-async function staffPost(section){const map={recommended:['rec-text','rec-author','rec-tag'],featured:['feat-text','feat-author','feat-tag'],adminboard:['admin-text','admin-author','admin-tag']};const [ti,ai,gi]=map[section];const text=document.getElementById(ti).value.trim();const auth=document.getElementById(ai).value.trim()||'Staff';const tag=document.getElementById(gi).value;if(!text){document.getElementById(ti).focus();return;}setStatus('loading','posting...');try{db[section].unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById(ti).value='';setStatus('ok','posted ✓');renderAll();}catch(e){db[section].shift();setStatus('error','could not post — '+e.message);}}
+
+async function submitPublic(){const text=document.getElementById('pub-text').value.trim();const auth=document.getElementById('pub-name').value.trim()||username||'anon';const tag=document.getElementById('pub-tag').value;if(!text){document.getElementById('pub-text').focus();return;}setStatus('loading','submitting...');try{db.pending.unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById('pub-text').value='';setStatus('ok','submitted ✓ — waiting for approval');}catch(e){db.pending.shift();setStatus('error','could not submit — '+e.message);}}
+async function staffPost(section){const map={recommended:['rec-text','rec-author','rec-tag'],featured:['feat-text','feat-author','feat-tag'],adminboard:['admin-text','admin-author','admin-tag']};const [ti,ai,gi]=map[section];const text=document.getElementById(ti).value.trim();const auth=document.getElementById(ai).value.trim()||username||'Staff';const tag=document.getElementById(gi).value;if(!text){document.getElementById(ti).focus();return;}setStatus('loading','posting...');try{db[section].unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById(ti).value='';setStatus('ok','posted ✓');renderAll();}catch(e){db[section].shift();setStatus('error','could not post — '+e.message);}}
 async function approveTip(id){const tip=db.pending.find(t=>t.id==id);if(!tip)return;setStatus('loading','approving...');try{db.pending=db.pending.filter(t=>t.id!=id);db.public.unshift({...tip,pending:false});await saveAll();setStatus('ok','approved ✓');renderAll();}catch(e){setStatus('error','could not approve — '+e.message);}}
-async function denyTip(id){if(!confirm('Deny and delete this tip?'))return;setStatus('loading','denying...');try{db.pending=db.pending.filter(t=>t.id!=id);await saveAll();setStatus('ok','denied ✓');renderAll();}catch(e){setStatus('error','could not deny — '+e.message);}}
+async function denyTip(id){if(!confirm('Deny and delete?'))return;setStatus('loading','denying...');try{db.pending=db.pending.filter(t=>t.id!=id);await saveAll();setStatus('ok','denied ✓');renderAll();}catch(e){setStatus('error','could not deny — '+e.message);}}
 async function deleteTip(gridId,id){if(!confirm('Delete this tip?'))return;const sec=gridId.replace('-grid','');const prev=[...db[sec]];db[sec]=db[sec].filter(t=>t.id!=id);renderAll();try{await saveAll();setStatus('ok','deleted ✓');}catch(e){db[sec]=prev;setStatus('error','could not delete — '+e.message);renderAll();}}
 
-function populateSettings(){const cfg=db.config||{};document.getElementById('set-title').value=(cfg.title||'').replace(/<[^>]*>/g,'').replace('&amp;','&');document.getElementById('set-subtitle').value=cfg.subtitle||'';const acc=cfg.accent||'#c8602a';document.getElementById('set-accent').value=acc;document.getElementById('accent-sw').style.background=acc;const bg=cfg.bg||'#f5f2eb';document.getElementById('set-bg').value=bg;document.getElementById('bg-sw').style.background=bg;document.getElementById('set-rules').value=Array.isArray(db.rules)?db.rules.join('\n'):'';document.getElementById('set-welcome').value=cfg.welcome||'';const ann=cfg.announcement||{};document.getElementById('set-ann-text').value=ann.text||'';document.getElementById('set-ann-show').value=ann.show||'no';const ac=ann.color||'#c8602a';document.getElementById('set-ann-color').value=ac;document.getElementById('ann-swatch').style.background=ac;
-// version + changelog
-const sv=document.getElementById('set-version');const sc=document.getElementById('set-changelog');
-if(sv)sv.value=cfg.version||'';if(sc)sc.value=cfg.changelog||'';
-updateAnnPreview();renderMemberList();}
+function populateSettings(){
+  const cfg=db.config||{};
+  document.getElementById('set-title').value=(cfg.title||'').replace(/<[^>]*>/g,'').replace('&amp;','&');
+  document.getElementById('set-subtitle').value=cfg.subtitle||'';
+  const acc=cfg.accent||'#c8602a';document.getElementById('set-accent').value=acc;document.getElementById('accent-sw').style.background=acc;
+  const bg=cfg.bg||'#f5f2eb';document.getElementById('set-bg').value=bg;document.getElementById('bg-sw').style.background=bg;
+  document.getElementById('set-rules').value=Array.isArray(db.rules)?db.rules.join('\n'):'';
+  document.getElementById('set-welcome').value=cfg.welcome||'';
+  const ann=cfg.announcement||{};document.getElementById('set-ann-text').value=ann.text||'';document.getElementById('set-ann-show').value=ann.show||'no';
+  const ac=ann.color||'#c8602a';document.getElementById('set-ann-color').value=ac;document.getElementById('ann-swatch').style.background=ac;
+  const sv=document.getElementById('set-version');const sc=document.getElementById('set-changelog');
+  if(sv)sv.value=cfg.version||'';if(sc)sc.value=cfg.changelog||'';
+  updateAnnPreview();renderMemberList();
+}
 function updateAnnPreview(){const t=document.getElementById('set-ann-text').value;const c=document.getElementById('set-ann-color').value;document.getElementById('ann-swatch').style.background=c;const w=document.getElementById('ann-preview-wrap'),p=document.getElementById('ann-preview');if(t){w.style.display='block';p.textContent=t;p.style.background=c;}else w.style.display='none';}
 document.getElementById('set-ann-text').addEventListener('input',updateAnnPreview);
 function renderMemberList(){const list=document.getElementById('member-list');if(!db.members||!db.members.length){list.innerHTML='<p style="font-size:0.8rem;color:var(--muted)">No staff added yet.</p>';return;}const rl={owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod'},rc={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod'};list.innerHTML=db.members.map((m,i)=>`<div class="member-row"><span class="member-name">${esc(m.name)}</span><span class="rank-badge ${rc[m.rank]||'rank-public'}">${rl[m.rank]||m.rank}</span><button class="member-del" onclick="removeMember(${i})">✕</button></div>`).join('');}
 function addMember(){const n=document.getElementById('new-member-name').value.trim();const r=document.getElementById('new-member-rank').value;if(!n){document.getElementById('new-member-name').focus();return;}db.members.push({name:n,rank:r});document.getElementById('new-member-name').value='';renderMemberList();}
 function removeMember(i){db.members.splice(i,1);renderMemberList();}
 function toast(id,msg,err){const el=document.getElementById(id);el.textContent=msg;el.className='settings-toast show'+(err?' error':'');setTimeout(()=>el.className='settings-toast',3000);}
-async function saveAnn(){if(!db.config)db.config={};db.config.announcement={text:document.getElementById('set-ann-text').value.trim(),show:document.getElementById('set-ann-show').value,color:document.getElementById('set-ann-color').value};try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-ann','✓ Banner saved!');}catch(e){toast('toast-ann','✕ '+e.message,true);}}
+async function saveAnn(){if(!db.config)db.config={};db.config.announcement={text:document.getElementById('set-ann-text').value.trim(),show:document.getElementById('set-ann-show').value,color:document.getElementById('set-ann-color').value};try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-ann','✓ Saved!');}catch(e){toast('toast-ann','✕ '+e.message,true);}}
 async function saveAppearance(){if(!db.config)db.config={};db.config.title=esc(document.getElementById('set-title').value.trim()||'tips & stuff');db.config.subtitle=document.getElementById('set-subtitle').value.trim();db.config.accent=document.getElementById('set-accent').value;db.config.bg=document.getElementById('set-bg').value;try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-appearance','✓ Saved!');}catch(e){toast('toast-appearance','✕ '+e.message,true);}}
 async function savePasswords(){if(!db.config)db.config={};if(!db.config.passwords)db.config.passwords={};const o=document.getElementById('set-pw-owner').value,a=document.getElementById('set-pw-admin').value,m=document.getElementById('set-pw-mod').value;if(o){db.config.passwords.owner=o;PASSWORDS.owner=o;}if(a){db.config.passwords.admin=a;PASSWORDS.admin=a;}if(m){db.config.passwords.mod=m;PASSWORDS.mod=m;}try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');['set-pw-owner','set-pw-admin','set-pw-mod'].forEach(id=>document.getElementById(id).value='');toast('toast-passwords','✓ Updated!');}catch(e){toast('toast-passwords','✕ '+e.message,true);}}
 async function saveMembers(){try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-members','✓ Saved!');}catch(e){toast('toast-members','✕ '+e.message,true);}}
@@ -806,7 +771,23 @@ async function saveRules(){db.rules=document.getElementById('set-rules').value.s
 async function saveWelcome(){if(!db.config)db.config={};db.config.welcome=document.getElementById('set-welcome').value.trim();try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-welcome','✓ Saved!');}catch(e){toast('toast-welcome','✕ '+e.message,true);}}
 async function dangerClear(sec){if(!confirm('Permanently delete ALL '+sec+' tips?'))return;db[sec]=[];try{setStatus('loading','clearing...');await saveAll();setStatus('ok','cleared ✓');renderAll();}catch(e){setStatus('error','failed: '+e.message);}}
 
-// ── CHAT (no name gate — uses session username) ──
+// ── NEWS ──
+const NEWS_CATS={update:{label:'📣 Update',bg:'#e0eaf8',color:'#1a3d6b',accent:'#2a60c8'},announcement:{label:'🎉 Announcement',bg:'#e8f0e0',color:'#2d5016',accent:'#4a8a1a'},warning:{label:'⚠️ Warning',bg:'#fdecd6',color:'#7a3a0a',accent:'#c8602a'},event:{label:'📅 Event',bg:'#ece0f8',color:'#4a1f7a',accent:'#7a2ac8'},other:{label:'💬 Other',bg:'#fce8ec',color:'#7a1a2e',accent:'#c82a4a'}};
+function renderNews(){const list=document.getElementById('news-list');const isAdmin=rank==='owner'||rank==='admin';const news=db.news||[];if(!news.length){list.innerHTML='<p class="empty">No news posted yet.</p>';return;}list.innerHTML=news.map(n=>{const cat=NEWS_CATS[n.cat]||NEWS_CATS.other;const date=n.ts?new Date(n.ts).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}):'';const delBtn=isAdmin?`<button class="news-del-btn show" onclick="deleteNews('${n.id}')">✕ delete</button>`:'';return `<div class="news-card" style="--news-color:${cat.accent}"><div class="news-card-accent"></div><div class="news-card-body"><div class="news-card-top"><span class="news-cat-badge" style="background:${cat.bg};color:${cat.color}">${cat.label}</span><span class="news-date">${date}</span><span class="news-author-tag">by ${esc(n.author||'Staff')}</span></div><div class="news-headline">${esc(n.title)}</div><div class="news-text">${esc(n.body)}</div>${delBtn}</div></div>`;}).join('');}
+async function postNews(){const title=document.getElementById('news-title').value.trim();const body=document.getElementById('news-body').value.trim();const cat=document.getElementById('news-cat').value;const author=document.getElementById('news-author').value.trim()||username||'Staff';if(!title||!body){return;}setStatus('loading','publishing...');try{db.news.unshift({id:Date.now(),title,body,cat,author,ts:Date.now()});await saveAll();document.getElementById('news-title').value='';document.getElementById('news-body').value='';setStatus('ok','published ✓');renderNews();}catch(e){db.news.shift();setStatus('error','could not publish — '+e.message);}}
+async function deleteNews(id){if(!confirm('Delete?'))return;const prev=[...db.news];db.news=db.news.filter(n=>n.id!=id);renderNews();try{await saveAll();setStatus('ok','deleted ✓');}catch(e){db.news=prev;renderNews();}}
+
+// ── COMPLAINTS ──
+const COMPLAINT_TYPES={behavior:{label:'😠 Behavior',bg:'#fce8ec',color:'#7a1a2e'},spam:{label:'🚫 Spam',bg:'#fdecd6',color:'#7a3a0a'},inappropriate:{label:'⚠️ Inappropriate',bg:'#fdecd6',color:'#7a3a0a'},bug:{label:'🐛 Bug / Issue',bg:'#e0eaf8',color:'#1a3d6b'},suggestion:{label:'💡 Suggestion',bg:'#e8f0e0',color:'#2d5016'},other:{label:'💬 Other',bg:'#ece0f8',color:'#4a1f7a'}};
+function cfToast(msg,err){const el=document.getElementById('cf-toast');el.textContent=msg;el.className='cf-toast show'+(err?' error':'');setTimeout(()=>el.className='cf-toast',3500);}
+function updateComplaintBadge(){const open=(db.complaints||[]).filter(c=>c.status==='open').length;const ct=document.getElementById('complaint-ct');const mb=document.getElementById('mob-complaint-badge');if(ct){ct.textContent=open>0?open:'';ct.style.display=open>0?'inline':'none';}if(mb){mb.textContent=open>0?open:'';mb.classList.toggle('show',open>0);}}
+function renderComplaints(){const list=document.getElementById('complaints-list');const filter=document.getElementById('complaint-filter')?.value||'all';const isAdmin=rank==='owner'||rank==='admin';if(!isAdmin){list.innerHTML='<p class="empty">Staff only.</p>';return;}const all=db.complaints||[];const filtered=filter==='all'?all:all.filter(c=>c.status===filter);if(!filtered.length){list.innerHTML=`<p class="empty">No ${filter!=='all'?filter:''} complaints.</p>`;return;}list.innerHTML=filtered.map(c=>{const ct=COMPLAINT_TYPES[c.type]||COMPLAINT_TYPES.other;const date=c.ts?new Date(c.ts).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}):'—';const isOpen=c.status!=='resolved';const stCls=isOpen?'complaint-status-open':'complaint-status-resolved';const stLabel=isOpen?'🔴 Open':'✅ Resolved';const actions=isOpen?`<button class="complaint-resolve-btn" onclick="resolveComplaint('${c.id}')">✅ Resolved</button>`:`<button class="complaint-reopen-btn" onclick="reopenComplaint('${c.id}')">🔴 Reopen</button>`;return `<div class="complaint-card${isOpen?'':' is-resolved'}"><div class="complaint-card-top"><span class="complaint-name">${esc(c.name||'Anonymous')}</span><span class="complaint-type-badge" style="background:${ct.bg};color:${ct.color}">${ct.label}</span><span class="complaint-status-badge ${stCls}">${stLabel}</span><span class="complaint-date">${date}</span></div><p class="complaint-text">${esc(c.text)}</p><div class="complaint-actions">${actions}<button class="complaint-del-btn" onclick="deleteComplaint('${c.id}')">✕ Delete</button></div></div>`;}).join('');}
+async function submitComplaint(){const name=document.getElementById('cf-name').value.trim()||username||'';const type=document.getElementById('cf-type').value;const text=document.getElementById('cf-text').value.trim();if(!name){document.getElementById('cf-name').focus();cfToast('Please enter your name.',true);return;}if(!text){document.getElementById('cf-text').focus();cfToast('Please describe your complaint.',true);return;}cfToast('Submitting...');try{db.complaints.unshift({id:Date.now(),name,type,text,status:'open',ts:Date.now()});await saveAll();document.getElementById('cf-text').value='';cfToast('✓ Submitted!');updateComplaintBadge();}catch(e){db.complaints.shift();cfToast('✕ Could not submit.',true);}}
+async function resolveComplaint(id){const c=db.complaints.find(c=>String(c.id)===String(id));if(!c)return;c.status='resolved';try{await saveAll();renderComplaints();updateComplaintBadge();}catch(e){c.status='open';}}
+async function reopenComplaint(id){const c=db.complaints.find(c=>String(c.id)===String(id));if(!c)return;c.status='open';try{await saveAll();renderComplaints();updateComplaintBadge();}catch(e){c.status='resolved';}}
+async function deleteComplaint(id){if(!confirm('Delete?'))return;const prev=[...db.complaints];db.complaints=db.complaints.filter(c=>String(c.id)!==String(id));renderComplaints();updateComplaintBadge();try{await saveAll();}catch(e){db.complaints=prev;renderComplaints();}}
+
+// ── CHAT (uses username, no name gate needed) ──
 let chatOpen=false,chatTimer=null,chatLastCount=0;
 function toggleChat(){
   chatOpen=!chatOpen;
@@ -818,27 +799,15 @@ function toggleChat(){
     setTimeout(()=>document.getElementById('chat-input').focus(),100);
   } else {clearInterval(chatTimer);chatTimer=null;}
 }
-async function loadChat(){
-  try{
-    const res=await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
-    if(!res.ok) return;
-    const raw=await res.json(); const data=raw.record!==undefined?raw.record:raw;
-    db.chat=Array.isArray(data.chat)?data.chat:[];
-    if(!chatOpen&&db.chat.length>chatLastCount&&chatLastCount>0){
-      const n=db.chat.length-chatLastCount;
-      const b=document.getElementById('chat-fab-badge');b.textContent=n>9?'9+':n;b.classList.add('show');
-    }
-    chatLastCount=db.chat.length; renderChat();
-  }catch(e){}
-}
+async function loadChat(){try{const res=await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});if(!res.ok)return;const raw=await res.json();const data=raw.record!==undefined?raw.record:raw;db.chat=Array.isArray(data.chat)?data.chat:[];if(!chatOpen&&db.chat.length>chatLastCount&&chatLastCount>0){const n=db.chat.length-chatLastCount;const b=document.getElementById('chat-fab-badge');b.textContent=n>9?'9+':n;b.classList.add('show');}chatLastCount=db.chat.length;renderChat();}catch(e){}}
 function renderChat(){
-  const box=document.getElementById('chat-msgs'); const msgs=db.chat||[];
+  const box=document.getElementById('chat-msgs');const msgs=db.chat||[];
   const isAdmin=rank==='owner'||rank==='admin';
   if(!msgs.length){box.innerHTML='<p class="chat-empty-msg">No messages yet — say hi! 👋</p>';return;}
   const wasBottom=box.scrollHeight-box.scrollTop-box.clientHeight<60;
   const RM={owner:{lbl:'Owner',cls:'rank-owner is-owner'},admin:{lbl:'Admin',cls:'rank-admin is-admin'},mod:{lbl:'Mod',cls:'rank-mod is-mod'}};
   box.innerHTML=msgs.map(m=>{
-    const rm=RM[m.rank]; const nc=rm?'chat-msg-name is-'+m.rank:'chat-msg-name';
+    const rm=RM[m.rank];const nc=rm?'chat-msg-name is-'+m.rank:'chat-msg-name';
     const rb=rm?`<span class="chat-msg-rbadge ${rm.cls}">${rm.lbl}</span>`:'';
     const db_btn=isAdmin?`<button class="chat-msg-del show" onclick="deleteMsg('${m.id}')">✕</button>`:'';
     const t=m.ts?new Date(m.ts).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'';
@@ -847,265 +816,41 @@ function renderChat(){
   if(wasBottom) box.scrollTop=box.scrollHeight;
 }
 async function sendMsg(){
-  // Use session username, then localStorage fallback — no prompt needed
-  const name = username || localStorage.getItem('chat_name') || 'Anonymous';
+  // Name comes from username (set at login) — no gate needed
+  const name=username||'Anonymous';
   const input=document.getElementById('chat-input');
-  const text=input.value.trim(); if(!text){input.focus();return;}
+  const text=input.value.trim();if(!text){input.focus();return;}
   const msg={id:Date.now(),name,text,ts:Date.now(),rank:rank!=='public'?rank:null};
-  db.chat.push(msg); if(db.chat.length>200) db.chat=db.chat.slice(-200);
-  input.value=''; renderChat(); document.getElementById('chat-msgs').scrollTop=999999;
+  db.chat.push(msg);if(db.chat.length>200)db.chat=db.chat.slice(-200);
+  input.value='';renderChat();document.getElementById('chat-msgs').scrollTop=999999;
   try{await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});}catch(e){}
 }
 async function deleteMsg(id){db.chat=db.chat.filter(m=>m.id!=id);renderChat();try{await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});}catch(e){}}
 document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();});
 
-// ── NEWS ──
-const NEWS_CATS={update:{label:'📣 Update',bg:'#e0eaf8',color:'#1a3d6b',accent:'#2a60c8'},announcement:{label:'🎉 Announcement',bg:'#e8f0e0',color:'#2d5016',accent:'#4a8a1a'},warning:{label:'⚠️ Warning',bg:'#fdecd6',color:'#7a3a0a',accent:'#c8602a'},event:{label:'📅 Event',bg:'#ece0f8',color:'#4a1f7a',accent:'#7a2ac8'},other:{label:'💬 Other',bg:'#fce8ec',color:'#7a1a2e',accent:'#c82a4a'}};
-function renderNews(){const list=document.getElementById('news-list');const isAdmin=rank==='owner'||rank==='admin';const news=db.news||[];if(!news.length){list.innerHTML='<p class="empty">No news posted yet.</p>';return;}list.innerHTML=news.map(n=>{const cat=NEWS_CATS[n.cat]||NEWS_CATS.other;const date=n.ts?new Date(n.ts).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}):'';const delBtn=isAdmin?`<button class="news-del-btn show" onclick="deleteNews('${n.id}')">✕ delete</button>`:'';return `<div class="news-card" style="--news-color:${cat.accent}"><div class="news-card-accent"></div><div class="news-card-body"><div class="news-card-top"><span class="news-cat-badge" style="background:${cat.bg};color:${cat.color}">${cat.label}</span><span class="news-date">${date}</span><span class="news-author-tag">by ${esc(n.author||'Staff')}</span></div><div class="news-headline">${esc(n.title)}</div><div class="news-text">${esc(n.body)}</div>${delBtn}</div></div>`;}).join('');}
-async function postNews(){const title=document.getElementById('news-title').value.trim();const body=document.getElementById('news-body').value.trim();const cat=document.getElementById('news-cat').value;const author=document.getElementById('news-author').value.trim()||'Staff';if(!title){document.getElementById('news-title').focus();return;}if(!body){document.getElementById('news-body').focus();return;}setStatus('loading','publishing...');try{db.news.unshift({id:Date.now(),title,body,cat,author,ts:Date.now()});await saveAll();document.getElementById('news-title').value='';document.getElementById('news-body').value='';document.getElementById('news-author').value='';setStatus('ok','published ✓');renderNews();}catch(e){db.news.shift();setStatus('error','could not publish — '+e.message);}}
-async function deleteNews(id){if(!confirm('Delete this news post?'))return;const prev=[...db.news];db.news=db.news.filter(n=>n.id!=id);renderNews();try{await saveAll();setStatus('ok','deleted ✓');}catch(e){db.news=prev;setStatus('error','could not delete — '+e.message);renderNews();}}
-
-// ── COMPLAINTS ──
-const COMPLAINT_TYPES={behavior:{label:'😠 Behavior',bg:'#fce8ec',color:'#7a1a2e'},spam:{label:'🚫 Spam',bg:'#fdecd6',color:'#7a3a0a'},inappropriate:{label:'⚠️ Inappropriate Content',bg:'#fdecd6',color:'#7a3a0a'},bug:{label:'🐛 Bug / Issue',bg:'#e0eaf8',color:'#1a3d6b'},suggestion:{label:'💡 Suggestion',bg:'#e8f0e0',color:'#2d5016'},other:{label:'💬 Other',bg:'#ece0f8',color:'#4a1f7a'}};
-function cfToast(msg,err){const el=document.getElementById('cf-toast');el.textContent=msg;el.className='cf-toast show'+(err?' error':'');setTimeout(()=>el.className='cf-toast',3500);}
-function updateComplaintBadge(){const open=(db.complaints||[]).filter(c=>c.status==='open').length;const ct=document.getElementById('complaint-ct');const mb=document.getElementById('mob-complaint-badge');if(ct){ct.textContent=open>0?open:'';ct.style.display=open>0?'inline':'none';}if(mb){mb.textContent=open>0?open:'';mb.classList.toggle('show',open>0);}}
-function renderComplaints(){
-  const list=document.getElementById('complaints-list');
-  const filter=document.getElementById('complaint-filter')?.value||'all';
-  const isAdmin=rank==='owner'||rank==='admin';
-  if(!isAdmin){list.innerHTML='<p class="empty">Staff only.</p>';return;}
-  const all=db.complaints||[];
-  const filtered=filter==='all'?all:all.filter(c=>c.status===filter);
-  if(!filtered.length){list.innerHTML=`<p class="empty">No ${filter!=='all'?filter:''} complaints.</p>`;return;}
-  list.innerHTML=filtered.map(c=>{
-    const ct=COMPLAINT_TYPES[c.type]||COMPLAINT_TYPES.other;
-    const date=c.ts?new Date(c.ts).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}):'—';
-    const isOpen=c.status!=='resolved';
-    const stCls=isOpen?'complaint-status-open':'complaint-status-resolved';
-    const stLabel=isOpen?'🔴 Open':'✅ Resolved';
-    const actions=isOpen?`<button class="complaint-resolve-btn" onclick="resolveComplaint('${c.id}')">✅ Mark Resolved</button>`:`<button class="complaint-reopen-btn" onclick="reopenComplaint('${c.id}')">🔴 Reopen</button>`;
-    return `<div class="complaint-card${isOpen?'':' is-resolved'}"><div class="complaint-card-top"><span class="complaint-name">${esc(c.name||'Anonymous')}</span><span class="complaint-type-badge" style="background:${ct.bg};color:${ct.color}">${ct.label}</span><span class="complaint-status-badge ${stCls}">${stLabel}</span><span class="complaint-date">${date}</span></div><p class="complaint-text">${esc(c.text)}</p><div class="complaint-actions">${actions}<button class="complaint-del-btn" onclick="deleteComplaint('${c.id}')">✕ Delete</button></div></div>`;
-  }).join('');
-}
-async function submitComplaint(){
-  const name=document.getElementById('cf-name').value.trim()||username||'';
-  const type=document.getElementById('cf-type').value;
-  const text=document.getElementById('cf-text').value.trim();
-  if(!name){document.getElementById('cf-name').focus();cfToast('Please enter your name.',true);return;}
-  if(!text){document.getElementById('cf-text').focus();cfToast('Please describe your complaint.',true);return;}
-  cfToast('Submitting...');
-  try{db.complaints.unshift({id:Date.now(),name,type,text,status:'open',ts:Date.now()});await saveAll();document.getElementById('cf-name').value='';document.getElementById('cf-text').value='';cfToast('✓ Submitted! Staff will review privately.');updateComplaintBadge();}
-  catch(e){db.complaints.shift();cfToast('✕ Could not submit — '+e.message,true);}
-}
-async function resolveComplaint(id){const c=db.complaints.find(c=>String(c.id)===String(id));if(!c)return;c.status='resolved';try{await saveAll();renderComplaints();updateComplaintBadge();setStatus('ok','resolved ✓');}catch(e){c.status='open';}}
-async function reopenComplaint(id){const c=db.complaints.find(c=>String(c.id)===String(id));if(!c)return;c.status='open';try{await saveAll();renderComplaints();updateComplaintBadge();setStatus('ok','reopened ✓');}catch(e){c.status='resolved';}}
-async function deleteComplaint(id){if(!confirm('Delete this complaint?'))return;const prev=[...db.complaints];db.complaints=db.complaints.filter(c=>String(c.id)!==String(id));renderComplaints();updateComplaintBadge();try{await saveAll();setStatus('ok','deleted ✓');}catch(e){db.complaints=prev;renderComplaints();}}
-
-// ── LANGUAGE SYSTEM ──
-const LANGS = {
-  en: {
-    siteSubtitle: 'a shared board for tips, tricks, and random gems ✦',
-    tabRecommended:'⭐ Recommended', tabFeatured:'🔥 Featured', tabPublic:'📢 Public',
-    tabNews:'📰 News', tabComplaints:'📝 Complaints', tabPending:'⏳ Pending',
-    tabAdmin:'🔒 Admin Board', tabSettings:'⚙️ Settings',
-    submitReview:'Submit for Review', yourName:'Your name', writeTip:'Write your tip here...',
-    pendingNotice:'⏳ Tips are reviewed before posting — Owner & Admins approve or deny.',
-    noApproved:'No approved tips yet.', nothingHere:'Nothing here yet.', loading:'loading...',
-    loaded:'loaded ✓', login:'Login', logout:'Logout',
-    addRec:'Add a recommended tip...', addFeat:'Add a featured tip...', addAdmin:'Add an admin tip...',
-    describeComplaint:'Explain what happened...', yourComplaint:'Your Name',
-    submitComplaint:'📬 Submit Complaint', noComplaints:'No complaints yet.',
-    updateAvailable:'A new update is available —', updateNow:'Update Now →',
-    updating:'Installing update…', whatsNew:"What's New", gotIt:"Got it — let's go! →",
-  },
-  ko: {
-    siteSubtitle: '팁, 트릭, 랜덤 보석을 위한 공유 게시판 ✦',
-    tabRecommended:'⭐ 추천', tabFeatured:'🔥 주목', tabPublic:'📢 공개',
-    tabNews:'📰 뉴스', tabComplaints:'📝 불만', tabPending:'⏳ 대기',
-    tabAdmin:'🔒 관리자 보드', tabSettings:'⚙️ 설정',
-    submitReview:'검토를 위해 제출', yourName:'이름', writeTip:'팁을 작성하세요...',
-    pendingNotice:'⏳ 팁은 검토 후 게시됩니다 — 소유자 & 관리자가 승인 또는 거부합니다.',
-    noApproved:'아직 승인된 팁이 없습니다.', nothingHere:'아직 아무것도 없습니다.', loading:'불러오는 중...',
-    loaded:'불러옴 ✓', login:'로그인', logout:'로그아웃',
-    addRec:'추천 팁 추가...', addFeat:'주목 팁 추가...', addAdmin:'관리자 팁 추가...',
-    describeComplaint:'무슨 일이 있었는지 설명하세요...', yourComplaint:'이름',
-    submitComplaint:'📬 불만 제출', noComplaints:'아직 불만이 없습니다.',
-    updateAvailable:'새 업데이트가 있습니다 —', updateNow:'지금 업데이트 →',
-    updating:'업데이트 설치 중…', whatsNew:'새로운 기능', gotIt:"확인 — 시작하기! →",
-  },
-  es: {
-    siteSubtitle: 'un tablero compartido de tips, trucos y gemas al azar ✦',
-    tabRecommended:'⭐ Recomendados', tabFeatured:'🔥 Destacados', tabPublic:'📢 Público',
-    tabNews:'📰 Noticias', tabComplaints:'📝 Quejas', tabPending:'⏳ Pendiente',
-    tabAdmin:'🔒 Panel Admin', tabSettings:'⚙️ Configuración',
-    submitReview:'Enviar para revisión', yourName:'Tu nombre', writeTip:'Escribe tu tip aquí...',
-    pendingNotice:'⏳ Los tips se revisan antes de publicarse — el Owner y Admins aprueban o rechazan.',
-    noApproved:'Sin tips aprobados aún.', nothingHere:'Nada aquí todavía.', loading:'cargando...',
-    loaded:'cargado ✓', login:'Iniciar sesión', logout:'Cerrar sesión',
-    addRec:'Añadir tip recomendado...', addFeat:'Añadir tip destacado...', addAdmin:'Añadir tip admin...',
-    describeComplaint:'Explica lo que ocurrió...', yourComplaint:'Tu nombre',
-    submitComplaint:'📬 Enviar queja', noComplaints:'Sin quejas todavía.',
-    updateAvailable:'Nueva actualización disponible —', updateNow:'Actualizar ahora →',
-    updating:'Instalando actualización…', whatsNew:'Novedades', gotIt:"¡Entendido — vamos! →",
-  },
-  de: {
-    siteSubtitle: 'ein gemeinsames Board für Tipps, Tricks und zufällige Entdeckungen ✦',
-    tabRecommended:'⭐ Empfohlen', tabFeatured:'🔥 Empfohlen', tabPublic:'📢 Öffentlich',
-    tabNews:'📰 Neuigkeiten', tabComplaints:'📝 Beschwerden', tabPending:'⏳ Ausstehend',
-    tabAdmin:'🔒 Admin-Board', tabSettings:'⚙️ Einstellungen',
-    submitReview:'Zur Prüfung einreichen', yourName:'Dein Name', writeTip:'Schreib deinen Tipp...',
-    pendingNotice:'⏳ Tipps werden vor der Veröffentlichung geprüft — Owner & Admins genehmigen oder ablehnen.',
-    noApproved:'Noch keine genehmigten Tipps.', nothingHere:'Noch nichts hier.', loading:'lädt...',
-    loaded:'geladen ✓', login:'Anmelden', logout:'Abmelden',
-    addRec:'Empfohlenen Tipp hinzufügen...', addFeat:'Hervorgehobenen Tipp hinzufügen...', addAdmin:'Admin-Tipp hinzufügen...',
-    describeComplaint:'Erkläre was passiert ist...', yourComplaint:'Dein Name',
-    submitComplaint:'📬 Beschwerde einreichen', noComplaints:'Noch keine Beschwerden.',
-    updateAvailable:'Neues Update verfügbar —', updateNow:'Jetzt aktualisieren →',
-    updating:'Update wird installiert…', whatsNew:'Was ist neu', gotIt:"Verstanden — los geht's! →",
-  },
+// ── LANGUAGE ──
+const LANGS={
+  en:{siteSubtitle:'a shared board for tips, tricks, and random gems ✦'},
+  es:{siteSubtitle:'un tablero compartido de tips, trucos y curiosidades ✦'},
+  fr:{siteSubtitle:'un tableau partagé de conseils, astuces et curiosités ✦'},
+  pt:{siteSubtitle:'um quadro compartilhado de dicas, truques e curiosidades ✦'},
+  ja:{siteSubtitle:'ヒント、コツ、豆知識を共有するボード ✦'},
 };
-
-let lang = localStorage.getItem('lang') || 'en';
-let T = LANGS[lang];
-
-function setLang(l) {
-  lang = l; T = LANGS[l];
-  localStorage.setItem('lang', l);
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
-  applyLang();
-}
-
-function applyLang() {
-  const T = LANGS[lang];
-  const setTxt = (id, v) => { const e=document.getElementById(id); if(e&&v) e.textContent=v; };
-  const setPH  = (id, v) => { const e=document.getElementById(id); if(e&&v) e.placeholder=v; };
-  // subtitle (only if not overridden by config)
-  if(!(db.config && db.config.subtitle)) setTxt('site-subtitle-el', T.siteSubtitle);
-  // tabs
-  setTxt('tab-recommended', T.tabRecommended);
-  setTxt('tab-featured',    T.tabFeatured);
-  setTxt('tab-public',      T.tabPublic);
-  setTxt('tab-news',        T.tabNews);
-  setTxt('tab-complaints',  T.tabComplaints);
-  setTxt('tab-pending',     T.tabPending);
-  setTxt('tab-adminboard',  T.tabAdmin);
-  setTxt('tab-settings',    T.tabSettings);
-  // buttons & labels
-  const loginLink = document.getElementById('login-link');
-  if(loginLink) loginLink.textContent = T.login;
-  const logoutBtn = document.getElementById('logout-btn');
-  if(logoutBtn) logoutBtn.textContent = T.logout;
-  // placeholders
-  setPH('rec-text',   T.addRec);
-  setPH('feat-text',  T.addFeat);
-  setPH('admin-text', T.addAdmin);
-  setPH('pub-name',   T.yourName);
-  setPH('pub-text',   T.writeTip);
-  setPH('rec-author', T.yourName);
-  setPH('feat-author',T.yourName);
-  setPH('admin-author',T.yourName);
-  setPH('cf-name',    T.yourComplaint);
-  setPH('cf-text',    T.describeComplaint);
-  // submit buttons
-  const subBtn = document.querySelector('.submit-btn');
-  if(subBtn) subBtn.textContent = T.submitReview;
-  const cfBtn = document.querySelector('.cf-submit-btn');
-  if(cfBtn) cfBtn.textContent = T.submitComplaint;
-  // pending notice
-  const pn = document.querySelector('.pending-notice');
-  if(pn) pn.innerHTML = T.pendingNotice;
-  // update bar
-  setTxt('update-now-btn',    T.updateNow);
-  setTxt('update-overlay-label', T.updating);
-  setTxt('whats-new-heading', T.whatsNew);
-  setTxt('whats-new-dismiss', T.gotIt);
-  // status
-  const st = document.getElementById('status-text');
-  if(st && st.textContent.includes('loading')) st.textContent = T.loading;
-}
+let lang=localStorage.getItem('lang')||'en';
+function setLang(l){lang=l;localStorage.setItem('lang',l);document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));const sub=document.getElementById('site-subtitle-el');if(sub&&LANGS[l]&&!(db.config&&db.config.subtitle))sub.textContent=LANGS[l].siteSubtitle;}
+(function(){document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));})();
 
 // ── UPDATE SYSTEM ──
-function checkForUpdates() {
-  const cfg = db.config || {};
-  const currentVer = cfg.version || '';
-  const changelog  = cfg.changelog || '';
-  if (!currentVer) return; // no version set yet
-
-  const seenVer = localStorage.getItem('site_version_seen') || '';
-  if (seenVer !== currentVer) {
-    // Show outdated bar
-    document.getElementById('update-bar-version').textContent = currentVer;
-    document.getElementById('update-bar').classList.add('show');
-  }
-}
-
-function startUpdate() {
-  // Hide bar, show overlay
-  document.getElementById('update-bar').classList.remove('show');
-  const overlay = document.getElementById('update-overlay');
-  overlay.classList.add('show');
-
-  let secs = 10;
-  const ring = document.getElementById('update-ring');
-  const num  = document.getElementById('update-num');
-  const prog = document.getElementById('update-prog');
-  const circumference = 125.6; // 2 * PI * 20
-
-  // Start progress bar
-  requestAnimationFrame(() => {
-    prog.style.transition = 'width 10s linear';
-    prog.style.width = '100%';
-  });
-
-  // Tick countdown every second
-  const tick = setInterval(() => {
-    secs--;
-    num.textContent = secs;
-    // Update SVG ring
-    const offset = circumference * (secs / 10);
-    ring.style.strokeDashoffset = offset;
-    if (secs <= 0) {
-      clearInterval(tick);
-      // Hide overlay, show what's new
-      overlay.classList.remove('show');
-      showWhatsNew();
-    }
-  }, 1000);
-}
-
-function showWhatsNew() {
-  const cfg = db.config || {};
-  const ver = cfg.version || 'Latest';
-  const log = cfg.changelog || 'No changelog provided.';
-  document.getElementById('whats-new-ver').textContent  = ver;
-  document.getElementById('whats-new-body').textContent = log;
-  document.getElementById('whats-new-overlay').classList.add('show');
-}
-
-function dismissUpdate() {
-  const ver = (db.config || {}).version || '';
-  localStorage.setItem('site_version_seen', ver);
-  document.getElementById('whats-new-overlay').classList.remove('show');
-}
-
-async function saveVersion() {
-  if (!db.config) db.config = {};
-  db.config.version   = document.getElementById('set-version').value.trim();
-  db.config.changelog = document.getElementById('set-changelog').value.trim();
-  try {
-    setStatus('loading', 'saving...');
-    await saveAll();
-    setStatus('ok', 'saved ✓');
-    toast('toast-version', '✓ Version pushed! Users will see the update banner.');
-  } catch(e) {
-    toast('toast-version', '✕ ' + e.message, true);
-  }
-}
+function checkForUpdates(){const cfg=db.config||{};const v=cfg.version||'';if(!v)return;const seen=localStorage.getItem('site_version_seen')||'';if(seen!==v){document.getElementById('update-bar-version').textContent=v;document.getElementById('update-bar').classList.add('show');}}
+function startUpdate(){document.getElementById('update-bar').classList.remove('show');const overlay=document.getElementById('update-overlay');overlay.classList.add('show');let secs=10;const ring=document.getElementById('update-ring');const num=document.getElementById('update-num');const prog=document.getElementById('update-prog');requestAnimationFrame(()=>{prog.style.transition='width 10s linear';prog.style.width='100%';});const tick=setInterval(()=>{secs--;num.textContent=secs;ring.style.strokeDashoffset=125.6*(secs/10);if(secs<=0){clearInterval(tick);overlay.classList.remove('show');showWhatsNew();}},1000);}
+function showWhatsNew(){const cfg=db.config||{};document.getElementById('whats-new-ver').textContent=cfg.version||'Latest';document.getElementById('whats-new-body').textContent=cfg.changelog||'No changelog.';document.getElementById('whats-new-overlay').classList.add('show');}
+function dismissUpdate(){const ver=(db.config||{}).version||'';localStorage.setItem('site_version_seen',ver);document.getElementById('whats-new-overlay').classList.remove('show');}
+async function saveVersion(){if(!db.config)db.config={};db.config.version=document.getElementById('set-version').value.trim();db.config.changelog=document.getElementById('set-changelog').value.trim();try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-version','✓ Version pushed!');}catch(e){toast('toast-version','✕ '+e.message,true);}}
 
 // ── INIT ──
 applyRankUI();
 loadAll();
 </script>
-<script src="transition.js"></script>
 </body>
 </html>
+HTMLEOF
