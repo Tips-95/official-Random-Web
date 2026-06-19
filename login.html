@@ -17,258 +17,435 @@
       --mod-bg:#0a2a1a;--mod-txt:#60d090;
     }
     html,body{height:100%}
-    body{
-      font-family:'DM Sans',sans-serif;background:var(--bg);
-      color:var(--text);display:flex;flex-direction:column;
-      align-items:center;justify-content:center;min-height:100vh;
-      padding:1.5rem;
-    }
-    body::before{
-      content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      min-height:100vh;padding:1.5rem;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
       background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      background-size:200px 200px;
-    }
+      background-size:200px 200px;}
 
     /* CARD */
-    .login-card{
-      position:relative;z-index:1;
-      background:var(--surface);border:1px solid var(--border);
-      border-radius:18px;padding:2.25rem 2rem;
-      width:100%;max-width:400px;
-      box-shadow:0 8px 32px rgba(0,0,0,0.08);
-      animation:rise 0.3s cubic-bezier(0.22,1,0.36,1) both;
-    }
-    @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .card{position:relative;z-index:1;background:var(--surface);border:1px solid var(--border);
+      border-radius:18px;padding:2rem 2rem 1.75rem;width:100%;max-width:420px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.08);animation:rise 0.3s cubic-bezier(0.22,1,0.36,1) both;}
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-    /* LOGO */
-    .login-logo{
-      font-family:'Instrument Serif',serif;font-size:1.6rem;
-      letter-spacing:-0.02em;text-align:center;margin-bottom:0.25rem;
-    }
-    .login-logo em{font-style:italic;color:var(--accent)}
-    .login-sub{text-align:center;font-size:0.8rem;color:var(--muted);margin-bottom:1.75rem}
+    .logo{font-family:'Instrument Serif',serif;font-size:1.55rem;letter-spacing:-0.02em;text-align:center;margin-bottom:0.2rem;}
+    .logo em{font-style:italic;color:var(--accent)}
+    .logo-sub{text-align:center;font-size:0.78rem;color:var(--muted);margin-bottom:1.5rem}
+
+    /* MODE TABS */
+    .mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--bg);
+      border-radius:10px;padding:3px;margin-bottom:1.5rem;border:1px solid var(--border);}
+    .mode-tab{height:36px;border:none;background:transparent;font-family:'DM Sans',sans-serif;
+      font-size:0.82rem;color:var(--muted);cursor:pointer;border-radius:7px;transition:all 0.15s;font-weight:500;}
+    .mode-tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,0.08);}
+
+    /* FORM PANELS */
+    .panel{display:none}.panel.active{display:block}
 
     /* RANK PILLS */
-    .rank-picker{display:flex;gap:6px;margin-bottom:1.25rem}
-    .rank-pill{
-      flex:1;height:38px;border-radius:8px;border:1.5px solid var(--border-strong);
-      background:transparent;font-family:'DM Sans',sans-serif;font-size:0.78rem;
-      font-weight:500;color:var(--muted);cursor:pointer;transition:all 0.15s;
-      display:flex;align-items:center;justify-content:center;gap:4px;
-    }
+    .rank-picker{display:flex;gap:5px;margin-bottom:1.1rem;}
+    .rank-pill{flex:1;height:36px;border-radius:8px;border:1.5px solid var(--border-strong);
+      background:transparent;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:500;
+      color:var(--muted);cursor:pointer;transition:all 0.14s;display:flex;align-items:center;
+      justify-content:center;gap:4px;}
     .rank-pill:hover{border-color:var(--accent);color:var(--text)}
-    .rank-pill.selected-owner{background:var(--owner-bg);color:var(--owner-txt);border-color:var(--owner-bg)}
-    .rank-pill.selected-admin{background:var(--admin-bg);color:var(--admin-txt);border-color:var(--admin-bg)}
-    .rank-pill.selected-mod{background:var(--mod-bg);color:var(--mod-txt);border-color:var(--mod-bg)}
+    .rank-pill.sel-owner{background:var(--owner-bg);color:var(--owner-txt);border-color:var(--owner-bg)}
+    .rank-pill.sel-admin{background:var(--admin-bg);color:var(--admin-txt);border-color:var(--admin-bg)}
+    .rank-pill.sel-mod  {background:var(--mod-bg);  color:var(--mod-txt);  border-color:var(--mod-bg)}
+
+    /* SUB TABS (sign in / register) */
+    .sub-tabs{display:flex;gap:0;margin-bottom:1.25rem;border-bottom:1px solid var(--border);}
+    .sub-tab{background:none;border:none;font-family:'DM Sans',sans-serif;font-size:0.82rem;
+      color:var(--muted);cursor:pointer;padding:6px 14px 8px;transition:all 0.14s;
+      border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:500;}
+    .sub-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
 
     /* FIELDS */
-    .field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
-    .field label{font-size:0.72rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
-    .field input{
-      height:44px;padding:0 14px;font-family:'DM Sans',sans-serif;font-size:0.9rem;
-      background:var(--bg);border:1.5px solid var(--border-strong);border-radius:10px;
-      color:var(--text);outline:none;transition:border-color 0.15s,box-shadow 0.15s;width:100%;
-    }
-    .field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,96,42,0.12)}
-    .field input::placeholder{color:var(--muted)}
+    .field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;}
+    .field label{font-size:0.68rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;}
+    .field input{height:42px;padding:0 13px;font-family:'DM Sans',sans-serif;font-size:0.875rem;
+      background:var(--bg);border:1.5px solid var(--border-strong);border-radius:9px;
+      color:var(--text);outline:none;transition:border-color 0.14s,box-shadow 0.14s;width:100%;}
+    .field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,96,42,0.11);}
+    .field input::placeholder{color:var(--muted);opacity:0.7;}
+    .field-hint{font-size:0.68rem;color:var(--muted);margin-top:2px;}
 
-    /* ERROR */
-    .error-msg{
-      display:none;font-size:0.8rem;color:#c0392b;
-      background:#fce8ec;border:1px solid #ef9a9a;
-      border-radius:8px;padding:8px 12px;margin-bottom:12px;
-      text-align:center;
-    }
-    .error-msg.show{display:block}
+    /* ERROR / SUCCESS TOASTS */
+    .toast{display:none;font-size:0.78rem;border-radius:8px;padding:8px 12px;
+      margin-bottom:10px;text-align:center;}
+    .toast.show{display:block;}
+    .toast.error{color:#c0392b;background:#fce8ec;border:1px solid #ef9a9a;}
+    .toast.success{color:#2d7a2d;background:#e8f5e9;border:1px solid #a5d6a7;}
 
-    /* LOGIN BTN */
-    .login-btn{
-      width:100%;height:46px;font-family:'DM Sans',sans-serif;font-size:0.95rem;
-      font-weight:500;background:var(--accent);color:#fff;border:none;
-      border-radius:10px;cursor:pointer;transition:background 0.15s,transform 0.1s;
-      margin-top:4px;
-    }
-    .login-btn:hover{background:#b5521f}
-    .login-btn:active{transform:scale(0.98)}
-    .login-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+    /* BUTTONS */
+    .btn{width:100%;height:44px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;
+      border:none;border-radius:9px;cursor:pointer;transition:background 0.14s,transform 0.1s;margin-top:4px;}
+    .btn:active{transform:scale(0.98);}
+    .btn:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+    .btn-primary{background:var(--accent);color:#fff;}
+    .btn-primary:hover{background:#b5521f;}
+    .btn-dark{background:var(--text);color:#fff;}
+    .btn-dark:hover{opacity:0.85;}
 
-    /* DIVIDER */
-    .divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0}
+    .divider{border:none;border-top:1px solid var(--border);margin:1.1rem 0;}
+    .footer-note{font-size:0.73rem;color:var(--muted);text-align:center;line-height:1.5;}
+    .footer-note a{color:var(--accent);text-decoration:none;}
+    .footer-note a:hover{text-decoration:underline;}
 
-    /* HINT */
-    .login-hint{font-size:0.75rem;color:var(--muted);text-align:center;line-height:1.5}
-    .login-hint a{color:var(--accent);text-decoration:none}
-    .login-hint a:hover{text-decoration:underline}
-
-    /* SUCCESS FLASH */
-    .success-overlay{
-      position:fixed;inset:0;z-index:9999;background:var(--bg);
-      display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;
-    }
-    .success-overlay.show{display:flex}
-    .success-logo{font-family:'Instrument Serif',serif;font-size:2rem;letter-spacing:-0.02em}
-    .success-logo em{font-style:italic;color:var(--accent)}
-    .success-msg{font-size:0.82rem;color:var(--muted);font-family:'DM Mono',monospace}
+    /* SUCCESS OVERLAY */
+    .success-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg);display:none;
+      flex-direction:column;align-items:center;justify-content:center;gap:10px;}
+    .success-overlay.show{display:flex;}
+    .success-logo{font-family:'Instrument Serif',serif;font-size:2rem;letter-spacing:-0.02em;}
+    .success-logo em{font-style:italic;color:var(--accent);}
+    .success-msg{font-size:0.78rem;color:var(--muted);font-family:'DM Mono',monospace;}
   </style>
 </head>
 <body>
 
-<!-- Success screen shown briefly before redirect -->
+<!-- Redirect if already logged in (runs before page renders — no glitch) -->
+<script>
+  (function(){
+    var r = localStorage.getItem('rank');
+    if(r && r !== 'null' && r !== 'undefined') {
+      window.location.replace('index.html');
+    }
+  })();
+</script>
+
+<!-- Success overlay -->
 <div class="success-overlay" id="success-overlay">
   <div class="success-logo">tips <em>&</em> stuff</div>
-  <div class="success-msg" id="success-msg">Welcome back!</div>
+  <div class="success-msg" id="success-msg">Welcome!</div>
 </div>
 
-<div class="login-card">
-  <div class="login-logo">tips <em>&</em> stuff</div>
-  <p class="login-sub">sign in to your account</p>
+<div class="card">
+  <div class="logo">tips <em>&</em> stuff</div>
+  <p class="logo-sub">sign in to continue</p>
 
-  <!-- RANK SELECTOR -->
-  <div class="rank-picker">
-    <button class="rank-pill" id="pill-owner" onclick="selectRank('owner')">👑 Owner</button>
-    <button class="rank-pill" id="pill-admin" onclick="selectRank('admin')">🛡️ Admin</button>
-    <button class="rank-pill" id="pill-mod"   onclick="selectRank('mod')">🔧 Mod</button>
+  <!-- MODE: Staff / Public Account -->
+  <div class="mode-tabs">
+    <button class="mode-tab active" id="mode-staff"  onclick="setMode('staff')">🔐 Staff Login</button>
+    <button class="mode-tab"        id="mode-public" onclick="setMode('public')">👤 My Account</button>
   </div>
 
-  <!-- USERNAME -->
-  <div class="field">
-    <label>Your Display Name</label>
-    <input type="text" id="inp-username" placeholder="Name shown in chat & posts" maxlength="30" autocomplete="nickname"/>
+  <!-- ───── STAFF PANEL ───── -->
+  <div class="panel active" id="panel-staff">
+    <div class="rank-picker">
+      <button class="rank-pill" id="pill-owner" onclick="selectRank('owner')">👑 Owner</button>
+      <button class="rank-pill" id="pill-admin" onclick="selectRank('admin')">🛡️ Admin</button>
+      <button class="rank-pill" id="pill-mod"   onclick="selectRank('mod')">🔧 Mod</button>
+    </div>
+    <div class="field">
+      <label>Your Display Name</label>
+      <input type="text" id="staff-name" placeholder="Name shown in chat & posts" maxlength="30" autocomplete="nickname"/>
+    </div>
+    <div class="field">
+      <label>Rank Password</label>
+      <input type="password" id="staff-pw" placeholder="Shared staff password" maxlength="60" autocomplete="current-password"/>
+    </div>
+    <div class="toast" id="staff-toast"></div>
+    <button class="btn btn-dark" onclick="doStaffLogin()">Sign In as Staff →</button>
   </div>
 
-  <!-- PASSWORD -->
-  <div class="field">
-    <label>Password</label>
-    <input type="password" id="inp-password" placeholder="Enter your rank password" maxlength="60" autocomplete="current-password"/>
+  <!-- ───── PUBLIC ACCOUNT PANEL ───── -->
+  <div class="panel" id="panel-public">
+    <!-- Sub-tabs -->
+    <div class="sub-tabs">
+      <button class="sub-tab active" id="sub-signin"   onclick="setSubTab('signin')">Sign In</button>
+      <button class="sub-tab"        id="sub-register" onclick="setSubTab('register')">Create Account</button>
+    </div>
+
+    <!-- Sign In -->
+    <div id="pub-signin-form">
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="pub-login-user" placeholder="Your username" maxlength="30" autocomplete="username"/>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="pub-login-pw" placeholder="Your password" maxlength="60" autocomplete="current-password"/>
+      </div>
+      <div class="toast" id="signin-toast"></div>
+      <button class="btn btn-primary" onclick="doPublicLogin()">Sign In →</button>
+    </div>
+
+    <!-- Register -->
+    <div id="pub-register-form" style="display:none">
+      <div class="field">
+        <label>Display Name</label>
+        <input type="text" id="reg-display" placeholder="Name shown in chat & posts" maxlength="30" autocomplete="nickname"/>
+        <span class="field-hint">This is what others see (e.g. "Alex")</span>
+      </div>
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="reg-user" placeholder="Unique login ID (e.g. alex42)" maxlength="30" autocomplete="username"/>
+        <span class="field-hint">Used to sign in — no spaces allowed</span>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="reg-pw" placeholder="Choose a password" maxlength="60" autocomplete="new-password"/>
+      </div>
+      <div class="field">
+        <label>Confirm Password</label>
+        <input type="password" id="reg-pw2" placeholder="Repeat your password" maxlength="60" autocomplete="new-password"/>
+      </div>
+      <div class="toast" id="register-toast"></div>
+      <button class="btn btn-primary" id="reg-btn" onclick="doRegister()">Create Account →</button>
+    </div>
   </div>
-
-  <!-- ERROR -->
-  <div class="error-msg" id="error-msg">Incorrect password. Try again.</div>
-
-  <!-- SUBMIT -->
-  <button class="login-btn" id="login-btn" onclick="doLogin()">Sign In →</button>
 
   <hr class="divider"/>
-  <p class="login-hint">
-    <a href="index.html">← Back to site</a> &nbsp;·&nbsp;
-    Need the password? Ask the owner.
-  </p>
+  <p class="footer-note"><a href="index.html">← Back to site</a> &nbsp;·&nbsp; Need help? Ask the owner.</p>
 </div>
 
 <script>
-// ── If already logged in, skip straight to the site ──
-(function(){
-  var r = localStorage.getItem('rank');
-  // Only skip if they have a non-public rank already saved
-  if(r && r !== 'public' && r !== 'null' && r !== 'undefined') {
-    window.location.replace('index.html');
-  }
-})();
+// ── Prevent Enter key from double-firing ──
+let submitting = false;
 
-// ── Passwords (will be overridden by JSONBin config) ──
-const PASSWORDS = { owner:'20140314', admin:'382790', mod:'23889' };
+// ── JSONBin config ──
 const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
 const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
+const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
 
-let selectedRank = null;
+let PASSWORDS = { owner:'20140314', admin:'382790', mod:'23889' };
+let ACCOUNTS  = []; // loaded from JSONBin
+let dbLoaded  = false;
+let fullDb    = null;
 
-// Try to load passwords from JSONBin in the background
-(async function(){
-  try{
-    const res = await fetch('https://api.jsonbin.io/v3/b/'+BIN_ID+'/latest',{
-      headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}
-    });
-    if(!res.ok) return;
+// ── Load DB (passwords + accounts) from JSONBin ──
+async function loadDb() {
+  try {
+    const res  = await fetch(BIN_URL + '/latest', { headers: { 'X-Master-Key': API_KEY, 'X-Bin-Meta': 'false' } });
+    if (!res.ok) return;
     const raw  = await res.json();
-    const data = raw.record !== undefined ? raw.record : raw;
-    if(data.config && data.config.passwords){
-      const p = data.config.passwords;
-      if(p.owner) PASSWORDS.owner = p.owner;
-      if(p.admin) PASSWORDS.admin = p.admin;
-      if(p.mod)   PASSWORDS.mod   = p.mod;
+    fullDb = raw.record !== undefined ? raw.record : raw;
+    if (fullDb.config && fullDb.config.passwords) {
+      const p = fullDb.config.passwords;
+      if (p.owner) PASSWORDS.owner = p.owner;
+      if (p.admin) PASSWORDS.admin = p.admin;
+      if (p.mod)   PASSWORDS.mod   = p.mod;
     }
-  }catch(e){}
-})();
+    ACCOUNTS = Array.isArray(fullDb.accounts) ? fullDb.accounts : [];
+    dbLoaded = true;
+  } catch(e) { console.warn('DB load failed:', e); }
+}
 
-function selectRank(r){
-  selectedRank = r;
-  // Reset all pills
-  ['owner','admin','mod'].forEach(k=>{
-    document.getElementById('pill-'+k).className = 'rank-pill';
+async function saveDb() {
+  if (!fullDb) return;
+  fullDb.accounts = ACCOUNTS;
+  await fetch(BIN_URL, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+    body: JSON.stringify(fullDb)
   });
-  // Highlight selected
-  document.getElementById('pill-'+r).className = 'rank-pill selected-'+r;
-  // Focus password field
-  document.getElementById('inp-password').focus();
 }
 
-function doLogin(){
-  const username = document.getElementById('inp-username').value.trim();
-  const password = document.getElementById('inp-password').value;
-  const errEl    = document.getElementById('error-msg');
-  const btn      = document.getElementById('login-btn');
+// Load immediately
+loadDb();
 
-  // Validation
-  errEl.classList.remove('show');
+// ── UI helpers ──
+let currentMode    = 'staff';
+let selectedRank   = null;
+let currentSubTab  = 'signin';
 
-  if(!selectedRank){
-    errEl.textContent = 'Please select your rank first.';
-    errEl.classList.add('show');
-    return;
-  }
-  if(!username){
-    errEl.textContent = 'Please enter your display name.';
-    errEl.classList.add('show');
-    document.getElementById('inp-username').focus();
-    return;
-  }
-  if(!password){
-    errEl.textContent = 'Please enter your password.';
-    errEl.classList.add('show');
-    document.getElementById('inp-password').focus();
-    return;
-  }
+function setMode(m) {
+  currentMode = m;
+  document.getElementById('mode-staff').classList.toggle('active',  m === 'staff');
+  document.getElementById('mode-public').classList.toggle('active', m === 'public');
+  document.getElementById('panel-staff').classList.toggle('active',  m === 'staff');
+  document.getElementById('panel-public').classList.toggle('active', m === 'public');
+}
 
-  // Check password
-  if(password !== PASSWORDS[selectedRank]){
-    errEl.textContent = 'Incorrect password. Try again.';
-    errEl.classList.add('show');
-    document.getElementById('inp-password').value = '';
-    document.getElementById('inp-password').focus();
-    return;
-  }
+function setSubTab(t) {
+  currentSubTab = t;
+  document.getElementById('sub-signin').classList.toggle('active',   t === 'signin');
+  document.getElementById('sub-register').classList.toggle('active', t === 'register');
+  document.getElementById('pub-signin-form').style.display   = t === 'signin'   ? 'block' : 'none';
+  document.getElementById('pub-register-form').style.display = t === 'register' ? 'block' : 'none';
+}
 
-  // ✅ Success — save to localStorage
-  btn.disabled = true;
-  btn.textContent = 'Signing in…';
+function selectRank(r) {
+  selectedRank = r;
+  ['owner','admin','mod'].forEach(k => document.getElementById('pill-'+k).className = 'rank-pill');
+  document.getElementById('pill-'+r).className = 'rank-pill sel-'+r;
+  document.getElementById('staff-pw').focus();
+}
 
-  localStorage.setItem('rank', selectedRank);
-  localStorage.setItem('username', username);
+function showToast(id, msg, type) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'toast show ' + type;
+  setTimeout(() => el.className = 'toast', 3500);
+}
 
-  // Show success overlay briefly, then redirect
-  const rankLabels = {owner:'👑 Owner', admin:'🛡️ Admin', mod:'🔧 Mod'};
-  document.getElementById('success-msg').textContent =
-    'Welcome, ' + username + '! (' + rankLabels[selectedRank] + ')';
+function successRedirect(displayName, rank) {
+  const icons = { owner:'👑', admin:'🛡️', mod:'🔧', public:'👤' };
+  document.getElementById('success-msg').textContent = 'Welcome, ' + displayName + '! ' + (icons[rank]||'');
   document.getElementById('success-overlay').classList.add('show');
-
-  setTimeout(()=>{
-    window.location.replace('index.html');
-  }, 800);
+  setTimeout(() => window.location.replace('index.html'), 750);
 }
 
-// Allow Enter key to submit
-document.addEventListener('keydown', e=>{
-  if(e.key === 'Enter') doLogin();
+// ── STAFF LOGIN ──
+async function doStaffLogin() {
+  if (submitting) return; submitting = true;
+  const name = document.getElementById('staff-name').value.trim();
+  const pw   = document.getElementById('staff-pw').value;
+
+  if (!selectedRank) {
+    showToast('staff-toast', 'Please select your rank first.', 'error');
+    submitting = false; return;
+  }
+  if (!name) {
+    showToast('staff-toast', 'Please enter your display name.', 'error');
+    document.getElementById('staff-name').focus();
+    submitting = false; return;
+  }
+  if (!pw) {
+    showToast('staff-toast', 'Please enter the password.', 'error');
+    document.getElementById('staff-pw').focus();
+    submitting = false; return;
+  }
+  if (!dbLoaded) await loadDb();
+  if (pw !== PASSWORDS[selectedRank]) {
+    showToast('staff-toast', 'Incorrect password. Try again.', 'error');
+    document.getElementById('staff-pw').value = '';
+    document.getElementById('staff-pw').focus();
+    submitting = false; return;
+  }
+  localStorage.setItem('rank', selectedRank);
+  localStorage.setItem('username', name);
+  successRedirect(name, selectedRank);
+}
+
+// ── PUBLIC LOGIN ──
+async function doPublicLogin() {
+  if (submitting) return; submitting = true;
+  const user = document.getElementById('pub-login-user').value.trim().toLowerCase();
+  const pw   = document.getElementById('pub-login-pw').value;
+
+  if (!user) {
+    showToast('signin-toast', 'Please enter your username.', 'error');
+    document.getElementById('pub-login-user').focus();
+    submitting = false; return;
+  }
+  if (!pw) {
+    showToast('signin-toast', 'Please enter your password.', 'error');
+    document.getElementById('pub-login-pw').focus();
+    submitting = false; return;
+  }
+  if (!dbLoaded) await loadDb();
+
+  const account = ACCOUNTS.find(a => a.username.toLowerCase() === user && a.password === pw);
+  if (!account) {
+    showToast('signin-toast', 'Username or password is incorrect.', 'error');
+    document.getElementById('pub-login-pw').value = '';
+    document.getElementById('pub-login-pw').focus();
+    submitting = false; return;
+  }
+  localStorage.setItem('rank', 'public');
+  localStorage.setItem('username', account.displayName);
+  localStorage.setItem('account_id', String(account.id));
+  successRedirect(account.displayName, 'public');
+}
+
+// ── PUBLIC REGISTER ──
+async function doRegister() {
+  if (submitting) return; submitting = true;
+  const display = document.getElementById('reg-display').value.trim();
+  const user    = document.getElementById('reg-user').value.trim().toLowerCase();
+  const pw      = document.getElementById('reg-pw').value;
+  const pw2     = document.getElementById('reg-pw2').value;
+  const btn     = document.getElementById('reg-btn');
+
+  if (!display) {
+    showToast('register-toast', 'Please enter a display name.', 'error');
+    document.getElementById('reg-display').focus();
+    submitting = false; return;
+  }
+  if (!user) {
+    showToast('register-toast', 'Please enter a username.', 'error');
+    document.getElementById('reg-user').focus();
+    submitting = false; return;
+  }
+  if (/\s/.test(user)) {
+    showToast('register-toast', 'Username cannot contain spaces.', 'error');
+    document.getElementById('reg-user').focus();
+    submitting = false; return;
+  }
+  if (user.length < 3) {
+    showToast('register-toast', 'Username must be at least 3 characters.', 'error');
+    document.getElementById('reg-user').focus();
+    submitting = false; return;
+  }
+  if (!pw || pw.length < 4) {
+    showToast('register-toast', 'Password must be at least 4 characters.', 'error');
+    document.getElementById('reg-pw').focus();
+    submitting = false; return;
+  }
+  if (pw !== pw2) {
+    showToast('register-toast', 'Passwords do not match.', 'error');
+    document.getElementById('reg-pw2').value = '';
+    document.getElementById('reg-pw2').focus();
+    submitting = false; return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Creating…';
+  showToast('register-toast', 'Checking username…', 'success');
+
+  if (!dbLoaded) await loadDb();
+
+  // Check if username is taken
+  const taken = ACCOUNTS.some(a => a.username.toLowerCase() === user);
+  if (taken) {
+    showToast('register-toast', 'That username is already taken. Try another.', 'error');
+    btn.disabled = false;
+    btn.textContent = 'Create Account →';
+    document.getElementById('reg-user').focus();
+    submitting = false; return;
+  }
+
+  // Create the account
+  const newAccount = {
+    id: Date.now(),
+    username: user,
+    displayName: display,
+    password: pw,
+    createdAt: Date.now()
+  };
+  ACCOUNTS.push(newAccount);
+
+  try {
+    await saveDb();
+    localStorage.setItem('rank', 'public');
+    localStorage.setItem('username', display);
+    localStorage.setItem('account_id', String(newAccount.id));
+    showToast('register-toast', '✓ Account created! Signing you in…', 'success');
+    setTimeout(() => successRedirect(display, 'public'), 700);
+  } catch(e) {
+    ACCOUNTS.pop();
+    showToast('register-toast', 'Could not save account. Try again.', 'error');
+    btn.disabled = false;
+    btn.textContent = 'Create Account →';
+    submitting = false;
+  }
+}
+
+// ── Enter key support ──
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  if (currentMode === 'staff') { doStaffLogin(); return; }
+  if (currentSubTab === 'signin')   doPublicLogin();
+  else                              doRegister();
 });
 
-// Pre-select rank from localStorage if returning
+// ── Pre-fill if returning ──
 (function(){
-  const saved = localStorage.getItem('rank');
-  const validRanks = ['owner','admin','mod'];
-  if(saved && validRanks.includes(saved)) selectRank(saved);
-  // Pre-fill username
   const savedName = localStorage.getItem('username');
-  if(savedName) document.getElementById('inp-username').value = savedName;
+  if (savedName) document.getElementById('staff-name').value = savedName;
 })();
 </script>
 </body>
