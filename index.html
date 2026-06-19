@@ -303,7 +303,7 @@
 <script>
 (function(){
   var r = localStorage.getItem('rank');
-  if(!r || r === 'public') window.location.replace('login.html');
+  if(!r || r === 'null' || r === 'undefined') window.location.replace('login.html');
 })();
 </script>
 
@@ -592,7 +592,7 @@ const TAG = {
 const SEED={recommended:[{id:'r1',text:'Drink a glass of water first thing in the morning — your body is dehydrated after sleep.',tag:'life',author:'Owner'},{id:'r2',text:'Make your bed every morning. It takes 2 minutes and makes your whole room feel cleaner instantly.',tag:'life',author:'Owner'},{id:'r3',text:'Tell people when you appreciate them. Most people never say it out loud.',tag:'life',author:'Owner'},{id:'r4',text:'When you feel overwhelmed, write down everything on your mind. Getting it out of your head cuts anxiety in half.',tag:'life',author:'Owner'},{id:'r5',text:"Set your alarm 10 minutes earlier than you need to.",tag:'life',author:'Owner'},{id:'r6',text:"If a task takes less than 2 minutes, do it right now.",tag:'life',author:'Owner'},{id:'r7',text:'Take a 10-minute walk outside after lunch.',tag:'life',author:'Owner'},{id:'r8',text:'Add a pinch of salt to your coffee grounds before brewing.',tag:'food',author:'Owner'},{id:'r9',text:'Store fresh herbs in a glass of water in the fridge. They last 2x longer.',tag:'food',author:'Owner'},{id:'r10',text:'Freeze overripe bananas for smoothies and banana bread.',tag:'food',author:'Owner'},{id:'r11',text:'Let your steak rest 5 minutes before cutting.',tag:'food',author:'Owner'},{id:'r12',text:'Pasta water is liquid gold — add a ladle to your sauce.',tag:'food',author:'Owner'},{id:'r13',text:'Toast spices in a dry pan for 30 seconds. It doubles the flavor.',tag:'food',author:'Owner'},{id:'r14',text:'Press Ctrl+Shift+T to reopen a closed browser tab.',tag:'tech',author:'Owner'},{id:'r15',text:'Google anything + "site:reddit.com" for honest real-world opinions.',tag:'tech',author:'Owner'},{id:'r16',text:'Use dark mode everywhere. Saves battery on OLED screens.',tag:'tech',author:'Owner'},{id:'r17',text:'Press Windows+V to open clipboard history.',tag:'tech',author:'Owner'},{id:'r18',text:'Use a password manager. One master password protects everything.',tag:'tech',author:'Owner'},{id:'r19',text:'Ctrl+Z undoes mistakes in almost every app.',tag:'tech',author:'Owner'},{id:'r20',text:'Restart your router by unplugging 30 seconds. Fixes most WiFi issues.',tag:'tech',author:'Owner'},{id:'r21',text:"Flip a coin to notice which outcome you're hoping for.",tag:'random',author:'Owner'},{id:'r22',text:"If you're bored, clean something.",tag:'random',author:'Owner'},{id:'r23',text:'Put your phone on the other side of the room at night.',tag:'random',author:'Owner'},{id:'r24',text:'Keep a notebook by your bed. Best ideas come before sleep.',tag:'random',author:'Owner'},{id:'r25',text:'When you buy something new, get rid of something old.',tag:'random',author:'Owner'},{id:'r26',text:'Say things out loud to remember them better.',tag:'random',author:'Owner'}],
 public:[{id:'p1',text:'Use focus mode on your phone during meals.',tag:'life',author:'Admin'},{id:'p2',text:'Freeze leftover ginger — grates easier from frozen.',tag:'food',author:'Admin'},{id:'p3',text:'Screenshot important confirmation emails.',tag:'tech',author:'Admin'},{id:'p4',text:'Mute group chats you never check instead of leaving them.',tag:'tech',author:'Admin'},{id:'p5',text:'Add garlic last to the pan — it burns fast.',tag:'food',author:'Admin'},{id:'p6',text:'Carry a reusable bag folded in your pocket.',tag:'random',author:'Admin'}]};
 
-let db = {public:[],featured:[],adminboard:[],pending:[],recommended:[],banlist:[],rules:[],members:[],config:{},chat:[],news:[],complaints:[]};
+let db = {public:[],featured:[],adminboard:[],pending:[],recommended:[],banlist:[],rules:[],members:[],config:{},chat:[],news:[],complaints:[],accounts:[]};
 const SECS = ['recommended','featured','public','news','complaints','pending','adminboard','settings'];
 
 function showSec(id){
@@ -680,6 +680,7 @@ async function loadAll(){
     db.chat       =Array.isArray(data.chat)       ?data.chat       :[];
     db.news       =Array.isArray(data.news)       ?data.news       :[];
     db.complaints =Array.isArray(data.complaints) ?data.complaints :[];
+    db.accounts   =Array.isArray(data.accounts)   ?data.accounts   :[];
     db.config     =(data.config&&typeof data.config==='object')?data.config:{};
     if(db.config.passwords){
       if(db.config.passwords.owner) PASSWORDS.owner=db.config.passwords.owner;
@@ -737,120 +738,4 @@ function renderAll(){
   renderNews();renderComplaints();updateComplaintBadge();
 }
 
-async function submitPublic(){const text=document.getElementById('pub-text').value.trim();const auth=document.getElementById('pub-name').value.trim()||username||'anon';const tag=document.getElementById('pub-tag').value;if(!text){document.getElementById('pub-text').focus();return;}setStatus('loading','submitting...');try{db.pending.unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById('pub-text').value='';setStatus('ok','submitted ✓ — waiting for approval');}catch(e){db.pending.shift();setStatus('error','could not submit — '+e.message);}}
-async function staffPost(section){const map={recommended:['rec-text','rec-author','rec-tag'],featured:['feat-text','feat-author','feat-tag'],adminboard:['admin-text','admin-author','admin-tag']};const [ti,ai,gi]=map[section];const text=document.getElementById(ti).value.trim();const auth=document.getElementById(ai).value.trim()||username||'Staff';const tag=document.getElementById(gi).value;if(!text){document.getElementById(ti).focus();return;}setStatus('loading','posting...');try{db[section].unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById(ti).value='';setStatus('ok','posted ✓');renderAll();}catch(e){db[section].shift();setStatus('error','could not post — '+e.message);}}
-async function approveTip(id){const tip=db.pending.find(t=>t.id==id);if(!tip)return;setStatus('loading','approving...');try{db.pending=db.pending.filter(t=>t.id!=id);db.public.unshift({...tip,pending:false});await saveAll();setStatus('ok','approved ✓');renderAll();}catch(e){setStatus('error','could not approve — '+e.message);}}
-async function denyTip(id){if(!confirm('Deny and delete?'))return;setStatus('loading','denying...');try{db.pending=db.pending.filter(t=>t.id!=id);await saveAll();setStatus('ok','denied ✓');renderAll();}catch(e){setStatus('error','could not deny — '+e.message);}}
-async function deleteTip(gridId,id){if(!confirm('Delete this tip?'))return;const sec=gridId.replace('-grid','');const prev=[...db[sec]];db[sec]=db[sec].filter(t=>t.id!=id);renderAll();try{await saveAll();setStatus('ok','deleted ✓');}catch(e){db[sec]=prev;setStatus('error','could not delete — '+e.message);renderAll();}}
-
-function populateSettings(){
-  const cfg=db.config||{};
-  document.getElementById('set-title').value=(cfg.title||'').replace(/<[^>]*>/g,'').replace('&amp;','&');
-  document.getElementById('set-subtitle').value=cfg.subtitle||'';
-  const acc=cfg.accent||'#c8602a';document.getElementById('set-accent').value=acc;document.getElementById('accent-sw').style.background=acc;
-  const bg=cfg.bg||'#f5f2eb';document.getElementById('set-bg').value=bg;document.getElementById('bg-sw').style.background=bg;
-  document.getElementById('set-rules').value=Array.isArray(db.rules)?db.rules.join('\n'):'';
-  document.getElementById('set-welcome').value=cfg.welcome||'';
-  const ann=cfg.announcement||{};document.getElementById('set-ann-text').value=ann.text||'';document.getElementById('set-ann-show').value=ann.show||'no';
-  const ac=ann.color||'#c8602a';document.getElementById('set-ann-color').value=ac;document.getElementById('ann-swatch').style.background=ac;
-  const sv=document.getElementById('set-version');const sc=document.getElementById('set-changelog');
-  if(sv)sv.value=cfg.version||'';if(sc)sc.value=cfg.changelog||'';
-  updateAnnPreview();renderMemberList();
-}
-function updateAnnPreview(){const t=document.getElementById('set-ann-text').value;const c=document.getElementById('set-ann-color').value;document.getElementById('ann-swatch').style.background=c;const w=document.getElementById('ann-preview-wrap'),p=document.getElementById('ann-preview');if(t){w.style.display='block';p.textContent=t;p.style.background=c;}else w.style.display='none';}
-document.getElementById('set-ann-text').addEventListener('input',updateAnnPreview);
-function renderMemberList(){const list=document.getElementById('member-list');if(!db.members||!db.members.length){list.innerHTML='<p style="font-size:0.8rem;color:var(--muted)">No staff added yet.</p>';return;}const rl={owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod'},rc={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod'};list.innerHTML=db.members.map((m,i)=>`<div class="member-row"><span class="member-name">${esc(m.name)}</span><span class="rank-badge ${rc[m.rank]||'rank-public'}">${rl[m.rank]||m.rank}</span><button class="member-del" onclick="removeMember(${i})">✕</button></div>`).join('');}
-function addMember(){const n=document.getElementById('new-member-name').value.trim();const r=document.getElementById('new-member-rank').value;if(!n){document.getElementById('new-member-name').focus();return;}db.members.push({name:n,rank:r});document.getElementById('new-member-name').value='';renderMemberList();}
-function removeMember(i){db.members.splice(i,1);renderMemberList();}
-function toast(id,msg,err){const el=document.getElementById(id);el.textContent=msg;el.className='settings-toast show'+(err?' error':'');setTimeout(()=>el.className='settings-toast',3000);}
-async function saveAnn(){if(!db.config)db.config={};db.config.announcement={text:document.getElementById('set-ann-text').value.trim(),show:document.getElementById('set-ann-show').value,color:document.getElementById('set-ann-color').value};try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-ann','✓ Saved!');}catch(e){toast('toast-ann','✕ '+e.message,true);}}
-async function saveAppearance(){if(!db.config)db.config={};db.config.title=esc(document.getElementById('set-title').value.trim()||'tips & stuff');db.config.subtitle=document.getElementById('set-subtitle').value.trim();db.config.accent=document.getElementById('set-accent').value;db.config.bg=document.getElementById('set-bg').value;try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-appearance','✓ Saved!');}catch(e){toast('toast-appearance','✕ '+e.message,true);}}
-async function savePasswords(){if(!db.config)db.config={};if(!db.config.passwords)db.config.passwords={};const o=document.getElementById('set-pw-owner').value,a=document.getElementById('set-pw-admin').value,m=document.getElementById('set-pw-mod').value;if(o){db.config.passwords.owner=o;PASSWORDS.owner=o;}if(a){db.config.passwords.admin=a;PASSWORDS.admin=a;}if(m){db.config.passwords.mod=m;PASSWORDS.mod=m;}try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');['set-pw-owner','set-pw-admin','set-pw-mod'].forEach(id=>document.getElementById(id).value='');toast('toast-passwords','✓ Updated!');}catch(e){toast('toast-passwords','✕ '+e.message,true);}}
-async function saveMembers(){try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-members','✓ Saved!');}catch(e){toast('toast-members','✕ '+e.message,true);}}
-async function saveRules(){db.rules=document.getElementById('set-rules').value.split('\n').map(r=>r.trim()).filter(Boolean);try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-rules','✓ Rules saved!');}catch(e){toast('toast-rules','✕ '+e.message,true);}}
-async function saveWelcome(){if(!db.config)db.config={};db.config.welcome=document.getElementById('set-welcome').value.trim();try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-welcome','✓ Saved!');}catch(e){toast('toast-welcome','✕ '+e.message,true);}}
-async function dangerClear(sec){if(!confirm('Permanently delete ALL '+sec+' tips?'))return;db[sec]=[];try{setStatus('loading','clearing...');await saveAll();setStatus('ok','cleared ✓');renderAll();}catch(e){setStatus('error','failed: '+e.message);}}
-
-// ── NEWS ──
-const NEWS_CATS={update:{label:'📣 Update',bg:'#e0eaf8',color:'#1a3d6b',accent:'#2a60c8'},announcement:{label:'🎉 Announcement',bg:'#e8f0e0',color:'#2d5016',accent:'#4a8a1a'},warning:{label:'⚠️ Warning',bg:'#fdecd6',color:'#7a3a0a',accent:'#c8602a'},event:{label:'📅 Event',bg:'#ece0f8',color:'#4a1f7a',accent:'#7a2ac8'},other:{label:'💬 Other',bg:'#fce8ec',color:'#7a1a2e',accent:'#c82a4a'}};
-function renderNews(){const list=document.getElementById('news-list');const isAdmin=rank==='owner'||rank==='admin';const news=db.news||[];if(!news.length){list.innerHTML='<p class="empty">No news posted yet.</p>';return;}list.innerHTML=news.map(n=>{const cat=NEWS_CATS[n.cat]||NEWS_CATS.other;const date=n.ts?new Date(n.ts).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}):'';const delBtn=isAdmin?`<button class="news-del-btn show" onclick="deleteNews('${n.id}')">✕ delete</button>`:'';return `<div class="news-card" style="--news-color:${cat.accent}"><div class="news-card-accent"></div><div class="news-card-body"><div class="news-card-top"><span class="news-cat-badge" style="background:${cat.bg};color:${cat.color}">${cat.label}</span><span class="news-date">${date}</span><span class="news-author-tag">by ${esc(n.author||'Staff')}</span></div><div class="news-headline">${esc(n.title)}</div><div class="news-text">${esc(n.body)}</div>${delBtn}</div></div>`;}).join('');}
-async function postNews(){const title=document.getElementById('news-title').value.trim();const body=document.getElementById('news-body').value.trim();const cat=document.getElementById('news-cat').value;const author=document.getElementById('news-author').value.trim()||username||'Staff';if(!title||!body){return;}setStatus('loading','publishing...');try{db.news.unshift({id:Date.now(),title,body,cat,author,ts:Date.now()});await saveAll();document.getElementById('news-title').value='';document.getElementById('news-body').value='';setStatus('ok','published ✓');renderNews();}catch(e){db.news.shift();setStatus('error','could not publish — '+e.message);}}
-async function deleteNews(id){if(!confirm('Delete?'))return;const prev=[...db.news];db.news=db.news.filter(n=>n.id!=id);renderNews();try{await saveAll();setStatus('ok','deleted ✓');}catch(e){db.news=prev;renderNews();}}
-
-// ── COMPLAINTS ──
-const COMPLAINT_TYPES={behavior:{label:'😠 Behavior',bg:'#fce8ec',color:'#7a1a2e'},spam:{label:'🚫 Spam',bg:'#fdecd6',color:'#7a3a0a'},inappropriate:{label:'⚠️ Inappropriate',bg:'#fdecd6',color:'#7a3a0a'},bug:{label:'🐛 Bug / Issue',bg:'#e0eaf8',color:'#1a3d6b'},suggestion:{label:'💡 Suggestion',bg:'#e8f0e0',color:'#2d5016'},other:{label:'💬 Other',bg:'#ece0f8',color:'#4a1f7a'}};
-function cfToast(msg,err){const el=document.getElementById('cf-toast');el.textContent=msg;el.className='cf-toast show'+(err?' error':'');setTimeout(()=>el.className='cf-toast',3500);}
-function updateComplaintBadge(){const open=(db.complaints||[]).filter(c=>c.status==='open').length;const ct=document.getElementById('complaint-ct');const mb=document.getElementById('mob-complaint-badge');if(ct){ct.textContent=open>0?open:'';ct.style.display=open>0?'inline':'none';}if(mb){mb.textContent=open>0?open:'';mb.classList.toggle('show',open>0);}}
-function renderComplaints(){const list=document.getElementById('complaints-list');const filter=document.getElementById('complaint-filter')?.value||'all';const isAdmin=rank==='owner'||rank==='admin';if(!isAdmin){list.innerHTML='<p class="empty">Staff only.</p>';return;}const all=db.complaints||[];const filtered=filter==='all'?all:all.filter(c=>c.status===filter);if(!filtered.length){list.innerHTML=`<p class="empty">No ${filter!=='all'?filter:''} complaints.</p>`;return;}list.innerHTML=filtered.map(c=>{const ct=COMPLAINT_TYPES[c.type]||COMPLAINT_TYPES.other;const date=c.ts?new Date(c.ts).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}):'—';const isOpen=c.status!=='resolved';const stCls=isOpen?'complaint-status-open':'complaint-status-resolved';const stLabel=isOpen?'🔴 Open':'✅ Resolved';const actions=isOpen?`<button class="complaint-resolve-btn" onclick="resolveComplaint('${c.id}')">✅ Resolved</button>`:`<button class="complaint-reopen-btn" onclick="reopenComplaint('${c.id}')">🔴 Reopen</button>`;return `<div class="complaint-card${isOpen?'':' is-resolved'}"><div class="complaint-card-top"><span class="complaint-name">${esc(c.name||'Anonymous')}</span><span class="complaint-type-badge" style="background:${ct.bg};color:${ct.color}">${ct.label}</span><span class="complaint-status-badge ${stCls}">${stLabel}</span><span class="complaint-date">${date}</span></div><p class="complaint-text">${esc(c.text)}</p><div class="complaint-actions">${actions}<button class="complaint-del-btn" onclick="deleteComplaint('${c.id}')">✕ Delete</button></div></div>`;}).join('');}
-async function submitComplaint(){const name=document.getElementById('cf-name').value.trim()||username||'';const type=document.getElementById('cf-type').value;const text=document.getElementById('cf-text').value.trim();if(!name){document.getElementById('cf-name').focus();cfToast('Please enter your name.',true);return;}if(!text){document.getElementById('cf-text').focus();cfToast('Please describe your complaint.',true);return;}cfToast('Submitting...');try{db.complaints.unshift({id:Date.now(),name,type,text,status:'open',ts:Date.now()});await saveAll();document.getElementById('cf-text').value='';cfToast('✓ Submitted!');updateComplaintBadge();}catch(e){db.complaints.shift();cfToast('✕ Could not submit.',true);}}
-async function resolveComplaint(id){const c=db.complaints.find(c=>String(c.id)===String(id));if(!c)return;c.status='resolved';try{await saveAll();renderComplaints();updateComplaintBadge();}catch(e){c.status='open';}}
-async function reopenComplaint(id){const c=db.complaints.find(c=>String(c.id)===String(id));if(!c)return;c.status='open';try{await saveAll();renderComplaints();updateComplaintBadge();}catch(e){c.status='resolved';}}
-async function deleteComplaint(id){if(!confirm('Delete?'))return;const prev=[...db.complaints];db.complaints=db.complaints.filter(c=>String(c.id)!==String(id));renderComplaints();updateComplaintBadge();try{await saveAll();}catch(e){db.complaints=prev;renderComplaints();}}
-
-// ── CHAT (uses username, no name gate needed) ──
-let chatOpen=false,chatTimer=null,chatLastCount=0;
-function toggleChat(){
-  chatOpen=!chatOpen;
-  document.getElementById('chat-panel').classList.toggle('open',chatOpen);
-  if(chatOpen){
-    document.getElementById('chat-fab-badge').classList.remove('show');
-    loadChat();
-    if(!chatTimer) chatTimer=setInterval(loadChat,15000);
-    setTimeout(()=>document.getElementById('chat-input').focus(),100);
-  } else {clearInterval(chatTimer);chatTimer=null;}
-}
-async function loadChat(){try{const res=await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});if(!res.ok)return;const raw=await res.json();const data=raw.record!==undefined?raw.record:raw;db.chat=Array.isArray(data.chat)?data.chat:[];if(!chatOpen&&db.chat.length>chatLastCount&&chatLastCount>0){const n=db.chat.length-chatLastCount;const b=document.getElementById('chat-fab-badge');b.textContent=n>9?'9+':n;b.classList.add('show');}chatLastCount=db.chat.length;renderChat();}catch(e){}}
-function renderChat(){
-  const box=document.getElementById('chat-msgs');const msgs=db.chat||[];
-  const isAdmin=rank==='owner'||rank==='admin';
-  if(!msgs.length){box.innerHTML='<p class="chat-empty-msg">No messages yet — say hi! 👋</p>';return;}
-  const wasBottom=box.scrollHeight-box.scrollTop-box.clientHeight<60;
-  const RM={owner:{lbl:'Owner',cls:'rank-owner is-owner'},admin:{lbl:'Admin',cls:'rank-admin is-admin'},mod:{lbl:'Mod',cls:'rank-mod is-mod'}};
-  box.innerHTML=msgs.map(m=>{
-    const rm=RM[m.rank];const nc=rm?'chat-msg-name is-'+m.rank:'chat-msg-name';
-    const rb=rm?`<span class="chat-msg-rbadge ${rm.cls}">${rm.lbl}</span>`:'';
-    const db_btn=isAdmin?`<button class="chat-msg-del show" onclick="deleteMsg('${m.id}')">✕</button>`:'';
-    const t=m.ts?new Date(m.ts).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'';
-    return `<div class="chat-msg"><div class="chat-msg-top"><span class="${nc}">${esc(m.name)}</span>${rb}<span class="chat-msg-time">${t}</span>${db_btn}</div><div class="chat-msg-body">${esc(m.text)}</div></div>`;
-  }).join('');
-  if(wasBottom) box.scrollTop=box.scrollHeight;
-}
-async function sendMsg(){
-  // Name comes from username (set at login) — no gate needed
-  const name=username||'Anonymous';
-  const input=document.getElementById('chat-input');
-  const text=input.value.trim();if(!text){input.focus();return;}
-  const msg={id:Date.now(),name,text,ts:Date.now(),rank:rank!=='public'?rank:null};
-  db.chat.push(msg);if(db.chat.length>200)db.chat=db.chat.slice(-200);
-  input.value='';renderChat();document.getElementById('chat-msgs').scrollTop=999999;
-  try{await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});}catch(e){}
-}
-async function deleteMsg(id){db.chat=db.chat.filter(m=>m.id!=id);renderChat();try{await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});}catch(e){}}
-document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();});
-
-// ── LANGUAGE ──
-const LANGS={
-  en:{siteSubtitle:'a shared board for tips, tricks, and random gems ✦'},
-  es:{siteSubtitle:'un tablero compartido de tips, trucos y curiosidades ✦'},
-  fr:{siteSubtitle:'un tableau partagé de conseils, astuces et curiosités ✦'},
-  pt:{siteSubtitle:'um quadro compartilhado de dicas, truques e curiosidades ✦'},
-  ja:{siteSubtitle:'ヒント、コツ、豆知識を共有するボード ✦'},
-};
-let lang=localStorage.getItem('lang')||'en';
-function setLang(l){lang=l;localStorage.setItem('lang',l);document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));const sub=document.getElementById('site-subtitle-el');if(sub&&LANGS[l]&&!(db.config&&db.config.subtitle))sub.textContent=LANGS[l].siteSubtitle;}
-(function(){document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));})();
-
-// ── UPDATE SYSTEM ──
-function checkForUpdates(){const cfg=db.config||{};const v=cfg.version||'';if(!v)return;const seen=localStorage.getItem('site_version_seen')||'';if(seen!==v){document.getElementById('update-bar-version').textContent=v;document.getElementById('update-bar').classList.add('show');}}
-function startUpdate(){document.getElementById('update-bar').classList.remove('show');const overlay=document.getElementById('update-overlay');overlay.classList.add('show');let secs=10;const ring=document.getElementById('update-ring');const num=document.getElementById('update-num');const prog=document.getElementById('update-prog');requestAnimationFrame(()=>{prog.style.transition='width 10s linear';prog.style.width='100%';});const tick=setInterval(()=>{secs--;num.textContent=secs;ring.style.strokeDashoffset=125.6*(secs/10);if(secs<=0){clearInterval(tick);overlay.classList.remove('show');showWhatsNew();}},1000);}
-function showWhatsNew(){const cfg=db.config||{};document.getElementById('whats-new-ver').textContent=cfg.version||'Latest';document.getElementById('whats-new-body').textContent=cfg.changelog||'No changelog.';document.getElementById('whats-new-overlay').classList.add('show');}
-function dismissUpdate(){const ver=(db.config||{}).version||'';localStorage.setItem('site_version_seen',ver);document.getElementById('whats-new-overlay').classList.remove('show');}
-async function saveVersion(){if(!db.config)db.config={};db.config.version=document.getElementById('set-version').value.trim();db.config.changelog=document.getElementById('set-changelog').value.trim();try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-version','✓ Version pushed!');}catch(e){toast('toast-version','✕ '+e.message,true);}}
-
-// ── INIT ──
-applyRankUI();
-loadAll();
-</script>
-</body>
-</html>
-HTMLEOF
+async function submitPublic(){const text=document.getElementById('pub-text').value.trim();const auth=document.getElementById('pub-name').value.trim()||username||'anon';const tag=document.getElementById('pub-tag'
