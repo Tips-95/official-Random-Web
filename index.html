@@ -262,7 +262,65 @@
     .whats-new-dismiss{height:42px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;background:var(--text);color:var(--bg);border:none;border-radius:10px;cursor:pointer;transition:opacity 0.15s}
     .whats-new-dismiss:hover{opacity:0.82}
     .site-footer{margin-top:2rem;text-align:center;font-size:0.75rem;color:var(--muted);padding-bottom:2rem}
-    @media(max-width:700px){.page-wrap{padding:0 1rem 5rem}.tab-bar-wrap{margin:0 -1rem;padding-left:1rem;padding-right:1rem}.topnav-links{display:none}.mobile-nav{display:flex}.chat-fab{bottom:4.5rem;right:1rem;width:46px;height:46px;font-size:1.2rem}.chat-panel{bottom:7.5rem;right:0.75rem;width:calc(100vw - 1.5rem)}}
+    @media(max-width:700px){.page-wrap{padding:0 1rem 5rem}.tab-bar-wrap{margin:0 -1rem;padding-left:1rem;padding-right:1rem}.topnav-links{display:none}.mobile-nav{display:flex}.chat-fab{bottom:4.5rem;right:1rem;width:46px;height:46px;font-size:1.2rem}.chat-panel{bottom:7.5rem;right:0.75rem;width:calc(100vw - 1.5rem)}.bot-fab{bottom:4.5rem;right:1rem;width:46px;height:46px;font-size:1.2rem}.bot-panel{bottom:7.5rem;right:0.75rem;width:calc(100vw - 1.5rem)}}
+
+    /* ===== Ask Bot widget ===== */
+    .bot-fab{position:fixed;bottom:1.5rem;right:5.5rem;z-index:50;width:52px;height:52px;border-radius:50%;background:var(--text);color:#fff;border:none;cursor:pointer;font-size:1.3rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.18);transition:transform 0.15s}
+    .bot-fab:hover{transform:scale(1.08)}
+    .bot-panel{position:fixed;bottom:5.5rem;right:5.5rem;z-index:50;width:340px;max-width:calc(100vw - 2rem);background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.14);display:none;flex-direction:column;overflow:hidden}
+    .bot-panel.open{display:flex}
+    .bot-head{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;background:var(--text);color:#fff;flex-shrink:0}
+    .bot-head-title{font-size:0.88rem;font-weight:500;display:flex;align-items:center;gap:6px}
+    .bot-head-btn{background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:0.85rem;padding:3px 6px;border-radius:5px}
+    .bot-head-btn:hover{color:#fff;background:rgba(255,255,255,0.1)}
+    .bot-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;min-height:260px;max-height:340px}
+    .bot-msg{display:flex;gap:8px;animation:rise 0.18s ease both}
+    .bot-msg.from-user{flex-direction:row-reverse}
+    .bot-bubble{font-size:0.83rem;line-height:1.5;padding:8px 12px;border-radius:12px;max-width:80%;word-break:break-word}
+    .bot-msg.from-bot .bot-bubble{background:var(--bg);color:var(--text);border:1px solid var(--border)}
+    .bot-msg.from-user .bot-bubble{background:var(--accent);color:#fff}
+    .bot-suggest-row{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 10px}
+    .bot-suggest-chip{font-size:0.72rem;padding:5px 10px;border-radius:99px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);cursor:pointer;white-space:nowrap}
+    .bot-suggest-chip:hover{background:var(--bg)}
+    .bot-input-row{padding:10px 12px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0;background:var(--bg)}
+    .bot-input-row input{flex:1;height:36px;padding:0 12px;font-family:'DM Sans',sans-serif;font-size:0.875rem;background:var(--surface);border:1px solid var(--border-strong);border-radius:99px;color:var(--text);outline:none}
+    .bot-input-row input:focus{border-color:var(--accent)}
+    .bot-send{width:36px;height:36px;border-radius:50%;background:var(--text);color:#fff;border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .bot-send:hover{opacity:0.85}
+    .bot-footer-note{font-size:0.63rem;color:var(--muted);padding:3px 12px 6px;background:var(--bg);text-align:center;flex-shrink:0}
+
+    /* ===== Page Builder ===== */
+    .builder-bar{display:none;position:sticky;top:104px;z-index:19;align-items:center;gap:10px;flex-wrap:wrap;background:var(--text);color:#fff;padding:10px 14px;border-radius:10px;margin-bottom:1rem;font-size:0.8rem}
+    .builder-bar.active{display:flex}
+    .builder-bar .bb-label{font-weight:500;display:flex;align-items:center;gap:6px}
+    .builder-bar select,.builder-bar button{font-family:'DM Sans',sans-serif;font-size:0.78rem;border-radius:6px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.08);color:#fff;padding:5px 10px;cursor:pointer}
+    .builder-bar button:hover{background:rgba(255,255,255,0.18)}
+    .builder-bar .bb-exit{margin-left:auto;background:var(--accent);border-color:var(--accent)}
+    .builder-blocks{display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem}
+    .builder-block{position:relative;border:1px solid var(--border);border-radius:12px;background:var(--surface);overflow:hidden}
+    .builder-block.editing-mode{border-style:dashed;border-color:var(--border-strong)}
+    .bb-controls{display:none;align-items:center;gap:4px;padding:7px 10px;background:var(--bg);border-bottom:1px solid var(--border)}
+    .builder-block.editing-mode .bb-controls{display:flex}
+    .bb-type-tag{font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);padding:2px 7px;border:1px solid var(--border-strong);border-radius:99px}
+    .bb-ctrl-btn{background:none;border:1px solid var(--border-strong);cursor:pointer;font-size:0.78rem;padding:3px 8px;border-radius:6px;color:var(--text)}
+    .bb-ctrl-btn:hover{background:var(--surface);border-color:var(--accent)}
+    .bb-ctrl-btn.danger{color:#c0392b;border-color:#fce8ec}
+    .bb-ctrl-btn.danger:hover{background:#fce8ec}
+    .bb-ctrl-spacer{margin-left:auto}
+    .bb-body{padding:1rem 1.2rem}
+    .bb-text-content{font-size:0.92rem;line-height:1.7;white-space:pre-wrap}
+    .bb-text-edit{width:100%;min-height:90px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:0.875rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;resize:vertical;margin-bottom:8px}
+    .bb-video-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:8px;overflow:hidden;background:#000}
+    .bb-video-wrap iframe,.bb-video-wrap video{position:absolute;inset:0;width:100%;height:100%;border:none}
+    .bb-video-url-edit{width:100%;height:38px;padding:0 12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;margin-bottom:8px}
+    .bb-section-title-edit{width:100%;height:40px;padding:0 12px;font-family:'Instrument Serif',serif;font-size:1.1rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;margin-bottom:6px}
+    .bb-section-heading{font-family:'Instrument Serif',serif;font-size:1.3rem;letter-spacing:-0.01em;margin-bottom:4px}
+    .bb-footer-edit{width:100%;min-height:60px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;resize:vertical;margin-bottom:8px;text-align:center}
+    .bb-footer-content{text-align:center;font-size:0.8rem;color:var(--muted)}
+    .bb-save-row{display:flex;gap:8px;justify-content:flex-end}
+    .add-block-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:1rem;border:2px dashed var(--border-strong);border-radius:12px}
+    .add-block-row button{font-family:'DM Sans',sans-serif;font-size:0.82rem;padding:8px 14px;border-radius:8px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);cursor:pointer}
+    .add-block-row button:hover{background:var(--bg);border-color:var(--accent)}
   </style>
 </head>
 <body>
@@ -319,6 +377,7 @@
     <a href="news.html"        class="topnav-link">📰 News</a>
     <a href="games.html"       class="topnav-link">🎮 Games</a>
     <a href="leaderboard.html" class="topnav-link">🏆 Leaderboard</a>
+    <a href="movie.html"       class="topnav-link">🎬 Movie</a>
     <a href="version.html"     class="topnav-link">🔖 Version</a>
     <a href="donate.html"      class="topnav-link">💛 Donate</a>
   </div>
@@ -357,6 +416,7 @@
       <button class="tab-btn" id="tab-mysettings"  onclick="showSec('mysettings')">🎨 My Style</button>
       <a href="games.html" class="tab-btn">🎮 Games</a>
       <a href="leaderboard.html" class="tab-btn">🏆 Leaderboard</a>
+      <a href="movie.html" class="tab-btn">🎬 Movie</a>
       <div class="tab-divider"></div>
       <button class="tab-btn" id="tab-pending"    onclick="showSec('pending')"    style="display:none">⏳ Pending <span class="tb-badge" id="pending-ct" style="display:none"></span></button>
       <button class="tab-btn" id="tab-adminboard" onclick="showSec('adminboard')" style="display:none">🔒 Admin Board</button>
@@ -364,6 +424,10 @@
     </div>
   </div>
   <div class="content">
+    <div class="builder-bar" id="builder-bar">
+      <span class="bb-label">🧩 Builder Mode — editing <strong id="bb-target-label">Recommended</strong></span>
+      <button class="bb-exit" onclick="exitBuilder()">✕ Exit Builder</button>
+    </div>
     <div class="section sec-panel visible" id="sec-recommended">
       <div class="section-header"><span class="section-title">⭐ Recommended Tips <span class="section-lock">Owner &amp; Admins</span></span><span class="rank-badge rank-admin">Staff Picks</span></div>
       <div class="staff-form" id="rec-form" style="display:none">
@@ -373,6 +437,7 @@
         <button class="post-btn" onclick="staffPost('recommended')">+ Post</button>
       </div>
       <div class="rec-grid" id="recommended-grid"><p class="empty">Loading...</p></div>
+      <div id="builder-zone-recommended"></div>
     </div>
     <div class="section sec-panel" id="sec-featured">
       <div class="section-header"><span class="section-title">🔥 Featured Tips <span class="section-lock">Mod+ only</span></span><span class="rank-badge rank-mod">Mod+</span></div>
@@ -505,6 +570,56 @@
     <div class="sec-panel" id="sec-settings">
       <div class="section-header" style="margin-bottom:1.5rem"><span class="section-title">⚙️ Owner Settings</span><span class="rank-badge rank-owner">👑 Owner Only</span></div>
       <div class="settings-wrap">
+        <div class="settings-card" style="border-color:rgba(200,96,42,0.35)">
+          <div class="settings-card-header">🧩 Page Builder</div>
+          <div class="settings-card-body">
+            <p class="hint">Move, edit, and add Text, Video, Section, and Footer blocks directly on the live page. Changes save to the site for everyone.</p>
+            <div class="setting-row">
+              <label>Choose a page to edit</label>
+              <select id="builder-page-select">
+                <option value="recommended">⭐ Recommended tab</option>
+                <option value="public">📢 Public tab</option>
+                <option value="news">📰 News tab</option>
+                <option value="footer">Site-wide footer</option>
+              </select>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+              <button class="save-btn" onclick="enterBuilder(document.getElementById('builder-page-select').value)">🧩 Launch Builder</button>
+              <span class="settings-toast" id="toast-builder"></span>
+            </div>
+          </div>
+        </div>
+        <div class="settings-card">
+          <div class="settings-card-header">🎬 Movie Page</div>
+          <div class="settings-card-body">
+            <p class="hint">Edit the content shown on the public Movie page.</p>
+            <div class="setting-row"><label>Movie Title</label><input type="text" id="set-movie-title" placeholder="e.g. Untitled Project" maxlength="80"/></div>
+            <div class="setting-row"><label>Tagline</label><input type="text" id="set-movie-tagline" placeholder="A short tagline..." maxlength="120"/></div>
+            <div class="setting-row"><label>Synopsis</label><textarea id="set-movie-synopsis" style="min-height:100px" placeholder="What's the movie about?" maxlength="2000"></textarea></div>
+            <div class="settings-row-2">
+              <div class="setting-row"><label>Poster Image URL</label><input type="text" id="set-movie-poster" placeholder="https://...jpg"/></div>
+              <div class="setting-row"><label>Trailer / Video URL</label><input type="text" id="set-movie-video" placeholder="YouTube/Vimeo link or .mp4 URL"/></div>
+            </div>
+            <div class="settings-row-2">
+              <div class="setting-row"><label>Status</label>
+                <select id="set-movie-status">
+                  <option value="planning">📝 Planning</option>
+                  <option value="writing">✍️ Writing</option>
+                  <option value="filming">🎥 Filming</option>
+                  <option value="editing">✂️ Editing</option>
+                  <option value="post">🎞️ Post-Production</option>
+                  <option value="released">🍿 Released</option>
+                </select>
+              </div>
+              <div class="setting-row"><label>Progress (%)</label><input type="text" id="set-movie-progress" placeholder="e.g. 40"/></div>
+            </div>
+            <div class="setting-row"><label>Progress Update / Director's Note</label><textarea id="set-movie-update" style="min-height:80px" placeholder="Latest update for fans..." maxlength="1000"></textarea></div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+              <button class="save-btn" onclick="saveMovie()">Save Movie Page</button>
+              <span class="settings-toast" id="toast-movie"></span>
+            </div>
+          </div>
+        </div>
         <div class="settings-card"><div class="settings-card-header">📢 Announcement Banner</div><div class="settings-card-body"><div class="setting-row"><label>Message</label><textarea id="set-ann-text" placeholder="e.g. 🎉 Welcome!" maxlength="200"></textarea></div><div class="setting-row"><label>Banner Color</label><div class="color-row"><input type="color" id="set-ann-color" value="#c8602a" style="width:80px" oninput="updateAnnPreview()"/><div class="color-swatch" id="ann-swatch" style="background:#c8602a"></div></div></div><div id="ann-preview-wrap" style="display:none"><div class="ann-preview" id="ann-preview"></div></div><div class="setting-row"><label>Visibility</label><select id="set-ann-show"><option value="yes">✅ Visible to everyone</option><option value="no">🚫 Hidden</option></select></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveAnn()">Save Banner</button><span class="settings-toast" id="toast-ann"></span></div></div></div>
         <div class="settings-card"><div class="settings-card-header">🎨 Site Appearance</div><div class="settings-card-body"><div class="settings-row-2"><div class="setting-row"><label>Site Title</label><input type="text" id="set-title" placeholder="tips &amp; stuff" maxlength="40"/></div><div class="setting-row"><label>Subtitle</label><input type="text" id="set-subtitle" maxlength="80"/></div></div><div class="settings-row-2"><div class="setting-row"><label>Accent Color</label><div class="color-row"><input type="color" id="set-accent" value="#c8602a" style="width:80px" oninput="document.getElementById('accent-sw').style.background=this.value"/><div class="color-swatch" id="accent-sw" style="background:#c8602a"></div></div></div><div class="setting-row"><label>Background</label><div class="color-row"><input type="color" id="set-bg" value="#f5f2eb" style="width:80px" oninput="document.getElementById('bg-sw').style.background=this.value"/><div class="color-swatch" id="bg-sw" style="background:#f5f2eb"></div></div></div></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveAppearance()">Save Appearance</button><span class="settings-toast" id="toast-appearance"></span></div></div></div>
         <div class="settings-card"><div class="settings-card-header">🔑 Staff Passwords</div><div class="settings-card-body"><p class="hint">Leave blank to keep current.</p><div class="settings-row-2"><div class="setting-row"><label>👑 Owner Password</label><input type="password" id="set-pw-owner" placeholder="new password..." autocomplete="new-password"/></div><div class="setting-row"><label>🛡️ Admin Password</label><input type="password" id="set-pw-admin" placeholder="new password..." autocomplete="new-password"/></div></div><div class="setting-row"><label>🔧 Mod Password</label><input type="password" id="set-pw-mod" placeholder="new password..." autocomplete="new-password"/></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="savePasswords()">Save Passwords</button><span class="settings-toast" id="toast-passwords"></span></div></div></div>
@@ -540,7 +655,8 @@
         </div></div>
       </div>
     </div>
-    <div class="site-footer"><p>tips &amp; stuff — shared with friends ✦</p></div>
+    <div class="site-footer" id="site-footer-default"><p>tips &amp; stuff — shared with friends ✦</p></div>
+    <div id="builder-zone-footer"></div>
   </div>
 </div>
 <nav class="mobile-nav">
@@ -550,6 +666,7 @@
   <button class="mob-btn" id="mob-news"        onclick="mobGo('news',this)"><span class="mi">📰</span>News</button>
   <a href="games.html"       class="mob-btn"><span class="mi">🎮</span>Games</a>
   <a href="leaderboard.html" class="mob-btn"><span class="mi">🏆</span>Board</a>
+  <a href="movie.html"       class="mob-btn"><span class="mi">🎬</span>Movie</a>
   <a href="donate.html"      class="mob-btn"><span class="mi">💛</span>Donate</a>
   <button class="mob-btn" id="mob-complaints"  onclick="mobGo('complaints',this)"><span class="mi">📝</span>Report<span class="mob-badge" id="mob-complaint-badge"></span></button>
   <button class="mob-btn" id="mob-mysettings"  onclick="mobGo('mysettings',this)"><span class="mi">🎨</span>Style</button>
@@ -557,6 +674,14 @@
   <button class="mob-btn" id="mob-adminboard"  onclick="mobGo('adminboard',this)" style="display:none"><span class="mi">🔒</span>Admin</button>
   <button class="mob-btn" id="mob-settings"    onclick="mobGo('settings',this)"   style="display:none"><span class="mi">⚙️</span>Settings</button>
 </nav>
+<button class="bot-fab" onclick="toggleBot()" title="Ask Bot">🤖</button>
+<div class="bot-panel" id="bot-panel">
+  <div class="bot-head"><span class="bot-head-title">🤖 Ask Bot</span><button class="bot-head-btn" onclick="toggleBot()">✕</button></div>
+  <div class="bot-msgs" id="bot-msgs"></div>
+  <div class="bot-suggest-row" id="bot-suggest-row"></div>
+  <div class="bot-input-row"><input type="text" id="bot-input" placeholder="Ask about the site..." maxlength="200"/><button class="bot-send" onclick="sendBotMsg()">➤</button></div>
+  <div class="bot-footer-note">Answers questions about this site only.</div>
+</div>
 <button class="chat-fab" onclick="toggleChat()">💬<span class="chat-fab-badge" id="chat-fab-badge"></span></button>
 <div class="chat-panel" id="chat-panel">
   <div class="chat-head"><span class="chat-head-title">💬 Group Chat</span><div class="chat-head-btns"><button class="chat-head-btn" onclick="loadChat()">↻</button><button class="chat-head-btn" onclick="toggleChat()">✕</button></div></div>
@@ -580,7 +705,7 @@ const TAG={
 };
 const SEED={recommended:[{id:'r1',text:'Drink a glass of water first thing in the morning.',tag:'life',author:'Owner'},{id:'r2',text:'Make your bed every morning. Takes 2 minutes.',tag:'life',author:'Owner'},{id:'r3',text:'Tell people when you appreciate them.',tag:'life',author:'Owner'},{id:'r4',text:'When overwhelmed, write everything on your mind.',tag:'life',author:'Owner'},{id:'r5',text:'Set your alarm 10 minutes earlier than you need.',tag:'life',author:'Owner'},{id:'r6',text:'If a task takes less than 2 minutes, do it now.',tag:'life',author:'Owner'},{id:'r7',text:'Take a 10-minute walk after lunch.',tag:'life',author:'Owner'},{id:'r8',text:'Add a pinch of salt to coffee grounds before brewing.',tag:'food',author:'Owner'},{id:'r9',text:'Store fresh herbs in a glass of water in the fridge.',tag:'food',author:'Owner'},{id:'r10',text:'Freeze overripe bananas for smoothies.',tag:'food',author:'Owner'},{id:'r11',text:'Let steak rest 5 minutes before cutting.',tag:'food',author:'Owner'},{id:'r12',text:'Pasta water is liquid gold for your sauce.',tag:'food',author:'Owner'},{id:'r13',text:'Toast spices 30 seconds in a dry pan.',tag:'food',author:'Owner'},{id:'r14',text:'Ctrl+Shift+T reopens a closed browser tab.',tag:'tech',author:'Owner'},{id:'r15',text:'Add site:reddit.com to Google for real opinions.',tag:'tech',author:'Owner'},{id:'r16',text:'Use dark mode everywhere to save battery.',tag:'tech',author:'Owner'},{id:'r17',text:'Windows+V opens clipboard history.',tag:'tech',author:'Owner'},{id:'r18',text:'Use a password manager.',tag:'tech',author:'Owner'},{id:'r19',text:'Ctrl+Z undoes mistakes in almost every app.',tag:'tech',author:'Owner'},{id:'r20',text:'Unplug your router 30 seconds to fix WiFi.',tag:'tech',author:'Owner'},{id:'r21',text:'Flip a coin to see which outcome you hope for.',tag:'random',author:'Owner'},{id:'r22',text:"If bored, clean something.",tag:'random',author:'Owner'},{id:'r23',text:'Put phone across the room at night.',tag:'random',author:'Owner'},{id:'r24',text:'Keep a notebook by your bed.',tag:'random',author:'Owner'},{id:'r25',text:'Buy something new, get rid of something old.',tag:'random',author:'Owner'},{id:'r26',text:'Say things out loud to remember them.',tag:'random',author:'Owner'}],
 public:[{id:'p1',text:'Use focus mode during meals.',tag:'life',author:'Admin'},{id:'p2',text:'Freeze ginger — grates easier.',tag:'food',author:'Admin'},{id:'p3',text:'Screenshot important confirmation emails.',tag:'tech',author:'Admin'},{id:'p4',text:'Mute group chats instead of leaving them.',tag:'tech',author:'Admin'},{id:'p5',text:'Add garlic last to the pan.',tag:'food',author:'Admin'},{id:'p6',text:'Carry a reusable bag folded in your pocket.',tag:'random',author:'Admin'}]};
-let db={public:[],featured:[],adminboard:[],pending:[],recommended:[],banlist:[],rules:[],members:[],config:{},chat:[],news:[],complaints:[],accounts:[]};
+let db={public:[],featured:[],adminboard:[],pending:[],recommended:[],banlist:[],rules:[],members:[],config:{},chat:[],news:[],complaints:[],accounts:[],blocks:{},movie:{}};
 const SECS=['recommended','featured','public','news','complaints','mysettings','pending','adminboard','settings'];
 function showSec(id){
   SECS.forEach(s=>{
@@ -622,6 +747,7 @@ function applyRankUI(){
   document.getElementById('admin-form').style.display=isAdmin?'flex':'none';
   const crp=document.getElementById('complaints-review-panel');if(crp)crp.style.display=isAdmin?'block':'none';
   renderAll();
+  renderBuilderZones();
 }
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function setStatus(s,m){document.getElementById('status-dot').className='status-dot '+s;document.getElementById('status-text').textContent=m}
@@ -644,6 +770,8 @@ async function loadAll(){
     db.complaints =Array.isArray(data.complaints) ?data.complaints :[];
     db.accounts   =Array.isArray(data.accounts)   ?data.accounts   :[];
     db.config     =(data.config&&typeof data.config==='object')?data.config:{};
+    db.blocks     =(data.blocks&&typeof data.blocks==='object')?data.blocks:{};
+    db.movie      =(data.movie&&typeof data.movie==='object')?data.movie:{};
     if(db.config.passwords){
       if(db.config.passwords.owner)PASSWORDS.owner=db.config.passwords.owner;
       if(db.config.passwords.admin)PASSWORDS.admin=db.config.passwords.admin;
@@ -724,6 +852,15 @@ function populateSettings(){
   const ac=ann.color||'#c8602a';document.getElementById('set-ann-color').value=ac;document.getElementById('ann-swatch').style.background=ac;
   const sv=document.getElementById('set-version');const sc=document.getElementById('set-changelog');
   if(sv)sv.value=cfg.version||'';if(sc)sc.value=cfg.changelog||'';
+  const mv=db.movie||{};
+  document.getElementById('set-movie-title').value=mv.title||'';
+  document.getElementById('set-movie-tagline').value=mv.tagline||'';
+  document.getElementById('set-movie-synopsis').value=mv.synopsis||'';
+  document.getElementById('set-movie-poster').value=mv.poster||'';
+  document.getElementById('set-movie-video').value=mv.video||'';
+  document.getElementById('set-movie-status').value=mv.status||'planning';
+  document.getElementById('set-movie-progress').value=mv.progress||'';
+  document.getElementById('set-movie-update').value=mv.update||'';
   renderCustomBlocksList();updateAnnPreview();renderMemberList();
 }
 function renderCustomBlocksList(){
@@ -810,6 +947,21 @@ async function savePasswords(){if(!db.config)db.config={};if(!db.config.password
 async function saveMembers(){try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-members','✓ Saved!');}catch(e){toast('toast-members','✕ '+e.message,true);}}
 async function saveRules(){db.rules=document.getElementById('set-rules').value.split('\n').map(r=>r.trim()).filter(Boolean);try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-rules','✓ Rules saved!');}catch(e){toast('toast-rules','✕ '+e.message,true);}}
 async function saveWelcome(){if(!db.config)db.config={};db.config.welcome=document.getElementById('set-welcome').value.trim();try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-welcome','✓ Saved!');}catch(e){toast('toast-welcome','✕ '+e.message,true);}}
+async function saveMovie(){
+  db.movie={
+    title:document.getElementById('set-movie-title').value.trim(),
+    tagline:document.getElementById('set-movie-tagline').value.trim(),
+    synopsis:document.getElementById('set-movie-synopsis').value.trim(),
+    poster:document.getElementById('set-movie-poster').value.trim(),
+    video:document.getElementById('set-movie-video').value.trim(),
+    status:document.getElementById('set-movie-status').value,
+    progress:document.getElementById('set-movie-progress').value.trim(),
+    update:document.getElementById('set-movie-update').value.trim(),
+    updatedAt:Date.now()
+  };
+  try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-movie','✓ Movie page saved! View it on the Movie tab.');}
+  catch(e){toast('toast-movie','✕ '+e.message,true);}
+}
 async function dangerClear(sec){if(!confirm('Permanently delete ALL '+sec+' tips?'))return;db[sec]=[];try{setStatus('loading','clearing...');await saveAll();setStatus('ok','cleared ✓');renderAll();}catch(e){setStatus('error','failed: '+e.message);}}
 const NEWS_CATS={update:{label:'📣 Update',bg:'#e0eaf8',color:'#1a3d6b',accent:'#2a60c8'},announcement:{label:'🎉 Announcement',bg:'#e8f0e0',color:'#2d5016',accent:'#4a8a1a'},warning:{label:'⚠️ Warning',bg:'#fdecd6',color:'#7a3a0a',accent:'#c8602a'},event:{label:'📅 Event',bg:'#ece0f8',color:'#4a1f7a',accent:'#7a2ac8'},other:{label:'💬 Other',bg:'#fce8ec',color:'#7a1a2e',accent:'#c82a4a'}};
 function renderNews(){const list=document.getElementById('news-list');const isAdmin=rank==='owner'||rank==='admin';const news=db.news||[];if(!news.length){list.innerHTML='<p class="empty">No news posted yet.</p>';return;}list.innerHTML=news.map(n=>{const cat=NEWS_CATS[n.cat]||NEWS_CATS.other;const date=n.ts?new Date(n.ts).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}):'';const delBtn=isAdmin?`<button class="news-del-btn show" onclick="deleteNews('${n.id}')">✕ delete</button>`:'';return `<div class="news-card" style="--news-color:${cat.accent}"><div class="news-card-accent"></div><div class="news-card-body"><div class="news-card-top"><span class="news-cat-badge" style="background:${cat.bg};color:${cat.color}">${cat.label}</span><span class="news-date">${date}</span><span class="news-author-tag">by ${esc(n.author||'Staff')}</span></div><div class="news-headline">${esc(n.title)}</div><div class="news-text">${esc(n.body)}</div>${delBtn}</div></div>`;}).join('');}
@@ -848,6 +1000,221 @@ async function sendMsg(){
 }
 async function deleteMsg(id){db.chat=db.chat.filter(m=>m.id!=id);renderChat();try{await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});}catch(e){}}
 document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();});
+
+/* ===================== ASK BOT (rule-based FAQ assistant) ===================== */
+/*
+  This is a self-contained FAQ engine — no external API calls, so there's nothing to
+  configure and no key to leak. To later upgrade it to a real AI model, replace the
+  body of getBotAnswer(question) with a fetch() call to your AI provider's API and
+  return the text it gives back. Everything else (UI, history, suggestions) stays the same.
+*/
+const BOT_FAQ=[
+  {kws:['rank','role','owner','admin','mod','permission'],a:"Ranks control what you can do here: 👑 Owner has full control including Settings, 🛡️ Admin can manage tips/news/complaints, 🔧 Mod can post Featured tips, and 👤 Public can submit tips and chat. Check the Ranks page for the full breakdown and current staff list."},
+  {kws:['post','submit','tip','add a tip'],a:"To post a tip: go to the 📢 Public tab, fill in your name, pick a category, write your tip, and hit Submit for Review. Staff will approve or deny it before it shows up publicly. Staff (Mod+) can post directly to Featured/Recommended without review."},
+  {kws:['pending','review','approve','queue'],a:"Public tip submissions land in the ⏳ Pending queue, visible to Owner & Admins. They can approve (moves it to Public) or deny (deletes it) from there."},
+  {kws:['complaint','report','issue','bug'],a:"Use the 📝 Complaints tab to privately report behavior, spam, bugs, or suggestions to staff. Only Admin+ can see submitted complaints — they're not public."},
+  {kws:['news','announcement'],a:"📰 News posts are published by Owner/Admins and show up with categories like Update, Announcement, Warning, or Event. Check the News tab for the latest."},
+  {kws:['chat','group chat','message'],a:"The 💬 chat bubble (bottom right) opens Group Chat — it's live, auto-refreshes every 15s, and shows your rank badge if you're staff. I'm a separate bot just for answering questions about the site, not the same as Group Chat!"},
+  {kws:['style','color','theme','background','my style'],a:"Go to 🎨 My Style to set a personal background and accent color — it's stored only on your device, so nobody else sees your custom colors."},
+  {kws:['leaderboard','points','score'],a:"Check the 🏆 Leaderboard page from the nav for current standings."},
+  {kws:['game','games'],a:"The 🎮 Games page has the site's mini-games — check the nav bar at the top or the mobile bar at the bottom."},
+  {kws:['movie','trailer','film'],a:"There's now a 🎬 Movie page in the nav with info about the movie being made — synopsis, poster, status, progress, and a trailer if one's been added."},
+  {kws:['donate','support','tip jar'],a:"You can support the site from the 💛 Donate page in the nav."},
+  {kws:['version','changelog','update'],a:"Check the 🔖 Version page for the changelog. When the Owner pushes a new version, you'll see an update banner at the top of the site."},
+  {kws:['rule','rules','banned','ban'],a:"Site rules live on the 📜 Rules page, and the 🚫 Bans page lists anyone currently banned."},
+  {kws:['login','log in','account','password'],a:"Use the Login page (top nav) with your name and the rank password given to you by staff. Forgot your password? Ask an Owner/Admin — they manage passwords in Settings."},
+  {kws:['settings','builder','edit page','customize'],a:"Owner-only: the ⚙️ Settings tab has site appearance, the Movie page editor, and a new 🧩 Page Builder for moving/editing Text, Video, Section, and Footer blocks directly on the page."},
+  {kws:['who made','who built','developer'],a:"This site was built and is maintained by its Owner — check the Ranks page to see who that is!"},
+  {kws:['hi','hello','hey','sup'],a:"Hey! 👋 I'm the site's Ask Bot. I can answer questions about ranks, posting tips, complaints, the leaderboard, the movie page, and more. What do you want to know?"},
+];
+const BOT_DEFAULT="Hmm, I'm not sure about that one — I can only answer questions about how this site works (ranks, posting tips, complaints, settings, etc). Try asking something like \"how do I post a tip?\" or \"what do ranks mean?\"";
+const BOT_SUGGESTIONS=["How do ranks work?","How do I post a tip?","What's the Movie page?","How do complaints work?"];
+let botHistory=[];
+function getBotAnswer(q){
+  const lower=q.toLowerCase();
+  for(const entry of BOT_FAQ){
+    if(entry.kws.some(k=>lower.includes(k)))return entry.a;
+  }
+  return BOT_DEFAULT;
+}
+function renderBotSuggestions(){
+  const row=document.getElementById('bot-suggest-row');
+  if(!row)return;
+  row.innerHTML=BOT_SUGGESTIONS.map(s=>`<button class="bot-suggest-chip" onclick="askBotSuggestion(this)">${esc(s)}</button>`).join('');
+}
+function askBotSuggestion(btn){
+  document.getElementById('bot-input').value=btn.textContent;
+  sendBotMsg();
+}
+function renderBotMsgs(){
+  const box=document.getElementById('bot-msgs');
+  if(!botHistory.length){
+    box.innerHTML='<div class="bot-msg from-bot"><div class="bot-bubble">Hey! 👋 Ask me anything about how this site works — ranks, posting tips, complaints, the movie page, settings, you name it.</div></div>';
+    return;
+  }
+  box.innerHTML=botHistory.map(m=>`<div class="bot-msg from-${m.from}"><div class="bot-bubble">${esc(m.text)}</div></div>`).join('');
+  box.scrollTop=box.scrollHeight;
+}
+function sendBotMsg(){
+  const input=document.getElementById('bot-input');
+  const text=input.value.trim();
+  if(!text)return;
+  botHistory.push({from:'user',text});
+  input.value='';
+  renderBotMsgs();
+  setTimeout(()=>{
+    const answer=getBotAnswer(text);
+    botHistory.push({from:'bot',text:answer});
+    renderBotMsgs();
+  },280);
+}
+document.getElementById('bot-input').addEventListener('keydown',e=>{if(e.key==='Enter')sendBotMsg();});
+let botOpen=false;
+function toggleBot(){
+  botOpen=!botOpen;
+  document.getElementById('bot-panel').classList.toggle('open',botOpen);
+  if(botOpen){
+    if(!botHistory.length)renderBotMsgs();
+    renderBotSuggestions();
+    setTimeout(()=>document.getElementById('bot-input').focus(),100);
+  }
+}
+
+/* ===================== PAGE BUILDER (Owner-only block editor) ===================== */
+/*
+  db.blocks is a map of zoneKey -> array of block objects: {id,type,...fields,order}
+  Block types: 'text' {content}, 'video' {url}, 'section' {heading,content}, 'footer' {content}
+  Zones currently supported: 'recommended', 'public', 'news', 'footer' (site-wide)
+*/
+const BUILDER_ZONE_LABELS={recommended:'Recommended tab',public:'Public tab',news:'News tab',footer:'Site-wide footer'};
+let builderActiveZone=null;
+function isOwner(){return rank==='owner';}
+function toYouTubeEmbed(url){
+  if(!url)return '';
+  const m=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{6,})/);
+  if(m)return 'https://www.youtube.com/embed/'+m[1];
+  const v=url.match(/vimeo\.com\/(\d+)/);
+  if(v)return 'https://player.vimeo.com/video/'+v[1];
+  return '';
+}
+function renderVideoEmbed(url){
+  if(!url)return '<p class="hint">No video URL set yet.</p>';
+  const embed=toYouTubeEmbed(url);
+  if(embed)return `<div class="bb-video-wrap"><iframe src="${esc(embed)}" allowfullscreen></iframe></div>`;
+  if(/\.(mp4|webm|ogg)$/i.test(url))return `<div class="bb-video-wrap"><video src="${esc(url)}" controls></video></div>`;
+  return `<div class="bb-video-wrap" style="display:flex;align-items:center;justify-content:center"><a href="${esc(url)}" target="_blank" style="color:#fff;font-size:0.85rem">▶ Open video link</a></div>`;
+}
+function zoneBlocks(zone){
+  if(!db.blocks)db.blocks={};
+  if(!Array.isArray(db.blocks[zone]))db.blocks[zone]=[];
+  return db.blocks[zone];
+}
+function renderBuilderZones(){
+  ['recommended','footer'].forEach(zone=>renderZoneDisplay(zone));
+}
+function renderZoneDisplay(zone){
+  const host=document.getElementById('builder-zone-'+zone);
+  if(!host)return;
+  const blocks=zoneBlocks(zone).slice().sort((a,b)=>(a.order||0)-(b.order||0));
+  const editing=builderActiveZone===zone;
+  if(!blocks.length && !editing){host.innerHTML='';return;}
+  host.innerHTML=`<div class="builder-blocks">${blocks.map((b,i)=>renderBlockHTML(zone,b,i,blocks.length,editing)).join('')}</div>`+
+    (editing?`<div class="add-block-row">
+      <button onclick="addBlock('${zone}','text')">📝 Add Text</button>
+      <button onclick="addBlock('${zone}','video')">🎬 Add Video</button>
+      <button onclick="addBlock('${zone}','section')">📦 Add Section</button>
+      <button onclick="addBlock('${zone}','footer')">🦶 Add Footer</button>
+    </div>`:'');
+}
+function renderBlockHTML(zone,b,index,total,editing){
+  const editCls=editing?' editing-mode':'';
+  const controls=editing?`<div class="bb-controls">
+    <span class="bb-type-tag">${esc(b.type)}</span>
+    <button class="bb-ctrl-btn" onclick="moveBlock('${zone}','${b.id}',-1)" ${index===0?'disabled':''} title="Move up">⬆</button>
+    <button class="bb-ctrl-btn" onclick="moveBlock('${zone}','${b.id}',1)" ${index===total-1?'disabled':''} title="Move down">⬇</button>
+    <button class="bb-ctrl-btn danger bb-ctrl-spacer" onclick="deleteBlock('${zone}','${b.id}')">🗑 Remove</button>
+  </div>`:'';
+  let body='';
+  if(b.type==='text'){
+    body=editing
+      ? `<textarea class="bb-text-edit" id="bbedit-${b.id}" oninput="markBlockDirty('${zone}','${b.id}')">${esc(b.content||'')}</textarea><div class="bb-save-row"><button class="save-btn" onclick="saveBlockField('${zone}','${b.id}','content',document.getElementById('bbedit-${b.id}').value)">Save Text</button></div>`
+      : `<p class="bb-text-content">${esc(b.content||'')}</p>`;
+  }else if(b.type==='video'){
+    body=editing
+      ? `<input class="bb-video-url-edit" id="bbedit-${b.id}" value="${esc(b.url||'')}" placeholder="YouTube/Vimeo link or .mp4 URL"/><div class="bb-save-row"><button class="save-btn" onclick="saveBlockField('${zone}','${b.id}','url',document.getElementById('bbedit-${b.id}').value)">Save Video</button></div>`+renderVideoEmbed(b.url)
+      : renderVideoEmbed(b.url);
+  }else if(b.type==='section'){
+    body=editing
+      ? `<input class="bb-section-title-edit" id="bbedit-h-${b.id}" value="${esc(b.heading||'')}" placeholder="Section heading"/><textarea class="bb-text-edit" id="bbedit-${b.id}" placeholder="Section content">${esc(b.content||'')}</textarea><div class="bb-save-row"><button class="save-btn" onclick="saveSectionBlock('${zone}','${b.id}')">Save Section</button></div>`
+      : `<div class="bb-section-heading">${esc(b.heading||'')}</div><p class="bb-text-content">${esc(b.content||'')}</p>`;
+  }else if(b.type==='footer'){
+    body=editing
+      ? `<textarea class="bb-footer-edit" id="bbedit-${b.id}">${esc(b.content||'')}</textarea><div class="bb-save-row"><button class="save-btn" onclick="saveBlockField('${zone}','${b.id}','content',document.getElementById('bbedit-${b.id}').value)">Save Footer</button></div>`
+      : `<p class="bb-footer-content">${esc(b.content||'')}</p>`;
+  }
+  return `<div class="builder-block${editCls}" id="block-${b.id}">${controls}<div class="bb-body">${body}</div></div>`;
+}
+function enterBuilder(zone){
+  if(!isOwner())return;
+  builderActiveZone=zone;
+  document.getElementById('builder-bar').classList.add('active');
+  document.getElementById('bb-target-label').textContent=BUILDER_ZONE_LABELS[zone]||zone;
+  if(zone==='recommended'){showSec('recommended');}
+  if(zone==='public'){showSec('public');}
+  if(zone==='news'){showSec('news');}
+  renderZoneDisplay(zone);
+  toast('toast-builder','🧩 Builder launched — scroll to the '+(BUILDER_ZONE_LABELS[zone]||zone)+' to edit.');
+}
+function exitBuilder(){
+  const zone=builderActiveZone;
+  builderActiveZone=null;
+  document.getElementById('builder-bar').classList.remove('active');
+  if(zone)renderZoneDisplay(zone);
+  renderBuilderZones();
+}
+async function addBlock(zone,type){
+  const blocks=zoneBlocks(zone);
+  const maxOrder=blocks.reduce((m,b)=>Math.max(m,b.order||0),0);
+  const block={id:'b'+Date.now(),type,order:maxOrder+1};
+  if(type==='text')block.content='New text block — click to edit.';
+  if(type==='video')block.url='';
+  if(type==='section'){block.heading='New Section';block.content='Section content goes here.';}
+  if(type==='footer')block.content='© your footer text here';
+  blocks.push(block);
+  renderZoneDisplay(zone);
+  try{await saveAll();}catch(e){toast('toast-builder','✕ Could not save — '+e.message,true);}
+}
+async function deleteBlock(zone,id){
+  if(!confirm('Remove this block?'))return;
+  db.blocks[zone]=zoneBlocks(zone).filter(b=>b.id!==id);
+  renderZoneDisplay(zone);
+  try{await saveAll();}catch(e){toast('toast-builder','✕ Could not save — '+e.message,true);}
+}
+async function moveBlock(zone,id,dir){
+  const blocks=zoneBlocks(zone).slice().sort((a,b)=>(a.order||0)-(b.order||0));
+  const idx=blocks.findIndex(b=>b.id===id);
+  const swapIdx=idx+dir;
+  if(idx<0||swapIdx<0||swapIdx>=blocks.length)return;
+  const a=blocks[idx],b=blocks[swapIdx];
+  const tmp=a.order;a.order=b.order;b.order=tmp;
+  renderZoneDisplay(zone);
+  try{await saveAll();}catch(e){toast('toast-builder','✕ Could not save — '+e.message,true);}
+}
+async function saveBlockField(zone,id,field,value){
+  const block=zoneBlocks(zone).find(b=>b.id===id);
+  if(!block)return;
+  block[field]=value;
+  try{await saveAll();toast('toast-builder','✓ Saved!');}catch(e){toast('toast-builder','✕ Could not save — '+e.message,true);}
+}
+async function saveSectionBlock(zone,id){
+  const block=zoneBlocks(zone).find(b=>b.id===id);
+  if(!block)return;
+  block.heading=document.getElementById('bbedit-h-'+id).value;
+  block.content=document.getElementById('bbedit-'+id).value;
+  try{await saveAll();toast('toast-builder','✓ Saved!');renderZoneDisplay(zone);}catch(e){toast('toast-builder','✕ Could not save — '+e.message,true);}
+}
+function markBlockDirty(){/* reserved for future autosave/dirty-state indicator */}
+
 const LANGS={
   en:{sub:'a shared board for tips, tricks, and random gems ✦',login:'Login',logout:'Logout',recommended:'⭐ Recommended',featured:'🔥 Featured',pub:'📢 Public',news:'📰 News',complaints:'📝 Complaints',mystyle:'🎨 My Style',pending:'⏳ Pending',admin:'🔒 Admin Board',settings:'⚙️ Settings'},
   ko:{sub:'팁, 트릭, 랜덤 보석을 위한 공유 게시판 ✦',login:'로그인',logout:'로그아웃',recommended:'⭐ 추천',featured:'🔥 주목',pub:'📢 공개',news:'📰 뉴스',complaints:'📝 불만',mystyle:'🎨 내 스타일',pending:'⏳ 대기',admin:'🔒 관리자 보드',settings:'⚙️ 설정'},
