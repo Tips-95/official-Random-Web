@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>tips & stuff ✦</title>
+  <title>tips & stuff \u2726</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
@@ -15,7 +15,6 @@
       --owner-bg:#1a1612;--owner-txt:#f0c060;
       --admin-bg:#2a1a4a;--admin-txt:#c090ff;
       --mod-bg:#0a2a1a;--mod-txt:#60d090;
-      --pub-bg:#2a2a2a;--pub-txt:#cccccc;
       --tag-tip-bg:#e8f0e0;--tag-tip-txt:#2d5016;
       --tag-food-bg:#fdecd6;--tag-food-txt:#7a3a0a;
       --tag-life-bg:#e0eaf8;--tag-life-txt:#1a3d6b;
@@ -25,14 +24,10 @@
     html{font-size:16px}
     body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
     body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");background-size:200px 200px}
-
-    /* ANNOUNCEMENT */
     .announcement{display:none;position:relative;z-index:20;padding:9px 2.5rem;font-size:0.82rem;font-family:'DM Mono',monospace;text-align:center;background:var(--accent);color:#fff;line-height:1.4}
     .announcement.show{display:block}
     .ann-close{position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;cursor:pointer;font-size:1rem;opacity:0.7;padding:2px 6px}
     .ann-close:hover{opacity:1}
-
-    /* TOP NAV */
     .topnav{position:sticky;top:0;z-index:30;background:var(--text);display:flex;align-items:center;padding:0 1.5rem;height:52px;gap:8px;flex-shrink:0}
     .topnav-logo{font-family:'Instrument Serif',serif;font-size:1.15rem;color:#fff;text-decoration:none;white-space:nowrap;flex-shrink:0;margin-right:6px}
     .topnav-logo em{font-style:italic;color:var(--accent)}
@@ -48,11 +43,7 @@
     .rank-public{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)}
     .topnav-btn{font-size:0.78rem;padding:5px 11px;border-radius:6px;border:1px solid rgba(255,255,255,0.18);background:transparent;color:rgba(255,255,255,0.75);cursor:pointer;transition:all 0.13s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;font-family:'DM Sans',sans-serif}
     .topnav-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
-
-    /* MAIN WRAPPER */
     .page-wrap{position:relative;z-index:1;flex:1;width:100%;max-width:980px;margin:0 auto;padding:0 1.5rem 5rem}
-
-    /* PAGE HEADER */
     .page-header{padding:1.75rem 0 0}
     .header-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:0.5rem}
     .site-title{font-family:'Instrument Serif',serif;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1;letter-spacing:-0.02em}
@@ -62,8 +53,6 @@
     .status-dot{width:7px;height:7px;border-radius:50%;background:#ccc;transition:background 0.3s}
     .status-dot.ok{background:#3a9c5a}.status-dot.error{background:#c8602a}.status-dot.loading{background:#f0a500}
     .status-text{font-size:0.72rem;color:var(--muted)}
-
-    /* TAB BAR */
     .tab-bar-wrap{position:sticky;top:52px;z-index:20;background:var(--bg);padding:10px 0 0;margin:0 -1.5rem;padding-left:1.5rem;padding-right:1.5rem}
     .tab-bar{display:flex;gap:4px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;border-bottom:1px solid var(--border)}
     .tab-bar::-webkit-scrollbar{display:none}
@@ -73,19 +62,15 @@
     .tab-btn .tb-badge{font-size:0.6rem;font-weight:600;padding:1px 5px;border-radius:99px;background:var(--accent);color:#fff}
     .tab-btn.active .tb-badge{background:rgba(255,255,255,0.25)}
     .tab-divider{width:1px;background:var(--border);margin:4px 2px;align-self:stretch;flex-shrink:0}
-
-    /* CONTENT */
     .content{padding-top:1.5rem}
     .sec-panel{display:none}.sec-panel.visible{display:block}
     .section{margin-bottom:2rem}
     .section-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:1rem;padding:0.7rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:10px}
     .section-title{font-size:0.95rem;font-weight:500;display:flex;align-items:center;gap:8px}
     .section-lock{font-size:0.72rem;color:var(--muted)}
-
-    /* GRIDS */
     .rec-grid,.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
     .rec-card{background:linear-gradient(135deg,#fffbf0,#fff8e8);border:1px solid rgba(200,96,42,0.22);border-radius:12px;padding:0.9rem 1rem;display:flex;flex-direction:column;gap:8px;animation:rise 0.2s ease both;position:relative;overflow:hidden}
-    .rec-card::before{content:'⭐';position:absolute;top:8px;right:9px;font-size:0.65rem;opacity:0.45}
+    .rec-card::before{content:'\2605';position:absolute;top:8px;right:9px;font-size:0.65rem;opacity:0.45}
     .rec-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);border-radius:12px 12px 0 0}
     .tip-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1rem;display:flex;flex-direction:column;gap:8px;animation:rise 0.2s ease both;position:relative;overflow:hidden}
     .tip-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-accent,transparent);border-radius:12px 12px 0 0}
@@ -100,8 +85,6 @@
     .approve-btn{color:#2d7a2d}.approve-btn:hover{background:#e8f0e0}
     .deny-btn{color:#c0392b}.deny-btn:hover{background:#fce8ec}
     .empty{text-align:center;padding:2.5rem 0;color:var(--muted);font-size:0.875rem;grid-column:1/-1}
-
-    /* FORMS */
     .staff-form{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
     .staff-form input[type="text"]{flex:1;min-width:150px;height:38px;padding:0 12px;font-family:'DM Sans',sans-serif;font-size:0.875rem;background:var(--surface);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none}
     .staff-form input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,96,42,0.1)}
@@ -117,8 +100,6 @@
     .submit-btn{height:38px;padding:0 16px;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;background:var(--text);color:var(--bg);border:none;border-radius:8px;cursor:pointer;transition:opacity 0.15s;white-space:nowrap}
     .submit-btn:hover{opacity:0.85}
     .pending-notice{font-size:0.78rem;color:var(--muted);margin-top:5px;padding:5px 10px;background:#fdecd6;border-radius:6px;display:inline-block}
-
-    /* NEWS */
     .news-compose{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem}
     .news-title-in{height:42px;padding:0 14px;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;width:100%}
     .news-title-in:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,96,42,0.1)}
@@ -140,8 +121,6 @@
     .news-del-btn{position:absolute;top:12px;right:12px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:0.75rem;padding:3px 7px;border-radius:5px;display:none}
     .news-del-btn.show{display:inline-block}
     .news-del-btn:hover{color:#c0392b;background:#fce8ec}
-
-    /* COMPLAINTS */
     .complaint-form-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1rem}
     .complaint-form-head{padding:0.85rem 1.2rem;background:var(--bg);border-bottom:1px solid var(--border);font-size:0.88rem;font-weight:600}
     .complaint-form-body{padding:1.2rem;display:flex;flex-direction:column;gap:12px}
@@ -176,8 +155,6 @@
     .complaint-del-btn{font-size:0.75rem;padding:4px 10px;border-radius:6px;border:1px solid #fce8ec;background:#fce8ec;color:#c0392b;cursor:pointer;font-family:'DM Sans',sans-serif}
     .complaint-del-btn:hover{background:#c0392b;color:#fff}
     @media(max-width:600px){.cf-row{grid-template-columns:1fr}}
-
-    /* SETTINGS */
     .settings-wrap{display:flex;flex-direction:column;gap:1.5rem}
     .settings-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
     .settings-card-header{display:flex;align-items:center;gap:8px;padding:0.85rem 1.2rem;background:var(--bg);border-bottom:1px solid var(--border);font-size:0.85rem;font-weight:600}
@@ -208,7 +185,16 @@
     .color-row{display:flex;align-items:center;gap:10px}
     .color-swatch{width:32px;height:32px;border-radius:6px;border:1px solid var(--border-strong);flex-shrink:0}
     .ann-preview{border-radius:8px;padding:8px 14px;font-size:0.82rem;margin-top:4px;font-family:'DM Mono',monospace;color:#fff}
-
+    /* Custom content blocks */
+    .custom-block{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:10px;position:relative}
+    .custom-block-del{position:absolute;top:8px;right:10px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:0.75rem;padding:3px 7px;border-radius:5px}
+    .custom-block-del:hover{color:#c0392b;background:#fce8ec}
+    .custom-block-text{font-size:0.9rem;line-height:1.65;white-space:pre-wrap}
+    .custom-block-btn{display:inline-flex;height:38px;padding:0 18px;align-items:center;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;text-decoration:none;transition:background 0.15s;margin-top:6px}
+    .custom-block-btn:hover{background:#b5521f}
+    /* My Settings (public personal) */
+    .my-settings-wrap{display:flex;flex-direction:column;gap:1.5rem}
+    .my-settings-note{font-size:0.8rem;color:var(--muted);padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;line-height:1.5}
     /* CHAT FAB */
     .chat-fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:50;width:52px;height:52px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:1.4rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.18);transition:transform 0.15s}
     .chat-fab:hover{transform:scale(1.08)}
@@ -240,8 +226,6 @@
     .chat-send:hover{background:#b5521f}
     .chat-footer-note{font-size:0.65rem;color:var(--muted);padding:3px 12px 6px;background:var(--bg);text-align:center;flex-shrink:0}
     .chat-footer-note button{background:none;border:none;cursor:pointer;color:var(--accent);font-size:0.65rem}
-
-    /* MOBILE NAV */
     .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:40;background:var(--text);align-items:center;justify-content:space-around;border-top:1px solid rgba(255,255,255,0.08);height:56px}
     .mob-btn{flex:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.45);font-family:'DM Sans',sans-serif;font-size:0.55rem;position:relative;white-space:nowrap;text-decoration:none;min-width:0}
     .mob-btn .mi{font-size:1.05rem;line-height:1}
@@ -249,14 +233,10 @@
     .mob-btn.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:2px;background:var(--accent);border-radius:2px 2px 0 0}
     .mob-badge{position:absolute;top:5px;right:calc(50% - 20px);background:var(--accent);color:#fff;font-size:0.5rem;font-weight:600;min-width:13px;height:13px;border-radius:99px;display:none;align-items:center;justify-content:center;padding:0 3px}
     .mob-badge.show{display:flex}
-
-    /* LANG SWITCHER */
     .lang-switcher{display:flex;align-items:center;gap:3px;background:rgba(255,255,255,0.07);border-radius:8px;padding:3px}
     .lang-btn{background:none;border:none;font-size:0.95rem;cursor:pointer;padding:3px 5px;border-radius:5px;transition:background 0.13s;line-height:1}
     .lang-btn:hover{background:rgba(255,255,255,0.12)}
     .lang-btn.active{background:rgba(255,255,255,0.22)}
-
-    /* UPDATE SYSTEM */
     .update-bar{position:relative;z-index:25;display:none;align-items:center;justify-content:center;gap:10px;padding:9px 1.5rem;background:linear-gradient(90deg,#1a1612,#2a1a0a);color:#f0c060;font-family:'DM Mono',monospace;font-size:0.8rem;text-align:center;flex-wrap:wrap}
     .update-bar.show{display:flex}
     .update-bar strong{color:#fff}
@@ -284,40 +264,30 @@
     .whats-new-body{font-size:0.9rem;line-height:1.75;color:var(--text);white-space:pre-wrap;max-height:260px;overflow-y:auto}
     .whats-new-dismiss{height:42px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;background:var(--text);color:var(--bg);border:none;border-radius:10px;cursor:pointer;transition:opacity 0.15s}
     .whats-new-dismiss:hover{opacity:0.82}
-
     .site-footer{margin-top:2rem;text-align:center;font-size:0.75rem;color:var(--muted);padding-bottom:2rem}
-
-    @media(max-width:700px){
-      .page-wrap{padding:0 1rem 5rem}
-      .tab-bar-wrap{margin:0 -1rem;padding-left:1rem;padding-right:1rem}
-      .topnav-links{display:none}
-      .mobile-nav{display:flex}
-      .chat-fab{bottom:4.5rem;right:1rem;width:46px;height:46px;font-size:1.2rem}
-      .chat-panel{bottom:7.5rem;right:0.75rem;width:calc(100vw - 1.5rem)}
-    }
+    @media(max-width:700px){.page-wrap{padding:0 1rem 5rem}.tab-bar-wrap{margin:0 -1rem;padding-left:1rem;padding-right:1rem}.topnav-links{display:none}.mobile-nav{display:flex}.chat-fab{bottom:4.5rem;right:1rem;width:46px;height:46px;font-size:1.2rem}.chat-panel{bottom:7.5rem;right:0.75rem;width:calc(100vw - 1.5rem)}}
   </style>
 </head>
 <body>
-
-<!-- REDIRECT: must be logged in -->
 <script>
 (function(){
-  var r = localStorage.getItem('rank');
-  if(!r || r === 'null' || r === 'undefined') window.location.replace('login.html');
+  var r=localStorage.getItem('rank');
+  if(!r||r==='null'||r==='undefined'){window.location.replace('login.html');}
+  // Apply personal colors immediately to avoid flash
+  var bg=localStorage.getItem('user_bg');
+  var ac=localStorage.getItem('user_accent');
+  if(bg){document.documentElement.style.setProperty('--bg',bg);}
+  if(ac){document.documentElement.style.setProperty('--accent',ac);}
 })();
 </script>
-
-<!-- UPDATE BAR -->
 <div class="update-bar" id="update-bar">
-  <span>⚡ A new update is available —</span>
+  <span>\u26a1 A new update is available \u2014</span>
   <strong id="update-bar-version"></strong>
-  <button class="update-bar-btn" onclick="startUpdate()">Update Now →</button>
+  <button class="update-bar-btn" onclick="startUpdate()">Update Now \u2192</button>
 </div>
-
-<!-- UPDATE OVERLAY -->
 <div class="update-overlay" id="update-overlay">
   <div class="update-logo">tips <em>&</em> stuff</div>
-  <div class="update-overlay-label" id="update-overlay-label">Installing update…</div>
+  <div class="update-overlay-label">Installing update\u2026</div>
   <div class="update-countdown-ring">
     <svg width="64" height="64" viewBox="0 0 44 44">
       <circle cx="22" cy="22" r="20" stroke="rgba(60,50,30,0.12)" stroke-width="3" fill="none"/>
@@ -327,64 +297,54 @@
   </div>
   <div class="update-prog-wrap"><div class="update-prog-fill" id="update-prog"></div></div>
 </div>
-
-<!-- WHAT'S NEW -->
 <div class="whats-new-overlay" id="whats-new-overlay">
   <div class="whats-new-modal">
-    <div class="whats-new-top">
-      <div class="whats-new-icon">✨</div>
-      <div>
-        <div class="whats-new-heading" id="whats-new-heading">What's New</div>
-        <span class="whats-new-version" id="whats-new-ver"></span>
-      </div>
-    </div>
+    <div class="whats-new-top"><div class="whats-new-icon">\u2728</div><div>
+      <div class="whats-new-heading">What's New</div>
+      <span class="whats-new-version" id="whats-new-ver"></span>
+    </div></div>
     <div class="whats-new-divider"></div>
-    <div class="whats-new-body" id="whats-new-body">Loading…</div>
-    <button class="whats-new-dismiss" id="whats-new-dismiss" onclick="dismissUpdate()">Got it — let's go! →</button>
+    <div class="whats-new-body" id="whats-new-body">Loading\u2026</div>
+    <button class="whats-new-dismiss" onclick="dismissUpdate()">Got it \u2014 let's go! \u2192</button>
   </div>
 </div>
-
-<!-- ANNOUNCEMENT -->
 <div class="announcement" id="ann-bar">
   <span id="ann-txt"></span>
-  <button class="ann-close" onclick="document.getElementById('ann-bar').classList.remove('show')">✕</button>
+  <button class="ann-close" onclick="document.getElementById('ann-bar').classList.remove('show')">\u2715</button>
 </div>
-
-<!-- TOP NAV -->
 <header class="topnav">
   <a href="index.html" class="topnav-logo">tips <em>&</em> stuff</a>
   <a href="login.html" class="topnav-btn" id="login-link" style="display:none">Login</a>
   <div class="topnav-links">
-    <a href="index.html"       class="topnav-link active">📋 Tips</a>
-    <a href="ranks.html"       class="topnav-link">🏅 Ranks</a>
-    <a href="rules.html"       class="topnav-link">📜 Rules</a>
-    <a href="banlist.html"     class="topnav-link">🚫 Bans</a>
-    <a href="news.html"        class="topnav-link">📰 News</a>
-    <a href="leaderboard.html" class="topnav-link">🏆 Leaderboard</a>
-    <a href="version.html"     class="topnav-link">🔖 Version</a>
-    <a href="donate.html"      class="topnav-link">💛 Donate</a>
+    <a href="index.html"       class="topnav-link active">\U0001f4cb Tips</a>
+    <a href="ranks.html"       class="topnav-link">\U0001f3c5 Ranks</a>
+    <a href="rules.html"       class="topnav-link">\U0001f4dc Rules</a>
+    <a href="banlist.html"     class="topnav-link">\U0001f6ab Bans</a>
+    <a href="news.html"        class="topnav-link">\U0001f4f0 News</a>
+    <a href="games.html"       class="topnav-link">\U0001f3ae Games</a>
+    <a href="leaderboard.html" class="topnav-link">\U0001f3c6 Leaderboard</a>
+    <a href="version.html"     class="topnav-link">\U0001f516 Version</a>
+    <a href="donate.html"      class="topnav-link">\U0001f49b Donate</a>
   </div>
   <div class="topnav-right">
-    <!-- Language switcher -->
     <div class="lang-switcher" id="lang-sw">
-      <button class="lang-btn active" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
-      <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Spanish">🇪🇸</button>
-      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')" title="French">🇫🇷</button>
-      <button class="lang-btn" data-lang="pt" onclick="setLang('pt')" title="Portuguese">🇧🇷</button>
-      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" title="Japanese">🇯🇵</button>
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')" title="English">\U0001f1fa\U0001f1f8</button>
+      <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Spanish">\U0001f1ea\U0001f1f8</button>
+      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')" title="French">\U0001f1eb\U0001f1f7</button>
+      <button class="lang-btn" data-lang="pt" onclick="setLang('pt')" title="Portuguese">\U0001f1e7\U0001f1f7</button>
+      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" title="Japanese">\U0001f1ef\U0001f1f5</button>
     </div>
-    <span id="rank-display" class="rank-badge rank-public">…</span>
+    <span id="rank-display" class="rank-badge rank-public">\u2026</span>
     <button class="topnav-btn" id="logout-btn" onclick="doLogout()">Logout</button>
-    <button class="topnav-btn" onclick="loadAll()" title="Refresh">↻</button>
+    <button class="topnav-btn" onclick="loadAll()" title="Refresh">\u21bb</button>
   </div>
 </header>
-
 <div class="page-wrap">
   <div class="page-header">
     <div class="header-top">
       <div>
         <h1 class="site-title" id="site-title-el">tips <em>&</em> stuff</h1>
-        <p class="subtitle" id="site-subtitle-el">a shared board for tips, tricks, and random gems ✦</p>
+        <p class="subtitle" id="site-subtitle-el">a shared board for tips, tricks, and random gems \u2726</p>
       </div>
       <div class="header-meta">
         <div class="status-dot loading" id="status-dot"></div>
@@ -392,32 +352,31 @@
       </div>
     </div>
   </div>
-
-  <!-- TAB BAR -->
   <div class="tab-bar-wrap">
     <div class="tab-bar">
-      <button class="tab-btn active" id="tab-recommended" onclick="showSec('recommended')">⭐ Recommended</button>
-      <button class="tab-btn" id="tab-featured"   onclick="showSec('featured')">🔥 Featured</button>
-      <button class="tab-btn" id="tab-public"     onclick="showSec('public')">📢 Public</button>
-      <button class="tab-btn" id="tab-news"       onclick="showSec('news')">📰 News</button>
-      <button class="tab-btn" id="tab-complaints" onclick="showSec('complaints')">📝 Complaints <span class="tb-badge" id="complaint-ct" style="display:none"></span></button>
-      <a href="leaderboard.html" class="tab-btn">🏆 Leaderboard</a>
+      <button class="tab-btn active" id="tab-recommended" onclick="showSec('recommended')">\u2b50 Recommended</button>
+      <button class="tab-btn" id="tab-featured"    onclick="showSec('featured')">\U0001f525 Featured</button>
+      <button class="tab-btn" id="tab-public"      onclick="showSec('public')">\U0001f4e2 Public</button>
+      <button class="tab-btn" id="tab-news"        onclick="showSec('news')">\U0001f4f0 News</button>
+      <button class="tab-btn" id="tab-complaints"  onclick="showSec('complaints')">\U0001f4dd Complaints <span class="tb-badge" id="complaint-ct" style="display:none"></span></button>
+      <button class="tab-btn" id="tab-mysettings"  onclick="showSec('mysettings')">\U0001f3a8 My Style</button>
+      <a href="games.html" class="tab-btn">\U0001f3ae Games</a>
+      <a href="leaderboard.html" class="tab-btn">\U0001f3c6 Leaderboard</a>
       <div class="tab-divider"></div>
-      <button class="tab-btn" id="tab-pending"    onclick="showSec('pending')"    style="display:none">⏳ Pending <span class="tb-badge" id="pending-ct" style="display:none"></span></button>
-      <button class="tab-btn" id="tab-adminboard" onclick="showSec('adminboard')" style="display:none">🔒 Admin Board</button>
-      <button class="tab-btn" id="tab-settings"   onclick="showSec('settings')"   style="display:none">⚙️ Settings</button>
+      <button class="tab-btn" id="tab-pending"    onclick="showSec('pending')"    style="display:none">\u23f3 Pending <span class="tb-badge" id="pending-ct" style="display:none"></span></button>
+      <button class="tab-btn" id="tab-adminboard" onclick="showSec('adminboard')" style="display:none">\U0001f512 Admin Board</button>
+      <button class="tab-btn" id="tab-settings"   onclick="showSec('settings')"   style="display:none">\u2699\ufe0f Settings</button>
     </div>
   </div>
-
   <div class="content">
 
     <!-- RECOMMENDED -->
     <div class="section sec-panel visible" id="sec-recommended">
-      <div class="section-header"><span class="section-title">⭐ Recommended Tips <span class="section-lock">Owner &amp; Admins</span></span><span class="rank-badge rank-admin">Staff Picks</span></div>
+      <div class="section-header"><span class="section-title">\u2b50 Recommended Tips <span class="section-lock">Owner &amp; Admins</span></span><span class="rank-badge rank-admin">Staff Picks</span></div>
       <div class="staff-form" id="rec-form" style="display:none">
         <input type="text" id="rec-text" placeholder="Add a recommended tip..." maxlength="280"/>
         <input type="text" id="rec-author" placeholder="Your name" maxlength="30"/>
-        <select class="tag-sel" id="rec-tag"><option value="tip">💡 tip</option><option value="food">🍜 food</option><option value="life">✌️ life</option><option value="tech">⚡ tech</option><option value="random">🎲 random</option></select>
+        <select class="tag-sel" id="rec-tag"><option value="tip">\U0001f4a1 tip</option><option value="food">\U0001f35c food</option><option value="life">\u270c\ufe0f life</option><option value="tech">\u26a1 tech</option><option value="random">\U0001f3b2 random</option></select>
         <button class="post-btn" onclick="staffPost('recommended')">+ Post</button>
       </div>
       <div class="rec-grid" id="recommended-grid"><p class="empty">Loading...</p></div>
@@ -425,11 +384,11 @@
 
     <!-- FEATURED -->
     <div class="section sec-panel" id="sec-featured">
-      <div class="section-header"><span class="section-title">🔥 Featured Tips <span class="section-lock">Mod+ only</span></span><span class="rank-badge rank-mod">Mod+</span></div>
+      <div class="section-header"><span class="section-title">\U0001f525 Featured Tips <span class="section-lock">Mod+ only</span></span><span class="rank-badge rank-mod">Mod+</span></div>
       <div class="staff-form" id="feat-form" style="display:none">
         <input type="text" id="feat-text" placeholder="Add a featured tip..." maxlength="280"/>
         <input type="text" id="feat-author" placeholder="Your name" maxlength="30"/>
-        <select class="tag-sel" id="feat-tag"><option value="tip">💡 tip</option><option value="food">🍜 food</option><option value="life">✌️ life</option><option value="tech">⚡ tech</option><option value="random">🎲 random</option></select>
+        <select class="tag-sel" id="feat-tag"><option value="tip">\U0001f4a1 tip</option><option value="food">\U0001f35c food</option><option value="life">\u270c\ufe0f life</option><option value="tech">\u26a1 tech</option><option value="random">\U0001f3b2 random</option></select>
         <button class="post-btn" onclick="staffPost('featured')">+ Post</button>
       </div>
       <div class="tips-grid" id="featured-grid"><p class="empty">Nothing here yet.</p></div>
@@ -437,32 +396,32 @@
 
     <!-- PUBLIC -->
     <div class="section sec-panel" id="sec-public">
-      <div class="section-header"><span class="section-title">📢 Public Tips <span class="section-lock">Everyone can submit</span></span><span class="rank-badge rank-public">Public</span></div>
+      <div class="section-header"><span class="section-title">\U0001f4e2 Public Tips <span class="section-lock">Everyone can submit</span></span><span class="rank-badge rank-public">Public</span></div>
       <div class="public-form">
         <h3>Submit a tip for review</h3>
         <div class="form-row">
           <input type="text" id="pub-name" placeholder="Your name" maxlength="30"/>
-          <select id="pub-tag"><option value="tip">💡 tip</option><option value="food">🍜 food</option><option value="life">✌️ life</option><option value="tech">⚡ tech</option><option value="random">🎲 random</option></select>
+          <select id="pub-tag"><option value="tip">\U0001f4a1 tip</option><option value="food">\U0001f35c food</option><option value="life">\u270c\ufe0f life</option><option value="tech">\u26a1 tech</option><option value="random">\U0001f3b2 random</option></select>
         </div>
         <div class="form-row"><textarea id="pub-text" placeholder="Write your tip here..." maxlength="280"></textarea></div>
         <div class="form-row"><button class="submit-btn" onclick="submitPublic()">Submit for Review</button></div>
-        <span class="pending-notice">⏳ Tips are reviewed before posting — Owner &amp; Admins approve or deny.</span>
+        <span class="pending-notice">\u23f3 Tips are reviewed before posting \u2014 Owner &amp; Admins approve or deny.</span>
       </div>
       <div class="tips-grid" id="public-grid"><p class="empty">No approved tips yet.</p></div>
     </div>
 
     <!-- NEWS -->
     <div class="section sec-panel" id="sec-news">
-      <div class="section-header"><span class="section-title">📰 News <span class="section-lock">Owner &amp; Admins</span></span><span class="rank-badge rank-admin">Latest</span></div>
+      <div class="section-header"><span class="section-title">\U0001f4f0 News <span class="section-lock">Owner &amp; Admins</span></span><span class="rank-badge rank-admin">Latest</span></div>
       <div id="news-form" style="display:none;margin-bottom:1rem">
         <div class="news-compose">
           <input type="text" id="news-title" placeholder="Headline..." maxlength="100" class="news-title-in"/>
           <div class="news-form-row">
-            <select id="news-cat" class="news-cat-sel"><option value="update">📣 Update</option><option value="announcement">🎉 Announcement</option><option value="warning">⚠️ Warning</option><option value="event">📅 Event</option><option value="other">💬 Other</option></select>
+            <select id="news-cat" class="news-cat-sel"><option value="update">\U0001f4e3 Update</option><option value="announcement">\U0001f389 Announcement</option><option value="warning">\u26a0\ufe0f Warning</option><option value="event">\U0001f4c5 Event</option><option value="other">\U0001f4ac Other</option></select>
             <input type="text" id="news-author" placeholder="Your name" maxlength="30" class="news-author-in"/>
           </div>
           <textarea id="news-body" placeholder="Write the full news post here..." maxlength="1000" class="news-body-in"></textarea>
-          <button class="post-btn" onclick="postNews()">📰 Publish</button>
+          <button class="post-btn" onclick="postNews()">\U0001f4f0 Publish</button>
         </div>
       </div>
       <div id="news-list"><p class="empty">No news yet.</p></div>
@@ -470,69 +429,130 @@
 
     <!-- COMPLAINTS -->
     <div class="sec-panel" id="sec-complaints">
-      <div class="section-header"><span class="section-title">📝 Complaints <span class="section-lock">Staff review privately</span></span></div>
+      <div class="section-header"><span class="section-title">\U0001f4dd Complaints <span class="section-lock">Staff review privately</span></span></div>
       <div class="complaint-form-wrap">
-        <div class="complaint-form-head">📬 Submit a Complaint</div>
+        <div class="complaint-form-head">\U0001f4ec Submit a Complaint</div>
         <div class="complaint-form-body">
-          <p class="complaint-form-note">Your complaint will be reviewed privately by staff. Be honest and specific.</p>
+          <p class="complaint-form-note">Your complaint will be reviewed privately by staff.</p>
           <div class="cf-row">
             <div class="cf-field"><label>Your Name</label><input type="text" id="cf-name" placeholder="Your name..." maxlength="40"/></div>
             <div class="cf-field"><label>Complaint Type</label>
               <select id="cf-type">
-                <option value="behavior">😠 Behavior</option><option value="spam">🚫 Spam</option>
-                <option value="inappropriate">⚠️ Inappropriate Content</option><option value="bug">🐛 Bug / Issue</option>
-                <option value="suggestion">💡 Suggestion</option><option value="other">💬 Other</option>
+                <option value="behavior">\U0001f620 Behavior</option><option value="spam">\U0001f6ab Spam</option>
+                <option value="inappropriate">\u26a0\ufe0f Inappropriate Content</option><option value="bug">\U0001f41b Bug / Issue</option>
+                <option value="suggestion">\U0001f4a1 Suggestion</option><option value="other">\U0001f4ac Other</option>
               </select>
             </div>
           </div>
           <div class="cf-field"><label>Describe your complaint</label><textarea id="cf-text" placeholder="Explain what happened..." maxlength="600"></textarea></div>
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-            <button class="cf-submit-btn" onclick="submitComplaint()">📬 Submit Complaint</button>
+            <button class="cf-submit-btn" onclick="submitComplaint()">\U0001f4ec Submit Complaint</button>
             <span class="cf-toast" id="cf-toast"></span>
           </div>
         </div>
       </div>
       <div id="complaints-review-panel" style="display:none;margin-top:1.5rem">
         <div class="section-header" style="margin-bottom:1rem">
-          <span class="section-title">🔍 Submitted Complaints <span class="section-lock">Admin+ only</span></span>
+          <span class="section-title">\U0001f50d Submitted Complaints <span class="section-lock">Admin+ only</span></span>
           <select id="complaint-filter" onchange="renderComplaints()" style="height:32px;padding:0 10px;font-family:'DM Sans',sans-serif;font-size:0.8rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:6px;color:var(--text);outline:none">
-            <option value="all">All</option><option value="open">🔴 Open</option><option value="resolved">✅ Resolved</option>
+            <option value="all">All</option><option value="open">\U0001f534 Open</option><option value="resolved">\u2705 Resolved</option>
           </select>
         </div>
         <div id="complaints-list"><p class="empty">No complaints yet.</p></div>
       </div>
     </div>
 
+    <!-- MY STYLE (Personal Settings - visible to all logged-in users) -->
+    <div class="sec-panel" id="sec-mysettings">
+      <div class="section-header"><span class="section-title">\U0001f3a8 My Style <span class="section-lock">Only you can see these changes</span></span><span class="rank-badge rank-public">\U0001f464 Personal</span></div>
+      <div class="my-settings-wrap">
+        <p class="my-settings-note">\U0001f4a1 These are your personal visual preferences. Only stored on <em>your device</em> \u2014 no one else sees them. They apply everywhere on the site.</p>
+        <div class="settings-card">
+          <div class="settings-card-header">\U0001f3a8 Personal Colors</div>
+          <div class="settings-card-body">
+            <div class="settings-row-2">
+              <div class="setting-row">
+                <label>Background Color</label>
+                <div class="color-row">
+                  <input type="color" id="my-bg" value="#f5f2eb" style="width:80px" oninput="previewMyColor('bg',this.value)"/>
+                  <div class="color-swatch" id="my-bg-swatch" style="background:#f5f2eb"></div>
+                </div>
+              </div>
+              <div class="setting-row">
+                <label>Accent / Button Color</label>
+                <div class="color-row">
+                  <input type="color" id="my-accent" value="#c8602a" style="width:80px" oninput="previewMyColor('accent',this.value)"/>
+                  <div class="color-swatch" id="my-accent-swatch" style="background:#c8602a"></div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+              <button class="save-btn" onclick="saveMyColors()">\u2728 Apply My Colors</button>
+              <button class="save-btn secondary" onclick="resetMyColors()">\u21bb Reset to Default</button>
+              <span class="settings-toast" id="toast-mycolors"></span>
+            </div>
+          </div>
+        </div>
+        <div class="settings-card">
+          <div class="settings-card-header">\U0001f464 My Account Info</div>
+          <div class="settings-card-body">
+            <div class="setting-row"><label>Display Name</label><input type="text" id="my-displayname" placeholder="Your display name" maxlength="30"/></div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+              <button class="save-btn" onclick="saveMyName()">Save Name</button>
+              <span class="settings-toast" id="toast-myname"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- PENDING -->
     <div class="section sec-panel" id="sec-pending">
-      <div class="section-header"><span class="section-title">⏳ Pending Approval <span class="section-lock">Owner &amp; Admin only</span></span><span class="rank-badge rank-admin">Review Queue</span></div>
+      <div class="section-header"><span class="section-title">\u23f3 Pending Approval <span class="section-lock">Owner &amp; Admin only</span></span><span class="rank-badge rank-admin">Review Queue</span></div>
       <div class="tips-grid" id="pending-grid"><p class="empty">No pending tips.</p></div>
     </div>
 
     <!-- ADMIN BOARD -->
     <div class="section sec-panel" id="sec-adminboard">
-      <div class="section-header"><span class="section-title">🔒 Admin Board <span class="section-lock">Admin+ only</span></span><span class="rank-badge rank-admin">Admin+</span></div>
+      <div class="section-header"><span class="section-title">\U0001f512 Admin Board <span class="section-lock">Admin+ only</span></span><span class="rank-badge rank-admin">Admin+</span></div>
       <div class="staff-form" id="admin-form" style="display:none">
         <input type="text" id="admin-text" placeholder="Add an admin tip..." maxlength="280"/>
         <input type="text" id="admin-author" placeholder="Your name" maxlength="30"/>
-        <select class="tag-sel" id="admin-tag"><option value="tip">💡 tip</option><option value="food">🍜 food</option><option value="life">✌️ life</option><option value="tech">⚡ tech</option><option value="random">🎲 random</option></select>
+        <select class="tag-sel" id="admin-tag"><option value="tip">\U0001f4a1 tip</option><option value="food">\U0001f35c food</option><option value="life">\u270c\ufe0f life</option><option value="tech">\u26a1 tech</option><option value="random">\U0001f3b2 random</option></select>
         <button class="post-btn" onclick="staffPost('adminboard')">+ Post</button>
       </div>
       <div class="tips-grid" id="adminboard-grid"><p class="empty">Nothing here yet.</p></div>
     </div>
 
-    <!-- SETTINGS -->
+    <!-- SETTINGS (Owner) -->
     <div class="sec-panel" id="sec-settings">
-      <div class="section-header" style="margin-bottom:1.5rem"><span class="section-title">⚙️ Owner Settings</span><span class="rank-badge rank-owner">👑 Owner Only</span></div>
+      <div class="section-header" style="margin-bottom:1.5rem"><span class="section-title">\u2699\ufe0f Owner Settings</span><span class="rank-badge rank-owner">\U0001f451 Owner Only</span></div>
       <div class="settings-wrap">
-        <div class="settings-card"><div class="settings-card-header">📢 Announcement Banner</div><div class="settings-card-body"><div class="setting-row"><label>Message</label><textarea id="set-ann-text" placeholder="e.g. 🎉 Welcome!" maxlength="200"></textarea></div><div class="setting-row"><label>Banner Color</label><div class="color-row"><input type="color" id="set-ann-color" value="#c8602a" style="width:80px" oninput="updateAnnPreview()"/><div class="color-swatch" id="ann-swatch" style="background:#c8602a"></div></div></div><div id="ann-preview-wrap" style="display:none"><div class="ann-preview" id="ann-preview"></div></div><div class="setting-row"><label>Visibility</label><select id="set-ann-show"><option value="yes">✅ Visible to everyone</option><option value="no">🚫 Hidden</option></select></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveAnn()">Save Banner</button><span class="settings-toast" id="toast-ann"></span></div></div></div>
-        <div class="settings-card"><div class="settings-card-header">🎨 Site Appearance</div><div class="settings-card-body"><div class="settings-row-2"><div class="setting-row"><label>Site Title</label><input type="text" id="set-title" placeholder="tips & stuff" maxlength="40"/></div><div class="setting-row"><label>Subtitle</label><input type="text" id="set-subtitle" maxlength="80"/></div></div><div class="settings-row-2"><div class="setting-row"><label>Accent Color</label><div class="color-row"><input type="color" id="set-accent" value="#c8602a" style="width:80px" oninput="document.getElementById('accent-sw').style.background=this.value"/><div class="color-swatch" id="accent-sw" style="background:#c8602a"></div></div></div><div class="setting-row"><label>Background</label><div class="color-row"><input type="color" id="set-bg" value="#f5f2eb" style="width:80px" oninput="document.getElementById('bg-sw').style.background=this.value"/><div class="color-swatch" id="bg-sw" style="background:#f5f2eb"></div></div></div></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveAppearance()">Save Appearance</button><span class="settings-toast" id="toast-appearance"></span></div></div></div>
-        <div class="settings-card"><div class="settings-card-header">🔑 Staff Passwords</div><div class="settings-card-body"><p class="hint">Leave blank to keep current.</p><div class="settings-row-2"><div class="setting-row"><label>👑 Owner Password</label><input type="password" id="set-pw-owner" placeholder="new password..." autocomplete="new-password"/></div><div class="setting-row"><label>🛡️ Admin Password</label><input type="password" id="set-pw-admin" placeholder="new password..." autocomplete="new-password"/></div></div><div class="setting-row"><label>🔧 Mod Password</label><input type="password" id="set-pw-mod" placeholder="new password..." autocomplete="new-password"/></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="savePasswords()">Save Passwords</button><span class="settings-toast" id="toast-passwords"></span></div></div></div>
-        <div class="settings-card"><div class="settings-card-header">👥 Staff Members</div><div class="settings-card-body"><p class="hint">Roster shown on the Ranks page.</p><div class="member-list" id="member-list"></div><div class="add-row"><input type="text" id="new-member-name" placeholder="Name" maxlength="30"/><select id="new-member-rank"><option value="owner">👑 Owner</option><option value="admin">🛡️ Admin</option><option value="mod">🔧 Mod</option></select><button class="save-btn secondary" onclick="addMember()" style="height:36px;padding:0 12px">+ Add</button></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px"><button class="save-btn" onclick="saveMembers()">Save Members</button><span class="settings-toast" id="toast-members"></span></div></div></div>
-        <div class="settings-card"><div class="settings-card-header">📜 Site Rules</div><div class="settings-card-body"><p class="hint">One rule per line.</p><div class="setting-row"><textarea id="set-rules" style="min-height:130px" placeholder="e.g. Be respectful&#10;No spam"></textarea></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveRules()">Save Rules</button><span class="settings-toast" id="toast-rules"></span></div></div></div>
-        <div class="settings-card"><div class="settings-card-header">👋 Welcome Message</div><div class="settings-card-body"><p class="hint">Shown below the site title.</p><div class="setting-row"><textarea id="set-welcome" placeholder="Welcome!..." maxlength="300"></textarea></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveWelcome()">Save Welcome</button><span class="settings-toast" id="toast-welcome"></span></div></div></div>
-        <div class="settings-card"><div class="settings-card-header">🔄 Version &amp; Changelog</div><div class="settings-card-body"><p class="hint">When the version changes, users see an "Update Available" banner.</p><div class="setting-row"><label>Version Number</label><input type="text" id="set-version" placeholder="e.g. 1.0, 2.3"/></div><div class="setting-row"><label>What's New</label><textarea id="set-changelog" style="min-height:120px" placeholder="✦ New feature&#10;✦ Bug fix"></textarea></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveVersion()">Save &amp; Push Update</button><span class="settings-toast" id="toast-version"></span></div></div></div>
-        <div class="settings-card" style="border-color:rgba(192,57,43,0.3)"><div class="settings-card-header" style="color:#c0392b">🗑️ Danger Zone</div><div class="settings-card-body">
+        <div class="settings-card"><div class="settings-card-header">\U0001f4e2 Announcement Banner</div><div class="settings-card-body"><div class="setting-row"><label>Message</label><textarea id="set-ann-text" placeholder="e.g. \U0001f389 Welcome!" maxlength="200"></textarea></div><div class="setting-row"><label>Banner Color</label><div class="color-row"><input type="color" id="set-ann-color" value="#c8602a" style="width:80px" oninput="updateAnnPreview()"/><div class="color-swatch" id="ann-swatch" style="background:#c8602a"></div></div></div><div id="ann-preview-wrap" style="display:none"><div class="ann-preview" id="ann-preview"></div></div><div class="setting-row"><label>Visibility</label><select id="set-ann-show"><option value="yes">\u2705 Visible to everyone</option><option value="no">\U0001f6ab Hidden</option></select></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveAnn()">Save Banner</button><span class="settings-toast" id="toast-ann"></span></div></div></div>
+        <div class="settings-card"><div class="settings-card-header">\U0001f3a8 Site Appearance</div><div class="settings-card-body"><div class="settings-row-2"><div class="setting-row"><label>Site Title</label><input type="text" id="set-title" placeholder="tips &amp; stuff" maxlength="40"/></div><div class="setting-row"><label>Subtitle</label><input type="text" id="set-subtitle" maxlength="80"/></div></div><div class="settings-row-2"><div class="setting-row"><label>Accent Color</label><div class="color-row"><input type="color" id="set-accent" value="#c8602a" style="width:80px" oninput="document.getElementById('accent-sw').style.background=this.value"/><div class="color-swatch" id="accent-sw" style="background:#c8602a"></div></div></div><div class="setting-row"><label>Background</label><div class="color-row"><input type="color" id="set-bg" value="#f5f2eb" style="width:80px" oninput="document.getElementById('bg-sw').style.background=this.value"/><div class="color-swatch" id="bg-sw" style="background:#f5f2eb"></div></div></div></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveAppearance()">Save Appearance</button><span class="settings-toast" id="toast-appearance"></span></div></div></div>
+        <div class="settings-card"><div class="settings-card-header">\U0001f511 Staff Passwords</div><div class="settings-card-body"><p class="hint">Leave blank to keep current.</p><div class="settings-row-2"><div class="setting-row"><label>\U0001f451 Owner Password</label><input type="password" id="set-pw-owner" placeholder="new password..." autocomplete="new-password"/></div><div class="setting-row"><label>\U0001f6e1\ufe0f Admin Password</label><input type="password" id="set-pw-admin" placeholder="new password..." autocomplete="new-password"/></div></div><div class="setting-row"><label>\U0001f527 Mod Password</label><input type="password" id="set-pw-mod" placeholder="new password..." autocomplete="new-password"/></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="savePasswords()">Save Passwords</button><span class="settings-toast" id="toast-passwords"></span></div></div></div>
+        <div class="settings-card"><div class="settings-card-header">\U0001f465 Staff Members</div><div class="settings-card-body"><p class="hint">Roster shown on the Ranks page.</p><div class="member-list" id="member-list"></div><div class="add-row"><input type="text" id="new-member-name" placeholder="Name" maxlength="30"/><select id="new-member-rank"><option value="owner">\U0001f451 Owner</option><option value="admin">\U0001f6e1\ufe0f Admin</option><option value="mod">\U0001f527 Mod</option></select><button class="save-btn secondary" onclick="addMember()" style="height:36px;padding:0 12px">+ Add</button></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px"><button class="save-btn" onclick="saveMembers()">Save Members</button><span class="settings-toast" id="toast-members"></span></div></div></div>
+        <div class="settings-card"><div class="settings-card-header">\U0001f4dc Site Rules</div><div class="settings-card-body"><p class="hint">One rule per line.</p><div class="setting-row"><textarea id="set-rules" style="min-height:130px" placeholder="e.g. Be respectful&#10;No spam"></textarea></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveRules()">Save Rules</button><span class="settings-toast" id="toast-rules"></span></div></div></div>
+        <div class="settings-card"><div class="settings-card-header">\U0001f44b Welcome Message</div><div class="settings-card-body"><p class="hint">Shown below the site title.</p><div class="setting-row"><textarea id="set-welcome" placeholder="Welcome!..." maxlength="300"></textarea></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveWelcome()">Save Welcome</button><span class="settings-toast" id="toast-welcome"></span></div></div></div>
+        <div class="settings-card"><div class="settings-card-header">\U0001f4cc Custom Content Blocks</div><div class="settings-card-body">
+          <p class="hint">Add text sections or link buttons that appear on the site for all users (in the Recommended tab).</p>
+          <div id="custom-blocks-list"></div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:1rem;background:var(--bg);border-radius:8px;border:1px solid var(--border)">
+            <select id="new-block-type" style="height:38px;padding:0 10px;font-family:'DM Sans',sans-serif;font-size:0.85rem;background:var(--surface);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none">
+              <option value="text">\U0001f4dd Text Block</option>
+              <option value="button">\U0001f517 Link Button</option>
+            </select>
+            <textarea id="new-block-content" placeholder="Text content or button label..." style="min-height:70px;padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:0.875rem;background:var(--surface);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;resize:vertical"></textarea>
+            <input type="text" id="new-block-url" placeholder="URL (for link buttons only, e.g. https://...)" style="height:38px;padding:0 12px;font-family:'DM Sans',sans-serif;font-size:0.875rem;background:var(--surface);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;display:none"/>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+              <button class="save-btn" onclick="addCustomBlock()">\u2795 Add Block</button>
+              <button class="save-btn secondary" onclick="saveCustomBlocks()">Save All Blocks</button>
+              <span class="settings-toast" id="toast-custom"></span>
+            </div>
+          </div>
+        </div></div>
+        <div class="settings-card"><div class="settings-card-header">\U0001f504 Version &amp; Changelog</div><div class="settings-card-body"><p class="hint">When the version changes, users see an update banner.</p><div class="setting-row"><label>Version Number</label><input type="text" id="set-version" placeholder="e.g. 1.0, 2.3"/></div><div class="setting-row"><label>What's New</label><textarea id="set-changelog" style="min-height:120px" placeholder="\u2726 New feature&#10;\u2726 Bug fix"></textarea></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveVersion()">Save &amp; Push Update</button><span class="settings-toast" id="toast-version"></span></div></div></div>
+        <div class="settings-card" style="border-color:rgba(192,57,43,0.3)"><div class="settings-card-header" style="color:#c0392b">\U0001f5d1\ufe0f Danger Zone</div><div class="settings-card-body">
           <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><div style="flex:1;min-width:160px"><b style="font-size:0.85rem">Clear Pending</b><p class="hint">Delete all tips awaiting approval.</p></div><button class="save-btn danger" onclick="dangerClear('pending')">Clear Pending</button></div>
           <hr style="border:none;border-top:1px solid var(--border)">
           <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><div style="flex:1;min-width:160px"><b style="font-size:0.85rem">Clear Public</b><p class="hint">Delete all approved public tips.</p></div><button class="save-btn danger" onclick="dangerClear('public')">Clear Public</button></div>
@@ -544,131 +564,97 @@
       </div>
     </div>
 
-    <div class="site-footer"><p id="footer-text">tips & stuff — shared with friends ✦</p></div>
+    <div class="site-footer"><p>tips &amp; stuff \u2014 shared with friends \u2726</p></div>
   </div>
 </div>
-
-<!-- MOBILE NAV -->
 <nav class="mobile-nav">
-  <button class="mob-btn active" id="mob-recommended" onclick="mobGo('recommended',this)"><span class="mi">⭐</span>Picks</button>
-  <button class="mob-btn" id="mob-featured"   onclick="mobGo('featured',this)"><span class="mi">🔥</span>Hot</button>
-  <button class="mob-btn" id="mob-public"     onclick="mobGo('public',this)"><span class="mi">📢</span>Public</button>
-  <button class="mob-btn" id="mob-news"       onclick="mobGo('news',this)"><span class="mi">📰</span>News</button>
-  <a href="leaderboard.html" class="mob-btn"><span class="mi">🏆</span>Board</a>
-  <a href="donate.html"      class="mob-btn"><span class="mi">💛</span>Donate</a>
-  <button class="mob-btn" id="mob-complaints" onclick="mobGo('complaints',this)"><span class="mi">📝</span>Report<span class="mob-badge" id="mob-complaint-badge"></span></button>
-  <button class="mob-btn" id="mob-pending"    onclick="mobGo('pending',this)"    style="display:none"><span class="mi">⏳</span>Queue<span class="mob-badge" id="mob-pending-badge"></span></button>
-  <button class="mob-btn" id="mob-adminboard" onclick="mobGo('adminboard',this)" style="display:none"><span class="mi">🔒</span>Admin</button>
-  <button class="mob-btn" id="mob-settings"   onclick="mobGo('settings',this)"   style="display:none"><span class="mi">⚙️</span>Settings</button>
+  <button class="mob-btn active" id="mob-recommended" onclick="mobGo('recommended',this)"><span class="mi">\u2b50</span>Picks</button>
+  <button class="mob-btn" id="mob-featured"    onclick="mobGo('featured',this)"><span class="mi">\U0001f525</span>Hot</button>
+  <button class="mob-btn" id="mob-public"      onclick="mobGo('public',this)"><span class="mi">\U0001f4e2</span>Public</button>
+  <button class="mob-btn" id="mob-news"        onclick="mobGo('news',this)"><span class="mi">\U0001f4f0</span>News</button>
+  <a href="games.html"       class="mob-btn"><span class="mi">\U0001f3ae</span>Games</a>
+  <a href="leaderboard.html" class="mob-btn"><span class="mi">\U0001f3c6</span>Board</a>
+  <a href="donate.html"      class="mob-btn"><span class="mi">\U0001f49b</span>Donate</a>
+  <button class="mob-btn" id="mob-complaints"  onclick="mobGo('complaints',this)"><span class="mi">\U0001f4dd</span>Report<span class="mob-badge" id="mob-complaint-badge"></span></button>
+  <button class="mob-btn" id="mob-mysettings"  onclick="mobGo('mysettings',this)"><span class="mi">\U0001f3a8</span>Style</button>
+  <button class="mob-btn" id="mob-pending"     onclick="mobGo('pending',this)"    style="display:none"><span class="mi">\u23f3</span>Queue<span class="mob-badge" id="mob-pending-badge"></span></button>
+  <button class="mob-btn" id="mob-adminboard"  onclick="mobGo('adminboard',this)" style="display:none"><span class="mi">\U0001f512</span>Admin</button>
+  <button class="mob-btn" id="mob-settings"    onclick="mobGo('settings',this)"   style="display:none"><span class="mi">\u2699\ufe0f</span>Settings</button>
 </nav>
-
-<!-- CHAT FAB -->
-<button class="chat-fab" onclick="toggleChat()">💬<span class="chat-fab-badge" id="chat-fab-badge"></span></button>
+<button class="chat-fab" onclick="toggleChat()">\U0001f4ac<span class="chat-fab-badge" id="chat-fab-badge"></span></button>
 <div class="chat-panel" id="chat-panel">
-  <div class="chat-head"><span class="chat-head-title">💬 Group Chat</span><div class="chat-head-btns"><button class="chat-head-btn" onclick="loadChat()">↻</button><button class="chat-head-btn" onclick="toggleChat()">✕</button></div></div>
+  <div class="chat-head"><span class="chat-head-title">\U0001f4ac Group Chat</span><div class="chat-head-btns"><button class="chat-head-btn" onclick="loadChat()">\u21bb</button><button class="chat-head-btn" onclick="toggleChat()">\u2715</button></div></div>
   <div class="chat-msgs" id="chat-msgs"><p class="chat-empty-msg">Loading...</p></div>
-  <div class="chat-input-row"><input type="text" id="chat-input" placeholder="Type a message..." maxlength="300"/><button class="chat-send" onclick="sendMsg()">➤</button></div>
-  <div class="chat-footer-note">Auto-refreshes every 15s · <button onclick="loadChat()">refresh now</button></div>
+  <div class="chat-input-row"><input type="text" id="chat-input" placeholder="Type a message..." maxlength="300"/><button class="chat-send" onclick="sendMsg()">\u27a4</button></div>
+  <div class="chat-footer-note">Auto-refreshes every 15s \u00b7 <button onclick="loadChat()">refresh now</button></div>
 </div>
-
 <script>
-const BIN_ID  = '6a25d3bcf5f4af5e29c7e9a1';
-const API_KEY = '$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
-const BIN_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
-let PASSWORDS = { owner:'20140314', admin:'382790', mod:'23889' };
-
-// ── ACCOUNT: read from localStorage so it persists across sessions ──
-let rank     = localStorage.getItem('rank')    || 'public';
-let username = localStorage.getItem('username') || '';
-
-const TAG = {
-  tip:    {label:'💡 tip',    bg:'var(--tag-tip-bg)',    color:'var(--tag-tip-txt)',    accent:'#4a8a1a'},
-  food:   {label:'🍜 food',   bg:'var(--tag-food-bg)',   color:'var(--tag-food-txt)',   accent:'#c8602a'},
-  life:   {label:'✌️ life',   bg:'var(--tag-life-bg)',   color:'var(--tag-life-txt)',   accent:'#2a60c8'},
-  tech:   {label:'⚡ tech',   bg:'var(--tag-tech-bg)',   color:'var(--tag-tech-txt)',   accent:'#7a2ac8'},
-  random: {label:'🎲 random', bg:'var(--tag-random-bg)', color:'var(--tag-random-txt)', accent:'#c82a4a'},
+const BIN_ID='6a25d3bcf5f4af5e29c7e9a1';
+const API_KEY='$2a$10$g2w/Ji/OAOdsFUPYJt3SNOrEKqe74g.CKnZ2s7tIJpVFpezCM3UjO';
+const BIN_URL='https://api.jsonbin.io/v3/b/'+BIN_ID;
+let PASSWORDS={owner:'20140314',admin:'382790',mod:'23889'};
+let rank=localStorage.getItem('rank')||'public';
+let username=localStorage.getItem('username')||'';
+const TAG={
+  tip:   {label:'\U0001f4a1 tip',   bg:'var(--tag-tip-bg)',   color:'var(--tag-tip-txt)',   accent:'#4a8a1a'},
+  food:  {label:'\U0001f35c food',  bg:'var(--tag-food-bg)',  color:'var(--tag-food-txt)',  accent:'#c8602a'},
+  life:  {label:'\u270c\ufe0f life', bg:'var(--tag-life-bg)',  color:'var(--tag-life-txt)',  accent:'#2a60c8'},
+  tech:  {label:'\u26a1 tech',  bg:'var(--tag-tech-bg)',  color:'var(--tag-tech-txt)',  accent:'#7a2ac8'},
+  random:{label:'\U0001f3b2 random',bg:'var(--tag-random-bg)',color:'var(--tag-random-txt)',accent:'#c82a4a'},
 };
-
-const SEED={recommended:[{id:'r1',text:'Drink a glass of water first thing in the morning — your body is dehydrated after sleep.',tag:'life',author:'Owner'},{id:'r2',text:'Make your bed every morning. It takes 2 minutes and makes your whole room feel cleaner instantly.',tag:'life',author:'Owner'},{id:'r3',text:'Tell people when you appreciate them. Most people never say it out loud.',tag:'life',author:'Owner'},{id:'r4',text:'When you feel overwhelmed, write down everything on your mind. Getting it out of your head cuts anxiety in half.',tag:'life',author:'Owner'},{id:'r5',text:"Set your alarm 10 minutes earlier than you need to.",tag:'life',author:'Owner'},{id:'r6',text:"If a task takes less than 2 minutes, do it right now.",tag:'life',author:'Owner'},{id:'r7',text:'Take a 10-minute walk outside after lunch.',tag:'life',author:'Owner'},{id:'r8',text:'Add a pinch of salt to your coffee grounds before brewing.',tag:'food',author:'Owner'},{id:'r9',text:'Store fresh herbs in a glass of water in the fridge. They last 2x longer.',tag:'food',author:'Owner'},{id:'r10',text:'Freeze overripe bananas for smoothies and banana bread.',tag:'food',author:'Owner'},{id:'r11',text:'Let your steak rest 5 minutes before cutting.',tag:'food',author:'Owner'},{id:'r12',text:'Pasta water is liquid gold — add a ladle to your sauce.',tag:'food',author:'Owner'},{id:'r13',text:'Toast spices in a dry pan for 30 seconds. It doubles the flavor.',tag:'food',author:'Owner'},{id:'r14',text:'Press Ctrl+Shift+T to reopen a closed browser tab.',tag:'tech',author:'Owner'},{id:'r15',text:'Google anything + "site:reddit.com" for honest real-world opinions.',tag:'tech',author:'Owner'},{id:'r16',text:'Use dark mode everywhere. Saves battery on OLED screens.',tag:'tech',author:'Owner'},{id:'r17',text:'Press Windows+V to open clipboard history.',tag:'tech',author:'Owner'},{id:'r18',text:'Use a password manager. One master password protects everything.',tag:'tech',author:'Owner'},{id:'r19',text:'Ctrl+Z undoes mistakes in almost every app.',tag:'tech',author:'Owner'},{id:'r20',text:'Restart your router by unplugging 30 seconds. Fixes most WiFi issues.',tag:'tech',author:'Owner'},{id:'r21',text:"Flip a coin to notice which outcome you're hoping for.",tag:'random',author:'Owner'},{id:'r22',text:"If you're bored, clean something.",tag:'random',author:'Owner'},{id:'r23',text:'Put your phone on the other side of the room at night.',tag:'random',author:'Owner'},{id:'r24',text:'Keep a notebook by your bed. Best ideas come before sleep.',tag:'random',author:'Owner'},{id:'r25',text:'When you buy something new, get rid of something old.',tag:'random',author:'Owner'},{id:'r26',text:'Say things out loud to remember them better.',tag:'random',author:'Owner'}],
-public:[{id:'p1',text:'Use focus mode on your phone during meals.',tag:'life',author:'Admin'},{id:'p2',text:'Freeze leftover ginger — grates easier from frozen.',tag:'food',author:'Admin'},{id:'p3',text:'Screenshot important confirmation emails.',tag:'tech',author:'Admin'},{id:'p4',text:'Mute group chats you never check instead of leaving them.',tag:'tech',author:'Admin'},{id:'p5',text:'Add garlic last to the pan — it burns fast.',tag:'food',author:'Admin'},{id:'p6',text:'Carry a reusable bag folded in your pocket.',tag:'random',author:'Admin'}]};
-
-let db = {public:[],featured:[],adminboard:[],pending:[],recommended:[],banlist:[],rules:[],members:[],config:{},chat:[],news:[],complaints:[],accounts:[]};
-const SECS = ['recommended','featured','public','news','complaints','pending','adminboard','settings'];
-
+const SEED={recommended:[{id:'r1',text:'Drink a glass of water first thing in the morning.',tag:'life',author:'Owner'},{id:'r2',text:'Make your bed every morning. Takes 2 minutes.',tag:'life',author:'Owner'},{id:'r3',text:'Tell people when you appreciate them.',tag:'life',author:'Owner'},{id:'r4',text:'When overwhelmed, write everything on your mind.',tag:'life',author:'Owner'},{id:'r5',text:'Set your alarm 10 minutes earlier than you need.',tag:'life',author:'Owner'},{id:'r6',text:'If a task takes less than 2 minutes, do it now.',tag:'life',author:'Owner'},{id:'r7',text:'Take a 10-minute walk after lunch.',tag:'life',author:'Owner'},{id:'r8',text:'Add a pinch of salt to coffee grounds before brewing.',tag:'food',author:'Owner'},{id:'r9',text:'Store fresh herbs in a glass of water in the fridge.',tag:'food',author:'Owner'},{id:'r10',text:'Freeze overripe bananas for smoothies.',tag:'food',author:'Owner'},{id:'r11',text:'Let steak rest 5 minutes before cutting.',tag:'food',author:'Owner'},{id:'r12',text:'Pasta water is liquid gold for your sauce.',tag:'food',author:'Owner'},{id:'r13',text:'Toast spices 30 seconds in a dry pan.',tag:'food',author:'Owner'},{id:'r14',text:'Ctrl+Shift+T reopens a closed browser tab.',tag:'tech',author:'Owner'},{id:'r15',text:'Add site:reddit.com to Google for real opinions.',tag:'tech',author:'Owner'},{id:'r16',text:'Use dark mode everywhere to save battery.',tag:'tech',author:'Owner'},{id:'r17',text:'Windows+V opens clipboard history.',tag:'tech',author:'Owner'},{id:'r18',text:'Use a password manager.',tag:'tech',author:'Owner'},{id:'r19',text:'Ctrl+Z undoes mistakes in almost every app.',tag:'tech',author:'Owner'},{id:'r20',text:'Unplug your router 30 seconds to fix WiFi.',tag:'tech',author:'Owner'},{id:'r21',text:'Flip a coin to see which outcome you hope for.',tag:'random',author:'Owner'},{id:'r22',text:"If bored, clean something.",tag:'random',author:'Owner'},{id:'r23',text:'Put phone across the room at night.',tag:'random',author:'Owner'},{id:'r24',text:'Keep a notebook by your bed.',tag:'random',author:'Owner'},{id:'r25',text:'Buy something new, get rid of something old.',tag:'random',author:'Owner'},{id:'r26',text:'Say things out loud to remember them.',tag:'random',author:'Owner'}],
+public:[{id:'p1',text:'Use focus mode during meals.',tag:'life',author:'Admin'},{id:'p2',text:'Freeze ginger — grates easier.',tag:'food',author:'Admin'},{id:'p3',text:'Screenshot important confirmation emails.',tag:'tech',author:'Admin'},{id:'p4',text:'Mute group chats instead of leaving them.',tag:'tech',author:'Admin'},{id:'p5',text:'Add garlic last to the pan.',tag:'food',author:'Admin'},{id:'p6',text:'Carry a reusable bag folded in your pocket.',tag:'random',author:'Admin'}]};
+let db={public:[],featured:[],adminboard:[],pending:[],recommended:[],banlist:[],rules:[],members:[],config:{},chat:[],news:[],complaints:[],accounts:[]};
+const SECS=['recommended','featured','public','news','complaints','mysettings','pending','adminboard','settings'];
 function showSec(id){
   SECS.forEach(s=>{
-    document.getElementById('sec-'+s).classList.remove('visible');
-    const t=document.getElementById('tab-'+s); if(t) t.classList.remove('active');
-    const m=document.getElementById('mob-'+s); if(m) m.classList.remove('active');
+    const p=document.getElementById('sec-'+s);if(p)p.classList.remove('visible');
+    const t=document.getElementById('tab-'+s);if(t)t.classList.remove('active');
+    const m=document.getElementById('mob-'+s);if(m)m.classList.remove('active');
   });
-  document.getElementById('sec-'+id).classList.add('visible');
-  const t=document.getElementById('tab-'+id); if(t) t.classList.add('active');
-  const m=document.getElementById('mob-'+id); if(m) m.classList.add('active');
-  if(id==='settings') populateSettings();
+  const p=document.getElementById('sec-'+id);if(p)p.classList.add('visible');
+  const t=document.getElementById('tab-'+id);if(t)t.classList.add('active');
+  const m=document.getElementById('mob-'+id);if(m)m.classList.add('active');
+  if(id==='settings')populateSettings();
+  if(id==='mysettings')populateMySettings();
 }
 function mobGo(id,btn){showSec(id);}
-
-function doLogout(){
-  // Clear all account data from localStorage
-  localStorage.removeItem('rank');
-  localStorage.removeItem('username');
-  window.location.replace('login.html');
-}
-
+function doLogout(){localStorage.removeItem('rank');localStorage.removeItem('username');window.location.replace('login.html');}
 function applyRankUI(){
-  // Build display label: shows username if set, otherwise rank name
-  const rankIcons = {owner:'👑', admin:'🛡️', mod:'🔧', public:'👤'};
-  const rankNames = {owner:'Owner', admin:'Admin', mod:'Mod', public:'Public'};
-  const icon  = rankIcons[rank] || '👤';
-  const rname = rankNames[rank] || 'Public';
-  const label = username ? `${icon} ${username}` : `${icon} ${rname}`;
-  const classes = {owner:'rank-owner', admin:'rank-admin', mod:'rank-mod', public:'rank-public'};
-  const rd = document.getElementById('rank-display');
-  rd.textContent = label; rd.className = 'rank-badge ' + (classes[rank]||'rank-public');
-
-  const isOwner = rank==='owner';
-  const isAdmin = rank==='owner'||rank==='admin';
-  const isMod   = rank==='owner'||rank==='admin'||rank==='mod';
-
-  // Auto-fill author fields with username
+  const icons={owner:'\U0001f451',admin:'\U0001f6e1\ufe0f',mod:'\U0001f527',public:'\U0001f464'};
+  const names={owner:'Owner',admin:'Admin',mod:'Mod',public:'Public'};
+  const icon=icons[rank]||'\U0001f464';
+  const label=username?icon+' '+username:icon+' '+names[rank];
+  const cls={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
+  const rd=document.getElementById('rank-display');
+  rd.textContent=label;rd.className='rank-badge '+(cls[rank]||'rank-public');
+  const isOwner=rank==='owner',isAdmin=rank==='owner'||rank==='admin',isMod=rank==='owner'||rank==='admin'||rank==='mod';
   if(username){
-    ['rec-author','feat-author','admin-author','news-author'].forEach(id=>{
-      const el=document.getElementById(id); if(el&&!el.value) el.value=username;
-    });
-    const cfName=document.getElementById('cf-name'); if(cfName&&!cfName.value) cfName.value=username;
-    const pubName=document.getElementById('pub-name'); if(pubName&&!pubName.value) pubName.value=username;
+    ['rec-author','feat-author','admin-author','news-author'].forEach(id=>{const el=document.getElementById(id);if(el&&!el.value)el.value=username;});
+    const cf=document.getElementById('cf-name');if(cf&&!cf.value)cf.value=username;
+    const pn=document.getElementById('pub-name');if(pn&&!pn.value)pn.value=username;
   }
-
-  // Show/hide staff tabs
   ['pending','adminboard','settings'].forEach(id=>{
-    const t=document.getElementById('tab-'+id); if(t) t.style.display='none';
-    const m=document.getElementById('mob-'+id); if(m) m.style.display='none';
+    const t=document.getElementById('tab-'+id);if(t)t.style.display='none';
+    const m=document.getElementById('mob-'+id);if(m)m.style.display='none';
   });
-  if(isAdmin){
-    ['tab-pending','tab-adminboard','mob-pending','mob-adminboard'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='';});
-  }
-  if(isOwner){
-    ['tab-settings','mob-settings'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='';});
-  }
-  document.getElementById('rec-form').style.display   = isAdmin ? 'flex'  : 'none';
-  document.getElementById('news-form').style.display  = isAdmin ? 'block' : 'none';
-  document.getElementById('feat-form').style.display  = isMod   ? 'flex'  : 'none';
-  document.getElementById('admin-form').style.display = isAdmin ? 'flex'  : 'none';
-  const crp=document.getElementById('complaints-review-panel'); if(crp) crp.style.display=isAdmin?'block':'none';
-  const vis=document.querySelector('.sec-panel.visible');
-  if(vis){const id=vis.id.replace('sec-','');if((id==='settings'&&!isOwner)||(['pending','adminboard'].includes(id)&&!isAdmin))showSec('recommended');}
+  if(isAdmin){['tab-pending','tab-adminboard','mob-pending','mob-adminboard'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='';});}
+  if(isOwner){['tab-settings','mob-settings'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='';});}
+  document.getElementById('rec-form').style.display=isAdmin?'flex':'none';
+  document.getElementById('news-form').style.display=isAdmin?'block':'none';
+  document.getElementById('feat-form').style.display=isMod?'flex':'none';
+  document.getElementById('admin-form').style.display=isAdmin?'flex':'none';
+  const crp=document.getElementById('complaints-review-panel');if(crp)crp.style.display=isAdmin?'block':'none';
   renderAll();
 }
-
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function setStatus(s,m){document.getElementById('status-dot').className='status-dot '+s;document.getElementById('status-text').textContent=m}
-
 async function loadAll(){
   setStatus('loading','loading...');
   try{
     const res=await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
-    if(!res.ok) throw new Error('HTTP '+res.status);
-    const raw=await res.json(); const data=raw.record!==undefined?raw.record:raw;
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const raw=await res.json();const data=raw.record!==undefined?raw.record:raw;
     db.public     =Array.isArray(data.public)     ?data.public     :[];
     db.featured   =Array.isArray(data.featured)   ?data.featured   :[];
     db.adminboard =Array.isArray(data.adminboard) ?data.adminboard :[];
@@ -683,47 +669,57 @@ async function loadAll(){
     db.accounts   =Array.isArray(data.accounts)   ?data.accounts   :[];
     db.config     =(data.config&&typeof data.config==='object')?data.config:{};
     if(db.config.passwords){
-      if(db.config.passwords.owner) PASSWORDS.owner=db.config.passwords.owner;
-      if(db.config.passwords.admin) PASSWORDS.admin=db.config.passwords.admin;
-      if(db.config.passwords.mod)   PASSWORDS.mod  =db.config.passwords.mod;
+      if(db.config.passwords.owner)PASSWORDS.owner=db.config.passwords.owner;
+      if(db.config.passwords.admin)PASSWORDS.admin=db.config.passwords.admin;
+      if(db.config.passwords.mod)  PASSWORDS.mod  =db.config.passwords.mod;
     }
     applyConfig(db.config);
     let dirty=false;
     if(!db.recommended.length){db.recommended=SEED.recommended;dirty=true;}
     if(!db.public.length)     {db.public=SEED.public;dirty=true;}
-    if(dirty) await saveAll();
+    if(dirty)await saveAll();
     const pc=db.pending.length;
     const pct=document.getElementById('pending-ct');if(pct){pct.textContent=pc>0?pc:'';pct.style.display=pc>0?'inline':'none';}
     const mpb=document.getElementById('mob-pending-badge');if(mpb){mpb.textContent=pc>0?pc:'';mpb.classList.toggle('show',pc>0);}
-    setStatus('ok','loaded ✓');
+    setStatus('ok','loaded \u2713');
     applyRankUI();
     checkForUpdates();
-  }catch(e){console.error(e);setStatus('error','could not load — '+e.message);}
+  }catch(e){console.error(e);setStatus('error','could not load \u2014 '+e.message);}
 }
-
 async function saveAll(){
   const res=await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});
-  if(!res.ok) throw new Error('HTTP '+res.status);
+  if(!res.ok)throw new Error('HTTP '+res.status);
 }
-
 function applyConfig(cfg){
-  if(!cfg) return;
-  if(cfg.title){document.getElementById('site-title-el').innerHTML=cfg.title;document.title=cfg.title.replace(/<[^>]*>/g,'')+' ✦';}
-  if(cfg.subtitle) document.getElementById('site-subtitle-el').textContent=cfg.subtitle;
-  if(cfg.accent)   document.documentElement.style.setProperty('--accent',cfg.accent);
-  if(cfg.bg)       document.documentElement.style.setProperty('--bg',cfg.bg);
+  if(!cfg)return;
+  if(cfg.title){document.getElementById('site-title-el').innerHTML=cfg.title;document.title=cfg.title.replace(/<[^>]*>/g,'')+' \u2726';}
+  if(cfg.subtitle)document.getElementById('site-subtitle-el').textContent=cfg.subtitle;
+  if(cfg.accent)document.documentElement.style.setProperty('--accent',cfg.accent);
+  if(cfg.bg){
+    // Only apply site bg if user hasn't set personal bg
+    if(!localStorage.getItem('user_bg'))document.documentElement.style.setProperty('--bg',cfg.bg);
+  }
   if(cfg.welcome){let w=document.getElementById('welcome-msg');if(!w){w=document.createElement('p');w.id='welcome-msg';w.style.cssText='font-size:0.9rem;color:var(--muted);margin-top:0.35rem;line-height:1.6';document.getElementById('site-subtitle-el').after(w);}w.textContent=cfg.welcome;}
   if(cfg.announcement&&cfg.announcement.show==='yes'&&cfg.announcement.text){const bar=document.getElementById('ann-bar');document.getElementById('ann-txt').textContent=cfg.announcement.text;if(cfg.announcement.color)bar.style.background=cfg.announcement.color;bar.classList.add('show');}
+  if(Array.isArray(cfg.customBlocks)&&cfg.customBlocks.length)renderCustomBlocks(cfg.customBlocks);
 }
-
+function renderCustomBlocks(blocks){
+  // Show custom blocks at bottom of recommended section
+  let wrap=document.getElementById('custom-blocks-display');
+  if(!wrap){wrap=document.createElement('div');wrap.id='custom-blocks-display';document.getElementById('recommended-grid').after(wrap);}
+  wrap.innerHTML=blocks.map(b=>{
+    if(b.type==='button')return `<div class="custom-block"><a class="custom-block-btn" href="${esc(b.url||'#')}" target="_blank">${esc(b.content)}</a></div>`;
+    return `<div class="custom-block"><p class="custom-block-text">${esc(b.content)}</p></div>`;
+  }).join('');
+}
 function renderGrid(gridId,tips,canDel,isPending,isRec){
   const grid=document.getElementById(gridId);
   if(!tips||!tips.length){grid.innerHTML='<p class="empty">Nothing here yet.</p>';return;}
   const isAdmin=rank==='owner'||rank==='admin',isMod=rank==='owner'||rank==='admin'||rank==='mod';
   grid.innerHTML=tips.map(t=>{
     const cfg=TAG[t.tag]||TAG.tip;const acts=[];
-    if(isPending&&isAdmin){acts.push(`<button class="action-btn approve-btn" onclick="approveTip('${t.id}')">✓ Approve</button>`);acts.push(`<button class="action-btn deny-btn" onclick="denyTip('${t.id}')">✕ Deny</button>`);}
-    else if(canDel){acts.push(`<button class="action-btn del-btn" onclick="deleteTip('${gridId}','${t.id}')">✕</button>`);}
+    if(isPending&&isAdmin){acts.push(`<button class="action-btn approve-btn" onclick="approveTip('${t.id}')">\u2713 Approve</button>`);acts.push(`<button class="action-btn deny-btn" onclick="denyTip('${t.id}')">\u2715 Deny</button>`);}
+    else if(canDel){acts.push(`<button class="action-btn del-btn" onclick="deleteTip('${gridId}','${t.id}')">\u2715</button>`);}
     const cc=isRec?'rec-card':'tip-card';const sa=isRec?'':` style="--card-accent:${cfg.accent}"`;
     return `<article class="${cc}"${sa}><span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span><p class="tip-text">${esc(t.text)}</p><div class="tip-footer"><span class="tip-author">${esc(t.author)}</span><div class="tip-actions">${acts.join('')}</div></div></article>`;
   }).join('');
@@ -737,5 +733,179 @@ function renderAll(){
   renderGrid('pending-grid',db.pending,false,true,false);
   renderNews();renderComplaints();updateComplaintBadge();
 }
+async function submitPublic(){const text=document.getElementById('pub-text').value.trim();const auth=document.getElementById('pub-name').value.trim()||username||'anon';const tag=document.getElementById('pub-tag').value;if(!text){document.getElementById('pub-text').focus();return;}setStatus('loading','submitting...');try{db.pending.unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById('pub-text').value='';setStatus('ok','submitted \u2713');}catch(e){db.pending.shift();setStatus('error','could not submit \u2014 '+e.message);}}
+async function staffPost(section){const map={recommended:['rec-text','rec-author','rec-tag'],featured:['feat-text','feat-author','feat-tag'],adminboard:['admin-text','admin-author','admin-tag']};const [ti,ai,gi]=map[section];const text=document.getElementById(ti).value.trim();const auth=document.getElementById(ai).value.trim()||username||'Staff';const tag=document.getElementById(gi).value;if(!text){document.getElementById(ti).focus();return;}setStatus('loading','posting...');try{db[section].unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById(ti).value='';setStatus('ok','posted \u2713');renderAll();}catch(e){db[section].shift();setStatus('error','could not post \u2014 '+e.message);}}
+async function approveTip(id){const tip=db.pending.find(t=>t.id==id);if(!tip)return;setStatus('loading','approving...');try{db.pending=db.pending.filter(t=>t.id!=id);db.public.unshift({...tip,pending:false});await saveAll();setStatus('ok','approved \u2713');renderAll();}catch(e){setStatus('error','could not approve \u2014 '+e.message);}}
+async function denyTip(id){if(!confirm('Deny and delete?'))return;setStatus('loading','denying...');try{db.pending=db.pending.filter(t=>t.id!=id);await saveAll();setStatus('ok','denied \u2713');renderAll();}catch(e){setStatus('error','could not deny \u2014 '+e.message);}}
+async function deleteTip(gridId,id){if(!confirm('Delete this tip?'))return;const sec=gridId.replace('-grid','');const prev=[...db[sec]];db[sec]=db[sec].filter(t=>t.id!=id);renderAll();try{await saveAll();setStatus('ok','deleted \u2713');}catch(e){db[sec]=prev;setStatus('error','could not delete \u2014 '+e.message);renderAll();}}
+/* SETTINGS */
+function populateSettings(){
+  const cfg=db.config||{};
+  document.getElementById('set-title').value=(cfg.title||'').replace(/<[^>]*>/g,'').replace('&amp;','&');
+  document.getElementById('set-subtitle').value=cfg.subtitle||'';
+  const acc=cfg.accent||'#c8602a';document.getElementById('set-accent').value=acc;document.getElementById('accent-sw').style.background=acc;
+  const bg=cfg.bg||'#f5f2eb';document.getElementById('set-bg').value=bg;document.getElementById('bg-sw').style.background=bg;
+  document.getElementById('set-rules').value=Array.isArray(db.rules)?db.rules.join('\n'):'';
+  document.getElementById('set-welcome').value=cfg.welcome||'';
+  const ann=cfg.announcement||{};document.getElementById('set-ann-text').value=ann.text||'';document.getElementById('set-ann-show').value=ann.show||'no';
+  const ac=ann.color||'#c8602a';document.getElementById('set-ann-color').value=ac;document.getElementById('ann-swatch').style.background=ac;
+  const sv=document.getElementById('set-version');const sc=document.getElementById('set-changelog');
+  if(sv)sv.value=cfg.version||'';if(sc)sc.value=cfg.changelog||'';
+  renderCustomBlocksList();updateAnnPreview();renderMemberList();
+}
+/* CUSTOM BLOCKS */
+function renderCustomBlocksList(){
+  const blocks=(db.config&&Array.isArray(db.config.customBlocks))?db.config.customBlocks:[];
+  const list=document.getElementById('custom-blocks-list');
+  if(!blocks.length){list.innerHTML='<p style="font-size:0.8rem;color:var(--muted);margin-bottom:8px">No custom blocks added yet.</p>';return;}
+  list.innerHTML=blocks.map((b,i)=>`<div class="settings-card" style="margin-bottom:8px;padding:0">
+    <div style="padding:0.6rem 1rem;display:flex;align-items:center;gap:8px;background:var(--bg);border-bottom:1px solid var(--border)">
+      <span style="font-size:0.8rem;font-weight:500">${b.type==='button'?'\U0001f517 Button':'\U0001f4dd Text'}: ${esc((b.content||'').slice(0,40))}${(b.content||'').length>40?'...':''}</span>
+      <button class="save-btn danger" style="height:28px;padding:0 10px;font-size:0.72rem;margin-left:auto" onclick="removeCustomBlock(${i})">Remove</button>
+    </div>
+  </div>`).join('');
+}
+document.getElementById('new-block-type').addEventListener('change',function(){
+  document.getElementById('new-block-url').style.display=this.value==='button'?'block':'none';
+});
+function addCustomBlock(){
+  if(!db.config)db.config={};
+  if(!Array.isArray(db.config.customBlocks))db.config.customBlocks=[];
+  const type=document.getElementById('new-block-type').value;
+  const content=document.getElementById('new-block-content').value.trim();
+  const url=document.getElementById('new-block-url').value.trim();
+  if(!content){document.getElementById('new-block-content').focus();return;}
+  db.config.customBlocks.push({id:Date.now(),type,content,url});
+  document.getElementById('new-block-content').value='';
+  document.getElementById('new-block-url').value='';
+  renderCustomBlocksList();
+  toast('toast-custom','\u2795 Block added \u2014 click \u201cSave All Blocks\u201d to publish.');
+}
+function removeCustomBlock(i){
+  if(!db.config||!Array.isArray(db.config.customBlocks))return;
+  db.config.customBlocks.splice(i,1);
+  renderCustomBlocksList();
+}
+async function saveCustomBlocks(){
+  try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved \u2713');toast('toast-custom','\u2713 Blocks saved!');}
+  catch(e){toast('toast-custom','\u2715 '+e.message,true);}
+}
+/* MY PERSONAL SETTINGS */
+function populateMySettings(){
+  const bg=localStorage.getItem('user_bg')||'#f5f2eb';
+  const ac=localStorage.getItem('user_accent')||'#c8602a';
+  document.getElementById('my-bg').value=bg;document.getElementById('my-bg-swatch').style.background=bg;
+  document.getElementById('my-accent').value=ac;document.getElementById('my-accent-swatch').style.background=ac;
+  document.getElementById('my-displayname').value=username||'';
+}
+function previewMyColor(type,val){
+  if(type==='bg'){document.getElementById('my-bg-swatch').style.background=val;document.documentElement.style.setProperty('--bg',val);}
+  if(type==='accent'){document.getElementById('my-accent-swatch').style.background=val;document.documentElement.style.setProperty('--accent',val);}
+}
+function saveMyColors(){
+  const bg=document.getElementById('my-bg').value;
+  const ac=document.getElementById('my-accent').value;
+  localStorage.setItem('user_bg',bg);localStorage.setItem('user_accent',ac);
+  document.documentElement.style.setProperty('--bg',bg);
+  document.documentElement.style.setProperty('--accent',ac);
+  toastS('toast-mycolors','\u2713 Colors applied!');
+}
+function resetMyColors(){
+  localStorage.removeItem('user_bg');localStorage.removeItem('user_accent');
+  const siteBg=(db.config&&db.config.bg)||'#f5f2eb';
+  const siteAc=(db.config&&db.config.accent)||'#c8602a';
+  document.documentElement.style.setProperty('--bg',siteBg);
+  document.documentElement.style.setProperty('--accent',siteAc);
+  document.getElementById('my-bg').value=siteBg;document.getElementById('my-bg-swatch').style.background=siteBg;
+  document.getElementById('my-accent').value=siteAc;document.getElementById('my-accent-swatch').style.background=siteAc;
+  toastS('toast-mycolors','\u21bb Reset to site defaults');
+}
+function saveMyName(){
+  const name=document.getElementById('my-displayname').value.trim();
+  if(!name){document.getElementById('my-displayname').focus();return;}
+  username=name;localStorage.setItem('username',name);
+  applyRankUI();toastS('toast-myname','\u2713 Name updated!');
+}
+function toastS(id,msg,err){const el=document.getElementById(id);if(!el)return;el.textContent=msg;el.className='settings-toast show'+(err?' error':'');setTimeout(()=>el.className='settings-toast',3000);}
+/* REST OF SETTINGS */
+function updateAnnPreview(){const t=document.getElementById('set-ann-text').value;const c=document.getElementById('set-ann-color').value;document.getElementById('ann-swatch').style.background=c;const w=document.getElementById('ann-preview-wrap'),p=document.getElementById('ann-preview');if(t){w.style.display='block';p.textContent=t;p.style.background=c;}else w.style.display='none';}
+document.getElementById('set-ann-text').addEventListener('input',updateAnnPreview);
+function renderMemberList(){const list=document.getElementById('member-list');if(!db.members||!db.members.length){list.innerHTML='<p style="font-size:0.8rem;color:var(--muted)">No staff added yet.</p>';return;}const rl={owner:'\U0001f451 Owner',admin:'\U0001f6e1\ufe0f Admin',mod:'\U0001f527 Mod'},rc={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod'};list.innerHTML=db.members.map((m,i)=>`<div class="member-row"><span class="member-name">${esc(m.name)}</span><span class="rank-badge ${rc[m.rank]||'rank-public'}">${rl[m.rank]||m.rank}</span><button class="member-del" onclick="removeMember(${i})">\u2715</button></div>`).join('');}
+function addMember(){const n=document.getElementById('new-member-name').value.trim();const r=document.getElementById('new-member-rank').value;if(!n){document.getElementById('new-member-name').focus();return;}db.members.push({name:n,rank:r});document.getElementById('new-member-name').value='';renderMemberList();}
+function removeMember(i){db.members.splice(i,1);renderMemberList();}
+function toast(id,msg,err){const el=document.getElementById(id);if(!el)return;el.textContent=msg;el.className='settings-toast show'+(err?' error':'');setTimeout(()=>el.className='settings-toast',3000);}
+async function saveAnn(){if(!db.config)db.config={};db.config.announcement={text:document.getElementById('set-ann-text').value.trim(),show:document.getElementById('set-ann-show').value,color:document.getElementById('set-ann-color').value};try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved \u2713');toast('toast-ann','\u2713 Saved!');}catch(e){toast('toast-ann','\u2715 '+e.message,true);}}
+async function saveAppearance(){if(!db.config)db.config={};db.config.title=esc(document.getElementById('set-title').value.trim()||'tips & stuff');db.config.subtitle=document.getElementById('set-subtitle').value.trim();db.config.accent=document.getElementById('set-accent').value;db.config.bg=document.getElementById('set-bg').value;try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved \u2713');toast('toast-appearance','\u2713 Saved!');}catch(e){toast('toast-appearance','\u2715 '+e.message,true);}}
+async function savePasswords(){if(!db.config)db.config={};if(!db.config.passwords)db.config.passwords={};const o=document.getElementById('set-pw-owner').value,a=document.getElementById('set-pw-admin').value,m=document.getElementById('set-pw-mod').value;if(o){db.config.passwords.owner=o;PASSWORDS.owner=o;}if(a){db.config.passwords.admin=a;PASSWORDS.admin=a;}if(m){db.config.passwords.mod=m;PASSWORDS.mod=m;}try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved \u2713');['set-pw-owner','set-pw-admin','set-pw-mod'].forEach(id=>document.getElementById(id).value='');toast('toast-passwords','\u2713 Updated!');}catch(e){toast('toast-passwords','\u2715 '+e.message,true);}}
+async function saveMembers(){try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved \u2713');toast('toast-members','\u2713 Saved!');}catch(e){toast('toast-members','\u2715 '+e.message,true);}}
+async function saveRules(){db.rules=document.getElementById('set-rules').value.split('\n').map(r=>r.trim()).filter(Boolean);try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved \u2713');toast('toast-rules','\u2713 Rules saved!');}catch(e){toast('toast-rules','\u2715 '+e.message,true);}}
+async function saveWelcome(){if(!db.config)db.config={};db.config.welcome=document.getElementById('set-welcome').value.trim();try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved \u2713');toast('toast-welcome','\u2713 Saved!');}catch(e){toast('toast-welcome','\u2715 '+e.message,true);}}
+async function dangerClear(sec){if(!confirm('Permanently delete ALL '+sec+' tips?'))return;db[sec]=[];try{setStatus('loading','clearing...');await saveAll();setStatus('ok','cleared \u2713');renderAll();}catch(e){setStatus('error','failed: '+e.message);}}
+/* NEWS */
+const NEWS_CATS={update:{label:'\U0001f4e3 Update',bg:'#e0eaf8',color:'#1a3d6b',accent:'#2a60c8'},announcement:{label:'\U0001f389 Announcement',bg:'#e8f0e0',color:'#2d5016',accent:'#4a8a1a'},warning:{label:'\u26a0\ufe0f Warning',bg:'#fdecd6',color:'#7a3a0a',accent:'#c8602a'},event:{label:'\U0001f4c5 Event',bg:'#ece0f8',color:'#4a1f7a',accent:'#7a2ac8'},other:{label:'\U0001f4ac Other',bg:'#fce8ec',color:'#7a1a2e',accent:'#c82a4a'}};
+function renderNews(){const list=document.getElementById('news-list');const isAdmin=rank==='owner'||rank==='admin';const news=db.news||[];if(!news.length){list.innerHTML='<p class="empty">No news posted yet.</p>';return;}list.innerHTML=news.map(n=>{const cat=NEWS_CATS[n.cat]||NEWS_CATS.other;const date=n.ts?new Date(n.ts).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}):'';const delBtn=isAdmin?`<button class="news-del-btn show" onclick="deleteNews('${n.id}')">\u2715 delete</button>`:'';return `<div class="news-card" style="--news-color:${cat.accent}"><div class="news-card-accent"></div><div class="news-card-body"><div class="news-card-top"><span class="news-cat-badge" style="background:${cat.bg};color:${cat.color}">${cat.label}</span><span class="news-date">${date}</span><span class="news-author-tag">by ${esc(n.author||'Staff')}</span></div><div class="news-headline">${esc(n.title)}</div><div class="news-text">${esc(n.body)}</div>${delBtn}</div></div>`;}).join('');}
+async function postNews(){const title=document.getElementById('news-title').value.trim();const body=document.getElementById('news-body').value.trim();const cat=document.getElementById('news-cat').value;const author=document.getElementById('news-author').value.trim()||username||'Staff';if(!title||!body){return;}setStatus('loading','publishing...');try{db.news.unshift({id:Date.now(),title,body,cat,author,ts:Date.now()});await saveAll();document.getElementById('news-title').value='';document.getElementById('news-body').value='';setStatus('ok','published \u2713');renderNews();}catch(e){db.news.shift();setStatus('error','could not publish \u2014 '+e.message);}}
+async function deleteNews(id){if(!confirm('Delete?'))return;const prev=[...db.news];db.news=db.news.filter(n=>n.id!=id);renderNews();try{await saveAll();setStatus('ok','deleted \u2713');}catch(e){db.news=prev;renderNews();}}
+/* COMPLAINTS */
+const COMPLAINT_TYPES={behavior:{label:'\U0001f620 Behavior',bg:'#fce8ec',color:'#7a1a2e'},spam:{label:'\U0001f6ab Spam',bg:'#fdecd6',color:'#7a3a0a'},inappropriate:{label:'\u26a0\ufe0f Inappropriate',bg:'#fdecd6',color:'#7a3a0a'},bug:{label:'\U0001f41b Bug / Issue',bg:'#e0eaf8',color:'#1a3d6b'},suggestion:{label:'\U0001f4a1 Suggestion',bg:'#e8f0e0',color:'#2d5016'},other:{label:'\U0001f4ac Other',bg:'#ece0f8',color:'#4a1f7a'}};
+function cfToast(msg,err){const el=document.getElementById('cf-toast');el.textContent=msg;el.className='cf-toast show'+(err?' error':'');setTimeout(()=>el.className='cf-toast',3500);}
+function updateComplaintBadge(){const open=(db.complaints||[]).filter(c=>c.status==='open').length;const ct=document.getElementById('complaint-ct');const mb=document.getElementById('mob-complaint-badge');if(ct){ct.textContent=open>0?open:'';ct.style.display=open>0?'inline':'none';}if(mb){mb.textContent=open>0?open:'';mb.classList.toggle('show',open>0);}}
+function renderComplaints(){const list=document.getElementById('complaints-list');const filter=document.getElementById('complaint-filter')?.value||'all';const isAdmin=rank==='owner'||rank==='admin';if(!isAdmin){list.innerHTML='<p class="empty">Staff only.</p>';return;}const all=db.complaints||[];const filtered=filter==='all'?all:all.filter(c=>c.status===filter);if(!filtered.length){list.innerHTML=`<p class="empty">No ${filter!=='all'?filter:''} complaints.</p>`;return;}list.innerHTML=filtered.map(c=>{const ct=COMPLAINT_TYPES[c.type]||COMPLAINT_TYPES.other;const date=c.ts?new Date(c.ts).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}):'—';const isOpen=c.status!=='resolved';const stCls=isOpen?'complaint-status-open':'complaint-status-resolved';const stLabel=isOpen?'\U0001f534 Open':'\u2705 Resolved';const actions=isOpen?`<button class="complaint-resolve-btn" onclick="resolveComplaint('${c.id}')">\u2705 Resolved</button>`:`<button class="complaint-reopen-btn" onclick="reopenComplaint('${c.id}')">\U0001f534 Reopen</button>`;return `<div class="complaint-card${isOpen?'':' is-resolved'}"><div class="complaint-card-top"><span class="complaint-name">${esc(c.name||'Anonymous')}</span><span class="complaint-type-badge" style="background:${ct.bg};color:${ct.color}">${ct.label}</span><span class="complaint-status-badge ${stCls}">${stLabel}</span><span class="complaint-date">${date}</span></div><p class="complaint-text">${esc(c.text)}</p><div class="complaint-actions">${actions}<button class="complaint-del-btn" onclick="deleteComplaint('${c.id}')">\u2715 Delete</button></div></div>`;}).join('');}
+async function submitComplaint(){const name=document.getElementById('cf-name').value.trim()||username||'';const type=document.getElementById('cf-type').value;const text=document.getElementById('cf-text').value.trim();if(!name){document.getElementById('cf-name').focus();cfToast('Please enter your name.',true);return;}if(!text){document.getElementById('cf-text').focus();cfToast('Please describe your complaint.',true);return;}cfToast('Submitting...');try{db.complaints.unshift({id:Date.now(),name,type,text,status:'open',ts:Date.now()});await saveAll();document.getElementById('cf-text').value='';cfToast('\u2713 Submitted!');updateComplaintBadge();}catch(e){db.complaints.shift();cfToast('\u2715 Could not submit.',true);}}
+async function resolveComplaint(id){const c=db.complaints.find(c=>String(c.id)===String(id));if(!c)return;c.status='resolved';try{await saveAll();renderComplaints();updateComplaintBadge();}catch(e){c.status='open';}}
+async function reopenComplaint(id){const c=db.complaints.find(c=>String(c.id)===String(id));if(!c)return;c.status='open';try{await saveAll();renderComplaints();updateComplaintBadge();}catch(e){c.status='resolved';}}
+async function deleteComplaint(id){if(!confirm('Delete?'))return;const prev=[...db.complaints];db.complaints=db.complaints.filter(c=>String(c.id)!==String(id));renderComplaints();updateComplaintBadge();try{await saveAll();}catch(e){db.complaints=prev;renderComplaints();}}
+/* CHAT */
+let chatOpen=false,chatTimer=null,chatLastCount=0;
+function toggleChat(){
+  chatOpen=!chatOpen;
+  document.getElementById('chat-panel').classList.toggle('open',chatOpen);
+  if(chatOpen){document.getElementById('chat-fab-badge').classList.remove('show');loadChat();if(!chatTimer)chatTimer=setInterval(loadChat,15000);setTimeout(()=>document.getElementById('chat-input').focus(),100);}
+  else{clearInterval(chatTimer);chatTimer=null;}
+}
+async function loadChat(){try{const res=await fetch(BIN_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});if(!res.ok)return;const raw=await res.json();const data=raw.record!==undefined?raw.record:raw;db.chat=Array.isArray(data.chat)?data.chat:[];if(!chatOpen&&db.chat.length>chatLastCount&&chatLastCount>0){const n=db.chat.length-chatLastCount;const b=document.getElementById('chat-fab-badge');b.textContent=n>9?'9+':n;b.classList.add('show');}chatLastCount=db.chat.length;renderChat();}catch(e){}}
+function renderChat(){
+  const box=document.getElementById('chat-msgs');const msgs=db.chat||[];const isAdmin=rank==='owner'||rank==='admin';
+  if(!msgs.length){box.innerHTML='<p class="chat-empty-msg">No messages yet \u2014 say hi! \U0001f44b</p>';return;}
+  const wasBottom=box.scrollHeight-box.scrollTop-box.clientHeight<60;
+  const RM={owner:{lbl:'Owner',cls:'rank-owner is-owner'},admin:{lbl:'Admin',cls:'rank-admin is-admin'},mod:{lbl:'Mod',cls:'rank-mod is-mod'}};
+  box.innerHTML=msgs.map(m=>{const rm=RM[m.rank];const nc=rm?'chat-msg-name is-'+m.rank:'chat-msg-name';const rb=rm?`<span class="chat-msg-rbadge ${rm.cls}">${rm.lbl}</span>`:'';const db_btn=isAdmin?`<button class="chat-msg-del show" onclick="deleteMsg('${m.id}')">\u2715</button>`:'';const t=m.ts?new Date(m.ts).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'';return `<div class="chat-msg"><div class="chat-msg-top"><span class="${nc}">${esc(m.name)}</span>${rb}<span class="chat-msg-time">${t}</span>${db_btn}</div><div class="chat-msg-body">${esc(m.text)}</div></div>`;}).join('');
+  if(wasBottom)box.scrollTop=box.scrollHeight;
+}
+async function sendMsg(){
+  const name=username||'Anonymous';const input=document.getElementById('chat-input');const text=input.value.trim();if(!text){input.focus();return;}
+  const msg={id:Date.now(),name,text,ts:Date.now(),rank:rank!=='public'?rank:null};
+  db.chat.push(msg);if(db.chat.length>200)db.chat=db.chat.slice(-200);
+  input.value='';renderChat();document.getElementById('chat-msgs').scrollTop=999999;
+  try{await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});}catch(e){}
+}
+async function deleteMsg(id){db.chat=db.chat.filter(m=>m.id!=id);renderChat();try{await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});}catch(e){}}
+document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();});
+/* LANGUAGE */
+const LANGS={
+  en:{sub:'a shared board for tips, tricks, and random gems \u2726'},
+  es:{sub:'un tablero compartido de tips, trucos y curiosidades \u2726'},
+  fr:{sub:'un tableau partag\u00e9 de conseils, astuces et curiosit\u00e9s \u2726'},
+  pt:{sub:'um quadro compartilhado de dicas, truques e curiosidades \u2726'},
+  ja:{sub:'\u30d2\u30f3\u30c8\u3001\u30b3\u30c4\u3001\u8c46\u77e5\u8b58\u3092\u5171\u6709\u3059\u308b\u30dc\u30fc\u30c9 \u2726'},
+};
+let lang=localStorage.getItem('lang')||'en';
+function setLang(l){lang=l;localStorage.setItem('lang',l);document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));const sub=document.getElementById('site-subtitle-el');if(sub&&LANGS[l]&&!(db.config&&db.config.subtitle))sub.textContent=LANGS[l].sub;}
+(function(){document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));})();
+/* UPDATE SYSTEM */
+function checkForUpdates(){const cfg=db.config||{};const v=cfg.version||'';if(!v)return;const seen=localStorage.getItem('site_version_seen')||'';if(seen!==v){document.getElementById('update-bar-version').textContent=v;document.getElementById('update-bar').classList.add('show');}}
+function startUpdate(){document.getElementById('update-bar').classList.remove('show');const overlay=document.getElementById('update-overlay');overlay.classList.add('show');let secs=10;const ring=document.getElementById('update-ring');const num=document.getElementById('update-num');const prog=document.getElementById('update-prog');requestAnimationFrame(()=>{prog.style.transition='width 10s linear';prog.style.width='100%';});const tick=setInterval(()=>{secs--;num.textContent=secs;ring.style.strokeDashoffset=125.6*(secs/10);if(secs<=0){clearInterval(tick);overlay.classList.remove('show');showWhatsNew();}},1000);}
+function showWhatsNew(){const cfg=db.config||{};document.getElementById('whats-new-ver').textContent=cfg.version||'Latest';document.getElementById('whats-new-body').textContent=cfg.changelog||'No changelog.';document.getElementById('whats-new-overlay').classList.add('show');}
+function dismissUpdate(){const ver=(db.config||{}).version||'';localStorage.setItem('site_version_seen',ver);document.getElementById('whats-new-overlay').classList.remove('show');}
+async function saveVersion(){if(!db.config)db.config={};db.config.version=document.getElementById('set-version').value.trim();db.config.changelog=document.getElementById('set-changelog').value.trim();try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved \u2713');toast('toast-version','\u2713 Version pushed!');}catch(e){toast('toast-version','\u2715 '+e.message,true);}}
+/* INIT */
+applyRankUI();
+loadAll();
+</script>
+</body>
+</html>"""
 
-async function submitPublic(){const text=document.getElementById('pub-text').value.trim();const auth=document.getElementById('pub-name').value.trim()||username||'anon';const tag=document.getElementById('pub-tag'
+with open('/mnt/user-data/outputs/tips-site/index.html', 'w', encoding='utf-8') as f:
+    f.write(doc2)
+size = len(doc2.encode('utf-8'))
+print(f"index.html written: {size} bytes")
