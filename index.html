@@ -70,7 +70,7 @@
     .section-lock{font-size:0.72rem;color:var(--muted)}
     .rec-grid,.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
     .rec-card{background:linear-gradient(135deg,#fffbf0,#fff8e8);border:1px solid rgba(200,96,42,0.22);border-radius:12px;padding:0.9rem 1rem;display:flex;flex-direction:column;gap:8px;animation:rise 0.2s ease both;position:relative;overflow:hidden}
-    .rec-card::before{content:'°5';position:absolute;top:8px;right:9px;font-size:0.65rem;opacity:0.45}
+    .rec-card::before{content:'⭐';position:absolute;top:8px;right:9px;font-size:0.65rem;opacity:0.45}
     .rec-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);border-radius:12px 12px 0 0}
     .tip-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1rem;display:flex;flex-direction:column;gap:8px;animation:rise 0.2s ease both;position:relative;overflow:hidden}
     .tip-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-accent,transparent);border-radius:12px 12px 0 0}
@@ -185,17 +185,14 @@
     .color-row{display:flex;align-items:center;gap:10px}
     .color-swatch{width:32px;height:32px;border-radius:6px;border:1px solid var(--border-strong);flex-shrink:0}
     .ann-preview{border-radius:8px;padding:8px 14px;font-size:0.82rem;margin-top:4px;font-family:'DM Mono',monospace;color:#fff}
-    /* Custom content blocks */
     .custom-block{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:10px;position:relative}
     .custom-block-del{position:absolute;top:8px;right:10px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:0.75rem;padding:3px 7px;border-radius:5px}
     .custom-block-del:hover{color:#c0392b;background:#fce8ec}
     .custom-block-text{font-size:0.9rem;line-height:1.65;white-space:pre-wrap}
     .custom-block-btn{display:inline-flex;height:38px;padding:0 18px;align-items:center;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;text-decoration:none;transition:background 0.15s;margin-top:6px}
     .custom-block-btn:hover{background:#b5521f}
-    /* My Settings (public personal) */
     .my-settings-wrap{display:flex;flex-direction:column;gap:1.5rem}
     .my-settings-note{font-size:0.8rem;color:var(--muted);padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;line-height:1.5}
-    /* CHAT FAB */
     .chat-fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:50;width:52px;height:52px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:1.4rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.18);transition:transform 0.15s}
     .chat-fab:hover{transform:scale(1.08)}
     .chat-fab-badge{position:absolute;top:-2px;right:-2px;background:#e74c3c;color:#fff;font-size:0.6rem;font-weight:700;min-width:16px;height:16px;border-radius:99px;display:none;align-items:center;justify-content:center;padding:0 3px;border:2px solid var(--bg)}
@@ -273,7 +270,6 @@
 (function(){
   var r=localStorage.getItem('rank');
   if(!r||r==='null'||r==='undefined'){window.location.replace('login.html');}
-  // Apply personal colors immediately to avoid flash
   var bg=localStorage.getItem('user_bg');
   var ac=localStorage.getItem('user_accent');
   if(bg){document.documentElement.style.setProperty('--bg',bg);}
@@ -329,10 +325,9 @@
   <div class="topnav-right">
     <div class="lang-switcher" id="lang-sw">
       <button class="lang-btn active" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
+      <button class="lang-btn" data-lang="ko" onclick="setLang('ko')" title="Korean">🇰🇷</button>
       <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Spanish">🇪🇸</button>
-      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')" title="French">🇫🇷</button>
-      <button class="lang-btn" data-lang="pt" onclick="setLang('pt')" title="Portuguese">🇧🇷</button>
-      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" title="Japanese">🇯🇵</button>
+      <button class="lang-btn" data-lang="de" onclick="setLang('de')" title="German">🇩🇪</button>
     </div>
     <span id="rank-display" class="rank-badge rank-public">…</span>
     <button class="topnav-btn" id="logout-btn" onclick="doLogout()">Logout</button>
@@ -369,8 +364,6 @@
     </div>
   </div>
   <div class="content">
-
-    <!-- RECOMMENDED -->
     <div class="section sec-panel visible" id="sec-recommended">
       <div class="section-header"><span class="section-title">⭐ Recommended Tips <span class="section-lock">Owner &amp; Admins</span></span><span class="rank-badge rank-admin">Staff Picks</span></div>
       <div class="staff-form" id="rec-form" style="display:none">
@@ -381,8 +374,6 @@
       </div>
       <div class="rec-grid" id="recommended-grid"><p class="empty">Loading...</p></div>
     </div>
-
-    <!-- FEATURED -->
     <div class="section sec-panel" id="sec-featured">
       <div class="section-header"><span class="section-title">🔥 Featured Tips <span class="section-lock">Mod+ only</span></span><span class="rank-badge rank-mod">Mod+</span></div>
       <div class="staff-form" id="feat-form" style="display:none">
@@ -393,8 +384,6 @@
       </div>
       <div class="tips-grid" id="featured-grid"><p class="empty">Nothing here yet.</p></div>
     </div>
-
-    <!-- PUBLIC -->
     <div class="section sec-panel" id="sec-public">
       <div class="section-header"><span class="section-title">📢 Public Tips <span class="section-lock">Everyone can submit</span></span><span class="rank-badge rank-public">Public</span></div>
       <div class="public-form">
@@ -409,8 +398,6 @@
       </div>
       <div class="tips-grid" id="public-grid"><p class="empty">No approved tips yet.</p></div>
     </div>
-
-    <!-- NEWS -->
     <div class="section sec-panel" id="sec-news">
       <div class="section-header"><span class="section-title">📰 News <span class="section-lock">Owner &amp; Admins</span></span><span class="rank-badge rank-admin">Latest</span></div>
       <div id="news-form" style="display:none;margin-bottom:1rem">
@@ -426,8 +413,6 @@
       </div>
       <div id="news-list"><p class="empty">No news yet.</p></div>
     </div>
-
-    <!-- COMPLAINTS -->
     <div class="sec-panel" id="sec-complaints">
       <div class="section-header"><span class="section-title">📝 Complaints <span class="section-lock">Staff review privately</span></span></div>
       <div class="complaint-form-wrap">
@@ -461,8 +446,6 @@
         <div id="complaints-list"><p class="empty">No complaints yet.</p></div>
       </div>
     </div>
-
-    <!-- MY STYLE (Personal Settings - visible to all logged-in users) -->
     <div class="sec-panel" id="sec-mysettings">
       <div class="section-header"><span class="section-title">🎨 My Style <span class="section-lock">Only you can see these changes</span></span><span class="rank-badge rank-public">👤 Personal</span></div>
       <div class="my-settings-wrap">
@@ -505,14 +488,10 @@
         </div>
       </div>
     </div>
-
-    <!-- PENDING -->
     <div class="section sec-panel" id="sec-pending">
       <div class="section-header"><span class="section-title">⏳ Pending Approval <span class="section-lock">Owner &amp; Admin only</span></span><span class="rank-badge rank-admin">Review Queue</span></div>
       <div class="tips-grid" id="pending-grid"><p class="empty">No pending tips.</p></div>
     </div>
-
-    <!-- ADMIN BOARD -->
     <div class="section sec-panel" id="sec-adminboard">
       <div class="section-header"><span class="section-title">🔒 Admin Board <span class="section-lock">Admin+ only</span></span><span class="rank-badge rank-admin">Admin+</span></div>
       <div class="staff-form" id="admin-form" style="display:none">
@@ -523,8 +502,6 @@
       </div>
       <div class="tips-grid" id="adminboard-grid"><p class="empty">Nothing here yet.</p></div>
     </div>
-
-    <!-- SETTINGS (Owner) -->
     <div class="sec-panel" id="sec-settings">
       <div class="section-header" style="margin-bottom:1.5rem"><span class="section-title">⚙️ Owner Settings</span><span class="rank-badge rank-owner">👑 Owner Only</span></div>
       <div class="settings-wrap">
@@ -563,7 +540,6 @@
         </div></div>
       </div>
     </div>
-
     <div class="site-footer"><p>tips &amp; stuff — shared with friends ✦</p></div>
   </div>
 </div>
@@ -694,17 +670,14 @@ function applyConfig(cfg){
   if(!cfg)return;
   if(cfg.title){document.getElementById('site-title-el').innerHTML=cfg.title;document.title=cfg.title.replace(/<[^>]*>/g,'')+' ✦';}
   if(cfg.subtitle)document.getElementById('site-subtitle-el').textContent=cfg.subtitle;
-  if(cfg.accent)document.documentElement.style.setProperty('--accent',cfg.accent);
-  if(cfg.bg){
-    // Only apply site bg if user hasn't set personal bg
-    if(!localStorage.getItem('user_bg'))document.documentElement.style.setProperty('--bg',cfg.bg);
-  }
+  if(cfg.accent && !localStorage.getItem('user_accent'))document.documentElement.style.setProperty('--accent',cfg.accent);
+  if(cfg.bg && !localStorage.getItem('user_bg'))document.documentElement.style.setProperty('--bg',cfg.bg);
   if(cfg.welcome){let w=document.getElementById('welcome-msg');if(!w){w=document.createElement('p');w.id='welcome-msg';w.style.cssText='font-size:0.9rem;color:var(--muted);margin-top:0.35rem;line-height:1.6';document.getElementById('site-subtitle-el').after(w);}w.textContent=cfg.welcome;}
   if(cfg.announcement&&cfg.announcement.show==='yes'&&cfg.announcement.text){const bar=document.getElementById('ann-bar');document.getElementById('ann-txt').textContent=cfg.announcement.text;if(cfg.announcement.color)bar.style.background=cfg.announcement.color;bar.classList.add('show');}
   if(Array.isArray(cfg.customBlocks)&&cfg.customBlocks.length)renderCustomBlocks(cfg.customBlocks);
+  applyLang(); // re-apply translation after config text loads, so subtitle override logic is correct
 }
 function renderCustomBlocks(blocks){
-  // Show custom blocks at bottom of recommended section
   let wrap=document.getElementById('custom-blocks-display');
   if(!wrap){wrap=document.createElement('div');wrap.id='custom-blocks-display';document.getElementById('recommended-grid').after(wrap);}
   wrap.innerHTML=blocks.map(b=>{
@@ -732,21 +705,20 @@ function renderAll(){
   renderGrid('adminboard-grid',db.adminboard,isAdmin,false,false);
   renderGrid('pending-grid',db.pending,false,true,false);
   renderNews();renderComplaints();updateComplaintBadge();
+  if(db.config&&Array.isArray(db.config.customBlocks))renderCustomBlocks(db.config.customBlocks);
 }
 async function submitPublic(){const text=document.getElementById('pub-text').value.trim();const auth=document.getElementById('pub-name').value.trim()||username||'anon';const tag=document.getElementById('pub-tag').value;if(!text){document.getElementById('pub-text').focus();return;}setStatus('loading','submitting...');try{db.pending.unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById('pub-text').value='';setStatus('ok','submitted ✓');}catch(e){db.pending.shift();setStatus('error','could not submit — '+e.message);}}
 async function staffPost(section){const map={recommended:['rec-text','rec-author','rec-tag'],featured:['feat-text','feat-author','feat-tag'],adminboard:['admin-text','admin-author','admin-tag']};const [ti,ai,gi]=map[section];const text=document.getElementById(ti).value.trim();const auth=document.getElementById(ai).value.trim()||username||'Staff';const tag=document.getElementById(gi).value;if(!text){document.getElementById(ti).focus();return;}setStatus('loading','posting...');try{db[section].unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById(ti).value='';setStatus('ok','posted ✓');renderAll();}catch(e){db[section].shift();setStatus('error','could not post — '+e.message);}}
 async function approveTip(id){const tip=db.pending.find(t=>t.id==id);if(!tip)return;setStatus('loading','approving...');try{db.pending=db.pending.filter(t=>t.id!=id);db.public.unshift({...tip,pending:false});await saveAll();setStatus('ok','approved ✓');renderAll();}catch(e){setStatus('error','could not approve — '+e.message);}}
 async function denyTip(id){if(!confirm('Deny and delete?'))return;setStatus('loading','denying...');try{db.pending=db.pending.filter(t=>t.id!=id);await saveAll();setStatus('ok','denied ✓');renderAll();}catch(e){setStatus('error','could not deny — '+e.message);}}
 async function deleteTip(gridId,id){if(!confirm('Delete this tip?'))return;const sec=gridId.replace('-grid','');const prev=[...db[sec]];db[sec]=db[sec].filter(t=>t.id!=id);renderAll();try{await saveAll();setStatus('ok','deleted ✓');}catch(e){db[sec]=prev;setStatus('error','could not delete — '+e.message);renderAll();}}
-/* SETTINGS */
 function populateSettings(){
   const cfg=db.config||{};
   document.getElementById('set-title').value=(cfg.title||'').replace(/<[^>]*>/g,'').replace('&amp;','&');
   document.getElementById('set-subtitle').value=cfg.subtitle||'';
   const acc=cfg.accent||'#c8602a';document.getElementById('set-accent').value=acc;document.getElementById('accent-sw').style.background=acc;
   const bg=cfg.bg||'#f5f2eb';document.getElementById('set-bg').value=bg;document.getElementById('bg-sw').style.background=bg;
-  document.getElementById('set-rules').value=Array.isArray(db.rules)?db.rules.join('
-'):'';
+  document.getElementById('set-rules').value=Array.isArray(db.rules)?db.rules.join('\n'):'';
   document.getElementById('set-welcome').value=cfg.welcome||'';
   const ann=cfg.announcement||{};document.getElementById('set-ann-text').value=ann.text||'';document.getElementById('set-ann-show').value=ann.show||'no';
   const ac=ann.color||'#c8602a';document.getElementById('set-ann-color').value=ac;document.getElementById('ann-swatch').style.background=ac;
@@ -754,7 +726,6 @@ function populateSettings(){
   if(sv)sv.value=cfg.version||'';if(sc)sc.value=cfg.changelog||'';
   renderCustomBlocksList();updateAnnPreview();renderMemberList();
 }
-/* CUSTOM BLOCKS */
 function renderCustomBlocksList(){
   const blocks=(db.config&&Array.isArray(db.config.customBlocks))?db.config.customBlocks:[];
   const list=document.getElementById('custom-blocks-list');
@@ -780,7 +751,7 @@ function addCustomBlock(){
   document.getElementById('new-block-content').value='';
   document.getElementById('new-block-url').value='';
   renderCustomBlocksList();
-  toast('toast-custom','➕ Block added — click “Save All Blocks” to publish.');
+  toast('toast-custom','➕ Block added — click "Save All Blocks" to publish.');
 }
 function removeCustomBlock(i){
   if(!db.config||!Array.isArray(db.config.customBlocks))return;
@@ -791,10 +762,9 @@ async function saveCustomBlocks(){
   try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-custom','✓ Blocks saved!');}
   catch(e){toast('toast-custom','✕ '+e.message,true);}
 }
-/* MY PERSONAL SETTINGS */
 function populateMySettings(){
-  const bg=localStorage.getItem('user_bg')||'#f5f2eb';
-  const ac=localStorage.getItem('user_accent')||'#c8602a';
+  const bg=localStorage.getItem('user_bg')||(db.config&&db.config.bg)||'#f5f2eb';
+  const ac=localStorage.getItem('user_accent')||(db.config&&db.config.accent)||'#c8602a';
   document.getElementById('my-bg').value=bg;document.getElementById('my-bg-swatch').style.background=bg;
   document.getElementById('my-accent').value=ac;document.getElementById('my-accent-swatch').style.background=ac;
   document.getElementById('my-displayname').value=username||'';
@@ -809,7 +779,7 @@ function saveMyColors(){
   localStorage.setItem('user_bg',bg);localStorage.setItem('user_accent',ac);
   document.documentElement.style.setProperty('--bg',bg);
   document.documentElement.style.setProperty('--accent',ac);
-  toastS('toast-mycolors','✓ Colors applied!');
+  toastS('toast-mycolors','✓ Colors applied — only you see this!');
 }
 function resetMyColors(){
   localStorage.removeItem('user_bg');localStorage.removeItem('user_accent');
@@ -828,7 +798,6 @@ function saveMyName(){
   applyRankUI();toastS('toast-myname','✓ Name updated!');
 }
 function toastS(id,msg,err){const el=document.getElementById(id);if(!el)return;el.textContent=msg;el.className='settings-toast show'+(err?' error':'');setTimeout(()=>el.className='settings-toast',3000);}
-/* REST OF SETTINGS */
 function updateAnnPreview(){const t=document.getElementById('set-ann-text').value;const c=document.getElementById('set-ann-color').value;document.getElementById('ann-swatch').style.background=c;const w=document.getElementById('ann-preview-wrap'),p=document.getElementById('ann-preview');if(t){w.style.display='block';p.textContent=t;p.style.background=c;}else w.style.display='none';}
 document.getElementById('set-ann-text').addEventListener('input',updateAnnPreview);
 function renderMemberList(){const list=document.getElementById('member-list');if(!db.members||!db.members.length){list.innerHTML='<p style="font-size:0.8rem;color:var(--muted)">No staff added yet.</p>';return;}const rl={owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod'},rc={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod'};list.innerHTML=db.members.map((m,i)=>`<div class="member-row"><span class="member-name">${esc(m.name)}</span><span class="rank-badge ${rc[m.rank]||'rank-public'}">${rl[m.rank]||m.rank}</span><button class="member-del" onclick="removeMember(${i})">✕</button></div>`).join('');}
@@ -839,16 +808,13 @@ async function saveAnn(){if(!db.config)db.config={};db.config.announcement={text
 async function saveAppearance(){if(!db.config)db.config={};db.config.title=esc(document.getElementById('set-title').value.trim()||'tips & stuff');db.config.subtitle=document.getElementById('set-subtitle').value.trim();db.config.accent=document.getElementById('set-accent').value;db.config.bg=document.getElementById('set-bg').value;try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-appearance','✓ Saved!');}catch(e){toast('toast-appearance','✕ '+e.message,true);}}
 async function savePasswords(){if(!db.config)db.config={};if(!db.config.passwords)db.config.passwords={};const o=document.getElementById('set-pw-owner').value,a=document.getElementById('set-pw-admin').value,m=document.getElementById('set-pw-mod').value;if(o){db.config.passwords.owner=o;PASSWORDS.owner=o;}if(a){db.config.passwords.admin=a;PASSWORDS.admin=a;}if(m){db.config.passwords.mod=m;PASSWORDS.mod=m;}try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');['set-pw-owner','set-pw-admin','set-pw-mod'].forEach(id=>document.getElementById(id).value='');toast('toast-passwords','✓ Updated!');}catch(e){toast('toast-passwords','✕ '+e.message,true);}}
 async function saveMembers(){try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-members','✓ Saved!');}catch(e){toast('toast-members','✕ '+e.message,true);}}
-async function saveRules(){db.rules=document.getElementById('set-rules').value.split('
-').map(r=>r.trim()).filter(Boolean);try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-rules','✓ Rules saved!');}catch(e){toast('toast-rules','✕ '+e.message,true);}}
+async function saveRules(){db.rules=document.getElementById('set-rules').value.split('\n').map(r=>r.trim()).filter(Boolean);try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-rules','✓ Rules saved!');}catch(e){toast('toast-rules','✕ '+e.message,true);}}
 async function saveWelcome(){if(!db.config)db.config={};db.config.welcome=document.getElementById('set-welcome').value.trim();try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-welcome','✓ Saved!');}catch(e){toast('toast-welcome','✕ '+e.message,true);}}
 async function dangerClear(sec){if(!confirm('Permanently delete ALL '+sec+' tips?'))return;db[sec]=[];try{setStatus('loading','clearing...');await saveAll();setStatus('ok','cleared ✓');renderAll();}catch(e){setStatus('error','failed: '+e.message);}}
-/* NEWS */
 const NEWS_CATS={update:{label:'📣 Update',bg:'#e0eaf8',color:'#1a3d6b',accent:'#2a60c8'},announcement:{label:'🎉 Announcement',bg:'#e8f0e0',color:'#2d5016',accent:'#4a8a1a'},warning:{label:'⚠️ Warning',bg:'#fdecd6',color:'#7a3a0a',accent:'#c8602a'},event:{label:'📅 Event',bg:'#ece0f8',color:'#4a1f7a',accent:'#7a2ac8'},other:{label:'💬 Other',bg:'#fce8ec',color:'#7a1a2e',accent:'#c82a4a'}};
 function renderNews(){const list=document.getElementById('news-list');const isAdmin=rank==='owner'||rank==='admin';const news=db.news||[];if(!news.length){list.innerHTML='<p class="empty">No news posted yet.</p>';return;}list.innerHTML=news.map(n=>{const cat=NEWS_CATS[n.cat]||NEWS_CATS.other;const date=n.ts?new Date(n.ts).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}):'';const delBtn=isAdmin?`<button class="news-del-btn show" onclick="deleteNews('${n.id}')">✕ delete</button>`:'';return `<div class="news-card" style="--news-color:${cat.accent}"><div class="news-card-accent"></div><div class="news-card-body"><div class="news-card-top"><span class="news-cat-badge" style="background:${cat.bg};color:${cat.color}">${cat.label}</span><span class="news-date">${date}</span><span class="news-author-tag">by ${esc(n.author||'Staff')}</span></div><div class="news-headline">${esc(n.title)}</div><div class="news-text">${esc(n.body)}</div>${delBtn}</div></div>`;}).join('');}
 async function postNews(){const title=document.getElementById('news-title').value.trim();const body=document.getElementById('news-body').value.trim();const cat=document.getElementById('news-cat').value;const author=document.getElementById('news-author').value.trim()||username||'Staff';if(!title||!body){return;}setStatus('loading','publishing...');try{db.news.unshift({id:Date.now(),title,body,cat,author,ts:Date.now()});await saveAll();document.getElementById('news-title').value='';document.getElementById('news-body').value='';setStatus('ok','published ✓');renderNews();}catch(e){db.news.shift();setStatus('error','could not publish — '+e.message);}}
 async function deleteNews(id){if(!confirm('Delete?'))return;const prev=[...db.news];db.news=db.news.filter(n=>n.id!=id);renderNews();try{await saveAll();setStatus('ok','deleted ✓');}catch(e){db.news=prev;renderNews();}}
-/* COMPLAINTS */
 const COMPLAINT_TYPES={behavior:{label:'😠 Behavior',bg:'#fce8ec',color:'#7a1a2e'},spam:{label:'🚫 Spam',bg:'#fdecd6',color:'#7a3a0a'},inappropriate:{label:'⚠️ Inappropriate',bg:'#fdecd6',color:'#7a3a0a'},bug:{label:'🐛 Bug / Issue',bg:'#e0eaf8',color:'#1a3d6b'},suggestion:{label:'💡 Suggestion',bg:'#e8f0e0',color:'#2d5016'},other:{label:'💬 Other',bg:'#ece0f8',color:'#4a1f7a'}};
 function cfToast(msg,err){const el=document.getElementById('cf-toast');el.textContent=msg;el.className='cf-toast show'+(err?' error':'');setTimeout(()=>el.className='cf-toast',3500);}
 function updateComplaintBadge(){const open=(db.complaints||[]).filter(c=>c.status==='open').length;const ct=document.getElementById('complaint-ct');const mb=document.getElementById('mob-complaint-badge');if(ct){ct.textContent=open>0?open:'';ct.style.display=open>0?'inline':'none';}if(mb){mb.textContent=open>0?open:'';mb.classList.toggle('show',open>0);}}
@@ -857,7 +823,6 @@ async function submitComplaint(){const name=document.getElementById('cf-name').v
 async function resolveComplaint(id){const c=db.complaints.find(c=>String(c.id)===String(id));if(!c)return;c.status='resolved';try{await saveAll();renderComplaints();updateComplaintBadge();}catch(e){c.status='open';}}
 async function reopenComplaint(id){const c=db.complaints.find(c=>String(c.id)===String(id));if(!c)return;c.status='open';try{await saveAll();renderComplaints();updateComplaintBadge();}catch(e){c.status='resolved';}}
 async function deleteComplaint(id){if(!confirm('Delete?'))return;const prev=[...db.complaints];db.complaints=db.complaints.filter(c=>String(c.id)!==String(id));renderComplaints();updateComplaintBadge();try{await saveAll();}catch(e){db.complaints=prev;renderComplaints();}}
-/* CHAT */
 let chatOpen=false,chatTimer=null,chatLastCount=0;
 function toggleChat(){
   chatOpen=!chatOpen;
@@ -883,24 +848,39 @@ async function sendMsg(){
 }
 async function deleteMsg(id){db.chat=db.chat.filter(m=>m.id!=id);renderChat();try{await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});}catch(e){}}
 document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();});
-/* LANGUAGE */
 const LANGS={
-  en:{sub:'a shared board for tips, tricks, and random gems ✦'},
-  es:{sub:'un tablero compartido de tips, trucos y curiosidades ✦'},
-  fr:{sub:'un tableau partagé de conseils, astuces et curiosités ✦'},
-  pt:{sub:'um quadro compartilhado de dicas, truques e curiosidades ✦'},
-  ja:{sub:'ヒント、コツ、豆知識を共有するボード ✦'},
+  en:{sub:'a shared board for tips, tricks, and random gems ✦',login:'Login',logout:'Logout',recommended:'⭐ Recommended',featured:'🔥 Featured',pub:'📢 Public',news:'📰 News',complaints:'📝 Complaints',mystyle:'🎨 My Style',pending:'⏳ Pending',admin:'🔒 Admin Board',settings:'⚙️ Settings'},
+  ko:{sub:'팁, 트릭, 랜덤 보석을 위한 공유 게시판 ✦',login:'로그인',logout:'로그아웃',recommended:'⭐ 추천',featured:'🔥 주목',pub:'📢 공개',news:'📰 뉴스',complaints:'📝 불만',mystyle:'🎨 내 스타일',pending:'⏳ 대기',admin:'🔒 관리자 보드',settings:'⚙️ 설정'},
+  es:{sub:'un tablero compartido de tips, trucos y gemas al azar ✦',login:'Iniciar sesión',logout:'Cerrar sesión',recommended:'⭐ Recomendados',featured:'🔥 Destacados',pub:'📢 Público',news:'📰 Noticias',complaints:'📝 Quejas',mystyle:'🎨 Mi Estilo',pending:'⏳ Pendiente',admin:'🔒 Panel Admin',settings:'⚙️ Configuración'},
+  de:{sub:'ein gemeinsames Board für Tipps, Tricks und zufällige Entdeckungen ✦',login:'Anmelden',logout:'Abmelden',recommended:'⭐ Empfohlen',featured:'🔥 Hervorgehoben',pub:'📢 Öffentlich',news:'📰 Neuigkeiten',complaints:'📝 Beschwerden',mystyle:'🎨 Mein Stil',pending:'⏳ Ausstehend',admin:'🔒 Admin-Board',settings:'⚙️ Einstellungen'},
 };
 let lang=localStorage.getItem('lang')||'en';
-function setLang(l){lang=l;localStorage.setItem('lang',l);document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));const sub=document.getElementById('site-subtitle-el');if(sub&&LANGS[l]&&!(db.config&&db.config.subtitle))sub.textContent=LANGS[l].sub;}
+function setLang(l){
+  lang=l;localStorage.setItem('lang',l);
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  applyLang();
+}
+function applyLang(){
+  const T=LANGS[lang]||LANGS.en;
+  // only override subtitle if owner hasn't set a custom one
+  const sub=document.getElementById('site-subtitle-el');
+  if(sub && !(db.config && db.config.subtitle)) sub.textContent=T.sub;
+  const ll=document.getElementById('login-link'); if(ll) ll.textContent=T.login;
+  const lo=document.getElementById('logout-btn'); if(lo) lo.textContent=T.logout;
+  const tr=document.getElementById('tab-recommended'); if(tr) tr.textContent=T.recommended;
+  const tf=document.getElementById('tab-featured');    if(tf) tf.textContent=T.featured;
+  const tp=document.getElementById('tab-public');      if(tp) tp.textContent=T.pub;
+  const tn=document.getElementById('tab-news');         if(tn) tn.textContent=T.news;
+  const tpend=document.getElementById('tab-pending');   if(tpend) tpend.childNodes[0].textContent=T.pending+' ';
+  const tadm=document.getElementById('tab-adminboard'); if(tadm) tadm.textContent=T.admin;
+  const tset=document.getElementById('tab-settings');   if(tset) tset.textContent=T.settings;
+}
 (function(){document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));})();
-/* UPDATE SYSTEM */
 function checkForUpdates(){const cfg=db.config||{};const v=cfg.version||'';if(!v)return;const seen=localStorage.getItem('site_version_seen')||'';if(seen!==v){document.getElementById('update-bar-version').textContent=v;document.getElementById('update-bar').classList.add('show');}}
 function startUpdate(){document.getElementById('update-bar').classList.remove('show');const overlay=document.getElementById('update-overlay');overlay.classList.add('show');let secs=10;const ring=document.getElementById('update-ring');const num=document.getElementById('update-num');const prog=document.getElementById('update-prog');requestAnimationFrame(()=>{prog.style.transition='width 10s linear';prog.style.width='100%';});const tick=setInterval(()=>{secs--;num.textContent=secs;ring.style.strokeDashoffset=125.6*(secs/10);if(secs<=0){clearInterval(tick);overlay.classList.remove('show');showWhatsNew();}},1000);}
 function showWhatsNew(){const cfg=db.config||{};document.getElementById('whats-new-ver').textContent=cfg.version||'Latest';document.getElementById('whats-new-body').textContent=cfg.changelog||'No changelog.';document.getElementById('whats-new-overlay').classList.add('show');}
 function dismissUpdate(){const ver=(db.config||{}).version||'';localStorage.setItem('site_version_seen',ver);document.getElementById('whats-new-overlay').classList.remove('show');}
 async function saveVersion(){if(!db.config)db.config={};db.config.version=document.getElementById('set-version').value.trim();db.config.changelog=document.getElementById('set-changelog').value.trim();try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-version','✓ Version pushed!');}catch(e){toast('toast-version','✕ '+e.message,true);}}
-/* INIT */
 applyRankUI();
 loadAll();
 </script>
