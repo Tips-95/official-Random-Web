@@ -152,23 +152,39 @@ const STATUS_LABELS={
   released:{label:'🍿 Released'},
 };
 
-function toYouTubeEmbed(url){
+function normalizeUrl(url){
+  url=(url||'').trim();
   if(!url)return '';
-  const m=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{6,})/);
+  if(!/^https?:\/\//i.test(url))url='https://'+url;
+  return url;
+}
+function toEmbedUrl(rawUrl){
+  const url=normalizeUrl(rawUrl);
+  if(!url)return '';
+  // YouTube: watch?v=, youtu.be/, /embed/, /shorts/, /live/, with or without extra query params
+  let m=url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/)
+    || url.match(/youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{6,})/);
   if(m)return 'https://www.youtube.com/embed/'+m[1];
-  const v=url.match(/vimeo\.com\/(\d+)/);
-  if(v)return 'https://player.vimeo.com/video/'+v[1];
+  // Vimeo
+  m=url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if(m)return 'https://player.vimeo.com/video/'+m[1];
+  // Google Drive share links -> preview embed
+  m=url.match(/drive\.google\.com\/file\/d\/([A-Za-z0-9_-]+)/);
+  if(m)return 'https://drive.google.com/file/d/'+m[1]+'/preview';
+  // Streamable
+  m=url.match(/streamable\.com\/([A-Za-z0-9]+)/);
+  if(m)return 'https://streamable.com/e/'+m[1];
   return '';
 }
-
-function renderVideo(url){
+function renderVideo(rawUrl){
+  const url=normalizeUrl(rawUrl);
   if(!url){
     return `<div class="movie-video-empty"><div class="movie-video-empty-inner">🎬 No trailer added yet — check back soon!</div></div>`;
   }
-  const embed=toYouTubeEmbed(url);
-  if(embed)return `<div class="movie-video-wrap"><iframe src="${esc(embed)}" allowfullscreen></iframe></div>`;
-  if(/\.(mp4|webm|ogg)$/i.test(url))return `<div class="movie-video-wrap"><video src="${esc(url)}" controls></video></div>`;
-  return `<div class="movie-video-empty"><div class="movie-video-empty-inner">▶ <a href="${esc(url)}" target="_blank" style="color:#fff">Open video link</a></div></div>`;
+  const embed=toEmbedUrl(url);
+  if(embed)return `<div class="movie-video-wrap"><iframe src="${esc(embed)}" allowfullscreen allow="autoplay; fullscreen; encrypted-media"></iframe></div>`;
+  if(/\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url))return `<div class="movie-video-wrap"><video src="${esc(url)}" controls></video></div>`;
+  return `<div class="movie-video-empty"><div class="movie-video-empty-inner">▶ <a href="${esc(url)}" target="_blank" style="color:#fff">Open video link</a><br/><span style="font-size:0.72rem;opacity:0.8">This link can't be embedded directly — click to watch on its original site.</span></div></div>`;
 }
 
 function renderMovie(movie){
