@@ -1089,20 +1089,33 @@ function toggleBot(){
 const BUILDER_ZONE_LABELS={recommended:'Recommended tab',public:'Public tab',news:'News tab',footer:'Site-wide footer'};
 let builderActiveZone=null;
 function isOwner(){return rank==='owner';}
-function toYouTubeEmbed(url){
+function normalizeUrl(url){
+  url=(url||'').trim();
   if(!url)return '';
-  const m=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{6,})/);
+  if(!/^https?:\/\//i.test(url))url='https://'+url;
+  return url;
+}
+function toEmbedUrl(rawUrl){
+  const url=normalizeUrl(rawUrl);
+  if(!url)return '';
+  let m=url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/)
+    || url.match(/youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{6,})/);
   if(m)return 'https://www.youtube.com/embed/'+m[1];
-  const v=url.match(/vimeo\.com\/(\d+)/);
-  if(v)return 'https://player.vimeo.com/video/'+v[1];
+  m=url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if(m)return 'https://player.vimeo.com/video/'+m[1];
+  m=url.match(/drive\.google\.com\/file\/d\/([A-Za-z0-9_-]+)/);
+  if(m)return 'https://drive.google.com/file/d/'+m[1]+'/preview';
+  m=url.match(/streamable\.com\/([A-Za-z0-9]+)/);
+  if(m)return 'https://streamable.com/e/'+m[1];
   return '';
 }
-function renderVideoEmbed(url){
+function renderVideoEmbed(rawUrl){
+  const url=normalizeUrl(rawUrl);
   if(!url)return '<p class="hint">No video URL set yet.</p>';
-  const embed=toYouTubeEmbed(url);
-  if(embed)return `<div class="bb-video-wrap"><iframe src="${esc(embed)}" allowfullscreen></iframe></div>`;
-  if(/\.(mp4|webm|ogg)$/i.test(url))return `<div class="bb-video-wrap"><video src="${esc(url)}" controls></video></div>`;
-  return `<div class="bb-video-wrap" style="display:flex;align-items:center;justify-content:center"><a href="${esc(url)}" target="_blank" style="color:#fff;font-size:0.85rem">▶ Open video link</a></div>`;
+  const embed=toEmbedUrl(url);
+  if(embed)return `<div class="bb-video-wrap"><iframe src="${esc(embed)}" allowfullscreen allow="autoplay; fullscreen; encrypted-media"></iframe></div>`;
+  if(/\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url))return `<div class="bb-video-wrap"><video src="${esc(url)}" controls></video></div>`;
+  return `<div class="bb-video-wrap" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px"><a href="${esc(url)}" target="_blank" style="color:#fff;font-size:0.85rem">▶ Open video link</a><span style="color:rgba(255,255,255,0.5);font-size:0.7rem">Can't be embedded directly</span></div>`;
 }
 function zoneBlocks(zone){
   if(!db.blocks)db.blocks={};
