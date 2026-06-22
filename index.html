@@ -70,7 +70,7 @@
     .section-lock{font-size:0.72rem;color:var(--muted)}
     .rec-grid,.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
     .rec-card{background:linear-gradient(135deg,#fffbf0,#fff8e8);border:1px solid rgba(200,96,42,0.22);border-radius:12px;padding:0.9rem 1rem;display:flex;flex-direction:column;gap:8px;animation:rise 0.2s ease both;position:relative;overflow:hidden}
-    .rec-card::before{content:'°5';position:absolute;top:8px;right:9px;font-size:0.65rem;opacity:0.45}
+    .rec-card::before{content:'⭐';position:absolute;top:8px;right:9px;font-size:0.65rem;opacity:0.45}
     .rec-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);border-radius:12px 12px 0 0}
     .tip-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1rem;display:flex;flex-direction:column;gap:8px;animation:rise 0.2s ease both;position:relative;overflow:hidden}
     .tip-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-accent,transparent);border-radius:12px 12px 0 0}
@@ -185,17 +185,14 @@
     .color-row{display:flex;align-items:center;gap:10px}
     .color-swatch{width:32px;height:32px;border-radius:6px;border:1px solid var(--border-strong);flex-shrink:0}
     .ann-preview{border-radius:8px;padding:8px 14px;font-size:0.82rem;margin-top:4px;font-family:'DM Mono',monospace;color:#fff}
-    /* Custom content blocks */
     .custom-block{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:10px;position:relative}
     .custom-block-del{position:absolute;top:8px;right:10px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:0.75rem;padding:3px 7px;border-radius:5px}
     .custom-block-del:hover{color:#c0392b;background:#fce8ec}
     .custom-block-text{font-size:0.9rem;line-height:1.65;white-space:pre-wrap}
     .custom-block-btn{display:inline-flex;height:38px;padding:0 18px;align-items:center;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;text-decoration:none;transition:background 0.15s;margin-top:6px}
     .custom-block-btn:hover{background:#b5521f}
-    /* My Settings (public personal) */
     .my-settings-wrap{display:flex;flex-direction:column;gap:1.5rem}
     .my-settings-note{font-size:0.8rem;color:var(--muted);padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;line-height:1.5}
-    /* CHAT FAB */
     .chat-fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:50;width:52px;height:52px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:1.4rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.18);transition:transform 0.15s}
     .chat-fab:hover{transform:scale(1.08)}
     .chat-fab-badge{position:absolute;top:-2px;right:-2px;background:#e74c3c;color:#fff;font-size:0.6rem;font-weight:700;min-width:16px;height:16px;border-radius:99px;display:none;align-items:center;justify-content:center;padding:0 3px;border:2px solid var(--bg)}
@@ -265,7 +262,91 @@
     .whats-new-dismiss{height:42px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;background:var(--text);color:var(--bg);border:none;border-radius:10px;cursor:pointer;transition:opacity 0.15s}
     .whats-new-dismiss:hover{opacity:0.82}
     .site-footer{margin-top:2rem;text-align:center;font-size:0.75rem;color:var(--muted);padding-bottom:2rem}
-    @media(max-width:700px){.page-wrap{padding:0 1rem 5rem}.tab-bar-wrap{margin:0 -1rem;padding-left:1rem;padding-right:1rem}.topnav-links{display:none}.mobile-nav{display:flex}.chat-fab{bottom:4.5rem;right:1rem;width:46px;height:46px;font-size:1.2rem}.chat-panel{bottom:7.5rem;right:0.75rem;width:calc(100vw - 1.5rem)}}
+    @media(max-width:700px){.page-wrap{padding:0 1rem 5rem}.tab-bar-wrap{margin:0 -1rem;padding-left:1rem;padding-right:1rem}.topnav-links{display:none}.mobile-nav{display:flex}.chat-fab{bottom:4.5rem;right:1rem;width:46px;height:46px;font-size:1.2rem}.chat-panel{bottom:7.5rem;right:0.75rem;width:calc(100vw - 1.5rem)}.bot-fab{bottom:4.5rem;right:1rem;width:46px;height:46px;font-size:1.2rem}.bot-panel{bottom:7.5rem;right:0.75rem;width:calc(100vw - 1.5rem)}}
+
+    /* ===== Ask Bot widget ===== */
+    .bot-fab{position:fixed;bottom:1.5rem;right:5.5rem;z-index:50;width:52px;height:52px;border-radius:50%;background:var(--text);color:#fff;border:none;cursor:pointer;font-size:1.3rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.18);transition:transform 0.15s}
+    .bot-fab:hover{transform:scale(1.08)}
+    .bot-panel{position:fixed;bottom:5.5rem;right:5.5rem;z-index:50;width:340px;max-width:calc(100vw - 2rem);background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.14);display:none;flex-direction:column;overflow:hidden}
+    .bot-panel.open{display:flex}
+    .bot-head{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;background:var(--text);color:#fff;flex-shrink:0}
+    .bot-head-title{font-size:0.88rem;font-weight:500;display:flex;align-items:center;gap:6px}
+    .bot-head-btn{background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:0.85rem;padding:3px 6px;border-radius:5px}
+    .bot-head-btn:hover{color:#fff;background:rgba(255,255,255,0.1)}
+    .bot-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;min-height:260px;max-height:340px}
+    .bot-msg{display:flex;gap:8px;animation:rise 0.18s ease both}
+    .bot-msg.from-user{flex-direction:row-reverse}
+    .bot-bubble{font-size:0.83rem;line-height:1.5;padding:8px 12px;border-radius:12px;max-width:80%;word-break:break-word}
+    .bot-msg.from-bot .bot-bubble{background:var(--bg);color:var(--text);border:1px solid var(--border)}
+    .bot-msg.from-user .bot-bubble{background:var(--accent);color:#fff}
+    .bot-suggest-row{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 10px}
+    .bot-suggest-chip{font-size:0.72rem;padding:5px 10px;border-radius:99px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);cursor:pointer;white-space:nowrap}
+    .bot-suggest-chip:hover{background:var(--bg)}
+    .bot-input-row{padding:10px 12px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0;background:var(--bg)}
+    .bot-input-row input{flex:1;height:36px;padding:0 12px;font-family:'DM Sans',sans-serif;font-size:0.875rem;background:var(--surface);border:1px solid var(--border-strong);border-radius:99px;color:var(--text);outline:none}
+    .bot-input-row input:focus{border-color:var(--accent)}
+    .bot-send{width:36px;height:36px;border-radius:50%;background:var(--text);color:#fff;border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .bot-send:hover{opacity:0.85}
+    .bot-footer-note{font-size:0.63rem;color:var(--muted);padding:3px 12px 6px;background:var(--bg);text-align:center;flex-shrink:0}
+
+    /* ===== Page Builder ===== */
+    .builder-bar{display:none;position:sticky;top:104px;z-index:19;align-items:center;gap:10px;flex-wrap:wrap;background:var(--text);color:#fff;padding:10px 14px;border-radius:10px;margin-bottom:1rem;font-size:0.8rem}
+    .builder-bar.active{display:flex}
+    .builder-bar .bb-label{font-weight:500;display:flex;align-items:center;gap:6px}
+    .builder-bar select,.builder-bar button{font-family:'DM Sans',sans-serif;font-size:0.78rem;border-radius:6px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.08);color:#fff;padding:5px 10px;cursor:pointer}
+    .builder-bar button:hover{background:rgba(255,255,255,0.18)}
+    .builder-bar .bb-exit{margin-left:auto;background:var(--accent);border-color:var(--accent)}
+    .builder-blocks{display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem}
+    .builder-block{position:relative;border:1px solid var(--border);border-radius:12px;background:var(--surface);overflow:hidden}
+    .builder-block.editing-mode{border-style:dashed;border-color:var(--border-strong)}
+    .bb-controls{display:none;align-items:center;gap:4px;padding:7px 10px;background:var(--bg);border-bottom:1px solid var(--border)}
+    .builder-block.editing-mode .bb-controls{display:flex}
+    .bb-type-tag{font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);padding:2px 7px;border:1px solid var(--border-strong);border-radius:99px}
+    .bb-ctrl-btn{background:none;border:1px solid var(--border-strong);cursor:pointer;font-size:0.78rem;padding:3px 8px;border-radius:6px;color:var(--text)}
+    .bb-ctrl-btn:hover{background:var(--surface);border-color:var(--accent)}
+    .bb-ctrl-btn.danger{color:#c0392b;border-color:#fce8ec}
+    .bb-ctrl-btn.danger:hover{background:#fce8ec}
+    .bb-ctrl-spacer{margin-left:auto}
+    .bb-body{padding:1rem 1.2rem}
+    .bb-text-content{font-size:0.92rem;line-height:1.7;white-space:pre-wrap}
+    .bb-text-edit{width:100%;min-height:90px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:0.875rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;resize:vertical;margin-bottom:8px}
+    .bb-video-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:8px;overflow:hidden;background:#000}
+    .bb-video-wrap iframe,.bb-video-wrap video{position:absolute;inset:0;width:100%;height:100%;border:none}
+    .bb-video-url-edit{width:100%;height:38px;padding:0 12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;margin-bottom:8px}
+    .bb-section-title-edit{width:100%;height:40px;padding:0 12px;font-family:'Instrument Serif',serif;font-size:1.1rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;margin-bottom:6px}
+    .bb-section-heading{font-family:'Instrument Serif',serif;font-size:1.3rem;letter-spacing:-0.01em;margin-bottom:4px}
+    .bb-footer-edit{width:100%;min-height:60px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;background:var(--bg);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);outline:none;resize:vertical;margin-bottom:8px;text-align:center}
+    .bb-footer-content{text-align:center;font-size:0.8rem;color:var(--muted)}
+    .bb-save-row{display:flex;gap:8px;justify-content:flex-end}
+    .add-block-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:1rem;border:2px dashed var(--border-strong);border-radius:12px}
+    .add-block-row button{font-family:'DM Sans',sans-serif;font-size:0.82rem;padding:8px 14px;border-radius:8px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);cursor:pointer}
+    .add-block-row button:hover{background:var(--bg);border-color:var(--accent)}
+
+    /* ===== Global Search ===== */
+    .search-wrap{position:relative;padding:0.9rem 0 0;z-index:21}
+    .search-box{position:relative;display:flex;align-items:center}
+    .search-icon{position:absolute;left:13px;font-size:0.9rem;color:var(--muted);pointer-events:none}
+    .search-input{width:100%;height:42px;padding:0 38px 0 36px;font-family:'DM Sans',sans-serif;font-size:0.9rem;background:var(--surface);border:1px solid var(--border-strong);border-radius:10px;color:var(--text);outline:none;transition:border-color 0.15s}
+    .search-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,96,42,0.1)}
+    .search-clear{position:absolute;right:8px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:0.85rem;padding:5px 8px;border-radius:6px;display:none}
+    .search-clear.show{display:inline-block}
+    .search-clear:hover{color:var(--text);background:var(--bg)}
+    .search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface);border:1px solid var(--border-strong);border-radius:12px;box-shadow:0 10px 32px rgba(0,0,0,0.14);max-height:420px;overflow-y:auto;display:none;z-index:25}
+    .search-results.show{display:block}
+    .search-group-label{font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);padding:9px 14px 4px}
+    .search-result-item{display:flex;align-items:flex-start;gap:9px;padding:9px 14px;cursor:pointer;transition:background 0.1s;border-bottom:1px solid var(--border)}
+    .search-result-item:last-child{border-bottom:none}
+    .search-result-item:hover{background:var(--bg)}
+    .search-result-icon{font-size:0.95rem;flex-shrink:0;margin-top:1px}
+    .search-result-body{flex:1;min-width:0}
+    .search-result-title{font-size:0.85rem;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .search-result-snippet{font-size:0.76rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+    .search-result-snippet mark{background:rgba(200,96,42,0.22);color:var(--text);border-radius:2px;padding:0 1px}
+    .search-result-title mark{background:rgba(200,96,42,0.22);color:var(--text);border-radius:2px;padding:0 1px}
+    .search-no-results{padding:1.5rem 14px;text-align:center;color:var(--muted);font-size:0.85rem}
+    .search-overlay-bg{position:fixed;inset:0;z-index:24;display:none}
+    .search-overlay-bg.show{display:block}
+    @media(max-width:700px){.search-wrap{padding-top:0.7rem}}
   </style>
 </head>
 <body>
@@ -273,14 +354,12 @@
 (function(){
   var r=localStorage.getItem('rank');
   if(!r||r==='null'||r==='undefined'){window.location.replace('login.html');}
-  // Apply personal colors immediately to avoid flash
   var bg=localStorage.getItem('user_bg');
   var ac=localStorage.getItem('user_accent');
   if(bg){document.documentElement.style.setProperty('--bg',bg);}
   if(ac){document.documentElement.style.setProperty('--accent',ac);}
 })();
 </script>
-<div id="floating-bg" aria-hidden="true"></div>
 <div class="update-bar" id="update-bar">
   <span>⚡ A new update is available —</span>
   <strong id="update-bar-version"></strong>
@@ -313,29 +392,31 @@
   <span id="ann-txt"></span>
   <button class="ann-close" onclick="document.getElementById('ann-bar').classList.remove('show')">✕</button>
 </div>
+<div class="search-overlay-bg" id="search-overlay-bg" onclick="closeSearchResults()"></div>
 <header class="topnav">
   <a href="index.html" class="topnav-logo">tips <em>&</em> stuff</a>
   <a href="login.html" class="topnav-btn" id="login-link" style="display:none">Login</a>
   <div class="topnav-links">
     <a href="index.html"       class="topnav-link active">📋 Tips</a>
-    <a href="ranks.html"       class="topnav-link">🏅 Ranks</a>
-    <a href="rules.html"       class="topnav-link">📜 Rules</a>
-    <a href="banlist.html"     class="topnav-link">🚫 Bans</a>
-    <a href="news.html"        class="topnav-link">📰 News</a>
-    <a href="games.html"       class="topnav-link">🎮 Games</a>
-    <a href="leaderboard.html" class="topnav-link">🏆 Leaderboard</a>
-    <a href="version.html"     class="topnav-link">🔖 Version</a>
-    <a href="donate.html"      class="topnav-link">💛 Donate</a>
+    <a href="ranks.html"       class="topnav-link" data-guest-hide>🏅 Ranks</a>
+    <a href="rules.html"       class="topnav-link" data-guest-hide>📜 Rules</a>
+    <a href="banlist.html"     class="topnav-link" data-guest-hide>🚫 Bans</a>
+    <a href="news.html"        class="topnav-link" data-guest-hide>📰 News</a>
+    <a href="games.html"       class="topnav-link" data-guest-hide>🎮 Games</a>
+    <a href="leaderboard.html" class="topnav-link" data-guest-hide>🏆 Leaderboard</a>
+    <a href="movie.html"       class="topnav-link" data-guest-hide>🎬 Movie</a>
+    <a href="version.html"     class="topnav-link" data-guest-hide>🔖 Version</a>
+    <a href="donate.html"      class="topnav-link" data-guest-hide>💛 Donate</a>
   </div>
   <div class="topnav-right">
-    <div class="lang-switcher" id="lang-sw">
+    <div class="lang-switcher" id="lang-sw" data-guest-hide>
       <button class="lang-btn active" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
+      <button class="lang-btn" data-lang="ko" onclick="setLang('ko')" title="Korean">🇰🇷</button>
       <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Spanish">🇪🇸</button>
-      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')" title="French">🇫🇷</button>
-      <button class="lang-btn" data-lang="pt" onclick="setLang('pt')" title="Portuguese">🇧🇷</button>
-      <button class="lang-btn" data-lang="ja" onclick="setLang('ja')" title="Japanese">🇯🇵</button>
+      <button class="lang-btn" data-lang="de" onclick="setLang('de')" title="German">🇩🇪</button>
     </div>
     <span id="rank-display" class="rank-badge rank-public">…</span>
+    <a href="login.html" class="topnav-btn" id="signup-btn" style="display:none;background:var(--accent);border-color:var(--accent);color:#fff">✨ Sign Up</a>
     <button class="topnav-btn" id="logout-btn" onclick="doLogout()">Logout</button>
     <button class="topnav-btn" onclick="loadAll()" title="Refresh">↻</button>
   </div>
@@ -353,16 +434,26 @@
       </div>
     </div>
   </div>
+  <div class="search-wrap" data-guest-hide>
+    <div class="search-box">
+      <span class="search-icon">🔎</span>
+      <input type="text" class="search-input" id="global-search" placeholder="Search tips, news, the movie page, site pages..." autocomplete="off" oninput="onSearchInput()" onfocus="onSearchFocus()"/>
+      <button class="search-clear" id="search-clear-btn" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
   <div class="tab-bar-wrap">
     <div class="tab-bar">
       <button class="tab-btn active" id="tab-recommended" onclick="showSec('recommended')">⭐ Recommended</button>
       <button class="tab-btn" id="tab-featured"    onclick="showSec('featured')">🔥 Featured</button>
+      <button class="tab-btn" id="tab-protip"      onclick="showSec('protip')">🌟 Pro Tips</button>
       <button class="tab-btn" id="tab-public"      onclick="showSec('public')">📢 Public</button>
-      <button class="tab-btn" id="tab-news"        onclick="showSec('news')">📰 News</button>
-      <button class="tab-btn" id="tab-complaints"  onclick="showSec('complaints')">📝 Complaints <span class="tb-badge" id="complaint-ct" style="display:none"></span></button>
-      <button class="tab-btn" id="tab-mysettings"  onclick="showSec('mysettings')">🎨 My Style</button>
-      <a href="games.html" class="tab-btn">🎮 Games</a>
-      <a href="leaderboard.html" class="tab-btn">🏆 Leaderboard</a>
+      <button class="tab-btn" id="tab-news"        onclick="showSec('news')" data-guest-hide>📰 News</button>
+      <button class="tab-btn" id="tab-complaints"  onclick="showSec('complaints')" data-guest-hide>📝 Complaints <span class="tb-badge" id="complaint-ct" style="display:none"></span></button>
+      <button class="tab-btn" id="tab-mysettings"  onclick="showSec('mysettings')" data-guest-hide>🎨 My Style</button>
+      <a href="games.html" class="tab-btn" data-guest-hide>🎮 Games</a>
+      <a href="leaderboard.html" class="tab-btn" data-guest-hide>🏆 Leaderboard</a>
+      <a href="movie.html" class="tab-btn" data-guest-hide>🎬 Movie</a>
       <div class="tab-divider"></div>
       <button class="tab-btn" id="tab-pending"    onclick="showSec('pending')"    style="display:none">⏳ Pending <span class="tb-badge" id="pending-ct" style="display:none"></span></button>
       <button class="tab-btn" id="tab-adminboard" onclick="showSec('adminboard')" style="display:none">🔒 Admin Board</button>
@@ -370,8 +461,10 @@
     </div>
   </div>
   <div class="content">
-
-    <!-- RECOMMENDED -->
+    <div class="builder-bar" id="builder-bar">
+      <span class="bb-label">🧩 Builder Mode — editing <strong id="bb-target-label">Recommended</strong></span>
+      <button class="bb-exit" onclick="exitBuilder()">✕ Exit Builder</button>
+    </div>
     <div class="section sec-panel visible" id="sec-recommended">
       <div class="section-header"><span class="section-title">⭐ Recommended Tips <span class="section-lock">Owner &amp; Admins</span></span><span class="rank-badge rank-admin">Staff Picks</span></div>
       <div class="staff-form" id="rec-form" style="display:none">
@@ -381,9 +474,8 @@
         <button class="post-btn" onclick="staffPost('recommended')">+ Post</button>
       </div>
       <div class="rec-grid" id="recommended-grid"><p class="empty">Loading...</p></div>
+      <div id="builder-zone-recommended"></div>
     </div>
-
-    <!-- FEATURED -->
     <div class="section sec-panel" id="sec-featured">
       <div class="section-header"><span class="section-title">🔥 Featured Tips <span class="section-lock">Mod+ only</span></span><span class="rank-badge rank-mod">Mod+</span></div>
       <div class="staff-form" id="feat-form" style="display:none">
@@ -394,8 +486,6 @@
       </div>
       <div class="tips-grid" id="featured-grid"><p class="empty">Nothing here yet.</p></div>
     </div>
-
-    <!-- PUBLIC -->
     <div class="section sec-panel" id="sec-public">
       <div class="section-header"><span class="section-title">📢 Public Tips <span class="section-lock">Everyone can submit</span></span><span class="rank-badge rank-public">Public</span></div>
       <div class="public-form">
@@ -410,9 +500,21 @@
       </div>
       <div class="tips-grid" id="public-grid"><p class="empty">No approved tips yet.</p></div>
     </div>
-
-    <!-- NEWS -->
-    <div class="section sec-panel" id="sec-news">
+    <div class="section sec-panel" id="sec-protip">
+      <div class="section-header"><span class="section-title">🌟 Pro Tips <span class="section-lock">Advanced tips, reviewed before posting</span></span><span class="rank-badge rank-owner">Pro</span></div>
+      <div class="public-form" id="protip-form" style="display:none">
+        <h3>Submit a Pro Tip for review</h3>
+        <div class="form-row">
+          <input type="text" id="protip-name" placeholder="Your name" maxlength="30"/>
+          <select id="protip-tag"><option value="tip">💡 tip</option><option value="food">🍜 food</option><option value="life">✌️ life</option><option value="tech">⚡ tech</option><option value="random">🎲 random</option></select>
+        </div>
+        <div class="form-row"><textarea id="protip-text" placeholder="Share an advanced/pro-level tip here..." maxlength="280"></textarea></div>
+        <div class="form-row"><button class="submit-btn" onclick="submitProTip()">Submit Pro Tip for Review</button></div>
+        <span class="pending-notice">⏳ Pro Tips are reviewed before posting — Owner &amp; Admins approve or deny.</span>
+      </div>
+      <div class="rec-grid" id="protip-grid"><p class="empty">No pro tips yet.</p></div>
+    </div>
+    <div class="section sec-panel" id="sec-news" data-guest-hide>
       <div class="section-header"><span class="section-title">📰 News <span class="section-lock">Owner &amp; Admins</span></span><span class="rank-badge rank-admin">Latest</span></div>
       <div id="news-form" style="display:none;margin-bottom:1rem">
         <div class="news-compose">
@@ -427,9 +529,7 @@
       </div>
       <div id="news-list"><p class="empty">No news yet.</p></div>
     </div>
-
-    <!-- COMPLAINTS -->
-    <div class="sec-panel" id="sec-complaints">
+    <div class="sec-panel" id="sec-complaints" data-guest-hide>
       <div class="section-header"><span class="section-title">📝 Complaints <span class="section-lock">Staff review privately</span></span></div>
       <div class="complaint-form-wrap">
         <div class="complaint-form-head">📬 Submit a Complaint</div>
@@ -462,9 +562,7 @@
         <div id="complaints-list"><p class="empty">No complaints yet.</p></div>
       </div>
     </div>
-
-    <!-- MY STYLE (Personal Settings - visible to all logged-in users) -->
-    <div class="sec-panel" id="sec-mysettings">
+    <div class="sec-panel" id="sec-mysettings" data-guest-hide>
       <div class="section-header"><span class="section-title">🎨 My Style <span class="section-lock">Only you can see these changes</span></span><span class="rank-badge rank-public">👤 Personal</span></div>
       <div class="my-settings-wrap">
         <p class="my-settings-note">💡 These are your personal visual preferences. Only stored on <em>your device</em> — no one else sees them. They apply everywhere on the site.</p>
@@ -506,14 +604,10 @@
         </div>
       </div>
     </div>
-
-    <!-- PENDING -->
     <div class="section sec-panel" id="sec-pending">
       <div class="section-header"><span class="section-title">⏳ Pending Approval <span class="section-lock">Owner &amp; Admin only</span></span><span class="rank-badge rank-admin">Review Queue</span></div>
       <div class="tips-grid" id="pending-grid"><p class="empty">No pending tips.</p></div>
     </div>
-
-    <!-- ADMIN BOARD -->
     <div class="section sec-panel" id="sec-adminboard">
       <div class="section-header"><span class="section-title">🔒 Admin Board <span class="section-lock">Admin+ only</span></span><span class="rank-badge rank-admin">Admin+</span></div>
       <div class="staff-form" id="admin-form" style="display:none">
@@ -524,11 +618,59 @@
       </div>
       <div class="tips-grid" id="adminboard-grid"><p class="empty">Nothing here yet.</p></div>
     </div>
-
-    <!-- SETTINGS (Owner) -->
     <div class="sec-panel" id="sec-settings">
       <div class="section-header" style="margin-bottom:1.5rem"><span class="section-title">⚙️ Owner Settings</span><span class="rank-badge rank-owner">👑 Owner Only</span></div>
       <div class="settings-wrap">
+        <div class="settings-card" style="border-color:rgba(200,96,42,0.35)">
+          <div class="settings-card-header">🧩 Page Builder</div>
+          <div class="settings-card-body">
+            <p class="hint">Move, edit, and add Text, Video, Section, and Footer blocks directly on the live page. Changes save to the site for everyone.</p>
+            <div class="setting-row">
+              <label>Choose a page to edit</label>
+              <select id="builder-page-select">
+                <option value="recommended">⭐ Recommended tab</option>
+                <option value="public">📢 Public tab</option>
+                <option value="news">📰 News tab</option>
+                <option value="footer">Site-wide footer</option>
+              </select>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+              <button class="save-btn" onclick="enterBuilder(document.getElementById('builder-page-select').value)">🧩 Launch Builder</button>
+              <span class="settings-toast" id="toast-builder"></span>
+            </div>
+          </div>
+        </div>
+        <div class="settings-card">
+          <div class="settings-card-header">🎬 Movie Page</div>
+          <div class="settings-card-body">
+            <p class="hint">Edit the content shown on the public Movie page.</p>
+            <div class="setting-row"><label>Movie Title</label><input type="text" id="set-movie-title" placeholder="e.g. Untitled Project" maxlength="80"/></div>
+            <div class="setting-row"><label>Tagline</label><input type="text" id="set-movie-tagline" placeholder="A short tagline..." maxlength="120"/></div>
+            <div class="setting-row"><label>Synopsis</label><textarea id="set-movie-synopsis" style="min-height:100px" placeholder="What's the movie about?" maxlength="2000"></textarea></div>
+            <div class="settings-row-2">
+              <div class="setting-row"><label>Poster Image URL</label><input type="text" id="set-movie-poster" placeholder="https://...jpg"/></div>
+              <div class="setting-row"><label>Trailer / Video URL</label><input type="text" id="set-movie-video" placeholder="YouTube/Vimeo link or .mp4 URL"/></div>
+            </div>
+            <div class="settings-row-2">
+              <div class="setting-row"><label>Status</label>
+                <select id="set-movie-status">
+                  <option value="planning">📝 Planning</option>
+                  <option value="writing">✍️ Writing</option>
+                  <option value="filming">🎥 Filming</option>
+                  <option value="editing">✂️ Editing</option>
+                  <option value="post">🎞️ Post-Production</option>
+                  <option value="released">🍿 Released</option>
+                </select>
+              </div>
+              <div class="setting-row"><label>Progress (%)</label><input type="text" id="set-movie-progress" placeholder="e.g. 40"/></div>
+            </div>
+            <div class="setting-row"><label>Progress Update / Director's Note</label><textarea id="set-movie-update" style="min-height:80px" placeholder="Latest update for fans..." maxlength="1000"></textarea></div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+              <button class="save-btn" onclick="saveMovie()">Save Movie Page</button>
+              <span class="settings-toast" id="toast-movie"></span>
+            </div>
+          </div>
+        </div>
         <div class="settings-card"><div class="settings-card-header">📢 Announcement Banner</div><div class="settings-card-body"><div class="setting-row"><label>Message</label><textarea id="set-ann-text" placeholder="e.g. 🎉 Welcome!" maxlength="200"></textarea></div><div class="setting-row"><label>Banner Color</label><div class="color-row"><input type="color" id="set-ann-color" value="#c8602a" style="width:80px" oninput="updateAnnPreview()"/><div class="color-swatch" id="ann-swatch" style="background:#c8602a"></div></div></div><div id="ann-preview-wrap" style="display:none"><div class="ann-preview" id="ann-preview"></div></div><div class="setting-row"><label>Visibility</label><select id="set-ann-show"><option value="yes">✅ Visible to everyone</option><option value="no">🚫 Hidden</option></select></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveAnn()">Save Banner</button><span class="settings-toast" id="toast-ann"></span></div></div></div>
         <div class="settings-card"><div class="settings-card-header">🎨 Site Appearance</div><div class="settings-card-body"><div class="settings-row-2"><div class="setting-row"><label>Site Title</label><input type="text" id="set-title" placeholder="tips &amp; stuff" maxlength="40"/></div><div class="setting-row"><label>Subtitle</label><input type="text" id="set-subtitle" maxlength="80"/></div></div><div class="settings-row-2"><div class="setting-row"><label>Accent Color</label><div class="color-row"><input type="color" id="set-accent" value="#c8602a" style="width:80px" oninput="document.getElementById('accent-sw').style.background=this.value"/><div class="color-swatch" id="accent-sw" style="background:#c8602a"></div></div></div><div class="setting-row"><label>Background</label><div class="color-row"><input type="color" id="set-bg" value="#f5f2eb" style="width:80px" oninput="document.getElementById('bg-sw').style.background=this.value"/><div class="color-swatch" id="bg-sw" style="background:#f5f2eb"></div></div></div></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="saveAppearance()">Save Appearance</button><span class="settings-toast" id="toast-appearance"></span></div></div></div>
         <div class="settings-card"><div class="settings-card-header">🔑 Staff Passwords</div><div class="settings-card-body"><p class="hint">Leave blank to keep current.</p><div class="settings-row-2"><div class="setting-row"><label>👑 Owner Password</label><input type="password" id="set-pw-owner" placeholder="new password..." autocomplete="new-password"/></div><div class="setting-row"><label>🛡️ Admin Password</label><input type="password" id="set-pw-admin" placeholder="new password..." autocomplete="new-password"/></div></div><div class="setting-row"><label>🔧 Mod Password</label><input type="password" id="set-pw-mod" placeholder="new password..." autocomplete="new-password"/></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="save-btn" onclick="savePasswords()">Save Passwords</button><span class="settings-toast" id="toast-passwords"></span></div></div></div>
@@ -561,28 +703,40 @@
           <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><div style="flex:1;min-width:160px"><b style="font-size:0.85rem">Clear Featured</b><p class="hint">Delete all featured tips.</p></div><button class="save-btn danger" onclick="dangerClear('featured')">Clear Featured</button></div>
           <hr style="border:none;border-top:1px solid var(--border)">
           <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><div style="flex:1;min-width:160px"><b style="font-size:0.85rem">Clear Recommended</b><p class="hint">Delete all staff pick tips.</p></div><button class="save-btn danger" onclick="dangerClear('recommended')">Clear Recommended</button></div>
+          <hr style="border:none;border-top:1px solid var(--border)">
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><div style="flex:1;min-width:160px"><b style="font-size:0.85rem">Clear Pro Tips</b><p class="hint">Delete all approved pro tips.</p></div><button class="save-btn danger" onclick="dangerClear('protip')">Clear Pro Tips</button></div>
         </div></div>
       </div>
     </div>
-
-    <div class="site-footer"><p>tips &amp; stuff — shared with friends ✦</p></div>
+    <div class="site-footer" id="site-footer-default"><p>tips &amp; stuff — shared with friends ✦</p></div>
+    <div id="builder-zone-footer"></div>
   </div>
 </div>
 <nav class="mobile-nav">
   <button class="mob-btn active" id="mob-recommended" onclick="mobGo('recommended',this)"><span class="mi">⭐</span>Picks</button>
   <button class="mob-btn" id="mob-featured"    onclick="mobGo('featured',this)"><span class="mi">🔥</span>Hot</button>
+  <button class="mob-btn" id="mob-protip"      onclick="mobGo('protip',this)"><span class="mi">🌟</span>Pro</button>
   <button class="mob-btn" id="mob-public"      onclick="mobGo('public',this)"><span class="mi">📢</span>Public</button>
-  <button class="mob-btn" id="mob-news"        onclick="mobGo('news',this)"><span class="mi">📰</span>News</button>
-  <a href="games.html"       class="mob-btn"><span class="mi">🎮</span>Games</a>
-  <a href="leaderboard.html" class="mob-btn"><span class="mi">🏆</span>Board</a>
-  <a href="donate.html"      class="mob-btn"><span class="mi">💛</span>Donate</a>
-  <button class="mob-btn" id="mob-complaints"  onclick="mobGo('complaints',this)"><span class="mi">📝</span>Report<span class="mob-badge" id="mob-complaint-badge"></span></button>
-  <button class="mob-btn" id="mob-mysettings"  onclick="mobGo('mysettings',this)"><span class="mi">🎨</span>Style</button>
+  <button class="mob-btn" id="mob-news"        onclick="mobGo('news',this)" data-guest-hide><span class="mi">📰</span>News</button>
+  <a href="games.html"       class="mob-btn" data-guest-hide><span class="mi">🎮</span>Games</a>
+  <a href="leaderboard.html" class="mob-btn" data-guest-hide><span class="mi">🏆</span>Board</a>
+  <a href="movie.html"       class="mob-btn" data-guest-hide><span class="mi">🎬</span>Movie</a>
+  <a href="donate.html"      class="mob-btn" data-guest-hide><span class="mi">💛</span>Donate</a>
+  <button class="mob-btn" id="mob-complaints"  onclick="mobGo('complaints',this)" data-guest-hide><span class="mi">📝</span>Report<span class="mob-badge" id="mob-complaint-badge"></span></button>
+  <button class="mob-btn" id="mob-mysettings"  onclick="mobGo('mysettings',this)" data-guest-hide><span class="mi">🎨</span>Style</button>
   <button class="mob-btn" id="mob-pending"     onclick="mobGo('pending',this)"    style="display:none"><span class="mi">⏳</span>Queue<span class="mob-badge" id="mob-pending-badge"></span></button>
   <button class="mob-btn" id="mob-adminboard"  onclick="mobGo('adminboard',this)" style="display:none"><span class="mi">🔒</span>Admin</button>
   <button class="mob-btn" id="mob-settings"    onclick="mobGo('settings',this)"   style="display:none"><span class="mi">⚙️</span>Settings</button>
 </nav>
-<button class="chat-fab" onclick="toggleChat()">💬<span class="chat-fab-badge" id="chat-fab-badge"></span></button>
+<button class="bot-fab" onclick="toggleBot()" title="Ask Bot">🤖</button>
+<div class="bot-panel" id="bot-panel">
+  <div class="bot-head"><span class="bot-head-title">🤖 Ask Bot</span><button class="bot-head-btn" onclick="toggleBot()">✕</button></div>
+  <div class="bot-msgs" id="bot-msgs"></div>
+  <div class="bot-suggest-row" id="bot-suggest-row"></div>
+  <div class="bot-input-row"><input type="text" id="bot-input" placeholder="Ask about the site..." maxlength="200"/><button class="bot-send" onclick="sendBotMsg()">➤</button></div>
+  <div class="bot-footer-note">Answers questions about this site only.</div>
+</div>
+<button class="chat-fab" onclick="toggleChat()" data-guest-hide>💬<span class="chat-fab-badge" id="chat-fab-badge"></span></button>
 <div class="chat-panel" id="chat-panel">
   <div class="chat-head"><span class="chat-head-title">💬 Group Chat</span><div class="chat-head-btns"><button class="chat-head-btn" onclick="loadChat()">↻</button><button class="chat-head-btn" onclick="toggleChat()">✕</button></div></div>
   <div class="chat-msgs" id="chat-msgs"><p class="chat-empty-msg">Loading...</p></div>
@@ -605,8 +759,8 @@ const TAG={
 };
 const SEED={recommended:[{id:'r1',text:'Drink a glass of water first thing in the morning.',tag:'life',author:'Owner'},{id:'r2',text:'Make your bed every morning. Takes 2 minutes.',tag:'life',author:'Owner'},{id:'r3',text:'Tell people when you appreciate them.',tag:'life',author:'Owner'},{id:'r4',text:'When overwhelmed, write everything on your mind.',tag:'life',author:'Owner'},{id:'r5',text:'Set your alarm 10 minutes earlier than you need.',tag:'life',author:'Owner'},{id:'r6',text:'If a task takes less than 2 minutes, do it now.',tag:'life',author:'Owner'},{id:'r7',text:'Take a 10-minute walk after lunch.',tag:'life',author:'Owner'},{id:'r8',text:'Add a pinch of salt to coffee grounds before brewing.',tag:'food',author:'Owner'},{id:'r9',text:'Store fresh herbs in a glass of water in the fridge.',tag:'food',author:'Owner'},{id:'r10',text:'Freeze overripe bananas for smoothies.',tag:'food',author:'Owner'},{id:'r11',text:'Let steak rest 5 minutes before cutting.',tag:'food',author:'Owner'},{id:'r12',text:'Pasta water is liquid gold for your sauce.',tag:'food',author:'Owner'},{id:'r13',text:'Toast spices 30 seconds in a dry pan.',tag:'food',author:'Owner'},{id:'r14',text:'Ctrl+Shift+T reopens a closed browser tab.',tag:'tech',author:'Owner'},{id:'r15',text:'Add site:reddit.com to Google for real opinions.',tag:'tech',author:'Owner'},{id:'r16',text:'Use dark mode everywhere to save battery.',tag:'tech',author:'Owner'},{id:'r17',text:'Windows+V opens clipboard history.',tag:'tech',author:'Owner'},{id:'r18',text:'Use a password manager.',tag:'tech',author:'Owner'},{id:'r19',text:'Ctrl+Z undoes mistakes in almost every app.',tag:'tech',author:'Owner'},{id:'r20',text:'Unplug your router 30 seconds to fix WiFi.',tag:'tech',author:'Owner'},{id:'r21',text:'Flip a coin to see which outcome you hope for.',tag:'random',author:'Owner'},{id:'r22',text:"If bored, clean something.",tag:'random',author:'Owner'},{id:'r23',text:'Put phone across the room at night.',tag:'random',author:'Owner'},{id:'r24',text:'Keep a notebook by your bed.',tag:'random',author:'Owner'},{id:'r25',text:'Buy something new, get rid of something old.',tag:'random',author:'Owner'},{id:'r26',text:'Say things out loud to remember them.',tag:'random',author:'Owner'}],
 public:[{id:'p1',text:'Use focus mode during meals.',tag:'life',author:'Admin'},{id:'p2',text:'Freeze ginger — grates easier.',tag:'food',author:'Admin'},{id:'p3',text:'Screenshot important confirmation emails.',tag:'tech',author:'Admin'},{id:'p4',text:'Mute group chats instead of leaving them.',tag:'tech',author:'Admin'},{id:'p5',text:'Add garlic last to the pan.',tag:'food',author:'Admin'},{id:'p6',text:'Carry a reusable bag folded in your pocket.',tag:'random',author:'Admin'}]};
-let db={public:[],featured:[],adminboard:[],pending:[],recommended:[],banlist:[],rules:[],members:[],config:{},chat:[],news:[],complaints:[],accounts:[]};
-const SECS=['recommended','featured','public','news','complaints','mysettings','pending','adminboard','settings'];
+let db={public:[],featured:[],adminboard:[],pending:[],recommended:[],protip:[],banlist:[],rules:[],members:[],config:{},chat:[],news:[],complaints:[],accounts:[],blocks:{},movie:{}};
+const SECS=['recommended','featured','protip','public','news','complaints','mysettings','pending','adminboard','settings'];
 function showSec(id){
   SECS.forEach(s=>{
     const p=document.getElementById('sec-'+s);if(p)p.classList.remove('visible');
@@ -622,16 +776,17 @@ function showSec(id){
 function mobGo(id,btn){showSec(id);}
 function doLogout(){localStorage.removeItem('rank');localStorage.removeItem('username');window.location.replace('login.html');}
 function applyRankUI(){
-  const icons={owner:'👑',admin:'🛡️',mod:'🔧',public:'👤'};
-  const names={owner:'Owner',admin:'Admin',mod:'Mod',public:'Public'};
+  const icons={owner:'👑',admin:'🛡️',mod:'🔧',public:'👤',guest:'👀'};
+  const names={owner:'Owner',admin:'Admin',mod:'Mod',public:'Public',guest:'Guest'};
   const icon=icons[rank]||'👤';
   const label=username?icon+' '+username:icon+' '+names[rank];
-  const cls={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
+  const cls={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public',guest:'rank-public'};
   const rd=document.getElementById('rank-display');
   rd.textContent=label;rd.className='rank-badge '+(cls[rank]||'rank-public');
+  const isGuest=rank==='guest';
   const isOwner=rank==='owner',isAdmin=rank==='owner'||rank==='admin',isMod=rank==='owner'||rank==='admin'||rank==='mod';
-  if(username){
-    ['rec-author','feat-author','admin-author','news-author'].forEach(id=>{const el=document.getElementById(id);if(el&&!el.value)el.value=username;});
+  if(username && !isGuest){
+    ['rec-author','feat-author','admin-author','news-author','protip-name'].forEach(id=>{const el=document.getElementById(id);if(el&&!el.value)el.value=username;});
     const cf=document.getElementById('cf-name');if(cf&&!cf.value)cf.value=username;
     const pn=document.getElementById('pub-name');if(pn&&!pn.value)pn.value=username;
   }
@@ -646,7 +801,32 @@ function applyRankUI(){
   document.getElementById('feat-form').style.display=isMod?'flex':'none';
   document.getElementById('admin-form').style.display=isAdmin?'flex':'none';
   const crp=document.getElementById('complaints-review-panel');if(crp)crp.style.display=isAdmin?'block':'none';
+  applyGuestRestrictions(isGuest);
   renderAll();
+  renderBuilderZones();
+}
+function applyGuestRestrictions(isGuest){
+  // Hide every element marked data-guest-hide (other tabs, nav links, chat, search, etc.)
+  document.querySelectorAll('[data-guest-hide]').forEach(el=>{
+    el.style.display=isGuest?'none':'';
+  });
+  // Submit forms for Public + Pro Tip: guests can view tips but never submit
+  const pubFormWrap=document.querySelector('#sec-public .public-form');
+  if(pubFormWrap)pubFormWrap.style.display=isGuest?'none':'';
+  const protipForm=document.getElementById('protip-form');
+  if(protipForm)protipForm.style.display=isGuest?'none':'flex';
+  // Sign Up button only for guests; Logout stays for everyone (guests can "log out" back to login screen)
+  const signupBtn=document.getElementById('signup-btn');
+  if(signupBtn)signupBtn.style.display=isGuest?'inline-flex':'none';
+  // If a guest is somehow sitting on a restricted tab (e.g. stale state), bounce them to Recommended
+  if(isGuest){
+    const allowed=['recommended','featured','protip','public'];
+    const activePanel=document.querySelector('.sec-panel.visible');
+    if(activePanel){
+      const activeId=activePanel.id.replace('sec-','');
+      if(!allowed.includes(activeId))showSec('recommended');
+    }
+  }
 }
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function setStatus(s,m){document.getElementById('status-dot').className='status-dot '+s;document.getElementById('status-text').textContent=m}
@@ -661,6 +841,7 @@ async function loadAll(){
     db.adminboard =Array.isArray(data.adminboard) ?data.adminboard :[];
     db.pending    =Array.isArray(data.pending)    ?data.pending    :[];
     db.recommended=Array.isArray(data.recommended)?data.recommended:[];
+    db.protip     =Array.isArray(data.protip)     ?data.protip     :[];
     db.banlist    =Array.isArray(data.banlist)    ?data.banlist    :[];
     db.rules      =Array.isArray(data.rules)      ?data.rules      :[];
     db.members    =Array.isArray(data.members)    ?data.members    :[];
@@ -669,6 +850,8 @@ async function loadAll(){
     db.complaints =Array.isArray(data.complaints) ?data.complaints :[];
     db.accounts   =Array.isArray(data.accounts)   ?data.accounts   :[];
     db.config     =(data.config&&typeof data.config==='object')?data.config:{};
+    db.blocks     =(data.blocks&&typeof data.blocks==='object')?data.blocks:{};
+    db.movie      =(data.movie&&typeof data.movie==='object')?data.movie:{};
     if(db.config.passwords){
       if(db.config.passwords.owner)PASSWORDS.owner=db.config.passwords.owner;
       if(db.config.passwords.admin)PASSWORDS.admin=db.config.passwords.admin;
@@ -695,17 +878,14 @@ function applyConfig(cfg){
   if(!cfg)return;
   if(cfg.title){document.getElementById('site-title-el').innerHTML=cfg.title;document.title=cfg.title.replace(/<[^>]*>/g,'')+' ✦';}
   if(cfg.subtitle)document.getElementById('site-subtitle-el').textContent=cfg.subtitle;
-  if(cfg.accent)document.documentElement.style.setProperty('--accent',cfg.accent);
-  if(cfg.bg){
-    // Only apply site bg if user hasn't set personal bg
-    if(!localStorage.getItem('user_bg'))document.documentElement.style.setProperty('--bg',cfg.bg);
-  }
+  if(cfg.accent && !localStorage.getItem('user_accent'))document.documentElement.style.setProperty('--accent',cfg.accent);
+  if(cfg.bg && !localStorage.getItem('user_bg'))document.documentElement.style.setProperty('--bg',cfg.bg);
   if(cfg.welcome){let w=document.getElementById('welcome-msg');if(!w){w=document.createElement('p');w.id='welcome-msg';w.style.cssText='font-size:0.9rem;color:var(--muted);margin-top:0.35rem;line-height:1.6';document.getElementById('site-subtitle-el').after(w);}w.textContent=cfg.welcome;}
   if(cfg.announcement&&cfg.announcement.show==='yes'&&cfg.announcement.text){const bar=document.getElementById('ann-bar');document.getElementById('ann-txt').textContent=cfg.announcement.text;if(cfg.announcement.color)bar.style.background=cfg.announcement.color;bar.classList.add('show');}
   if(Array.isArray(cfg.customBlocks)&&cfg.customBlocks.length)renderCustomBlocks(cfg.customBlocks);
+  applyLang(); // re-apply translation after config text loads, so subtitle override logic is correct
 }
 function renderCustomBlocks(blocks){
-  // Show custom blocks at bottom of recommended section
   let wrap=document.getElementById('custom-blocks-display');
   if(!wrap){wrap=document.createElement('div');wrap.id='custom-blocks-display';document.getElementById('recommended-grid').after(wrap);}
   wrap.innerHTML=blocks.map(b=>{
@@ -722,7 +902,8 @@ function renderGrid(gridId,tips,canDel,isPending,isRec){
     if(isPending&&isAdmin){acts.push(`<button class="action-btn approve-btn" onclick="approveTip('${t.id}')">✓ Approve</button>`);acts.push(`<button class="action-btn deny-btn" onclick="denyTip('${t.id}')">✕ Deny</button>`);}
     else if(canDel){acts.push(`<button class="action-btn del-btn" onclick="deleteTip('${gridId}','${t.id}')">✕</button>`);}
     const cc=isRec?'rec-card':'tip-card';const sa=isRec?'':` style="--card-accent:${cfg.accent}"`;
-    return `<article class="${cc}"${sa}><span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span><p class="tip-text">${esc(t.text)}</p><div class="tip-footer"><span class="tip-author">${esc(t.author)}</span><div class="tip-actions">${acts.join('')}</div></div></article>`;
+    const destBadge=(isPending&&t.dest==='protip')?`<span class="rank-badge rank-owner" style="font-size:0.6rem;padding:2px 7px">🌟 → Pro Tip</span>`:'';
+    return `<article class="${cc}"${sa}>${destBadge?`<div style="margin-bottom:4px">${destBadge}</div>`:''}<span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span><p class="tip-text">${esc(t.text)}</p><div class="tip-footer"><span class="tip-author">${esc(t.author)}</span><div class="tip-actions">${acts.join('')}</div></div></article>`;
   }).join('');
 }
 function renderAll(){
@@ -730,32 +911,41 @@ function renderAll(){
   renderGrid('recommended-grid',db.recommended,isAdmin,false,true);
   renderGrid('public-grid',db.public,isAdmin,false,false);
   renderGrid('featured-grid',db.featured,isMod,false,false);
+  renderGrid('protip-grid',db.protip,isAdmin,false,true);
   renderGrid('adminboard-grid',db.adminboard,isAdmin,false,false);
   renderGrid('pending-grid',db.pending,false,true,false);
   renderNews();renderComplaints();updateComplaintBadge();
+  if(db.config&&Array.isArray(db.config.customBlocks))renderCustomBlocks(db.config.customBlocks);
 }
-async function submitPublic(){const text=document.getElementById('pub-text').value.trim();const auth=document.getElementById('pub-name').value.trim()||username||'anon';const tag=document.getElementById('pub-tag').value;if(!text){document.getElementById('pub-text').focus();return;}setStatus('loading','submitting...');try{db.pending.unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById('pub-text').value='';setStatus('ok','submitted ✓');}catch(e){db.pending.shift();setStatus('error','could not submit — '+e.message);}}
+async function submitPublic(){const text=document.getElementById('pub-text').value.trim();const auth=document.getElementById('pub-name').value.trim()||username||'anon';const tag=document.getElementById('pub-tag').value;if(!text){document.getElementById('pub-text').focus();return;}setStatus('loading','submitting...');try{db.pending.unshift({id:Date.now(),text,tag,author:auth,dest:'public'});await saveAll();document.getElementById('pub-text').value='';setStatus('ok','submitted ✓');}catch(e){db.pending.shift();setStatus('error','could not submit — '+e.message);}}
+async function submitProTip(){const text=document.getElementById('protip-text').value.trim();const auth=document.getElementById('protip-name').value.trim()||username||'anon';const tag=document.getElementById('protip-tag').value;if(!text){document.getElementById('protip-text').focus();return;}setStatus('loading','submitting...');try{db.pending.unshift({id:Date.now(),text,tag,author:auth,dest:'protip'});await saveAll();document.getElementById('protip-text').value='';setStatus('ok','submitted ✓');renderAll();}catch(e){db.pending.shift();setStatus('error','could not submit — '+e.message);}}
 async function staffPost(section){const map={recommended:['rec-text','rec-author','rec-tag'],featured:['feat-text','feat-author','feat-tag'],adminboard:['admin-text','admin-author','admin-tag']};const [ti,ai,gi]=map[section];const text=document.getElementById(ti).value.trim();const auth=document.getElementById(ai).value.trim()||username||'Staff';const tag=document.getElementById(gi).value;if(!text){document.getElementById(ti).focus();return;}setStatus('loading','posting...');try{db[section].unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById(ti).value='';setStatus('ok','posted ✓');renderAll();}catch(e){db[section].shift();setStatus('error','could not post — '+e.message);}}
-async function approveTip(id){const tip=db.pending.find(t=>t.id==id);if(!tip)return;setStatus('loading','approving...');try{db.pending=db.pending.filter(t=>t.id!=id);db.public.unshift({...tip,pending:false});await saveAll();setStatus('ok','approved ✓');renderAll();}catch(e){setStatus('error','could not approve — '+e.message);}}
+async function approveTip(id){const tip=db.pending.find(t=>t.id==id);if(!tip)return;setStatus('loading','approving...');const dest=tip.dest==='protip'?'protip':'public';try{db.pending=db.pending.filter(t=>t.id!=id);if(!Array.isArray(db[dest]))db[dest]=[];db[dest].unshift({...tip,pending:false});await saveAll();setStatus('ok','approved ✓');renderAll();}catch(e){setStatus('error','could not approve — '+e.message);}}
 async function denyTip(id){if(!confirm('Deny and delete?'))return;setStatus('loading','denying...');try{db.pending=db.pending.filter(t=>t.id!=id);await saveAll();setStatus('ok','denied ✓');renderAll();}catch(e){setStatus('error','could not deny — '+e.message);}}
 async function deleteTip(gridId,id){if(!confirm('Delete this tip?'))return;const sec=gridId.replace('-grid','');const prev=[...db[sec]];db[sec]=db[sec].filter(t=>t.id!=id);renderAll();try{await saveAll();setStatus('ok','deleted ✓');}catch(e){db[sec]=prev;setStatus('error','could not delete — '+e.message);renderAll();}}
-/* SETTINGS */
 function populateSettings(){
   const cfg=db.config||{};
   document.getElementById('set-title').value=(cfg.title||'').replace(/<[^>]*>/g,'').replace('&amp;','&');
   document.getElementById('set-subtitle').value=cfg.subtitle||'';
   const acc=cfg.accent||'#c8602a';document.getElementById('set-accent').value=acc;document.getElementById('accent-sw').style.background=acc;
   const bg=cfg.bg||'#f5f2eb';document.getElementById('set-bg').value=bg;document.getElementById('bg-sw').style.background=bg;
-  document.getElementById('set-rules').value=Array.isArray(db.rules)?db.rules.join('
-'):'';
+  document.getElementById('set-rules').value=Array.isArray(db.rules)?db.rules.join('\n'):'';
   document.getElementById('set-welcome').value=cfg.welcome||'';
   const ann=cfg.announcement||{};document.getElementById('set-ann-text').value=ann.text||'';document.getElementById('set-ann-show').value=ann.show||'no';
   const ac=ann.color||'#c8602a';document.getElementById('set-ann-color').value=ac;document.getElementById('ann-swatch').style.background=ac;
   const sv=document.getElementById('set-version');const sc=document.getElementById('set-changelog');
   if(sv)sv.value=cfg.version||'';if(sc)sc.value=cfg.changelog||'';
+  const mv=db.movie||{};
+  document.getElementById('set-movie-title').value=mv.title||'';
+  document.getElementById('set-movie-tagline').value=mv.tagline||'';
+  document.getElementById('set-movie-synopsis').value=mv.synopsis||'';
+  document.getElementById('set-movie-poster').value=mv.poster||'';
+  document.getElementById('set-movie-video').value=mv.video||'';
+  document.getElementById('set-movie-status').value=mv.status||'planning';
+  document.getElementById('set-movie-progress').value=mv.progress||'';
+  document.getElementById('set-movie-update').value=mv.update||'';
   renderCustomBlocksList();updateAnnPreview();renderMemberList();
 }
-/* CUSTOM BLOCKS */
 function renderCustomBlocksList(){
   const blocks=(db.config&&Array.isArray(db.config.customBlocks))?db.config.customBlocks:[];
   const list=document.getElementById('custom-blocks-list');
@@ -781,7 +971,7 @@ function addCustomBlock(){
   document.getElementById('new-block-content').value='';
   document.getElementById('new-block-url').value='';
   renderCustomBlocksList();
-  toast('toast-custom','➕ Block added — click “Save All Blocks” to publish.');
+  toast('toast-custom','➕ Block added — click "Save All Blocks" to publish.');
 }
 function removeCustomBlock(i){
   if(!db.config||!Array.isArray(db.config.customBlocks))return;
@@ -792,10 +982,9 @@ async function saveCustomBlocks(){
   try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-custom','✓ Blocks saved!');}
   catch(e){toast('toast-custom','✕ '+e.message,true);}
 }
-/* MY PERSONAL SETTINGS */
 function populateMySettings(){
-  const bg=localStorage.getItem('user_bg')||'#f5f2eb';
-  const ac=localStorage.getItem('user_accent')||'#c8602a';
+  const bg=localStorage.getItem('user_bg')||(db.config&&db.config.bg)||'#f5f2eb';
+  const ac=localStorage.getItem('user_accent')||(db.config&&db.config.accent)||'#c8602a';
   document.getElementById('my-bg').value=bg;document.getElementById('my-bg-swatch').style.background=bg;
   document.getElementById('my-accent').value=ac;document.getElementById('my-accent-swatch').style.background=ac;
   document.getElementById('my-displayname').value=username||'';
@@ -810,7 +999,7 @@ function saveMyColors(){
   localStorage.setItem('user_bg',bg);localStorage.setItem('user_accent',ac);
   document.documentElement.style.setProperty('--bg',bg);
   document.documentElement.style.setProperty('--accent',ac);
-  toastS('toast-mycolors','✓ Colors applied!');
+  toastS('toast-mycolors','✓ Colors applied — only you see this!');
 }
 function resetMyColors(){
   localStorage.removeItem('user_bg');localStorage.removeItem('user_accent');
@@ -829,7 +1018,6 @@ function saveMyName(){
   applyRankUI();toastS('toast-myname','✓ Name updated!');
 }
 function toastS(id,msg,err){const el=document.getElementById(id);if(!el)return;el.textContent=msg;el.className='settings-toast show'+(err?' error':'');setTimeout(()=>el.className='settings-toast',3000);}
-/* REST OF SETTINGS */
 function updateAnnPreview(){const t=document.getElementById('set-ann-text').value;const c=document.getElementById('set-ann-color').value;document.getElementById('ann-swatch').style.background=c;const w=document.getElementById('ann-preview-wrap'),p=document.getElementById('ann-preview');if(t){w.style.display='block';p.textContent=t;p.style.background=c;}else w.style.display='none';}
 document.getElementById('set-ann-text').addEventListener('input',updateAnnPreview);
 function renderMemberList(){const list=document.getElementById('member-list');if(!db.members||!db.members.length){list.innerHTML='<p style="font-size:0.8rem;color:var(--muted)">No staff added yet.</p>';return;}const rl={owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod'},rc={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod'};list.innerHTML=db.members.map((m,i)=>`<div class="member-row"><span class="member-name">${esc(m.name)}</span><span class="rank-badge ${rc[m.rank]||'rank-public'}">${rl[m.rank]||m.rank}</span><button class="member-del" onclick="removeMember(${i})">✕</button></div>`).join('');}
@@ -840,16 +1028,28 @@ async function saveAnn(){if(!db.config)db.config={};db.config.announcement={text
 async function saveAppearance(){if(!db.config)db.config={};db.config.title=esc(document.getElementById('set-title').value.trim()||'tips & stuff');db.config.subtitle=document.getElementById('set-subtitle').value.trim();db.config.accent=document.getElementById('set-accent').value;db.config.bg=document.getElementById('set-bg').value;try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-appearance','✓ Saved!');}catch(e){toast('toast-appearance','✕ '+e.message,true);}}
 async function savePasswords(){if(!db.config)db.config={};if(!db.config.passwords)db.config.passwords={};const o=document.getElementById('set-pw-owner').value,a=document.getElementById('set-pw-admin').value,m=document.getElementById('set-pw-mod').value;if(o){db.config.passwords.owner=o;PASSWORDS.owner=o;}if(a){db.config.passwords.admin=a;PASSWORDS.admin=a;}if(m){db.config.passwords.mod=m;PASSWORDS.mod=m;}try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');['set-pw-owner','set-pw-admin','set-pw-mod'].forEach(id=>document.getElementById(id).value='');toast('toast-passwords','✓ Updated!');}catch(e){toast('toast-passwords','✕ '+e.message,true);}}
 async function saveMembers(){try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-members','✓ Saved!');}catch(e){toast('toast-members','✕ '+e.message,true);}}
-async function saveRules(){db.rules=document.getElementById('set-rules').value.split('
-').map(r=>r.trim()).filter(Boolean);try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-rules','✓ Rules saved!');}catch(e){toast('toast-rules','✕ '+e.message,true);}}
+async function saveRules(){db.rules=document.getElementById('set-rules').value.split('\n').map(r=>r.trim()).filter(Boolean);try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-rules','✓ Rules saved!');}catch(e){toast('toast-rules','✕ '+e.message,true);}}
 async function saveWelcome(){if(!db.config)db.config={};db.config.welcome=document.getElementById('set-welcome').value.trim();try{setStatus('loading','saving...');await saveAll();applyConfig(db.config);setStatus('ok','saved ✓');toast('toast-welcome','✓ Saved!');}catch(e){toast('toast-welcome','✕ '+e.message,true);}}
+async function saveMovie(){
+  db.movie={
+    title:document.getElementById('set-movie-title').value.trim(),
+    tagline:document.getElementById('set-movie-tagline').value.trim(),
+    synopsis:document.getElementById('set-movie-synopsis').value.trim(),
+    poster:document.getElementById('set-movie-poster').value.trim(),
+    video:document.getElementById('set-movie-video').value.trim(),
+    status:document.getElementById('set-movie-status').value,
+    progress:document.getElementById('set-movie-progress').value.trim(),
+    update:document.getElementById('set-movie-update').value.trim(),
+    updatedAt:Date.now()
+  };
+  try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-movie','✓ Movie page saved! View it on the Movie tab.');}
+  catch(e){toast('toast-movie','✕ '+e.message,true);}
+}
 async function dangerClear(sec){if(!confirm('Permanently delete ALL '+sec+' tips?'))return;db[sec]=[];try{setStatus('loading','clearing...');await saveAll();setStatus('ok','cleared ✓');renderAll();}catch(e){setStatus('error','failed: '+e.message);}}
-/* NEWS */
 const NEWS_CATS={update:{label:'📣 Update',bg:'#e0eaf8',color:'#1a3d6b',accent:'#2a60c8'},announcement:{label:'🎉 Announcement',bg:'#e8f0e0',color:'#2d5016',accent:'#4a8a1a'},warning:{label:'⚠️ Warning',bg:'#fdecd6',color:'#7a3a0a',accent:'#c8602a'},event:{label:'📅 Event',bg:'#ece0f8',color:'#4a1f7a',accent:'#7a2ac8'},other:{label:'💬 Other',bg:'#fce8ec',color:'#7a1a2e',accent:'#c82a4a'}};
 function renderNews(){const list=document.getElementById('news-list');const isAdmin=rank==='owner'||rank==='admin';const news=db.news||[];if(!news.length){list.innerHTML='<p class="empty">No news posted yet.</p>';return;}list.innerHTML=news.map(n=>{const cat=NEWS_CATS[n.cat]||NEWS_CATS.other;const date=n.ts?new Date(n.ts).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}):'';const delBtn=isAdmin?`<button class="news-del-btn show" onclick="deleteNews('${n.id}')">✕ delete</button>`:'';return `<div class="news-card" style="--news-color:${cat.accent}"><div class="news-card-accent"></div><div class="news-card-body"><div class="news-card-top"><span class="news-cat-badge" style="background:${cat.bg};color:${cat.color}">${cat.label}</span><span class="news-date">${date}</span><span class="news-author-tag">by ${esc(n.author||'Staff')}</span></div><div class="news-headline">${esc(n.title)}</div><div class="news-text">${esc(n.body)}</div>${delBtn}</div></div>`;}).join('');}
 async function postNews(){const title=document.getElementById('news-title').value.trim();const body=document.getElementById('news-body').value.trim();const cat=document.getElementById('news-cat').value;const author=document.getElementById('news-author').value.trim()||username||'Staff';if(!title||!body){return;}setStatus('loading','publishing...');try{db.news.unshift({id:Date.now(),title,body,cat,author,ts:Date.now()});await saveAll();document.getElementById('news-title').value='';document.getElementById('news-body').value='';setStatus('ok','published ✓');renderNews();}catch(e){db.news.shift();setStatus('error','could not publish — '+e.message);}}
 async function deleteNews(id){if(!confirm('Delete?'))return;const prev=[...db.news];db.news=db.news.filter(n=>n.id!=id);renderNews();try{await saveAll();setStatus('ok','deleted ✓');}catch(e){db.news=prev;renderNews();}}
-/* COMPLAINTS */
 const COMPLAINT_TYPES={behavior:{label:'😠 Behavior',bg:'#fce8ec',color:'#7a1a2e'},spam:{label:'🚫 Spam',bg:'#fdecd6',color:'#7a3a0a'},inappropriate:{label:'⚠️ Inappropriate',bg:'#fdecd6',color:'#7a3a0a'},bug:{label:'🐛 Bug / Issue',bg:'#e0eaf8',color:'#1a3d6b'},suggestion:{label:'💡 Suggestion',bg:'#e8f0e0',color:'#2d5016'},other:{label:'💬 Other',bg:'#ece0f8',color:'#4a1f7a'}};
 function cfToast(msg,err){const el=document.getElementById('cf-toast');el.textContent=msg;el.className='cf-toast show'+(err?' error':'');setTimeout(()=>el.className='cf-toast',3500);}
 function updateComplaintBadge(){const open=(db.complaints||[]).filter(c=>c.status==='open').length;const ct=document.getElementById('complaint-ct');const mb=document.getElementById('mob-complaint-badge');if(ct){ct.textContent=open>0?open:'';ct.style.display=open>0?'inline':'none';}if(mb){mb.textContent=open>0?open:'';mb.classList.toggle('show',open>0);}}
@@ -858,7 +1058,6 @@ async function submitComplaint(){const name=document.getElementById('cf-name').v
 async function resolveComplaint(id){const c=db.complaints.find(c=>String(c.id)===String(id));if(!c)return;c.status='resolved';try{await saveAll();renderComplaints();updateComplaintBadge();}catch(e){c.status='open';}}
 async function reopenComplaint(id){const c=db.complaints.find(c=>String(c.id)===String(id));if(!c)return;c.status='open';try{await saveAll();renderComplaints();updateComplaintBadge();}catch(e){c.status='resolved';}}
 async function deleteComplaint(id){if(!confirm('Delete?'))return;const prev=[...db.complaints];db.complaints=db.complaints.filter(c=>String(c.id)!==String(id));renderComplaints();updateComplaintBadge();try{await saveAll();}catch(e){db.complaints=prev;renderComplaints();}}
-/* CHAT */
 let chatOpen=false,chatTimer=null,chatLastCount=0;
 function toggleChat(){
   chatOpen=!chatOpen;
@@ -884,100 +1083,421 @@ async function sendMsg(){
 }
 async function deleteMsg(id){db.chat=db.chat.filter(m=>m.id!=id);renderChat();try{await fetch(BIN_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},body:JSON.stringify(db)});}catch(e){}}
 document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();});
-/* LANGUAGE */
+
+/* ===================== ASK BOT (rule-based FAQ assistant) ===================== */
+/*
+  This is a self-contained FAQ engine — no external API calls, so there's nothing to
+  configure and no key to leak. To later upgrade it to a real AI model, replace the
+  body of getBotAnswer(question) with a fetch() call to your AI provider's API and
+  return the text it gives back. Everything else (UI, history, suggestions) stays the same.
+*/
+const BOT_FAQ=[
+  {kws:['rank','role','owner','admin','mod','permission'],a:"Ranks control what you can do here: 👑 Owner has full control including Settings, 🛡️ Admin can manage tips/news/complaints, 🔧 Mod can post Featured tips, and 👤 Public can submit tips and chat. Check the Ranks page for the full breakdown and current staff list."},
+  {kws:['post','submit','tip','add a tip'],a:"To post a tip: go to the 📢 Public tab, fill in your name, pick a category, write your tip, and hit Submit for Review. Staff will approve or deny it before it shows up publicly. Staff (Mod+) can post directly to Featured/Recommended without review."},
+  {kws:['pending','review','approve','queue'],a:"Public tip submissions land in the ⏳ Pending queue, visible to Owner & Admins. They can approve (moves it to Public) or deny (deletes it) from there."},
+  {kws:['complaint','report','issue','bug'],a:"Use the 📝 Complaints tab to privately report behavior, spam, bugs, or suggestions to staff. Only Admin+ can see submitted complaints — they're not public."},
+  {kws:['news','announcement'],a:"📰 News posts are published by Owner/Admins and show up with categories like Update, Announcement, Warning, or Event. Check the News tab for the latest."},
+  {kws:['chat','group chat','message'],a:"The 💬 chat bubble (bottom right) opens Group Chat — it's live, auto-refreshes every 15s, and shows your rank badge if you're staff. I'm a separate bot just for answering questions about the site, not the same as Group Chat!"},
+  {kws:['style','color','theme','background','my style'],a:"Go to 🎨 My Style to set a personal background and accent color — it's stored only on your device, so nobody else sees your custom colors."},
+  {kws:['leaderboard','points','score'],a:"Check the 🏆 Leaderboard page from the nav for current standings."},
+  {kws:['game','games'],a:"The 🎮 Games page has the site's mini-games — check the nav bar at the top or the mobile bar at the bottom."},
+  {kws:['movie','trailer','film'],a:"There's now a 🎬 Movie page in the nav with info about the movie being made — synopsis, poster, status, progress, and a trailer if one's been added."},
+  {kws:['donate','support','tip jar'],a:"You can support the site from the 💛 Donate page in the nav."},
+  {kws:['version','changelog','update'],a:"Check the 🔖 Version page for the changelog. When the Owner pushes a new version, you'll see an update banner at the top of the site."},
+  {kws:['rule','rules','banned','ban'],a:"Site rules live on the 📜 Rules page, and the 🚫 Bans page lists anyone currently banned."},
+  {kws:['login','log in','account','password'],a:"Use the Login page (top nav) with your name and the rank password given to you by staff. Forgot your password? Ask an Owner/Admin — they manage passwords in Settings."},
+  {kws:['settings','builder','edit page','customize'],a:"Owner-only: the ⚙️ Settings tab has site appearance, the Movie page editor, and a new 🧩 Page Builder for moving/editing Text, Video, Section, and Footer blocks directly on the page."},
+  {kws:['who made','who built','developer'],a:"This site was built and is maintained by its Owner — check the Ranks page to see who that is!"},
+  {kws:['hi','hello','hey','sup'],a:"Hey! 👋 I'm the site's Ask Bot. I can answer questions about ranks, posting tips, complaints, the leaderboard, the movie page, and more. What do you want to know?"},
+];
+const BOT_DEFAULT="Hmm, I'm not sure about that one — I can only answer questions about how this site works (ranks, posting tips, complaints, settings, etc). Try asking something like \"how do I post a tip?\" or \"what do ranks mean?\"";
+const BOT_SUGGESTIONS=["How do ranks work?","How do I post a tip?","What's the Movie page?","How do complaints work?"];
+let botHistory=[];
+function getBotAnswer(q){
+  const lower=q.toLowerCase();
+  for(const entry of BOT_FAQ){
+    if(entry.kws.some(k=>lower.includes(k)))return entry.a;
+  }
+  return BOT_DEFAULT;
+}
+function renderBotSuggestions(){
+  const row=document.getElementById('bot-suggest-row');
+  if(!row)return;
+  row.innerHTML=BOT_SUGGESTIONS.map(s=>`<button class="bot-suggest-chip" onclick="askBotSuggestion(this)">${esc(s)}</button>`).join('');
+}
+function askBotSuggestion(btn){
+  document.getElementById('bot-input').value=btn.textContent;
+  sendBotMsg();
+}
+function renderBotMsgs(){
+  const box=document.getElementById('bot-msgs');
+  if(!botHistory.length){
+    box.innerHTML='<div class="bot-msg from-bot"><div class="bot-bubble">Hey! 👋 Ask me anything about how this site works — ranks, posting tips, complaints, the movie page, settings, you name it.</div></div>';
+    return;
+  }
+  box.innerHTML=botHistory.map(m=>`<div class="bot-msg from-${m.from}"><div class="bot-bubble">${esc(m.text)}</div></div>`).join('');
+  box.scrollTop=box.scrollHeight;
+}
+function sendBotMsg(){
+  const input=document.getElementById('bot-input');
+  const text=input.value.trim();
+  if(!text)return;
+  botHistory.push({from:'user',text});
+  input.value='';
+  renderBotMsgs();
+  setTimeout(()=>{
+    const answer=getBotAnswer(text);
+    botHistory.push({from:'bot',text:answer});
+    renderBotMsgs();
+  },280);
+}
+document.getElementById('bot-input').addEventListener('keydown',e=>{if(e.key==='Enter')sendBotMsg();});
+let botOpen=false;
+function toggleBot(){
+  botOpen=!botOpen;
+  document.getElementById('bot-panel').classList.toggle('open',botOpen);
+  if(botOpen){
+    if(!botHistory.length)renderBotMsgs();
+    renderBotSuggestions();
+    setTimeout(()=>document.getElementById('bot-input').focus(),100);
+  }
+}
+
+/* ===================== PAGE BUILDER (Owner-only block editor) ===================== */
+/*
+  db.blocks is a map of zoneKey -> array of block objects: {id,type,...fields,order}
+  Block types: 'text' {content}, 'video' {url}, 'section' {heading,content}, 'footer' {content}
+  Zones currently supported: 'recommended', 'public', 'news', 'footer' (site-wide)
+*/
+const BUILDER_ZONE_LABELS={recommended:'Recommended tab',public:'Public tab',news:'News tab',footer:'Site-wide footer'};
+let builderActiveZone=null;
+function isOwner(){return rank==='owner';}
+function normalizeUrl(url){
+  url=(url||'').trim();
+  if(!url)return '';
+  if(!/^https?:\/\//i.test(url))url='https://'+url;
+  return url;
+}
+function toEmbedUrl(rawUrl){
+  const url=normalizeUrl(rawUrl);
+  if(!url)return '';
+  let m=url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/)
+    || url.match(/youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{6,})/);
+  if(m)return 'https://www.youtube.com/embed/'+m[1];
+  m=url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if(m)return 'https://player.vimeo.com/video/'+m[1];
+  m=url.match(/drive\.google\.com\/file\/d\/([A-Za-z0-9_-]+)/);
+  if(m)return 'https://drive.google.com/file/d/'+m[1]+'/preview';
+  m=url.match(/streamable\.com\/([A-Za-z0-9]+)/);
+  if(m)return 'https://streamable.com/e/'+m[1];
+  return '';
+}
+function renderVideoEmbed(rawUrl){
+  const url=normalizeUrl(rawUrl);
+  if(!url)return '<p class="hint">No video URL set yet.</p>';
+  const embed=toEmbedUrl(url);
+  if(embed)return `<div class="bb-video-wrap"><iframe src="${esc(embed)}" allowfullscreen allow="autoplay; fullscreen; encrypted-media"></iframe></div>`;
+  if(/\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url))return `<div class="bb-video-wrap"><video src="${esc(url)}" controls></video></div>`;
+  return `<div class="bb-video-wrap" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px"><a href="${esc(url)}" target="_blank" style="color:#fff;font-size:0.85rem">▶ Open video link</a><span style="color:rgba(255,255,255,0.5);font-size:0.7rem">Can't be embedded directly</span></div>`;
+}
+function zoneBlocks(zone){
+  if(!db.blocks)db.blocks={};
+  if(!Array.isArray(db.blocks[zone]))db.blocks[zone]=[];
+  return db.blocks[zone];
+}
+function renderBuilderZones(){
+  ['recommended','footer'].forEach(zone=>renderZoneDisplay(zone));
+}
+function renderZoneDisplay(zone){
+  const host=document.getElementById('builder-zone-'+zone);
+  if(!host)return;
+  const blocks=zoneBlocks(zone).slice().sort((a,b)=>(a.order||0)-(b.order||0));
+  const editing=builderActiveZone===zone;
+  if(!blocks.length && !editing){host.innerHTML='';return;}
+  host.innerHTML=`<div class="builder-blocks">${blocks.map((b,i)=>renderBlockHTML(zone,b,i,blocks.length,editing)).join('')}</div>`+
+    (editing?`<div class="add-block-row">
+      <button onclick="addBlock('${zone}','text')">📝 Add Text</button>
+      <button onclick="addBlock('${zone}','video')">🎬 Add Video</button>
+      <button onclick="addBlock('${zone}','section')">📦 Add Section</button>
+      <button onclick="addBlock('${zone}','footer')">🦶 Add Footer</button>
+    </div>`:'');
+}
+function renderBlockHTML(zone,b,index,total,editing){
+  const editCls=editing?' editing-mode':'';
+  const controls=editing?`<div class="bb-controls">
+    <span class="bb-type-tag">${esc(b.type)}</span>
+    <button class="bb-ctrl-btn" onclick="moveBlock('${zone}','${b.id}',-1)" ${index===0?'disabled':''} title="Move up">⬆</button>
+    <button class="bb-ctrl-btn" onclick="moveBlock('${zone}','${b.id}',1)" ${index===total-1?'disabled':''} title="Move down">⬇</button>
+    <button class="bb-ctrl-btn danger bb-ctrl-spacer" onclick="deleteBlock('${zone}','${b.id}')">🗑 Remove</button>
+  </div>`:'';
+  let body='';
+  if(b.type==='text'){
+    body=editing
+      ? `<textarea class="bb-text-edit" id="bbedit-${b.id}" oninput="markBlockDirty('${zone}','${b.id}')">${esc(b.content||'')}</textarea><div class="bb-save-row"><button class="save-btn" onclick="saveBlockField('${zone}','${b.id}','content',document.getElementById('bbedit-${b.id}').value)">Save Text</button></div>`
+      : `<p class="bb-text-content">${esc(b.content||'')}</p>`;
+  }else if(b.type==='video'){
+    body=editing
+      ? `<input class="bb-video-url-edit" id="bbedit-${b.id}" value="${esc(b.url||'')}" placeholder="YouTube/Vimeo link or .mp4 URL"/><div class="bb-save-row"><button class="save-btn" onclick="saveBlockField('${zone}','${b.id}','url',document.getElementById('bbedit-${b.id}').value)">Save Video</button></div>`+renderVideoEmbed(b.url)
+      : renderVideoEmbed(b.url);
+  }else if(b.type==='section'){
+    body=editing
+      ? `<input class="bb-section-title-edit" id="bbedit-h-${b.id}" value="${esc(b.heading||'')}" placeholder="Section heading"/><textarea class="bb-text-edit" id="bbedit-${b.id}" placeholder="Section content">${esc(b.content||'')}</textarea><div class="bb-save-row"><button class="save-btn" onclick="saveSectionBlock('${zone}','${b.id}')">Save Section</button></div>`
+      : `<div class="bb-section-heading">${esc(b.heading||'')}</div><p class="bb-text-content">${esc(b.content||'')}</p>`;
+  }else if(b.type==='footer'){
+    body=editing
+      ? `<textarea class="bb-footer-edit" id="bbedit-${b.id}">${esc(b.content||'')}</textarea><div class="bb-save-row"><button class="save-btn" onclick="saveBlockField('${zone}','${b.id}','content',document.getElementById('bbedit-${b.id}').value)">Save Footer</button></div>`
+      : `<p class="bb-footer-content">${esc(b.content||'')}</p>`;
+  }
+  return `<div class="builder-block${editCls}" id="block-${b.id}">${controls}<div class="bb-body">${body}</div></div>`;
+}
+function enterBuilder(zone){
+  if(!isOwner())return;
+  builderActiveZone=zone;
+  document.getElementById('builder-bar').classList.add('active');
+  document.getElementById('bb-target-label').textContent=BUILDER_ZONE_LABELS[zone]||zone;
+  if(zone==='recommended'){showSec('recommended');}
+  if(zone==='public'){showSec('public');}
+  if(zone==='news'){showSec('news');}
+  renderZoneDisplay(zone);
+  toast('toast-builder','🧩 Builder launched — scroll to the '+(BUILDER_ZONE_LABELS[zone]||zone)+' to edit.');
+}
+function exitBuilder(){
+  const zone=builderActiveZone;
+  builderActiveZone=null;
+  document.getElementById('builder-bar').classList.remove('active');
+  if(zone)renderZoneDisplay(zone);
+  renderBuilderZones();
+}
+async function addBlock(zone,type){
+  const blocks=zoneBlocks(zone);
+  const maxOrder=blocks.reduce((m,b)=>Math.max(m,b.order||0),0);
+  const block={id:'b'+Date.now(),type,order:maxOrder+1};
+  if(type==='text')block.content='New text block — click to edit.';
+  if(type==='video')block.url='';
+  if(type==='section'){block.heading='New Section';block.content='Section content goes here.';}
+  if(type==='footer')block.content='© your footer text here';
+  blocks.push(block);
+  renderZoneDisplay(zone);
+  try{await saveAll();}catch(e){toast('toast-builder','✕ Could not save — '+e.message,true);}
+}
+async function deleteBlock(zone,id){
+  if(!confirm('Remove this block?'))return;
+  db.blocks[zone]=zoneBlocks(zone).filter(b=>b.id!==id);
+  renderZoneDisplay(zone);
+  try{await saveAll();}catch(e){toast('toast-builder','✕ Could not save — '+e.message,true);}
+}
+async function moveBlock(zone,id,dir){
+  const blocks=zoneBlocks(zone).slice().sort((a,b)=>(a.order||0)-(b.order||0));
+  const idx=blocks.findIndex(b=>b.id===id);
+  const swapIdx=idx+dir;
+  if(idx<0||swapIdx<0||swapIdx>=blocks.length)return;
+  const a=blocks[idx],b=blocks[swapIdx];
+  const tmp=a.order;a.order=b.order;b.order=tmp;
+  renderZoneDisplay(zone);
+  try{await saveAll();}catch(e){toast('toast-builder','✕ Could not save — '+e.message,true);}
+}
+async function saveBlockField(zone,id,field,value){
+  const block=zoneBlocks(zone).find(b=>b.id===id);
+  if(!block)return;
+  block[field]=value;
+  try{await saveAll();toast('toast-builder','✓ Saved!');}catch(e){toast('toast-builder','✕ Could not save — '+e.message,true);}
+}
+async function saveSectionBlock(zone,id){
+  const block=zoneBlocks(zone).find(b=>b.id===id);
+  if(!block)return;
+  block.heading=document.getElementById('bbedit-h-'+id).value;
+  block.content=document.getElementById('bbedit-'+id).value;
+  try{await saveAll();toast('toast-builder','✓ Saved!');renderZoneDisplay(zone);}catch(e){toast('toast-builder','✕ Could not save — '+e.message,true);}
+}
+function markBlockDirty(){/* reserved for future autosave/dirty-state indicator */}
+
+/* ===================== GLOBAL SEARCH ===================== */
+/*
+  Searches across: tips (recommended/featured/public/adminboard), news, complaints
+  (staff-only, shown only if isAdmin), the movie page, and a static index of site
+  pages (so typing "rules" or "leaderboard" jumps you straight there).
+*/
+const SEARCH_PAGES=[
+  {label:'Tips (this page)',icon:'📋',url:'index.html',keywords:'tips home recommended featured public board'},
+  {label:'Ranks',icon:'🏅',url:'ranks.html',keywords:'ranks roles staff owner admin mod permissions members'},
+  {label:'Rules',icon:'📜',url:'rules.html',keywords:'rules guidelines policy'},
+  {label:'Ban List',icon:'🚫',url:'banlist.html',keywords:'bans banned banlist'},
+  {label:'News',icon:'📰',url:'news.html',keywords:'news announcements updates'},
+  {label:'Games',icon:'🎮',url:'games.html',keywords:'games play minigames'},
+  {label:'Leaderboard',icon:'🏆',url:'leaderboard.html',keywords:'leaderboard scores points ranking top'},
+  {label:'Movie',icon:'🎬',url:'movie.html',keywords:'movie film trailer synopsis poster production'},
+  {label:'Version / Changelog',icon:'🔖',url:'version.html',keywords:'version changelog update history'},
+  {label:'Donate',icon:'💛',url:'donate.html',keywords:'donate support tip jar'},
+];
+function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+function highlightMatch(text,q){
+  if(!q)return esc(text);
+  const idx=text.toLowerCase().indexOf(q.toLowerCase());
+  if(idx===-1)return esc(text);
+  return esc(text.slice(0,idx))+'<mark>'+esc(text.slice(idx,idx+q.length))+'</mark>'+esc(text.slice(idx+q.length));
+}
+function snippetAround(text,q,len){
+  len=len||70;
+  const idx=text.toLowerCase().indexOf(q.toLowerCase());
+  if(idx===-1)return text.slice(0,len);
+  const start=Math.max(0,idx-25);
+  return (start>0?'…':'')+text.slice(start,start+len)+(start+len<text.length?'…':'');
+}
+function runGlobalSearch(q){
+  const lower=q.toLowerCase();
+  const isAdmin=rank==='owner'||rank==='admin';
+  const results={tips:[],news:[],complaints:[],movie:[],pages:[]};
+  const tipSections=[
+    ['recommended','⭐ Recommended',db.recommended],
+    ['featured','🔥 Featured',db.featured],
+    ['public','📢 Public',db.public],
+    ['adminboard','🔒 Admin Board',db.adminboard],
+  ];
+  tipSections.forEach(([key,label,arr])=>{
+    if(key==='adminboard' && !isAdmin)return;
+    (arr||[]).forEach(t=>{
+      if((t.text||'').toLowerCase().includes(lower) || (t.author||'').toLowerCase().includes(lower)){
+        results.tips.push({sec:key,secLabel:label,id:t.id,text:t.text,author:t.author});
+      }
+    });
+  });
+  (db.news||[]).forEach(n=>{
+    if((n.title||'').toLowerCase().includes(lower) || (n.body||'').toLowerCase().includes(lower)){
+      results.news.push({id:n.id,title:n.title,body:n.body});
+    }
+  });
+  if(isAdmin){
+    (db.complaints||[]).forEach(c=>{
+      if((c.text||'').toLowerCase().includes(lower) || (c.name||'').toLowerCase().includes(lower)){
+        results.complaints.push({id:c.id,name:c.name,text:c.text});
+      }
+    });
+  }
+  const mv=db.movie||{};
+  ['title','tagline','synopsis','update'].forEach(f=>{
+    if((mv[f]||'').toLowerCase().includes(lower)){
+      results.movie.push({field:f,text:mv[f]});
+    }
+  });
+  SEARCH_PAGES.forEach(p=>{
+    if(p.label.toLowerCase().includes(lower) || p.keywords.includes(lower)){
+      results.pages.push(p);
+    }
+  });
+  return results;
+}
+function totalResultCount(r){
+  return r.tips.length+r.news.length+r.complaints.length+r.movie.length+r.pages.length;
+}
+function renderSearchResults(q,r){
+  const box=document.getElementById('search-results');
+  const total=totalResultCount(r);
+  if(!q){box.classList.remove('show');document.getElementById('search-overlay-bg').classList.remove('show');return;}
+  if(!total){
+    box.innerHTML='<p class="search-no-results">No results for "'+esc(q)+'"</p>';
+    box.classList.add('show');document.getElementById('search-overlay-bg').classList.add('show');
+    return;
+  }
+  let html='';
+  if(r.pages.length){
+    html+='<div class="search-group-label">Pages</div>';
+    html+=r.pages.slice(0,6).map(p=>`<div class="search-result-item" onclick="goToPage('${p.url}')"><span class="search-result-icon">${p.icon}</span><div class="search-result-body"><div class="search-result-title">${highlightMatch(p.label,q)}</div></div></div>`).join('');
+  }
+  if(r.tips.length){
+    html+='<div class="search-group-label">Tips</div>';
+    html+=r.tips.slice(0,8).map(t=>`<div class="search-result-item" onclick="goToTip('${t.sec}')"><span class="search-result-icon">💡</span><div class="search-result-body"><div class="search-result-title">${highlightMatch(t.text,q)}</div><div class="search-result-snippet">${t.secLabel} · by ${esc(t.author||'anon')}</div></div></div>`).join('');
+  }
+  if(r.news.length){
+    html+='<div class="search-group-label">News</div>';
+    html+=r.news.slice(0,6).map(n=>`<div class="search-result-item" onclick="goToSection('news')"><span class="search-result-icon">📰</span><div class="search-result-body"><div class="search-result-title">${highlightMatch(n.title,q)}</div><div class="search-result-snippet">${highlightMatch(snippetAround(n.body,q),q)}</div></div></div>`).join('');
+  }
+  if(r.complaints.length){
+    html+='<div class="search-group-label">Complaints (staff)</div>';
+    html+=r.complaints.slice(0,6).map(c=>`<div class="search-result-item" onclick="goToSection('complaints')"><span class="search-result-icon">📝</span><div class="search-result-body"><div class="search-result-title">${highlightMatch(c.text,q)}</div><div class="search-result-snippet">from ${esc(c.name||'anon')}</div></div></div>`).join('');
+  }
+  if(r.movie.length){
+    html+='<div class="search-group-label">Movie Page</div>';
+    html+=r.movie.slice(0,4).map(m=>`<div class="search-result-item" onclick="goToPage('movie.html')"><span class="search-result-icon">🎬</span><div class="search-result-body"><div class="search-result-title">${highlightMatch(snippetAround(m.text,q,50),q)}</div><div class="search-result-snippet">${m.field}</div></div></div>`).join('');
+  }
+  box.innerHTML=html;
+  box.classList.add('show');
+  document.getElementById('search-overlay-bg').classList.add('show');
+}
+let searchDebounce=null;
+function onSearchInput(){
+  const input=document.getElementById('global-search');
+  const q=input.value.trim();
+  document.getElementById('search-clear-btn').classList.toggle('show',q.length>0);
+  clearTimeout(searchDebounce);
+  searchDebounce=setTimeout(()=>{
+    renderSearchResults(q,runGlobalSearch(q));
+  },120);
+}
+function onSearchFocus(){
+  const q=document.getElementById('global-search').value.trim();
+  if(q)renderSearchResults(q,runGlobalSearch(q));
+}
+function closeSearchResults(){
+  document.getElementById('search-results').classList.remove('show');
+  document.getElementById('search-overlay-bg').classList.remove('show');
+}
+function clearSearch(){
+  const input=document.getElementById('global-search');
+  input.value='';
+  document.getElementById('search-clear-btn').classList.remove('show');
+  closeSearchResults();
+  input.focus();
+}
+function goToPage(url){
+  window.location.href=url;
+}
+function goToSection(sec){
+  showSec(sec);
+  closeSearchResults();
+  document.getElementById('global-search').value='';
+  document.getElementById('search-clear-btn').classList.remove('show');
+  document.getElementById('sec-'+sec).scrollIntoView({behavior:'smooth',block:'start'});
+}
+function goToTip(sec){
+  goToSection(sec);
+}
+document.getElementById('global-search').addEventListener('keydown',e=>{if(e.key==='Escape'){clearSearch();e.target.blur();}});
+
 const LANGS={
-  en:{sub:'a shared board for tips, tricks, and random gems ✦'},
-  es:{sub:'un tablero compartido de tips, trucos y curiosidades ✦'},
-  fr:{sub:'un tableau partagé de conseils, astuces et curiosités ✦'},
-  pt:{sub:'um quadro compartilhado de dicas, truques e curiosidades ✦'},
-  ja:{sub:'ヒント、コツ、豆知識を共有するボード ✦'},
+  en:{sub:'a shared board for tips, tricks, and random gems ✦',login:'Login',logout:'Logout',recommended:'⭐ Recommended',featured:'🔥 Featured',pub:'📢 Public',news:'📰 News',complaints:'📝 Complaints',mystyle:'🎨 My Style',pending:'⏳ Pending',admin:'🔒 Admin Board',settings:'⚙️ Settings'},
+  ko:{sub:'팁, 트릭, 랜덤 보석을 위한 공유 게시판 ✦',login:'로그인',logout:'로그아웃',recommended:'⭐ 추천',featured:'🔥 주목',pub:'📢 공개',news:'📰 뉴스',complaints:'📝 불만',mystyle:'🎨 내 스타일',pending:'⏳ 대기',admin:'🔒 관리자 보드',settings:'⚙️ 설정'},
+  es:{sub:'un tablero compartido de tips, trucos y gemas al azar ✦',login:'Iniciar sesión',logout:'Cerrar sesión',recommended:'⭐ Recomendados',featured:'🔥 Destacados',pub:'📢 Público',news:'📰 Noticias',complaints:'📝 Quejas',mystyle:'🎨 Mi Estilo',pending:'⏳ Pendiente',admin:'🔒 Panel Admin',settings:'⚙️ Configuración'},
+  de:{sub:'ein gemeinsames Board für Tipps, Tricks und zufällige Entdeckungen ✦',login:'Anmelden',logout:'Abmelden',recommended:'⭐ Empfohlen',featured:'🔥 Hervorgehoben',pub:'📢 Öffentlich',news:'📰 Neuigkeiten',complaints:'📝 Beschwerden',mystyle:'🎨 Mein Stil',pending:'⏳ Ausstehend',admin:'🔒 Admin-Board',settings:'⚙️ Einstellungen'},
 };
 let lang=localStorage.getItem('lang')||'en';
-function setLang(l){lang=l;localStorage.setItem('lang',l);document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));const sub=document.getElementById('site-subtitle-el');if(sub&&LANGS[l]&&!(db.config&&db.config.subtitle))sub.textContent=LANGS[l].sub;}
+function setLang(l){
+  lang=l;localStorage.setItem('lang',l);
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  applyLang();
+}
+function applyLang(){
+  const T=LANGS[lang]||LANGS.en;
+  // only override subtitle if owner hasn't set a custom one
+  const sub=document.getElementById('site-subtitle-el');
+  if(sub && !(db.config && db.config.subtitle)) sub.textContent=T.sub;
+  const ll=document.getElementById('login-link'); if(ll) ll.textContent=T.login;
+  const lo=document.getElementById('logout-btn'); if(lo) lo.textContent=T.logout;
+  const tr=document.getElementById('tab-recommended'); if(tr) tr.textContent=T.recommended;
+  const tf=document.getElementById('tab-featured');    if(tf) tf.textContent=T.featured;
+  const tp=document.getElementById('tab-public');      if(tp) tp.textContent=T.pub;
+  const tn=document.getElementById('tab-news');         if(tn) tn.textContent=T.news;
+  const tpend=document.getElementById('tab-pending');   if(tpend) tpend.childNodes[0].textContent=T.pending+' ';
+  const tadm=document.getElementById('tab-adminboard'); if(tadm) tadm.textContent=T.admin;
+  const tset=document.getElementById('tab-settings');   if(tset) tset.textContent=T.settings;
+}
 (function(){document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));})();
-/* UPDATE SYSTEM */
 function checkForUpdates(){const cfg=db.config||{};const v=cfg.version||'';if(!v)return;const seen=localStorage.getItem('site_version_seen')||'';if(seen!==v){document.getElementById('update-bar-version').textContent=v;document.getElementById('update-bar').classList.add('show');}}
 function startUpdate(){document.getElementById('update-bar').classList.remove('show');const overlay=document.getElementById('update-overlay');overlay.classList.add('show');let secs=10;const ring=document.getElementById('update-ring');const num=document.getElementById('update-num');const prog=document.getElementById('update-prog');requestAnimationFrame(()=>{prog.style.transition='width 10s linear';prog.style.width='100%';});const tick=setInterval(()=>{secs--;num.textContent=secs;ring.style.strokeDashoffset=125.6*(secs/10);if(secs<=0){clearInterval(tick);overlay.classList.remove('show');showWhatsNew();}},1000);}
 function showWhatsNew(){const cfg=db.config||{};document.getElementById('whats-new-ver').textContent=cfg.version||'Latest';document.getElementById('whats-new-body').textContent=cfg.changelog||'No changelog.';document.getElementById('whats-new-overlay').classList.add('show');}
 function dismissUpdate(){const ver=(db.config||{}).version||'';localStorage.setItem('site_version_seen',ver);document.getElementById('whats-new-overlay').classList.remove('show');}
 async function saveVersion(){if(!db.config)db.config={};db.config.version=document.getElementById('set-version').value.trim();db.config.changelog=document.getElementById('set-changelog').value.trim();try{setStatus('loading','saving...');await saveAll();setStatus('ok','saved ✓');toast('toast-version','✓ Version pushed!');}catch(e){toast('toast-version','✕ '+e.message,true);}}
-/* INIT */
 applyRankUI();
 loadAll();
 </script>
-
-<script>
-/* ── FLOATING TIPS BACKGROUND ── */
-(function(){
-  const TIPS=[
-    {tag:'💡 life',  tc:'#2d5016', bc:'rgba(232,240,224,0.85)', text:'Drink water first thing in the morning.'},
-    {tag:'💡 life',  tc:'#2d5016', bc:'rgba(232,240,224,0.85)', text:'Make your bed — 2 minutes, cleaner space.'},
-    {tag:'💡 life',  tc:'#2d5016', bc:'rgba(232,240,224,0.85)', text:'If it takes under 2 minutes, do it now.'},
-    {tag:'💡 life',  tc:'#2d5016', bc:'rgba(232,240,224,0.85)', text:'Take a 10-minute walk after lunch.'},
-    {tag:'💡 life',  tc:'#2d5016', bc:'rgba(232,240,224,0.85)', text:'Tell people when you appreciate them.'},
-    {tag:'🍜 food',  tc:'#7a3a0a', bc:'rgba(253,236,214,0.85)', text:'Add a pinch of salt to coffee grounds.'},
-    {tag:'🍜 food',  tc:'#7a3a0a', bc:'rgba(253,236,214,0.85)', text:'Let steak rest 5 min before cutting.'},
-    {tag:'🍜 food',  tc:'#7a3a0a', bc:'rgba(253,236,214,0.85)', text:'Freeze overripe bananas for smoothies.'},
-    {tag:'🍜 food',  tc:'#7a3a0a', bc:'rgba(253,236,214,0.85)', text:'Toast spices 30 sec — doubles flavor.'},
-    {tag:'🍜 food',  tc:'#7a3a0a', bc:'rgba(253,236,214,0.85)', text:'Pasta water makes sauce creamy.'},
-    {tag:'⚡ tech',  tc:'#4a1f7a', bc:'rgba(236,224,248,0.85)', text:'Ctrl+Shift+T reopens closed tabs.'},
-    {tag:'⚡ tech',  tc:'#4a1f7a', bc:'rgba(236,224,248,0.85)', text:'Windows+V opens clipboard history.'},
-    {tag:'⚡ tech',  tc:'#4a1f7a', bc:'rgba(236,224,248,0.85)', text:'Ctrl+Z undoes in almost every app.'},
-    {tag:'⚡ tech',  tc:'#4a1f7a', bc:'rgba(236,224,248,0.85)', text:'Use a password manager.'},
-    {tag:'⚡ tech',  tc:'#4a1f7a', bc:'rgba(236,224,248,0.85)', text:'Unplug router 30 sec to fix WiFi.'},
-    {tag:'🎲 random',tc:'#7a1a2e', bc:'rgba(252,232,236,0.85)', text:'Flip a coin — notice what you hope for.'},
-    {tag:'🎲 random',tc:'#7a1a2e', bc:'rgba(252,232,236,0.85)', text:'Phone on the other side of the room at night.'},
-    {tag:'🎲 random',tc:'#7a1a2e', bc:'rgba(252,232,236,0.85)', text:'Keep a notebook by your bed.'},
-  ];
-
-  const bg = document.getElementById('floating-bg');
-  if(!bg) return;
-
-  const particles=[];
-  const COUNT=12;
-
-  function rnd(min,max){return min+Math.random()*(max-min)}
-
-  function spawn(immediate){
-    const tip=TIPS[Math.floor(Math.random()*TIPS.length)];
-    const el=document.createElement('div');
-    el.className='ft';
-    el.innerHTML=`<span class="ft-tag" style="background:${tip.bc};color:${tip.tc}">${tip.tag}</span><br>${tip.text}`;
-    bg.appendChild(el);
-    const w=el.offsetWidth||155, h=el.offsetHeight||50;
-    const vx=rnd(-0.18,0.18), vy=rnd(-0.28,-0.14);
-    const x=rnd(0,window.innerWidth-w);
-    const y=immediate?rnd(0,window.innerHeight-h):window.innerHeight+10;
-    return{el,x,y,vx,vy,life:0,op:rnd(0.18,0.42),w,h};
-  }
-
-  for(let i=0;i<COUNT;i++) particles.push(spawn(true));
-
-  (function tick(){
-    const ww=window.innerWidth, wh=window.innerHeight;
-    for(let i=0;i<particles.length;i++){
-      const p=particles[i];
-      p.life++;
-      p.x+=p.vx;p.y+=p.vy;
-      // Wrap horizontally
-      if(p.x>ww+10) p.x=-p.w-5;
-      if(p.x<-p.w-10) p.x=ww+5;
-      // Fade in over first 80 frames
-      const fi=Math.min(1,p.life/80);
-      // Fade out near top
-      const fo=p.y<-p.h-20?0:Math.min(1,(p.y+p.h)/80);
-      p.el.style.transform=`translate(${p.x|0}px,${p.y|0}px)`;
-      p.el.style.opacity=p.op*fi*fo;
-      // Respawn when drifted off top
-      if(p.y<-p.h-30){
-        bg.removeChild(p.el);
-        particles[i]=spawn(false);
-      }
-    }
-    requestAnimationFrame(tick);
-  })();
-})();
-</script>
-
 </body>
 </html>
