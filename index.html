@@ -398,24 +398,25 @@
   <a href="login.html" class="topnav-btn" id="login-link" style="display:none">Login</a>
   <div class="topnav-links">
     <a href="index.html"       class="topnav-link active">📋 Tips</a>
-    <a href="ranks.html"       class="topnav-link">🏅 Ranks</a>
-    <a href="rules.html"       class="topnav-link">📜 Rules</a>
-    <a href="banlist.html"     class="topnav-link">🚫 Bans</a>
-    <a href="news.html"        class="topnav-link">📰 News</a>
-    <a href="games.html"       class="topnav-link">🎮 Games</a>
-    <a href="leaderboard.html" class="topnav-link">🏆 Leaderboard</a>
-    <a href="movie.html"       class="topnav-link">🎬 Movie</a>
-    <a href="version.html"     class="topnav-link">🔖 Version</a>
-    <a href="donate.html"      class="topnav-link">💛 Donate</a>
+    <a href="ranks.html"       class="topnav-link" data-guest-hide>🏅 Ranks</a>
+    <a href="rules.html"       class="topnav-link" data-guest-hide>📜 Rules</a>
+    <a href="banlist.html"     class="topnav-link" data-guest-hide>🚫 Bans</a>
+    <a href="news.html"        class="topnav-link" data-guest-hide>📰 News</a>
+    <a href="games.html"       class="topnav-link" data-guest-hide>🎮 Games</a>
+    <a href="leaderboard.html" class="topnav-link" data-guest-hide>🏆 Leaderboard</a>
+    <a href="movie.html"       class="topnav-link" data-guest-hide>🎬 Movie</a>
+    <a href="version.html"     class="topnav-link" data-guest-hide>🔖 Version</a>
+    <a href="donate.html"      class="topnav-link" data-guest-hide>💛 Donate</a>
   </div>
   <div class="topnav-right">
-    <div class="lang-switcher" id="lang-sw">
+    <div class="lang-switcher" id="lang-sw" data-guest-hide>
       <button class="lang-btn active" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
       <button class="lang-btn" data-lang="ko" onclick="setLang('ko')" title="Korean">🇰🇷</button>
       <button class="lang-btn" data-lang="es" onclick="setLang('es')" title="Spanish">🇪🇸</button>
       <button class="lang-btn" data-lang="de" onclick="setLang('de')" title="German">🇩🇪</button>
     </div>
     <span id="rank-display" class="rank-badge rank-public">…</span>
+    <a href="login.html" class="topnav-btn" id="signup-btn" style="display:none;background:var(--accent);border-color:var(--accent);color:#fff">✨ Sign Up</a>
     <button class="topnav-btn" id="logout-btn" onclick="doLogout()">Logout</button>
     <button class="topnav-btn" onclick="loadAll()" title="Refresh">↻</button>
   </div>
@@ -433,7 +434,7 @@
       </div>
     </div>
   </div>
-  <div class="search-wrap">
+  <div class="search-wrap" data-guest-hide>
     <div class="search-box">
       <span class="search-icon">🔎</span>
       <input type="text" class="search-input" id="global-search" placeholder="Search tips, news, the movie page, site pages..." autocomplete="off" oninput="onSearchInput()" onfocus="onSearchFocus()"/>
@@ -445,13 +446,14 @@
     <div class="tab-bar">
       <button class="tab-btn active" id="tab-recommended" onclick="showSec('recommended')">⭐ Recommended</button>
       <button class="tab-btn" id="tab-featured"    onclick="showSec('featured')">🔥 Featured</button>
+      <button class="tab-btn" id="tab-protip"      onclick="showSec('protip')">🌟 Pro Tips</button>
       <button class="tab-btn" id="tab-public"      onclick="showSec('public')">📢 Public</button>
-      <button class="tab-btn" id="tab-news"        onclick="showSec('news')">📰 News</button>
-      <button class="tab-btn" id="tab-complaints"  onclick="showSec('complaints')">📝 Complaints <span class="tb-badge" id="complaint-ct" style="display:none"></span></button>
-      <button class="tab-btn" id="tab-mysettings"  onclick="showSec('mysettings')">🎨 My Style</button>
-      <a href="games.html" class="tab-btn">🎮 Games</a>
-      <a href="leaderboard.html" class="tab-btn">🏆 Leaderboard</a>
-      <a href="movie.html" class="tab-btn">🎬 Movie</a>
+      <button class="tab-btn" id="tab-news"        onclick="showSec('news')" data-guest-hide>📰 News</button>
+      <button class="tab-btn" id="tab-complaints"  onclick="showSec('complaints')" data-guest-hide>📝 Complaints <span class="tb-badge" id="complaint-ct" style="display:none"></span></button>
+      <button class="tab-btn" id="tab-mysettings"  onclick="showSec('mysettings')" data-guest-hide>🎨 My Style</button>
+      <a href="games.html" class="tab-btn" data-guest-hide>🎮 Games</a>
+      <a href="leaderboard.html" class="tab-btn" data-guest-hide>🏆 Leaderboard</a>
+      <a href="movie.html" class="tab-btn" data-guest-hide>🎬 Movie</a>
       <div class="tab-divider"></div>
       <button class="tab-btn" id="tab-pending"    onclick="showSec('pending')"    style="display:none">⏳ Pending <span class="tb-badge" id="pending-ct" style="display:none"></span></button>
       <button class="tab-btn" id="tab-adminboard" onclick="showSec('adminboard')" style="display:none">🔒 Admin Board</button>
@@ -498,7 +500,21 @@
       </div>
       <div class="tips-grid" id="public-grid"><p class="empty">No approved tips yet.</p></div>
     </div>
-    <div class="section sec-panel" id="sec-news">
+    <div class="section sec-panel" id="sec-protip">
+      <div class="section-header"><span class="section-title">🌟 Pro Tips <span class="section-lock">Advanced tips, reviewed before posting</span></span><span class="rank-badge rank-owner">Pro</span></div>
+      <div class="public-form" id="protip-form" style="display:none">
+        <h3>Submit a Pro Tip for review</h3>
+        <div class="form-row">
+          <input type="text" id="protip-name" placeholder="Your name" maxlength="30"/>
+          <select id="protip-tag"><option value="tip">💡 tip</option><option value="food">🍜 food</option><option value="life">✌️ life</option><option value="tech">⚡ tech</option><option value="random">🎲 random</option></select>
+        </div>
+        <div class="form-row"><textarea id="protip-text" placeholder="Share an advanced/pro-level tip here..." maxlength="280"></textarea></div>
+        <div class="form-row"><button class="submit-btn" onclick="submitProTip()">Submit Pro Tip for Review</button></div>
+        <span class="pending-notice">⏳ Pro Tips are reviewed before posting — Owner &amp; Admins approve or deny.</span>
+      </div>
+      <div class="rec-grid" id="protip-grid"><p class="empty">No pro tips yet.</p></div>
+    </div>
+    <div class="section sec-panel" id="sec-news" data-guest-hide>
       <div class="section-header"><span class="section-title">📰 News <span class="section-lock">Owner &amp; Admins</span></span><span class="rank-badge rank-admin">Latest</span></div>
       <div id="news-form" style="display:none;margin-bottom:1rem">
         <div class="news-compose">
@@ -513,7 +529,7 @@
       </div>
       <div id="news-list"><p class="empty">No news yet.</p></div>
     </div>
-    <div class="sec-panel" id="sec-complaints">
+    <div class="sec-panel" id="sec-complaints" data-guest-hide>
       <div class="section-header"><span class="section-title">📝 Complaints <span class="section-lock">Staff review privately</span></span></div>
       <div class="complaint-form-wrap">
         <div class="complaint-form-head">📬 Submit a Complaint</div>
@@ -546,7 +562,7 @@
         <div id="complaints-list"><p class="empty">No complaints yet.</p></div>
       </div>
     </div>
-    <div class="sec-panel" id="sec-mysettings">
+    <div class="sec-panel" id="sec-mysettings" data-guest-hide>
       <div class="section-header"><span class="section-title">🎨 My Style <span class="section-lock">Only you can see these changes</span></span><span class="rank-badge rank-public">👤 Personal</span></div>
       <div class="my-settings-wrap">
         <p class="my-settings-note">💡 These are your personal visual preferences. Only stored on <em>your device</em> — no one else sees them. They apply everywhere on the site.</p>
@@ -687,6 +703,8 @@
           <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><div style="flex:1;min-width:160px"><b style="font-size:0.85rem">Clear Featured</b><p class="hint">Delete all featured tips.</p></div><button class="save-btn danger" onclick="dangerClear('featured')">Clear Featured</button></div>
           <hr style="border:none;border-top:1px solid var(--border)">
           <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><div style="flex:1;min-width:160px"><b style="font-size:0.85rem">Clear Recommended</b><p class="hint">Delete all staff pick tips.</p></div><button class="save-btn danger" onclick="dangerClear('recommended')">Clear Recommended</button></div>
+          <hr style="border:none;border-top:1px solid var(--border)">
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><div style="flex:1;min-width:160px"><b style="font-size:0.85rem">Clear Pro Tips</b><p class="hint">Delete all approved pro tips.</p></div><button class="save-btn danger" onclick="dangerClear('protip')">Clear Pro Tips</button></div>
         </div></div>
       </div>
     </div>
@@ -697,14 +715,15 @@
 <nav class="mobile-nav">
   <button class="mob-btn active" id="mob-recommended" onclick="mobGo('recommended',this)"><span class="mi">⭐</span>Picks</button>
   <button class="mob-btn" id="mob-featured"    onclick="mobGo('featured',this)"><span class="mi">🔥</span>Hot</button>
+  <button class="mob-btn" id="mob-protip"      onclick="mobGo('protip',this)"><span class="mi">🌟</span>Pro</button>
   <button class="mob-btn" id="mob-public"      onclick="mobGo('public',this)"><span class="mi">📢</span>Public</button>
-  <button class="mob-btn" id="mob-news"        onclick="mobGo('news',this)"><span class="mi">📰</span>News</button>
-  <a href="games.html"       class="mob-btn"><span class="mi">🎮</span>Games</a>
-  <a href="leaderboard.html" class="mob-btn"><span class="mi">🏆</span>Board</a>
-  <a href="movie.html"       class="mob-btn"><span class="mi">🎬</span>Movie</a>
-  <a href="donate.html"      class="mob-btn"><span class="mi">💛</span>Donate</a>
-  <button class="mob-btn" id="mob-complaints"  onclick="mobGo('complaints',this)"><span class="mi">📝</span>Report<span class="mob-badge" id="mob-complaint-badge"></span></button>
-  <button class="mob-btn" id="mob-mysettings"  onclick="mobGo('mysettings',this)"><span class="mi">🎨</span>Style</button>
+  <button class="mob-btn" id="mob-news"        onclick="mobGo('news',this)" data-guest-hide><span class="mi">📰</span>News</button>
+  <a href="games.html"       class="mob-btn" data-guest-hide><span class="mi">🎮</span>Games</a>
+  <a href="leaderboard.html" class="mob-btn" data-guest-hide><span class="mi">🏆</span>Board</a>
+  <a href="movie.html"       class="mob-btn" data-guest-hide><span class="mi">🎬</span>Movie</a>
+  <a href="donate.html"      class="mob-btn" data-guest-hide><span class="mi">💛</span>Donate</a>
+  <button class="mob-btn" id="mob-complaints"  onclick="mobGo('complaints',this)" data-guest-hide><span class="mi">📝</span>Report<span class="mob-badge" id="mob-complaint-badge"></span></button>
+  <button class="mob-btn" id="mob-mysettings"  onclick="mobGo('mysettings',this)" data-guest-hide><span class="mi">🎨</span>Style</button>
   <button class="mob-btn" id="mob-pending"     onclick="mobGo('pending',this)"    style="display:none"><span class="mi">⏳</span>Queue<span class="mob-badge" id="mob-pending-badge"></span></button>
   <button class="mob-btn" id="mob-adminboard"  onclick="mobGo('adminboard',this)" style="display:none"><span class="mi">🔒</span>Admin</button>
   <button class="mob-btn" id="mob-settings"    onclick="mobGo('settings',this)"   style="display:none"><span class="mi">⚙️</span>Settings</button>
@@ -717,7 +736,7 @@
   <div class="bot-input-row"><input type="text" id="bot-input" placeholder="Ask about the site..." maxlength="200"/><button class="bot-send" onclick="sendBotMsg()">➤</button></div>
   <div class="bot-footer-note">Answers questions about this site only.</div>
 </div>
-<button class="chat-fab" onclick="toggleChat()">💬<span class="chat-fab-badge" id="chat-fab-badge"></span></button>
+<button class="chat-fab" onclick="toggleChat()" data-guest-hide>💬<span class="chat-fab-badge" id="chat-fab-badge"></span></button>
 <div class="chat-panel" id="chat-panel">
   <div class="chat-head"><span class="chat-head-title">💬 Group Chat</span><div class="chat-head-btns"><button class="chat-head-btn" onclick="loadChat()">↻</button><button class="chat-head-btn" onclick="toggleChat()">✕</button></div></div>
   <div class="chat-msgs" id="chat-msgs"><p class="chat-empty-msg">Loading...</p></div>
@@ -740,8 +759,8 @@ const TAG={
 };
 const SEED={recommended:[{id:'r1',text:'Drink a glass of water first thing in the morning.',tag:'life',author:'Owner'},{id:'r2',text:'Make your bed every morning. Takes 2 minutes.',tag:'life',author:'Owner'},{id:'r3',text:'Tell people when you appreciate them.',tag:'life',author:'Owner'},{id:'r4',text:'When overwhelmed, write everything on your mind.',tag:'life',author:'Owner'},{id:'r5',text:'Set your alarm 10 minutes earlier than you need.',tag:'life',author:'Owner'},{id:'r6',text:'If a task takes less than 2 minutes, do it now.',tag:'life',author:'Owner'},{id:'r7',text:'Take a 10-minute walk after lunch.',tag:'life',author:'Owner'},{id:'r8',text:'Add a pinch of salt to coffee grounds before brewing.',tag:'food',author:'Owner'},{id:'r9',text:'Store fresh herbs in a glass of water in the fridge.',tag:'food',author:'Owner'},{id:'r10',text:'Freeze overripe bananas for smoothies.',tag:'food',author:'Owner'},{id:'r11',text:'Let steak rest 5 minutes before cutting.',tag:'food',author:'Owner'},{id:'r12',text:'Pasta water is liquid gold for your sauce.',tag:'food',author:'Owner'},{id:'r13',text:'Toast spices 30 seconds in a dry pan.',tag:'food',author:'Owner'},{id:'r14',text:'Ctrl+Shift+T reopens a closed browser tab.',tag:'tech',author:'Owner'},{id:'r15',text:'Add site:reddit.com to Google for real opinions.',tag:'tech',author:'Owner'},{id:'r16',text:'Use dark mode everywhere to save battery.',tag:'tech',author:'Owner'},{id:'r17',text:'Windows+V opens clipboard history.',tag:'tech',author:'Owner'},{id:'r18',text:'Use a password manager.',tag:'tech',author:'Owner'},{id:'r19',text:'Ctrl+Z undoes mistakes in almost every app.',tag:'tech',author:'Owner'},{id:'r20',text:'Unplug your router 30 seconds to fix WiFi.',tag:'tech',author:'Owner'},{id:'r21',text:'Flip a coin to see which outcome you hope for.',tag:'random',author:'Owner'},{id:'r22',text:"If bored, clean something.",tag:'random',author:'Owner'},{id:'r23',text:'Put phone across the room at night.',tag:'random',author:'Owner'},{id:'r24',text:'Keep a notebook by your bed.',tag:'random',author:'Owner'},{id:'r25',text:'Buy something new, get rid of something old.',tag:'random',author:'Owner'},{id:'r26',text:'Say things out loud to remember them.',tag:'random',author:'Owner'}],
 public:[{id:'p1',text:'Use focus mode during meals.',tag:'life',author:'Admin'},{id:'p2',text:'Freeze ginger — grates easier.',tag:'food',author:'Admin'},{id:'p3',text:'Screenshot important confirmation emails.',tag:'tech',author:'Admin'},{id:'p4',text:'Mute group chats instead of leaving them.',tag:'tech',author:'Admin'},{id:'p5',text:'Add garlic last to the pan.',tag:'food',author:'Admin'},{id:'p6',text:'Carry a reusable bag folded in your pocket.',tag:'random',author:'Admin'}]};
-let db={public:[],featured:[],adminboard:[],pending:[],recommended:[],banlist:[],rules:[],members:[],config:{},chat:[],news:[],complaints:[],accounts:[],blocks:{},movie:{}};
-const SECS=['recommended','featured','public','news','complaints','mysettings','pending','adminboard','settings'];
+let db={public:[],featured:[],adminboard:[],pending:[],recommended:[],protip:[],banlist:[],rules:[],members:[],config:{},chat:[],news:[],complaints:[],accounts:[],blocks:{},movie:{}};
+const SECS=['recommended','featured','protip','public','news','complaints','mysettings','pending','adminboard','settings'];
 function showSec(id){
   SECS.forEach(s=>{
     const p=document.getElementById('sec-'+s);if(p)p.classList.remove('visible');
@@ -757,16 +776,17 @@ function showSec(id){
 function mobGo(id,btn){showSec(id);}
 function doLogout(){localStorage.removeItem('rank');localStorage.removeItem('username');window.location.replace('login.html');}
 function applyRankUI(){
-  const icons={owner:'👑',admin:'🛡️',mod:'🔧',public:'👤'};
-  const names={owner:'Owner',admin:'Admin',mod:'Mod',public:'Public'};
+  const icons={owner:'👑',admin:'🛡️',mod:'🔧',public:'👤',guest:'👀'};
+  const names={owner:'Owner',admin:'Admin',mod:'Mod',public:'Public',guest:'Guest'};
   const icon=icons[rank]||'👤';
   const label=username?icon+' '+username:icon+' '+names[rank];
-  const cls={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
+  const cls={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public',guest:'rank-public'};
   const rd=document.getElementById('rank-display');
   rd.textContent=label;rd.className='rank-badge '+(cls[rank]||'rank-public');
+  const isGuest=rank==='guest';
   const isOwner=rank==='owner',isAdmin=rank==='owner'||rank==='admin',isMod=rank==='owner'||rank==='admin'||rank==='mod';
-  if(username){
-    ['rec-author','feat-author','admin-author','news-author'].forEach(id=>{const el=document.getElementById(id);if(el&&!el.value)el.value=username;});
+  if(username && !isGuest){
+    ['rec-author','feat-author','admin-author','news-author','protip-name'].forEach(id=>{const el=document.getElementById(id);if(el&&!el.value)el.value=username;});
     const cf=document.getElementById('cf-name');if(cf&&!cf.value)cf.value=username;
     const pn=document.getElementById('pub-name');if(pn&&!pn.value)pn.value=username;
   }
@@ -781,8 +801,32 @@ function applyRankUI(){
   document.getElementById('feat-form').style.display=isMod?'flex':'none';
   document.getElementById('admin-form').style.display=isAdmin?'flex':'none';
   const crp=document.getElementById('complaints-review-panel');if(crp)crp.style.display=isAdmin?'block':'none';
+  applyGuestRestrictions(isGuest);
   renderAll();
   renderBuilderZones();
+}
+function applyGuestRestrictions(isGuest){
+  // Hide every element marked data-guest-hide (other tabs, nav links, chat, search, etc.)
+  document.querySelectorAll('[data-guest-hide]').forEach(el=>{
+    el.style.display=isGuest?'none':'';
+  });
+  // Submit forms for Public + Pro Tip: guests can view tips but never submit
+  const pubFormWrap=document.querySelector('#sec-public .public-form');
+  if(pubFormWrap)pubFormWrap.style.display=isGuest?'none':'';
+  const protipForm=document.getElementById('protip-form');
+  if(protipForm)protipForm.style.display=isGuest?'none':'flex';
+  // Sign Up button only for guests; Logout stays for everyone (guests can "log out" back to login screen)
+  const signupBtn=document.getElementById('signup-btn');
+  if(signupBtn)signupBtn.style.display=isGuest?'inline-flex':'none';
+  // If a guest is somehow sitting on a restricted tab (e.g. stale state), bounce them to Recommended
+  if(isGuest){
+    const allowed=['recommended','featured','protip','public'];
+    const activePanel=document.querySelector('.sec-panel.visible');
+    if(activePanel){
+      const activeId=activePanel.id.replace('sec-','');
+      if(!allowed.includes(activeId))showSec('recommended');
+    }
+  }
 }
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function setStatus(s,m){document.getElementById('status-dot').className='status-dot '+s;document.getElementById('status-text').textContent=m}
@@ -797,6 +841,7 @@ async function loadAll(){
     db.adminboard =Array.isArray(data.adminboard) ?data.adminboard :[];
     db.pending    =Array.isArray(data.pending)    ?data.pending    :[];
     db.recommended=Array.isArray(data.recommended)?data.recommended:[];
+    db.protip     =Array.isArray(data.protip)     ?data.protip     :[];
     db.banlist    =Array.isArray(data.banlist)    ?data.banlist    :[];
     db.rules      =Array.isArray(data.rules)      ?data.rules      :[];
     db.members    =Array.isArray(data.members)    ?data.members    :[];
@@ -857,7 +902,8 @@ function renderGrid(gridId,tips,canDel,isPending,isRec){
     if(isPending&&isAdmin){acts.push(`<button class="action-btn approve-btn" onclick="approveTip('${t.id}')">✓ Approve</button>`);acts.push(`<button class="action-btn deny-btn" onclick="denyTip('${t.id}')">✕ Deny</button>`);}
     else if(canDel){acts.push(`<button class="action-btn del-btn" onclick="deleteTip('${gridId}','${t.id}')">✕</button>`);}
     const cc=isRec?'rec-card':'tip-card';const sa=isRec?'':` style="--card-accent:${cfg.accent}"`;
-    return `<article class="${cc}"${sa}><span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span><p class="tip-text">${esc(t.text)}</p><div class="tip-footer"><span class="tip-author">${esc(t.author)}</span><div class="tip-actions">${acts.join('')}</div></div></article>`;
+    const destBadge=(isPending&&t.dest==='protip')?`<span class="rank-badge rank-owner" style="font-size:0.6rem;padding:2px 7px">🌟 → Pro Tip</span>`:'';
+    return `<article class="${cc}"${sa}>${destBadge?`<div style="margin-bottom:4px">${destBadge}</div>`:''}<span class="tip-tag" style="background:${cfg.bg};color:${cfg.color}">${cfg.label}</span><p class="tip-text">${esc(t.text)}</p><div class="tip-footer"><span class="tip-author">${esc(t.author)}</span><div class="tip-actions">${acts.join('')}</div></div></article>`;
   }).join('');
 }
 function renderAll(){
@@ -865,14 +911,16 @@ function renderAll(){
   renderGrid('recommended-grid',db.recommended,isAdmin,false,true);
   renderGrid('public-grid',db.public,isAdmin,false,false);
   renderGrid('featured-grid',db.featured,isMod,false,false);
+  renderGrid('protip-grid',db.protip,isAdmin,false,true);
   renderGrid('adminboard-grid',db.adminboard,isAdmin,false,false);
   renderGrid('pending-grid',db.pending,false,true,false);
   renderNews();renderComplaints();updateComplaintBadge();
   if(db.config&&Array.isArray(db.config.customBlocks))renderCustomBlocks(db.config.customBlocks);
 }
-async function submitPublic(){const text=document.getElementById('pub-text').value.trim();const auth=document.getElementById('pub-name').value.trim()||username||'anon';const tag=document.getElementById('pub-tag').value;if(!text){document.getElementById('pub-text').focus();return;}setStatus('loading','submitting...');try{db.pending.unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById('pub-text').value='';setStatus('ok','submitted ✓');}catch(e){db.pending.shift();setStatus('error','could not submit — '+e.message);}}
+async function submitPublic(){const text=document.getElementById('pub-text').value.trim();const auth=document.getElementById('pub-name').value.trim()||username||'anon';const tag=document.getElementById('pub-tag').value;if(!text){document.getElementById('pub-text').focus();return;}setStatus('loading','submitting...');try{db.pending.unshift({id:Date.now(),text,tag,author:auth,dest:'public'});await saveAll();document.getElementById('pub-text').value='';setStatus('ok','submitted ✓');}catch(e){db.pending.shift();setStatus('error','could not submit — '+e.message);}}
+async function submitProTip(){const text=document.getElementById('protip-text').value.trim();const auth=document.getElementById('protip-name').value.trim()||username||'anon';const tag=document.getElementById('protip-tag').value;if(!text){document.getElementById('protip-text').focus();return;}setStatus('loading','submitting...');try{db.pending.unshift({id:Date.now(),text,tag,author:auth,dest:'protip'});await saveAll();document.getElementById('protip-text').value='';setStatus('ok','submitted ✓');renderAll();}catch(e){db.pending.shift();setStatus('error','could not submit — '+e.message);}}
 async function staffPost(section){const map={recommended:['rec-text','rec-author','rec-tag'],featured:['feat-text','feat-author','feat-tag'],adminboard:['admin-text','admin-author','admin-tag']};const [ti,ai,gi]=map[section];const text=document.getElementById(ti).value.trim();const auth=document.getElementById(ai).value.trim()||username||'Staff';const tag=document.getElementById(gi).value;if(!text){document.getElementById(ti).focus();return;}setStatus('loading','posting...');try{db[section].unshift({id:Date.now(),text,tag,author:auth});await saveAll();document.getElementById(ti).value='';setStatus('ok','posted ✓');renderAll();}catch(e){db[section].shift();setStatus('error','could not post — '+e.message);}}
-async function approveTip(id){const tip=db.pending.find(t=>t.id==id);if(!tip)return;setStatus('loading','approving...');try{db.pending=db.pending.filter(t=>t.id!=id);db.public.unshift({...tip,pending:false});await saveAll();setStatus('ok','approved ✓');renderAll();}catch(e){setStatus('error','could not approve — '+e.message);}}
+async function approveTip(id){const tip=db.pending.find(t=>t.id==id);if(!tip)return;setStatus('loading','approving...');const dest=tip.dest==='protip'?'protip':'public';try{db.pending=db.pending.filter(t=>t.id!=id);if(!Array.isArray(db[dest]))db[dest]=[];db[dest].unshift({...tip,pending:false});await saveAll();setStatus('ok','approved ✓');renderAll();}catch(e){setStatus('error','could not approve — '+e.message);}}
 async function denyTip(id){if(!confirm('Deny and delete?'))return;setStatus('loading','denying...');try{db.pending=db.pending.filter(t=>t.id!=id);await saveAll();setStatus('ok','denied ✓');renderAll();}catch(e){setStatus('error','could not deny — '+e.message);}}
 async function deleteTip(gridId,id){if(!confirm('Delete this tip?'))return;const sec=gridId.replace('-grid','');const prev=[...db[sec]];db[sec]=db[sec].filter(t=>t.id!=id);renderAll();try{await saveAll();setStatus('ok','deleted ✓');}catch(e){db[sec]=prev;setStatus('error','could not delete — '+e.message);renderAll();}}
 function populateSettings(){
