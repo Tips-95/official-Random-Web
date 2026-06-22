@@ -88,11 +88,17 @@
     .btn-primary:hover{background:#b5521f;}
     .btn-dark{background:var(--text);color:#fff;}
     .btn-dark:hover{opacity:0.85;}
+    .btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--border-strong);}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
 
     .divider{border:none;border-top:1px solid var(--border);margin:1.1rem 0;}
     .footer-note{font-size:0.73rem;color:var(--muted);text-align:center;line-height:1.5;}
     .footer-note a{color:var(--accent);text-decoration:none;}
     .footer-note a:hover{text-decoration:underline;}
+
+    /* GUEST BLOCK */
+    .guest-block{margin-top:1.1rem;text-align:center;}
+    .guest-block-label{font-size:0.7rem;color:var(--muted);margin-bottom:8px;}
 
     /* SUCCESS OVERLAY */
     .success-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg);display:none;
@@ -197,8 +203,13 @@
     </div>
   </div>
 
+  <div class="guest-block">
+    <p class="guest-block-label">Just want to browse?</p>
+    <button class="btn btn-ghost" onclick="browseAsGuest()">👀 Browse Tips as Guest</button>
+  </div>
+
   <hr class="divider"/>
-  <p class="footer-note"><a href="index.html">← Back to site</a> &nbsp;·&nbsp; Need help? Ask the owner.</p>
+  <p class="footer-note">Need help? Ask the owner.</p>
 </div>
 
 <script>
@@ -282,7 +293,7 @@ function showToast(id, msg, type) {
 }
 
 function successRedirect(displayName, rank) {
-  const icons = { owner:'👑', admin:'🛡️', mod:'🔧', public:'👤' };
+  const icons = { owner:'👑', admin:'🛡️', mod:'🔧', public:'👤', guest:'👀' };
   document.getElementById('success-msg').textContent = 'Welcome, ' + displayName + '! ' + (icons[rank]||'');
   document.getElementById('success-overlay').classList.add('show');
   setTimeout(() => window.location.replace('index.html'), 750);
@@ -432,6 +443,16 @@ async function doRegister() {
     btn.textContent = 'Create Account →';
     submitting = false;
   }
+}
+
+// ── BROWSE AS GUEST ──
+// Guests get a real rank value ('guest') so the rest of the site can recognize
+// and restrict them, but they skip all login/registration entirely.
+function browseAsGuest() {
+  localStorage.setItem('rank', 'guest');
+  localStorage.setItem('username', 'Guest');
+  localStorage.removeItem('account_id');
+  successRedirect('Guest', 'guest');
 }
 
 // ── Enter key support ──
