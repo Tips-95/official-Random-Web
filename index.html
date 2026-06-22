@@ -321,6 +321,32 @@
     .add-block-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:1rem;border:2px dashed var(--border-strong);border-radius:12px}
     .add-block-row button{font-family:'DM Sans',sans-serif;font-size:0.82rem;padding:8px 14px;border-radius:8px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);cursor:pointer}
     .add-block-row button:hover{background:var(--bg);border-color:var(--accent)}
+
+    /* ===== Global Search ===== */
+    .search-wrap{position:relative;padding:0.9rem 0 0;z-index:21}
+    .search-box{position:relative;display:flex;align-items:center}
+    .search-icon{position:absolute;left:13px;font-size:0.9rem;color:var(--muted);pointer-events:none}
+    .search-input{width:100%;height:42px;padding:0 38px 0 36px;font-family:'DM Sans',sans-serif;font-size:0.9rem;background:var(--surface);border:1px solid var(--border-strong);border-radius:10px;color:var(--text);outline:none;transition:border-color 0.15s}
+    .search-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,96,42,0.1)}
+    .search-clear{position:absolute;right:8px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:0.85rem;padding:5px 8px;border-radius:6px;display:none}
+    .search-clear.show{display:inline-block}
+    .search-clear:hover{color:var(--text);background:var(--bg)}
+    .search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface);border:1px solid var(--border-strong);border-radius:12px;box-shadow:0 10px 32px rgba(0,0,0,0.14);max-height:420px;overflow-y:auto;display:none;z-index:25}
+    .search-results.show{display:block}
+    .search-group-label{font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);padding:9px 14px 4px}
+    .search-result-item{display:flex;align-items:flex-start;gap:9px;padding:9px 14px;cursor:pointer;transition:background 0.1s;border-bottom:1px solid var(--border)}
+    .search-result-item:last-child{border-bottom:none}
+    .search-result-item:hover{background:var(--bg)}
+    .search-result-icon{font-size:0.95rem;flex-shrink:0;margin-top:1px}
+    .search-result-body{flex:1;min-width:0}
+    .search-result-title{font-size:0.85rem;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .search-result-snippet{font-size:0.76rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+    .search-result-snippet mark{background:rgba(200,96,42,0.22);color:var(--text);border-radius:2px;padding:0 1px}
+    .search-result-title mark{background:rgba(200,96,42,0.22);color:var(--text);border-radius:2px;padding:0 1px}
+    .search-no-results{padding:1.5rem 14px;text-align:center;color:var(--muted);font-size:0.85rem}
+    .search-overlay-bg{position:fixed;inset:0;z-index:24;display:none}
+    .search-overlay-bg.show{display:block}
+    @media(max-width:700px){.search-wrap{padding-top:0.7rem}}
   </style>
 </head>
 <body>
@@ -366,6 +392,7 @@
   <span id="ann-txt"></span>
   <button class="ann-close" onclick="document.getElementById('ann-bar').classList.remove('show')">✕</button>
 </div>
+<div class="search-overlay-bg" id="search-overlay-bg" onclick="closeSearchResults()"></div>
 <header class="topnav">
   <a href="index.html" class="topnav-logo">tips <em>&</em> stuff</a>
   <a href="login.html" class="topnav-btn" id="login-link" style="display:none">Login</a>
@@ -405,6 +432,14 @@
         <span class="status-text" id="status-text">loading...</span>
       </div>
     </div>
+  </div>
+  <div class="search-wrap">
+    <div class="search-box">
+      <span class="search-icon">🔎</span>
+      <input type="text" class="search-input" id="global-search" placeholder="Search tips, news, the movie page, site pages..." autocomplete="off" oninput="onSearchInput()" onfocus="onSearchFocus()"/>
+      <button class="search-clear" id="search-clear-btn" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="search-results" id="search-results"></div>
   </div>
   <div class="tab-bar-wrap">
     <div class="tab-bar">
@@ -1227,6 +1262,158 @@ async function saveSectionBlock(zone,id){
   try{await saveAll();toast('toast-builder','✓ Saved!');renderZoneDisplay(zone);}catch(e){toast('toast-builder','✕ Could not save — '+e.message,true);}
 }
 function markBlockDirty(){/* reserved for future autosave/dirty-state indicator */}
+
+/* ===================== GLOBAL SEARCH ===================== */
+/*
+  Searches across: tips (recommended/featured/public/adminboard), news, complaints
+  (staff-only, shown only if isAdmin), the movie page, and a static index of site
+  pages (so typing "rules" or "leaderboard" jumps you straight there).
+*/
+const SEARCH_PAGES=[
+  {label:'Tips (this page)',icon:'📋',url:'index.html',keywords:'tips home recommended featured public board'},
+  {label:'Ranks',icon:'🏅',url:'ranks.html',keywords:'ranks roles staff owner admin mod permissions members'},
+  {label:'Rules',icon:'📜',url:'rules.html',keywords:'rules guidelines policy'},
+  {label:'Ban List',icon:'🚫',url:'banlist.html',keywords:'bans banned banlist'},
+  {label:'News',icon:'📰',url:'news.html',keywords:'news announcements updates'},
+  {label:'Games',icon:'🎮',url:'games.html',keywords:'games play minigames'},
+  {label:'Leaderboard',icon:'🏆',url:'leaderboard.html',keywords:'leaderboard scores points ranking top'},
+  {label:'Movie',icon:'🎬',url:'movie.html',keywords:'movie film trailer synopsis poster production'},
+  {label:'Version / Changelog',icon:'🔖',url:'version.html',keywords:'version changelog update history'},
+  {label:'Donate',icon:'💛',url:'donate.html',keywords:'donate support tip jar'},
+];
+function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+function highlightMatch(text,q){
+  if(!q)return esc(text);
+  const idx=text.toLowerCase().indexOf(q.toLowerCase());
+  if(idx===-1)return esc(text);
+  return esc(text.slice(0,idx))+'<mark>'+esc(text.slice(idx,idx+q.length))+'</mark>'+esc(text.slice(idx+q.length));
+}
+function snippetAround(text,q,len){
+  len=len||70;
+  const idx=text.toLowerCase().indexOf(q.toLowerCase());
+  if(idx===-1)return text.slice(0,len);
+  const start=Math.max(0,idx-25);
+  return (start>0?'…':'')+text.slice(start,start+len)+(start+len<text.length?'…':'');
+}
+function runGlobalSearch(q){
+  const lower=q.toLowerCase();
+  const isAdmin=rank==='owner'||rank==='admin';
+  const results={tips:[],news:[],complaints:[],movie:[],pages:[]};
+  const tipSections=[
+    ['recommended','⭐ Recommended',db.recommended],
+    ['featured','🔥 Featured',db.featured],
+    ['public','📢 Public',db.public],
+    ['adminboard','🔒 Admin Board',db.adminboard],
+  ];
+  tipSections.forEach(([key,label,arr])=>{
+    if(key==='adminboard' && !isAdmin)return;
+    (arr||[]).forEach(t=>{
+      if((t.text||'').toLowerCase().includes(lower) || (t.author||'').toLowerCase().includes(lower)){
+        results.tips.push({sec:key,secLabel:label,id:t.id,text:t.text,author:t.author});
+      }
+    });
+  });
+  (db.news||[]).forEach(n=>{
+    if((n.title||'').toLowerCase().includes(lower) || (n.body||'').toLowerCase().includes(lower)){
+      results.news.push({id:n.id,title:n.title,body:n.body});
+    }
+  });
+  if(isAdmin){
+    (db.complaints||[]).forEach(c=>{
+      if((c.text||'').toLowerCase().includes(lower) || (c.name||'').toLowerCase().includes(lower)){
+        results.complaints.push({id:c.id,name:c.name,text:c.text});
+      }
+    });
+  }
+  const mv=db.movie||{};
+  ['title','tagline','synopsis','update'].forEach(f=>{
+    if((mv[f]||'').toLowerCase().includes(lower)){
+      results.movie.push({field:f,text:mv[f]});
+    }
+  });
+  SEARCH_PAGES.forEach(p=>{
+    if(p.label.toLowerCase().includes(lower) || p.keywords.includes(lower)){
+      results.pages.push(p);
+    }
+  });
+  return results;
+}
+function totalResultCount(r){
+  return r.tips.length+r.news.length+r.complaints.length+r.movie.length+r.pages.length;
+}
+function renderSearchResults(q,r){
+  const box=document.getElementById('search-results');
+  const total=totalResultCount(r);
+  if(!q){box.classList.remove('show');document.getElementById('search-overlay-bg').classList.remove('show');return;}
+  if(!total){
+    box.innerHTML='<p class="search-no-results">No results for "'+esc(q)+'"</p>';
+    box.classList.add('show');document.getElementById('search-overlay-bg').classList.add('show');
+    return;
+  }
+  let html='';
+  if(r.pages.length){
+    html+='<div class="search-group-label">Pages</div>';
+    html+=r.pages.slice(0,6).map(p=>`<div class="search-result-item" onclick="goToPage('${p.url}')"><span class="search-result-icon">${p.icon}</span><div class="search-result-body"><div class="search-result-title">${highlightMatch(p.label,q)}</div></div></div>`).join('');
+  }
+  if(r.tips.length){
+    html+='<div class="search-group-label">Tips</div>';
+    html+=r.tips.slice(0,8).map(t=>`<div class="search-result-item" onclick="goToTip('${t.sec}')"><span class="search-result-icon">💡</span><div class="search-result-body"><div class="search-result-title">${highlightMatch(t.text,q)}</div><div class="search-result-snippet">${t.secLabel} · by ${esc(t.author||'anon')}</div></div></div>`).join('');
+  }
+  if(r.news.length){
+    html+='<div class="search-group-label">News</div>';
+    html+=r.news.slice(0,6).map(n=>`<div class="search-result-item" onclick="goToSection('news')"><span class="search-result-icon">📰</span><div class="search-result-body"><div class="search-result-title">${highlightMatch(n.title,q)}</div><div class="search-result-snippet">${highlightMatch(snippetAround(n.body,q),q)}</div></div></div>`).join('');
+  }
+  if(r.complaints.length){
+    html+='<div class="search-group-label">Complaints (staff)</div>';
+    html+=r.complaints.slice(0,6).map(c=>`<div class="search-result-item" onclick="goToSection('complaints')"><span class="search-result-icon">📝</span><div class="search-result-body"><div class="search-result-title">${highlightMatch(c.text,q)}</div><div class="search-result-snippet">from ${esc(c.name||'anon')}</div></div></div>`).join('');
+  }
+  if(r.movie.length){
+    html+='<div class="search-group-label">Movie Page</div>';
+    html+=r.movie.slice(0,4).map(m=>`<div class="search-result-item" onclick="goToPage('movie.html')"><span class="search-result-icon">🎬</span><div class="search-result-body"><div class="search-result-title">${highlightMatch(snippetAround(m.text,q,50),q)}</div><div class="search-result-snippet">${m.field}</div></div></div>`).join('');
+  }
+  box.innerHTML=html;
+  box.classList.add('show');
+  document.getElementById('search-overlay-bg').classList.add('show');
+}
+let searchDebounce=null;
+function onSearchInput(){
+  const input=document.getElementById('global-search');
+  const q=input.value.trim();
+  document.getElementById('search-clear-btn').classList.toggle('show',q.length>0);
+  clearTimeout(searchDebounce);
+  searchDebounce=setTimeout(()=>{
+    renderSearchResults(q,runGlobalSearch(q));
+  },120);
+}
+function onSearchFocus(){
+  const q=document.getElementById('global-search').value.trim();
+  if(q)renderSearchResults(q,runGlobalSearch(q));
+}
+function closeSearchResults(){
+  document.getElementById('search-results').classList.remove('show');
+  document.getElementById('search-overlay-bg').classList.remove('show');
+}
+function clearSearch(){
+  const input=document.getElementById('global-search');
+  input.value='';
+  document.getElementById('search-clear-btn').classList.remove('show');
+  closeSearchResults();
+  input.focus();
+}
+function goToPage(url){
+  window.location.href=url;
+}
+function goToSection(sec){
+  showSec(sec);
+  closeSearchResults();
+  document.getElementById('global-search').value='';
+  document.getElementById('search-clear-btn').classList.remove('show');
+  document.getElementById('sec-'+sec).scrollIntoView({behavior:'smooth',block:'start'});
+}
+function goToTip(sec){
+  goToSection(sec);
+}
+document.getElementById('global-search').addEventListener('keydown',e=>{if(e.key==='Escape'){clearSearch();e.target.blur();}});
 
 const LANGS={
   en:{sub:'a shared board for tips, tricks, and random gems ✦',login:'Login',logout:'Logout',recommended:'⭐ Recommended',featured:'🔥 Featured',pub:'📢 Public',news:'📰 News',complaints:'📝 Complaints',mystyle:'🎨 My Style',pending:'⏳ Pending',admin:'🔒 Admin Board',settings:'⚙️ Settings'},
