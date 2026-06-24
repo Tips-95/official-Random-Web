@@ -132,6 +132,45 @@
     .trivia-result .big-score{font-family:'DM Mono',monospace;font-size:3rem;font-weight:500;color:var(--accent);line-height:1}
     .trivia-result p{color:var(--muted);font-size:0.9rem}
 
+    /* CHESS */
+    .chess-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+    .chess-mode-picker{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    .chess-mode-card{background:var(--surface);border:1.5px solid var(--border-strong);border-radius:12px;padding:1.25rem 1.5rem;cursor:pointer;transition:all 0.15s;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:160px;text-align:center}
+    .chess-mode-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+    .chess-mode-card .cm-icon{font-size:1.8rem}
+    .chess-mode-card .cm-name{font-weight:600;font-size:0.9rem}
+    .chess-mode-card .cm-desc{font-size:0.74rem;color:var(--muted);line-height:1.4}
+    .chess-side-picker{display:flex;gap:8px;justify-content:center}
+    .chess-side-btn{padding:8px 16px;border-radius:8px;border:1.5px solid var(--border-strong);background:var(--surface);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;transition:all 0.14s}
+    .chess-side-btn:hover{border-color:var(--accent)}
+    .chess-side-btn.sel{background:var(--text);color:#fff;border-color:var(--text)}
+    .chess-board-outer{display:flex;flex-direction:column;align-items:center;gap:4px}
+    .chess-turn-indicator{font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--muted);display:flex;align-items:center;gap:6px;min-height:20px}
+    .chess-board{display:grid;grid-template-columns:repeat(8,1fr);width:min(420px,92vw);aspect-ratio:1;border:3px solid var(--text);border-radius:6px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,0.12)}
+    .chess-sq{position:relative;display:flex;align-items:center;justify-content:center;font-size:min(7.5vw,32px);cursor:pointer;user-select:none;transition:background 0.1s}
+    .chess-sq.light{background:#f0e6d2}
+    .chess-sq.dark{background:#b58863}
+    .chess-sq.selected{box-shadow:inset 0 0 0 3px var(--accent)}
+    .chess-sq.legal-move::after{content:'';position:absolute;width:28%;height:28%;border-radius:50%;background:rgba(200,96,42,0.45)}
+    .chess-sq.legal-capture::after{content:'';position:absolute;inset:8%;border:3px solid rgba(200,96,42,0.55);border-radius:50%;background:none}
+    .chess-sq.in-check{background:#e07a5f !important}
+    .chess-sq.last-move{box-shadow:inset 0 0 0 3px rgba(240,192,96,0.65)}
+    .chess-piece-white{color:#fdfdfd;text-shadow:0 1px 2px rgba(0,0,0,0.5), 0 0 1px #000}
+    .chess-piece-black{color:#1a1612;text-shadow:0 1px 1px rgba(255,255,255,0.25)}
+    .chess-coords{display:flex;justify-content:space-between;width:min(420px,92vw);font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--muted);padding:0 2px}
+    .chess-status-bar{font-family:'DM Mono',monospace;font-size:0.85rem;text-align:center;min-height:22px;font-weight:500}
+    .chess-status-bar.is-check{color:#c0392b}
+    .chess-status-bar.is-mate{color:#c0392b;font-weight:700}
+    .chess-captured-row{display:flex;gap:3px;flex-wrap:wrap;min-height:22px;font-size:1.1rem;align-items:center}
+    .chess-captured-label{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);margin-right:4px}
+    .chess-controls-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+    .chess-promo-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;display:none;align-items:center;justify-content:center}
+    .chess-promo-overlay.show{display:flex}
+    .chess-promo-card{background:var(--surface);border-radius:14px;padding:1.5rem;display:flex;gap:10px;box-shadow:0 12px 40px rgba(0,0,0,0.25)}
+    .chess-promo-piece{width:56px;height:56px;border-radius:10px;border:1.5px solid var(--border-strong);background:var(--bg);font-size:2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.13s}
+    .chess-promo-piece:hover{border-color:var(--accent);background:#fdecd6}
+    .chess-thinking{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--accent);text-align:center;min-height:18px}
+
     /* SCORE SAVED TOAST */
     .score-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(60px);background:var(--text);color:#fff;font-family:'DM Mono',monospace;font-size:0.8rem;padding:10px 20px;border-radius:99px;box-shadow:0 4px 16px rgba(0,0,0,0.18);transition:transform 0.3s ease,opacity 0.3s ease;opacity:0;z-index:100;white-space:nowrap}
     .score-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
@@ -207,6 +246,12 @@
         <div class="game-name" data-t="triviaName">Tips Trivia</div>
         <div class="game-desc" data-t="triviaDesc">Test your knowledge of life hacks, food tips & tech tricks!</div>
         <div class="game-hiscore" id="hs-trivia">Best: —</div>
+      </div>
+      <div class="game-card" onclick="openGame('chess')" style="--card-accent:#5a4632">
+        <div class="game-icon">♟️</div>
+        <div class="game-name" data-t="chessName">Chess</div>
+        <div class="game-desc" data-t="chessDesc">Full rules, real checkmates. Play the computer or a friend.</div>
+        <div class="game-hiscore" id="hs-chess">Wins: —</div>
       </div>
     </div>
   </div>
@@ -303,7 +348,65 @@
     <div class="mini-lb" id="trivia-lb"></div>
   </div>
 
+  <!-- ── CHESS ── -->
+  <div id="screen-chess" class="game-screen">
+    <div class="game-topbar">
+      <button class="game-back-btn" onclick="closeGame('chess')">← Back</button>
+      <div class="game-title">♟️ <span data-t="chessName">Chess</span></div>
+      <button class="game-action-btn ghost" id="chess-new-btn" onclick="chessShowModePicker()" style="display:none">↺ New Game</button>
+    </div>
+
+    <!-- Mode picker -->
+    <div id="chess-mode-screen" class="chess-wrap">
+      <p style="font-size:0.85rem;color:var(--muted)" data-t="chessPickMode">Choose how you want to play:</p>
+      <div class="chess-mode-picker">
+        <div class="chess-mode-card" onclick="chessChooseMode('computer')">
+          <div class="cm-icon">🤖</div>
+          <div class="cm-name" data-t="chessVsComputer">vs Computer</div>
+          <div class="cm-desc" data-t="chessVsComputerDesc">Play against the site's chess AI</div>
+        </div>
+        <div class="chess-mode-card" onclick="chessChooseMode('friend')">
+          <div class="cm-icon">🧑‍🤝‍🧑</div>
+          <div class="cm-name" data-t="chessVsFriend">vs Friend</div>
+          <div class="cm-desc" data-t="chessVsFriendDesc">Pass-and-play on this device</div>
+        </div>
+      </div>
+      <div id="chess-side-screen" style="display:none;flex-direction:column;align-items:center;gap:10px">
+        <p style="font-size:0.85rem;color:var(--muted)" data-t="chessPickSide">Play as:</p>
+        <div class="chess-side-picker">
+          <button class="chess-side-btn" onclick="chessChooseSide('w')">♔ <span data-t="chessWhite">White</span></button>
+          <button class="chess-side-btn" onclick="chessChooseSide('b')">♚ <span data-t="chessBlack">Black</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Board screen -->
+    <div id="chess-board-screen" class="chess-wrap" style="display:none">
+      <div class="chess-board-outer">
+        <div class="chess-captured-row" id="chess-captured-black"></div>
+        <div class="chess-coords" id="chess-coords-top"></div>
+        <div class="chess-board" id="chess-board"></div>
+        <div class="chess-coords" id="chess-coords-bottom"></div>
+        <div class="chess-captured-row" id="chess-captured-white"></div>
+      </div>
+      <div class="chess-turn-indicator" id="chess-turn-indicator"></div>
+      <div class="chess-status-bar" id="chess-status-bar"></div>
+      <div class="chess-thinking" id="chess-thinking"></div>
+      <div class="chess-controls-row">
+        <button class="game-action-btn ghost" onclick="chessUndo()" data-t="chessUndo">↶ Undo</button>
+        <button class="game-action-btn ghost" onclick="chessResign()" data-t="chessResign">🏳 Resign</button>
+      </div>
+    </div>
+
+    <div class="mini-lb" id="chess-lb"></div>
+  </div>
+
   <div class="site-footer"><p>tips & stuff — shared with friends ✦</p></div>
+</div>
+
+<!-- PROMOTION OVERLAY -->
+<div class="chess-promo-overlay" id="chess-promo-overlay">
+  <div class="chess-promo-card" id="chess-promo-card"></div>
 </div>
 
 <!-- SCORE TOAST -->
@@ -321,7 +424,7 @@ const RANK_LABELS = {owner:'👑 Owner',admin:'🛡️ Admin',mod:'🔧 Mod'};
 const RANK_CLASSES = {owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
 
 let dbFull = {};
-let gameScores = {}; // { snake:[], ttt:[], memory:[], trivia:[] }
+let gameScores = {}; // { snake:[], ttt:[], memory:[], trivia:[], chess:[] }
 
 // ── LANG ──
 const LANGS = {
@@ -330,36 +433,56 @@ const LANGS = {
     tttName:'Tic-Tac-Toe', tttDesc:'You vs the computer. Can you beat the AI?',
     memName:'Memory', memDesc:'Flip cards to find matching pairs. Fewest moves wins!',
     triviaName:'Tips Trivia', triviaDesc:'Test your knowledge of life hacks, food tips & tech tricks!',
+    chessName:'Chess', chessDesc:"Full rules, real checkmates. Play the computer or a friend.",
     tttWins:'Wins', tttDraws:'Draws', tttLosses:'Losses',
     memMoves:'Moves:', memMatched:'Matched:', memBest:'Best:',
     scoreSaved:'🏆 Score saved to leaderboard!',
+    chessPickMode:'Choose how you want to play:', chessVsComputer:'vs Computer', chessVsComputerDesc:"Play against the site's chess AI",
+    chessVsFriend:'vs Friend', chessVsFriendDesc:'Pass-and-play on this device',
+    chessPickSide:'Play as:', chessWhite:'White', chessBlack:'Black',
+    chessUndo:'↶ Undo', chessResign:'🏳 Resign',
   },
   ko:{ title:'게임', subtitle:'미니 게임과 퀴즈를 즐기세요 — 점수가 리더보드에 저장됩니다!',
     snakeName:'스네이크', snakeDesc:'클래식 스네이크 — 먹이를 먹고 더 길어지세요!',
     tttName:'틱택토', tttDesc:'컴퓨터와 대결하세요. AI를 이길 수 있나요?',
     memName:'메모리', memDesc:'카드를 뒤집어 짝을 맞추세요. 적은 횟수가 승리!',
     triviaName:'팁스 퀴즈', triviaDesc:'생활 팁, 음식, 기술 지식을 테스트하세요!',
+    chessName:'체스', chessDesc:'완전한 규칙, 실제 체크메이트. 컴퓨터나 친구와 플레이하세요.',
     tttWins:'승리', tttDraws:'무승부', tttLosses:'패배',
     memMoves:'이동:', memMatched:'맞춤:', memBest:'최고:',
     scoreSaved:'🏆 점수가 리더보드에 저장되었습니다!',
+    chessPickMode:'플레이 방식을 선택하세요:', chessVsComputer:'컴퓨터 대전', chessVsComputerDesc:'사이트의 체스 AI와 대결하세요',
+    chessVsFriend:'친구와 대전', chessVsFriendDesc:'이 기기에서 번갈아 플레이',
+    chessPickSide:'플레이할 진영:', chessWhite:'화이트', chessBlack:'블랙',
+    chessUndo:'↶ 무르기', chessResign:'🏳 포기',
   },
   es:{ title:'Juegos', subtitle:'¡Juega mini juegos y trivia — los puntajes van al marcador!',
     snakeName:'Snake', snakeDesc:'Snake clásico — ¡come comida, crece y no choques!',
     tttName:'Tres en raya', tttDesc:'Tú vs la computadora. ¿Puedes vencer a la IA?',
     memName:'Memoria', memDesc:'Voltea cartas para encontrar pares. ¡Menos movimientos gana!',
     triviaName:'Trivia de Tips', triviaDesc:'¡Pon a prueba tus conocimientos sobre tips de vida, comida y tecnología!',
+    chessName:'Ajedrez', chessDesc:'Reglas completas, jaque mate real. Juega contra la computadora o un amigo.',
     tttWins:'Victorias', tttDraws:'Empates', tttLosses:'Derrotas',
     memMoves:'Movimientos:', memMatched:'Parejas:', memBest:'Mejor:',
     scoreSaved:'🏆 ¡Puntuación guardada en el marcador!',
+    chessPickMode:'Elige cómo quieres jugar:', chessVsComputer:'vs Computadora', chessVsComputerDesc:'Juega contra la IA de ajedrez del sitio',
+    chessVsFriend:'vs Amigo', chessVsFriendDesc:'Juega por turnos en este dispositivo',
+    chessPickSide:'Jugar como:', chessWhite:'Blancas', chessBlack:'Negras',
+    chessUndo:'↶ Deshacer', chessResign:'🏳 Rendirse',
   },
   de:{ title:'Spiele', subtitle:'Spiel Mini-Spiele & Trivia — Punkte kommen auf die Rangliste!',
     snakeName:'Snake', snakeDesc:'Klassisches Snake — iss Futter, werde länger, kein Absturz!',
     tttName:'Tic-Tac-Toe', tttDesc:'Du gegen den Computer. Kannst du die KI schlagen?',
     memName:'Memory', memDesc:'Karten umdrehen und Paare finden. Wenigste Züge gewinnen!',
     triviaName:'Tipps-Trivia', triviaDesc:'Teste dein Wissen über Lebenstipps, Essen und Technik!',
+    chessName:'Schach', chessDesc:'Vollständige Regeln, echtes Schachmatt. Spiel gegen den Computer oder einen Freund.',
     tttWins:'Siege', tttDraws:'Unentschieden', tttLosses:'Niederlagen',
     memMoves:'Züge:', memMatched:'Gefunden:', memBest:'Bestzeit:',
     scoreSaved:'🏆 Punktzahl auf Rangliste gespeichert!',
+    chessPickMode:'Wähle deine Spielart:', chessVsComputer:'vs Computer', chessVsComputerDesc:'Spiel gegen die Schach-KI der Seite',
+    chessVsFriend:'vs Freund', chessVsFriendDesc:'Abwechselnd auf diesem Gerät spielen',
+    chessPickSide:'Spielen als:', chessWhite:'Weiß', chessBlack:'Schwarz',
+    chessUndo:'↶ Rückgängig', chessResign:'🏳 Aufgeben',
   },
 };
 let lang = localStorage.getItem('lang') || 'en';
@@ -400,6 +523,7 @@ async function loadScores() {
     if(!Array.isArray(gameScores.ttt))    gameScores.ttt    = [];
     if(!Array.isArray(gameScores.memory)) gameScores.memory = [];
     if(!Array.isArray(gameScores.trivia)) gameScores.trivia = [];
+    if(!Array.isArray(gameScores.chess))  gameScores.chess  = [];
     updateHiScores();
   } catch(e) {}
 }
@@ -429,10 +553,12 @@ function updateHiScores() {
   const myTtt    = gameScores.ttt.filter(e=>e.name===username).reduce((a,b)=>a+b.score,0);
   const myMem    = gameScores.memory.filter(e=>e.name===username).sort((a,b)=>a.score-b.score)[0];
   const myTrivia = gameScores.trivia.filter(e=>e.name===username).sort((a,b)=>b.score-a.score)[0];
+  const myChess  = gameScores.chess.filter(e=>e.name===username).reduce((a,b)=>a+b.score,0);
   document.getElementById('hs-snake').textContent  = 'Best: ' + (mySnake  ? mySnake.score  : '—');
   document.getElementById('hs-ttt').textContent    = 'Wins: ' + (myTtt    ? myTtt         : '—');
   document.getElementById('hs-memory').textContent = 'Best: ' + (myMem    ? myMem.score+' moves' : '—');
   document.getElementById('hs-trivia').textContent = 'Best: ' + (myTrivia ? myTrivia.score+'/10' : '—');
+  document.getElementById('hs-chess').textContent  = 'Wins: ' + (myChess  ? myChess        : '—');
   // update snake best in game
   const sb = document.getElementById('snake-best');
   if(sb) sb.textContent = mySnake ? mySnake.score : 0;
@@ -452,7 +578,7 @@ function renderMiniLb(game) {
     sorted.map((e,i) => `<div class="mini-lb-row${e.name===username?' is-me':''}">
       <div class="mini-lb-pos">${medals[i]||i+1}</div>
       <div class="mini-lb-name">${esc(e.name)}${e.name===username?'<span style="font-size:0.6rem;background:var(--accent);color:#fff;padding:1px 5px;border-radius:99px;margin-left:4px">you</span>':''}</div>
-      <div class="mini-lb-score">${game==='memory'?e.score+' moves':game==='trivia'?e.score+'/10':e.score}</div>
+      <div class="mini-lb-score">${game==='memory'?e.score+' moves':game==='trivia'?e.score+'/10':game==='chess'?e.score+' wins':e.score}</div>
     </div>`).join('');
 }
 
@@ -466,6 +592,7 @@ function openGame(game) {
   if(game==='ttt')    { tttInit(); }
   if(game==='memory') { memReset(); }
   if(game==='trivia') { triviaStart(); }
+  if(game==='chess')  { chessShowModePicker(); }
 }
 function closeGame(game) {
   if(game==='snake') snakeStop();
@@ -845,6 +972,550 @@ function triviaNext() {
     if(triviaScoreVal > 0) saveScore('trivia', triviaScoreVal, triviaScoreVal + '/10');
     renderMiniLb('trivia');
   }
+}
+
+// ════════════════════════════════════════
+// ♟️ CHESS — full rules engine + simple AI
+// ════════════════════════════════════════
+
+// ---- Engine: board representation & move generation ----
+function chessInitialBoard(){
+  return [
+    ['r','n','b','q','k','b','n','r'],
+    ['p','p','p','p','p','p','p','p'],
+    ['','','','','','','',''],
+    ['','','','','','','',''],
+    ['','','','','','','',''],
+    ['','','','','','','',''],
+    ['P','P','P','P','P','P','P','P'],
+    ['R','N','B','Q','K','B','N','R'],
+  ];
+}
+function chessIsWhite(p){ return !!p && p === p.toUpperCase(); }
+function chessColorOf(p){ if(!p) return null; return chessIsWhite(p) ? 'w' : 'b'; }
+function chessInBounds(r,c){ return r>=0&&r<8&&c>=0&&c<8; }
+
+function chessNewState(){
+  return {
+    board: chessInitialBoard(),
+    turn: 'w',
+    castling: { wK:true, wQ:true, bK:true, bQ:true },
+    enPassant: null,
+    history: [],
+    captured: { w:[], b:[] } // pieces captured BY white, BY black
+  };
+}
+function chessCloneState(s){
+  return {
+    board: s.board.map(row=>row.slice()),
+    turn: s.turn,
+    castling: {...s.castling},
+    enPassant: s.enPassant ? {...s.enPassant} : null,
+    history: s.history.slice(),
+    captured: { w: s.captured.w.slice(), b: s.captured.b.slice() }
+  };
+}
+
+function chessPseudoMoves(state, r, c){
+  const board = state.board;
+  const p = board[r][c];
+  if(!p) return [];
+  const color = chessColorOf(p);
+  const dir = color === 'w' ? -1 : 1;
+  const moves = [];
+  const type = p.toUpperCase();
+
+  function slide(nr,nc){
+    if(!chessInBounds(nr,nc)) return false;
+    const target = board[nr][nc];
+    if(!target){ moves.push({r:nr,c:nc,type:'move'}); return true; }
+    if(chessColorOf(target) !== color) moves.push({r:nr,c:nc,type:'capture'});
+    return false;
+  }
+
+  if(type === 'P'){
+    const oneStep = r+dir;
+    if(chessInBounds(oneStep,c) && !board[oneStep][c]){
+      moves.push({r:oneStep,c, type:'move'});
+      const startRow = color==='w'?6:1;
+      const twoStep = r+2*dir;
+      if(r===startRow && !board[twoStep][c]) moves.push({r:twoStep,c, type:'move', doubleStep:true});
+    }
+    [[dir,-1],[dir,1]].forEach(([dr,dc])=>{
+      const nr=r+dr, nc=c+dc;
+      if(chessInBounds(nr,nc)){
+        const target = board[nr][nc];
+        if(target && chessColorOf(target)!==color) moves.push({r:nr,c:nc,type:'capture'});
+        else if(!target && state.enPassant && state.enPassant.r===nr && state.enPassant.c===nc) moves.push({r:nr,c:nc,type:'enpassant'});
+      }
+    });
+  } else if(type === 'N'){
+    [[1,2],[2,1],[-1,2],[-2,1],[1,-2],[2,-1],[-1,-2],[-2,-1]].forEach(([dr,dc])=>{
+      const nr=r+dr,nc=c+dc;
+      if(chessInBounds(nr,nc)){
+        const target=board[nr][nc];
+        if(!target) moves.push({r:nr,c:nc,type:'move'});
+        else if(chessColorOf(target)!==color) moves.push({r:nr,c:nc,type:'capture'});
+      }
+    });
+  } else if(type === 'B' || type === 'R' || type === 'Q'){
+    let dirs=[];
+    if(type==='B') dirs=[[1,1],[1,-1],[-1,1],[-1,-1]];
+    if(type==='R') dirs=[[1,0],[-1,0],[0,1],[0,-1]];
+    if(type==='Q') dirs=[[1,1],[1,-1],[-1,1],[-1,-1],[1,0],[-1,0],[0,1],[0,-1]];
+    dirs.forEach(([dr,dc])=>{
+      let nr=r+dr, nc=c+dc;
+      while(chessInBounds(nr,nc)){
+        const cont = slide(nr,nc);
+        if(!cont) break;
+        nr+=dr; nc+=dc;
+      }
+    });
+  } else if(type === 'K'){
+    [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]].forEach(([dr,dc])=>{
+      const nr=r+dr,nc=c+dc;
+      if(chessInBounds(nr,nc)){
+        const target=board[nr][nc];
+        if(!target) moves.push({r:nr,c:nc,type:'move'});
+        else if(chessColorOf(target)!==color) moves.push({r:nr,c:nc,type:'capture'});
+      }
+    });
+    const row = color==='w'?7:0;
+    if(r===row && c===4){
+      const kKey = color==='w'?'wK':'bK', qKey = color==='w'?'wQ':'bQ';
+      if(state.castling[kKey] && !board[row][5] && !board[row][6] && board[row][7]===(color==='w'?'R':'r')) moves.push({r:row,c:6,type:'castle-king'});
+      if(state.castling[qKey] && !board[row][1] && !board[row][2] && !board[row][3] && board[row][0]===(color==='w'?'R':'r')) moves.push({r:row,c:2,type:'castle-queen'});
+    }
+  }
+  return moves;
+}
+
+function chessFindKing(board, color){
+  const target = color==='w'?'K':'k';
+  for(let r=0;r<8;r++) for(let c=0;c<8;c++) if(board[r][c]===target) return {r,c};
+  return null;
+}
+function chessSquareAttacked(board, r, c, byColor){
+  for(let rr=0; rr<8; rr++){
+    for(let cc=0; cc<8; cc++){
+      const p = board[rr][cc];
+      if(p && chessColorOf(p)===byColor){
+        const moves = chessPseudoMoves({board, turn:byColor, castling:{wK:false,wQ:false,bK:false,bQ:false}, enPassant:null}, rr, cc);
+        if(moves.some(m=>m.r===r && m.c===c && m.type!=='castle-king' && m.type!=='castle-queen')) return true;
+      }
+    }
+  }
+  return false;
+}
+function chessInCheck(state, color){
+  const king = chessFindKing(state.board, color);
+  if(!king) return false;
+  return chessSquareAttacked(state.board, king.r, king.c, color==='w'?'b':'w');
+}
+
+function chessApplyMove(state, from, to, moveInfo, promotion){
+  const ns = chessCloneState(state);
+  const board = ns.board;
+  const piece = board[from.r][from.c];
+  const color = chessColorOf(piece);
+  const type = piece.toUpperCase();
+  ns.enPassant = null;
+  let capturedPiece = null;
+
+  if(moveInfo.type === 'enpassant'){
+    capturedPiece = board[from.r][to.c];
+    board[to.r][to.c] = piece; board[from.r][from.c] = ''; board[from.r][to.c] = '';
+  } else if(moveInfo.type === 'castle-king'){
+    const row = from.r;
+    board[row][6] = piece; board[row][4]=''; board[row][5] = board[row][7]; board[row][7]='';
+  } else if(moveInfo.type === 'castle-queen'){
+    const row = from.r;
+    board[row][2] = piece; board[row][4]=''; board[row][3] = board[row][0]; board[row][0]='';
+  } else {
+    capturedPiece = board[to.r][to.c] || null;
+    board[to.r][to.c] = piece; board[from.r][from.c] = '';
+    if(type==='P' && (to.r===0 || to.r===7)){
+      const promo = promotion || 'Q';
+      board[to.r][to.c] = color==='w' ? promo.toUpperCase() : promo.toLowerCase();
+    }
+    if(type==='P' && moveInfo.doubleStep) ns.enPassant = { r:(from.r+to.r)/2, c: from.c };
+  }
+
+  if(capturedPiece) ns.captured[color].push(capturedPiece);
+
+  if(type==='K'){ if(color==='w'){ ns.castling.wK=false; ns.castling.wQ=false; } else { ns.castling.bK=false; ns.castling.bQ=false; } }
+  if(type==='R'){
+    if(color==='w' && from.r===7 && from.c===0) ns.castling.wQ=false;
+    if(color==='w' && from.r===7 && from.c===7) ns.castling.wK=false;
+    if(color==='b' && from.r===0 && from.c===0) ns.castling.bQ=false;
+    if(color==='b' && from.r===0 && from.c===7) ns.castling.bK=false;
+  }
+  if(to.r===7&&to.c===0) ns.castling.wQ=false;
+  if(to.r===7&&to.c===7) ns.castling.wK=false;
+  if(to.r===0&&to.c===0) ns.castling.bQ=false;
+  if(to.r===0&&to.c===7) ns.castling.bK=false;
+
+  ns.turn = color==='w' ? 'b' : 'w';
+  ns.history.push({from,to,piece,moveInfo,promotion,capturedPiece});
+  return ns;
+}
+
+function chessLegalMovesForSquare(state, r, c){
+  const piece = state.board[r][c];
+  if(!piece || chessColorOf(piece) !== state.turn) return [];
+  const pseudo = chessPseudoMoves(state, r, c);
+  const color = state.turn;
+  return pseudo.filter(m=>{
+    if(m.type==='castle-king' || m.type==='castle-queen'){
+      if(chessInCheck(state, color)) return false;
+      const row = r;
+      const passCols = m.type==='castle-king' ? [5,6] : [3,2];
+      const oppColor = color==='w'?'b':'w';
+      for(const col of passCols) if(chessSquareAttacked(state.board, row, col, oppColor)) return false;
+    }
+    const next = chessApplyMove(state, {r,c}, {r:m.r,c:m.c}, m);
+    return !chessInCheck(next, color);
+  });
+}
+function chessAllLegalMoves(state, color){
+  const result = [];
+  for(let r=0;r<8;r++) for(let c=0;c<8;c++){
+    const p = state.board[r][c];
+    if(p && chessColorOf(p)===color){
+      chessLegalMovesForSquare({...state, turn:color}, r, c).forEach(m=>result.push({from:{r,c}, to:{r:m.r,c:m.c}, info:m}));
+    }
+  }
+  return result;
+}
+function chessStatus(state){
+  const moves = chessAllLegalMoves(state, state.turn);
+  const inCheck = chessInCheck(state, state.turn);
+  if(moves.length === 0) return inCheck ? { status:'checkmate', winner: state.turn==='w'?'b':'w' } : { status:'stalemate' };
+  return inCheck ? { status:'check' } : { status:'playing' };
+}
+
+// ---- Simple AI ----
+const CHESS_VALUES = { P:100, N:320, B:330, R:500, Q:900, K:20000 };
+const CHESS_PAWN_TABLE = [[0,0,0,0,0,0,0,0],[50,50,50,50,50,50,50,50],[10,10,20,30,30,20,10,10],[5,5,10,25,25,10,5,5],[0,0,0,20,20,0,0,0],[5,-5,-10,0,0,-10,-5,5],[5,10,10,-20,-20,10,10,5],[0,0,0,0,0,0,0,0]];
+const CHESS_KNIGHT_TABLE = [[-50,-40,-30,-30,-30,-30,-40,-50],[-40,-20,0,0,0,0,-20,-40],[-30,0,10,15,15,10,0,-30],[-30,5,15,20,20,15,5,-30],[-30,0,15,20,20,15,0,-30],[-30,5,10,15,15,10,5,-30],[-40,-20,0,5,5,0,-20,-40],[-50,-40,-30,-30,-30,-30,-40,-50]];
+function chessEval(state){
+  let score = 0;
+  for(let r=0;r<8;r++) for(let c=0;c<8;c++){
+    const p = state.board[r][c]; if(!p) continue;
+    const type = p.toUpperCase(); const color = chessColorOf(p);
+    let val = CHESS_VALUES[type];
+    if(type==='P') val += color==='w' ? CHESS_PAWN_TABLE[r][c] : CHESS_PAWN_TABLE[7-r][c];
+    if(type==='N') val += color==='w' ? CHESS_KNIGHT_TABLE[r][c] : CHESS_KNIGHT_TABLE[7-r][c];
+    score += color==='w' ? val : -val;
+  }
+  return score;
+}
+function chessMinimax(state, depth, alpha, beta, maximizing){
+  const status = chessStatus(state);
+  if(status.status === 'checkmate') return maximizing ? -100000+depth : 100000-depth;
+  if(status.status === 'stalemate') return 0;
+  if(depth === 0) return chessEval(state);
+  const moves = chessAllLegalMoves(state, state.turn);
+  if(maximizing){
+    let maxEval = -Infinity;
+    for(const m of moves){
+      const next = chessApplyMove(state, m.from, m.to, m.info);
+      maxEval = Math.max(maxEval, chessMinimax(next, depth-1, alpha, beta, false));
+      alpha = Math.max(alpha, maxEval);
+      if(beta <= alpha) break;
+    }
+    return maxEval;
+  } else {
+    let minEval = Infinity;
+    for(const m of moves){
+      const next = chessApplyMove(state, m.from, m.to, m.info);
+      minEval = Math.min(minEval, chessMinimax(next, depth-1, alpha, beta, true));
+      beta = Math.min(beta, minEval);
+      if(beta <= alpha) break;
+    }
+    return minEval;
+  }
+}
+function chessFindBestMove(state, depth){
+  const color = state.turn, maximizing = color === 'w';
+  const moves = chessAllLegalMoves(state, color);
+  if(!moves.length) return null;
+  moves.sort(()=>Math.random()-0.5);
+  let bestMove = null, bestEval = maximizing ? -Infinity : Infinity;
+  for(const m of moves){
+    const next = chessApplyMove(state, m.from, m.to, m.info);
+    const evalScore = chessMinimax(next, depth-1, -Infinity, Infinity, !maximizing);
+    if(maximizing && evalScore > bestEval){ bestEval = evalScore; bestMove = m; }
+    if(!maximizing && evalScore < bestEval){ bestEval = evalScore; bestMove = m; }
+  }
+  return bestMove;
+}
+
+// ---- UI wiring ----
+const CHESS_GLYPHS = { K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙', k:'♚',q:'♛',r:'♜',b:'♝',n:'♞',p:'♟' };
+const CHESS_FILES = ['a','b','c','d','e','f','g','h'];
+
+let chessState = null;
+let chessMode = null;       // 'computer' | 'friend'
+let chessPlayerSide = 'w';  // side the human plays in computer mode
+let chessSelected = null;   // {r,c}
+let chessLegalForSelected = [];
+let chessWins = 0, chessLosses = 0, chessDraws = 0;
+let chessGameOver = false;
+let chessPendingPromotion = null; // {from,to,info}
+let chessAIThinking = false;
+
+function chessShowModePicker(){
+  document.getElementById('chess-mode-screen').style.display='flex';
+  document.getElementById('chess-board-screen').style.display='none';
+  document.getElementById('chess-side-screen').style.display='none';
+  document.getElementById('chess-new-btn').style.display='none';
+  chessGameOver = true; // stop any pending AI move from previous game
+}
+function chessChooseMode(mode){
+  chessMode = mode;
+  if(mode === 'friend'){
+    chessPlayerSide = 'w';
+    chessStartGame();
+  } else {
+    document.querySelector('.chess-mode-picker').style.display='none';
+    document.getElementById('chess-side-screen').style.display='flex';
+  }
+}
+function chessChooseSide(side){
+  chessPlayerSide = side;
+  chessStartGame();
+}
+function chessStartGame(){
+  chessState = chessNewState();
+  chessSelected = null;
+  chessLegalForSelected = [];
+  chessGameOver = false;
+  chessPendingPromotion = null;
+  document.querySelector('.chess-mode-picker').style.display='flex';
+  document.getElementById('chess-side-screen').style.display='none';
+  document.getElementById('chess-mode-screen').style.display='none';
+  document.getElementById('chess-board-screen').style.display='flex';
+  document.getElementById('chess-new-btn').style.display='inline-flex';
+  chessRenderBoard();
+  chessUpdateStatus();
+  // If computer mode and AI plays white... well player picks side, so if player chose black, AI (white) moves first
+  if(chessMode === 'computer' && chessPlayerSide === 'b'){
+    chessAIMove();
+  }
+}
+
+function chessSquareColorClass(r,c){ return (r+c)%2===0 ? 'light' : 'dark'; }
+
+function chessRenderBoard(){
+  const boardEl = document.getElementById('chess-board');
+  const flip = chessMode === 'computer' && chessPlayerSide === 'b';
+  let rows = [...Array(8).keys()];
+  let cols = [...Array(8).keys()];
+  if(flip){ rows = rows.reverse(); cols = cols.reverse(); }
+
+  const lastMove = chessState.history[chessState.history.length-1];
+  const inCheckColor = chessInCheck(chessState, chessState.turn) ? chessState.turn : null;
+  const kingPos = inCheckColor ? chessFindKing(chessState.board, inCheckColor) : null;
+
+  let html = '';
+  rows.forEach(r=>{
+    cols.forEach(c=>{
+      const piece = chessState.board[r][c];
+      const classes = ['chess-sq', chessSquareColorClass(r,c)];
+      if(chessSelected && chessSelected.r===r && chessSelected.c===c) classes.push('selected');
+      if(lastMove && ((lastMove.from.r===r&&lastMove.from.c===c)||(lastMove.to.r===r&&lastMove.to.c===c))) classes.push('last-move');
+      if(kingPos && kingPos.r===r && kingPos.c===c) classes.push('in-check');
+      const legalHere = chessLegalForSelected.find(m=>m.r===r&&m.c===c);
+      if(legalHere) classes.push(legalHere.type==='capture'||legalHere.type==='enpassant' ? 'legal-capture' : 'legal-move');
+      const glyph = piece ? CHESS_GLYPHS[piece] : '';
+      const pieceClass = piece ? (chessIsWhite(piece) ? 'chess-piece-white' : 'chess-piece-black') : '';
+      html += `<div class="${classes.join(' ')}" onclick="chessSquareClick(${r},${c})"><span class="${pieceClass}">${glyph}</span></div>`;
+    });
+  });
+  boardEl.innerHTML = html;
+
+  // coords
+  const fileLabels = flip ? [...CHESS_FILES].reverse() : CHESS_FILES;
+  document.getElementById('chess-coords-bottom').innerHTML = fileLabels.map(f=>`<span>${f}</span>`).join('');
+  document.getElementById('chess-coords-top').innerHTML = fileLabels.map(()=>`<span></span>`).join('');
+
+  // captured pieces rows
+  const capturedByWhite = chessState.captured.w.map(p=>CHESS_GLYPHS[p]).join(' ');
+  const capturedByBlack = chessState.captured.b.map(p=>CHESS_GLYPHS[p]).join(' ');
+  document.getElementById('chess-captured-white').innerHTML = `<span class="chess-captured-label">White captured:</span>${capturedByWhite}`;
+  document.getElementById('chess-captured-black').innerHTML = `<span class="chess-captured-label">Black captured:</span>${capturedByBlack}`;
+}
+
+function chessHumanCanMove(){
+  if(chessGameOver) return false;
+  if(chessMode === 'friend') return true;
+  return chessState.turn === chessPlayerSide;
+}
+
+function chessSquareClick(r,c){
+  if(!chessHumanCanMove() || chessAIThinking) return;
+  const piece = chessState.board[r][c];
+
+  if(chessSelected){
+    const move = chessLegalForSelected.find(m=>m.r===r && m.c===c);
+    if(move){
+      chessExecuteMove(chessSelected, {r,c}, move);
+      return;
+    }
+    // clicking another own piece reselects
+    if(piece && chessColorOf(piece) === chessState.turn){
+      chessSelected = {r,c};
+      chessLegalForSelected = chessLegalMovesForSquare(chessState, r, c);
+      chessRenderBoard();
+      return;
+    }
+    chessSelected = null; chessLegalForSelected = [];
+    chessRenderBoard();
+    return;
+  }
+  if(piece && chessColorOf(piece) === chessState.turn){
+    chessSelected = {r,c};
+    chessLegalForSelected = chessLegalMovesForSquare(chessState, r, c);
+    chessRenderBoard();
+  }
+}
+
+function chessExecuteMove(from, to, moveInfo){
+  const piece = chessState.board[from.r][from.c];
+  const isPromotion = piece.toUpperCase()==='P' && (to.r===0 || to.r===7);
+  chessSelected = null; chessLegalForSelected = [];
+  if(isPromotion){
+    chessPendingPromotion = { from, to, info: moveInfo };
+    chessShowPromotionPicker(chessColorOf(piece));
+    return;
+  }
+  chessState = chessApplyMove(chessState, from, to, moveInfo);
+  chessAfterMove();
+}
+
+function chessShowPromotionPicker(color){
+  const pieces = ['Q','R','B','N'];
+  const card = document.getElementById('chess-promo-card');
+  card.innerHTML = pieces.map(p=>{
+    const glyph = color==='w'?CHESS_GLYPHS[p]:CHESS_GLYPHS[p.toLowerCase()];
+    return `<div class="chess-promo-piece" onclick="chessCompletePromotion('${p}')">${glyph}</div>`;
+  }).join('');
+  document.getElementById('chess-promo-overlay').classList.add('show');
+}
+function chessCompletePromotion(pieceType){
+  document.getElementById('chess-promo-overlay').classList.remove('show');
+  const { from, to, info } = chessPendingPromotion;
+  chessState = chessApplyMove(chessState, from, to, info, pieceType);
+  chessPendingPromotion = null;
+  chessAfterMove();
+}
+
+function chessAfterMove(){
+  chessRenderBoard();
+  const status = chessUpdateStatus();
+  if(status.status === 'checkmate' || status.status === 'stalemate'){
+    chessHandleGameEnd(status);
+    return;
+  }
+  if(chessMode === 'computer' && chessState.turn !== chessPlayerSide){
+    chessAIMove();
+  }
+}
+
+function chessAIMove(){
+  chessAIThinking = true;
+  document.getElementById('chess-thinking').textContent = '🤖 Thinking…';
+  setTimeout(()=>{
+    const best = chessFindBestMove(chessState, 2);
+    chessAIThinking = false;
+    document.getElementById('chess-thinking').textContent = '';
+    if(!best) return; // shouldn't happen if status checked first
+    chessState = chessApplyMove(chessState, best.from, best.to, best.info);
+    chessRenderBoard();
+    const status = chessUpdateStatus();
+    if(status.status === 'checkmate' || status.status === 'stalemate') chessHandleGameEnd(status);
+  }, 250);
+}
+
+function chessUpdateStatus(){
+  const status = chessStatus(chessState);
+  const bar = document.getElementById('chess-status-bar');
+  const turnInd = document.getElementById('chess-turn-indicator');
+  const turnName = chessState.turn === 'w' ? 'White' : 'Black';
+  const turnGlyph = chessState.turn === 'w' ? '♔' : '♚';
+  turnInd.textContent = `${turnGlyph} ${turnName} to move`;
+  bar.className = 'chess-status-bar';
+  if(status.status === 'checkmate'){
+    const winnerName = status.winner === 'w' ? 'White' : 'Black';
+    bar.textContent = `♛ Checkmate — ${winnerName} wins!`;
+    bar.classList.add('is-mate');
+  } else if(status.status === 'stalemate'){
+    bar.textContent = `🤝 Stalemate — it's a draw!`;
+    bar.classList.add('is-mate');
+  } else if(status.status === 'check'){
+    bar.textContent = `⚠ ${turnName} is in check!`;
+    bar.classList.add('is-check');
+  } else {
+    bar.textContent = '';
+  }
+  return status;
+}
+
+function chessHandleGameEnd(status){
+  chessGameOver = true;
+  if(status.status === 'stalemate'){
+    chessDraws++;
+    showToast("🤝 Draw by stalemate!");
+    return;
+  }
+  // checkmate
+  if(chessMode === 'computer'){
+    if(status.winner === chessPlayerSide){
+      chessWins++;
+      saveScore('chess', chessWins, chessWins + ' wins');
+    } else {
+      chessLosses++;
+      showToast('😅 Checkmate — the computer wins this one!');
+    }
+  } else {
+    // friend mode — just announce, no AI win/loss tracking makes sense here
+    const winnerName = status.winner === 'w' ? 'White' : 'Black';
+    showToast(`🏆 Checkmate — ${winnerName} wins!`);
+  }
+}
+
+function chessUndo(){
+  if(chessState.history.length === 0 || chessGameOver) return;
+  // Rebuild state by replaying all moves except the last (also undo AI's reply in computer mode)
+  const movesToReplay = chessState.history.slice(0, -1);
+  let stepsBack = 1;
+  if(chessMode === 'computer' && movesToReplay.length > 0) stepsBack = 2;
+  const targetLen = Math.max(0, chessState.history.length - stepsBack);
+  let ns = chessNewState();
+  for(let i=0;i<targetLen;i++){
+    const h = chessState.history[i];
+    ns = chessApplyMove(ns, h.from, h.to, h.moveInfo, h.promotion);
+  }
+  chessState = ns;
+  chessSelected = null; chessLegalForSelected = [];
+  chessGameOver = false;
+  chessRenderBoard();
+  chessUpdateStatus();
+}
+
+function chessResign(){
+  if(chessGameOver) return;
+  if(!confirm('Resign this game?')) return;
+  chessGameOver = true;
+  if(chessMode === 'computer'){
+    chessLosses++;
+    showToast('🏳 You resigned — better luck next time!');
+  } else {
+    const winnerName = chessState.turn === 'w' ? 'Black' : 'White';
+    showToast(`🏳 ${winnerName} wins by resignation!`);
+  }
+  document.getElementById('chess-status-bar').textContent = '🏳 Game over — resigned';
 }
 </script>
 <script src="transition.js"></script>
