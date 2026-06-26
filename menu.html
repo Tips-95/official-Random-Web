@@ -3,465 +3,180 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>tips & stuff \u2726</title>
+  <title>Menu ✦ tips & stuff</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --bg:#f5f2eb;--surface:#fffdf8;--surface2:#f0ece3;
-      --border:rgba(60,50,30,0.11);--border-strong:rgba(60,50,30,0.2);
+      --bg:#f5f2eb;--surface:#fffdf8;
+      --border:rgba(60,50,30,0.12);--border-strong:rgba(60,50,30,0.22);
       --text:#1a1612;--muted:#7a7060;--accent:#c8602a;
       --owner-bg:#1a1612;--owner-txt:#f0c060;
       --admin-bg:#2a1a4a;--admin-txt:#c090ff;
       --mod-bg:#0a2a1a;--mod-txt:#60d090;
     }
-    html{font-size:16px;height:100%}
-    body{
-      font-family:'DM Sans',sans-serif;
-      background:var(--bg);color:var(--text);
-      min-height:100vh;
-      display:flex;flex-direction:column;
-    }
+    html{font-size:16px}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");background-size:200px 200px}
 
-    /* ── GRAIN ── */
-    body::before{
-      content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      background-size:200px;
-    }
-
-    /* ── FLOATING TIPS BG ── */
-    #floating-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-    .ft{
-      position:absolute;left:0;top:0;
-      background:rgba(255,253,248,0.7);
-      border:1px solid rgba(60,50,30,0.08);
-      border-radius:10px;padding:7px 11px;
-      font-family:'DM Sans',sans-serif;font-size:0.7rem;
-      line-height:1.45;color:#7a7060;max-width:165px;
-      pointer-events:none;will-change:transform,opacity;
-    }
-    .ft-tag{
-      font-size:0.58rem;font-weight:500;letter-spacing:0.05em;
-      text-transform:uppercase;padding:1px 6px;border-radius:99px;
-      display:inline-block;margin-bottom:3px;
-    }
-
-    /* ── TOP BAR ── */
-    .topbar{
-      position:relative;z-index:10;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:0 2rem;height:52px;
-      background:var(--text);
-      flex-shrink:0;
-    }
-    .topbar-logo{font-family:'Instrument Serif',serif;font-size:1.1rem;color:#fff;text-decoration:none}
-    .topbar-logo em{font-style:italic;color:var(--accent)}
-    .topbar-right{display:flex;align-items:center;gap:8px}
-    .rank-chip{font-size:0.66rem;font-weight:500;padding:3px 10px;border-radius:99px;letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap}
+    .topnav{position:sticky;top:0;z-index:30;background:var(--text);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:52px;gap:8px;flex-shrink:0}
+    .topnav-logo{font-family:'Instrument Serif',serif;font-size:1.15rem;color:#fff;text-decoration:none;white-space:nowrap}
+    .topnav-logo em{font-style:italic;color:var(--accent)}
+    .topnav-right{display:flex;align-items:center;gap:6px}
+    .rank-badge{font-size:0.67rem;font-weight:500;letter-spacing:0.04em;padding:3px 9px;border-radius:99px;text-transform:uppercase;white-space:nowrap}
+    .rank-public{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)}
     .rank-owner{background:var(--owner-bg);color:var(--owner-txt)}
     .rank-admin{background:var(--admin-bg);color:var(--admin-txt)}
-    .rank-mod  {background:var(--mod-bg);  color:var(--mod-txt)}
-    .rank-public{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)}
-    .topbar-btn{font-size:0.75rem;padding:5px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.7);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.13s;white-space:nowrap}
-    .topbar-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
+    .rank-mod{background:var(--mod-bg);color:var(--mod-txt)}
+    .topnav-btn{font-size:0.78rem;padding:5px 11px;border-radius:6px;border:1px solid rgba(255,255,255,0.18);background:transparent;color:rgba(255,255,255,0.75);cursor:pointer;transition:all 0.13s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;font-family:'DM Sans',sans-serif}
+    .topnav-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
 
-    /* ── MAIN LAYOUT ── */
-    .page{
-      position:relative;z-index:1;
-      flex:1;display:flex;flex-direction:column;
-      max-width:1060px;width:100%;margin:0 auto;
-      padding:2.5rem 2rem 4rem;
-    }
+    .page{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:2.5rem 1.5rem 4rem;width:100%;flex:1}
 
-    /* ── GREETING ── */
-    .greeting{margin-bottom:2.5rem;animation:fadeUp 0.5s ease both}
-    .greeting-eyebrow{
-      font-family:'DM Mono',monospace;font-size:0.68rem;
-      letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);
-      margin-bottom:0.5rem;display:flex;align-items:center;gap:8px;
-    }
-    .greeting-eyebrow::before{content:'';width:20px;height:1px;background:var(--accent);display:inline-block}
-    .greeting-title{
-      font-family:'Instrument Serif',serif;
-      font-size:clamp(2rem,5vw,3.2rem);
-      line-height:1;letter-spacing:-0.02em;
-      margin-bottom:0.4rem;
-    }
-    .greeting-title em{font-style:italic;color:var(--accent)}
-    .greeting-sub{font-size:0.875rem;color:var(--muted)}
+    .menu-hero{text-align:center;margin-bottom:2.25rem}
+    .menu-hero .mh-greeting{font-size:0.85rem;color:var(--muted);margin-bottom:0.35rem}
+    .menu-hero h1{font-family:'Instrument Serif',serif;font-size:clamp(1.9rem,4.5vw,2.6rem);letter-spacing:-0.02em}
+    .menu-hero h1 em{font-style:italic;color:var(--accent)}
+    .menu-hero p{color:var(--muted);font-size:0.875rem;margin-top:0.4rem}
 
-    /* ── MAIN HERO CARD ── */
-    .hero-card{
-      background:var(--text);border-radius:16px;
-      padding:2rem 2.5rem;
-      margin-bottom:1.25rem;
-      display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;
-      cursor:pointer;text-decoration:none;
-      position:relative;overflow:hidden;
-      transition:transform 0.2s cubic-bezier(0.22,1,0.36,1), box-shadow 0.2s ease;
-      animation:fadeUp 0.5s 0.08s ease both;
-    }
-    .hero-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.15)}
-    .hero-card::before{
-      content:'';position:absolute;inset:0;
-      background:radial-gradient(ellipse 60% 80% at 80% 50%, rgba(200,96,42,0.12) 0%, transparent 70%);
-      pointer-events:none;
-    }
-    .hero-card-glyph{
-      position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);
-      font-family:'Instrument Serif',serif;font-size:8rem;
-      color:rgba(255,255,255,0.04);line-height:1;pointer-events:none;
-      font-style:italic;
-    }
-    .hero-badge{
-      font-family:'DM Mono',monospace;font-size:0.62rem;
-      letter-spacing:0.12em;text-transform:uppercase;
-      color:var(--accent);background:rgba(200,96,42,0.15);
-      padding:3px 10px;border-radius:99px;display:inline-block;margin-bottom:0.75rem;
-    }
-    .hero-name{
-      font-family:'Instrument Serif',serif;font-size:clamp(1.6rem,3vw,2.2rem);
-      color:#fff;line-height:1.1;letter-spacing:-0.01em;margin-bottom:0.5rem;
-    }
-    .hero-name em{font-style:italic;color:var(--accent)}
-    .hero-desc{font-size:0.875rem;color:rgba(255,255,255,0.5);line-height:1.6;max-width:440px}
-    .hero-arrow{
-      font-size:1.5rem;color:rgba(255,255,255,0.3);
-      transition:transform 0.2s ease,color 0.2s;
-      position:relative;z-index:1;flex-shrink:0;
-    }
-    .hero-card:hover .hero-arrow{transform:translateX(4px);color:var(--accent)}
+    /* MAIN CTA */
+    .main-cta{display:flex;align-items:center;gap:1.1rem;background:linear-gradient(135deg,#1a1612,#2a1d10);color:#fff;border-radius:18px;padding:1.5rem 1.75rem;margin-bottom:2rem;cursor:pointer;transition:transform 0.18s,box-shadow 0.18s;text-decoration:none;position:relative;overflow:hidden}
+    .main-cta:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,0,0,0.22)}
+    .main-cta::after{content:'';position:absolute;top:0;right:0;bottom:0;width:140px;background:radial-gradient(circle at top right, rgba(200,96,42,0.35), transparent 70%)}
+    .main-cta-icon{font-size:2.4rem;line-height:1;flex-shrink:0}
+    .main-cta-body{flex:1;min-width:0}
+    .main-cta-title{font-family:'Instrument Serif',serif;font-size:1.5rem;letter-spacing:-0.01em;margin-bottom:3px}
+    .main-cta-title em{font-style:italic;color:#f0c060}
+    .main-cta-desc{font-size:0.85rem;color:rgba(255,255,255,0.65);line-height:1.5}
+    .main-cta-arrow{font-size:1.3rem;color:#f0c060;flex-shrink:0}
 
-    /* ── CARDS GRID ── */
-    .section-label{
-      font-family:'DM Mono',monospace;font-size:0.65rem;
-      letter-spacing:0.14em;text-transform:uppercase;
-      color:var(--muted);margin-bottom:0.85rem;
-      display:flex;align-items:center;gap:10px;
-    }
-    .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+    /* SECTION LABEL */
+    .menu-section-label{font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin:0 0 0.9rem 0.1rem}
 
-    .cards-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-      gap:10px;
-      margin-bottom:1.25rem;
-    }
+    /* CARD GRID */
+    .menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-bottom:2.25rem}
+    .menu-card{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:1.25rem 1.3rem;text-decoration:none;color:var(--text);transition:all 0.16s;position:relative;overflow:hidden}
+    .menu-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 28px rgba(200,96,42,0.13)}
+    .menu-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--card-accent,var(--accent));border-radius:0 0 12px 12px;opacity:0;transition:opacity 0.16s}
+    .menu-card:hover::after{opacity:1}
+    .menu-card-top{display:flex;align-items:center;gap:10px}
+    .menu-card-icon{font-size:1.6rem;line-height:1}
+    .menu-card-name{font-weight:600;font-size:0.95rem}
+    .menu-card-desc{font-size:0.8rem;color:var(--muted);line-height:1.5}
+    .menu-card-badge{position:absolute;top:10px;right:10px;font-size:0.6rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:2px 7px;border-radius:99px}
 
-    .page-card{
-      background:var(--surface);border:1px solid var(--border);
-      border-radius:12px;padding:1.25rem 1.25rem 1rem;
-      text-decoration:none;color:inherit;
-      display:flex;flex-direction:column;gap:8px;
-      position:relative;overflow:hidden;
-      transition:all 0.18s cubic-bezier(0.22,1,0.36,1);
-      cursor:pointer;
-    }
-    .page-card::after{
-      content:'';position:absolute;bottom:0;left:0;right:0;height:2.5px;
-      background:var(--card-color,var(--accent));border-radius:0 0 12px 12px;
-      opacity:0;transition:opacity 0.18s;
-    }
-    .page-card:hover{
-      border-color:rgba(60,50,30,0.22);
-      transform:translateY(-2px);
-      box-shadow:0 6px 20px rgba(0,0,0,0.07);
-    }
-    .page-card:hover::after{opacity:1}
-    .card-icon{font-size:1.6rem;line-height:1;margin-bottom:2px}
-    .card-name{font-size:0.95rem;font-weight:500;color:var(--text)}
-    .card-desc{font-size:0.78rem;color:var(--muted);line-height:1.5;flex:1}
-    .card-go{
-      font-family:'DM Mono',monospace;font-size:0.68rem;
-      letter-spacing:0.08em;text-transform:uppercase;
-      color:var(--card-color,var(--accent));
-      margin-top:4px;display:flex;align-items:center;gap:5px;
-      transition:gap 0.15s;
-    }
-    .page-card:hover .card-go{gap:8px}
+    .menu-footer-note{text-align:center;font-size:0.78rem;color:var(--muted);margin-top:1rem}
+    .menu-footer-note button{background:none;border:none;color:var(--accent);font-family:'DM Sans',sans-serif;font-size:0.78rem;cursor:pointer;text-decoration:underline;padding:0}
 
-    /* Staff-only badge */
-    .staff-badge{
-      position:absolute;top:10px;right:10px;
-      font-family:'DM Mono',monospace;font-size:0.55rem;
-      letter-spacing:0.06em;text-transform:uppercase;
-      padding:2px 6px;border-radius:99px;
-      background:rgba(26,22,18,0.08);color:var(--muted);
-    }
+    .site-footer{margin-top:2rem;text-align:center;font-size:0.75rem;color:var(--muted);padding-bottom:1rem}
 
-    /* ── SMALL LINK ROW ── */
-    .link-row{
-      display:flex;flex-wrap:wrap;gap:6px;
-      margin-top:0.25rem;
-    }
-    .link-pill{
-      font-size:0.75rem;padding:5px 14px;border-radius:99px;
-      border:1px solid var(--border-strong);background:var(--surface);
-      color:var(--muted);text-decoration:none;transition:all 0.13s;
-      display:inline-flex;align-items:center;gap:5px;
-    }
-    .link-pill:hover{background:var(--text);color:#fff;border-color:var(--text)}
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-    .cards-grid .page-card:nth-child(1){animation:fadeUp 0.4s 0.14s ease both}
-    .cards-grid .page-card:nth-child(2){animation:fadeUp 0.4s 0.19s ease both}
-    .cards-grid .page-card:nth-child(3){animation:fadeUp 0.4s 0.24s ease both}
-    .cards-grid .page-card:nth-child(4){animation:fadeUp 0.4s 0.29s ease both}
-    .cards-grid .page-card:nth-child(5){animation:fadeUp 0.4s 0.34s ease both}
-    .cards-grid .page-card:nth-child(6){animation:fadeUp 0.4s 0.39s ease both}
-    .cards-grid .page-card:nth-child(7){animation:fadeUp 0.4s 0.44s ease both}
-    .cards-grid .page-card:nth-child(8){animation:fadeUp 0.4s 0.49s ease both}
-
-    @media(max-width:640px){
-      .page{padding:1.5rem 1rem 3rem}
-      .hero-card{grid-template-columns:1fr;padding:1.5rem}
-      .hero-card-glyph{display:none}
-      .cards-grid{grid-template-columns:1fr 1fr}
-    }
-    @media(max-width:400px){
-      .cards-grid{grid-template-columns:1fr}
+    @media(max-width:560px){
+      .main-cta{flex-direction:column;text-align:center;padding:1.5rem 1.25rem}
+      .main-cta-arrow{display:none}
     }
   </style>
 </head>
 <body>
 
-<!-- Redirect if not logged in -->
 <script>
 (function(){
-  if(!localStorage.getItem('rank')) window.location.replace('login.html');
-  var bg=localStorage.getItem('user_bg'),ac=localStorage.getItem('user_accent');
-  if(bg) document.documentElement.style.setProperty('--bg',bg);
-  if(ac) document.documentElement.style.setProperty('--accent',ac);
+  var r = localStorage.getItem('rank');
+  if(!r || r === 'null' || r === 'undefined'){ window.location.replace('login.html'); }
+  // Guests never see the menu — straight to tips, read-only.
+  if(r === 'guest'){ window.location.replace('index.html'); }
 })();
 </script>
 
-<!-- Floating tips bg -->
-<div id="floating-bg" aria-hidden="true"></div>
-
-<!-- TOP BAR -->
-<header class="topbar">
-  <a href="menu.html" class="topbar-logo">tips <em>&</em> stuff</a>
-  <div class="topbar-right">
-    <span id="rank-chip" class="rank-chip rank-public">\u2026</span>
-    <button class="topbar-btn" onclick="doLogout()">Log out</button>
+<header class="topnav">
+  <a href="index.html" class="topnav-logo">tips <em>&</em> stuff</a>
+  <div class="topnav-right">
+    <span id="rank-display" class="rank-badge rank-public">…</span>
+    <button class="topnav-btn" onclick="doLogout()">Logout</button>
   </div>
 </header>
 
-<!-- MAIN PAGE -->
-<main class="page">
+<div class="page">
 
-  <!-- GREETING -->
-  <div class="greeting">
-    <div class="greeting-eyebrow">Welcome back</div>
-    <h1 class="greeting-title">Hey, <em id="greeting-name">friend</em> \u2728</h1>
-    <p class="greeting-sub" id="greeting-sub">Where do you want to go today?</p>
+  <div class="menu-hero">
+    <p class="mh-greeting" id="menu-greeting">Welcome back</p>
+    <h1>Where to <em>today?</em></h1>
+    <p>Pick a destination — you can always get back here from the menu link.</p>
   </div>
 
-  <!-- HERO — MAIN TIPS BOARD -->
-  <a href="index.html" class="hero-card" aria-label="Go to Tips Board">
-    <span class="hero-card-glyph">&amp;</span>
-    <div>
-      <span class="hero-badge">\u2606 Main Destination</span>
-      <div class="hero-name">tips <em>&amp;</em> stuff</div>
-      <p class="hero-desc">
-        The main tips board \u2014 browse staff picks, featured tips, public submissions,
-        group chat, news, and more. Everything lives here.
-      </p>
+  <a href="index.html" class="main-cta">
+    <div class="main-cta-icon">📋</div>
+    <div class="main-cta-body">
+      <div class="main-cta-title">tips <em>&</em> stuff</div>
+      <div class="main-cta-desc">The main board — browse recommended &amp; pro tips, submit your own, catch up on news, and chat with everyone.</div>
     </div>
-    <span class="hero-arrow" aria-hidden="true">\u2192</span>
+    <div class="main-cta-arrow">→</div>
   </a>
 
-  <!-- EXPLORE -->
-  <div class="section-label">Explore</div>
-  <div class="cards-grid" id="explore-grid">
+  <p class="menu-section-label">Explore the site</p>
+  <div class="menu-grid" id="menu-grid"></div>
 
-    <a href="movie.html" class="page-card" style="--card-color:#9b1d1d">
-      <div class="card-icon">\U0001f3ac</div>
-      <div class="card-name">The Film</div>
-      <p class="card-desc">Follow the production of <em>The Great Chaos</em> \u2014 a horror film in development. Progress log, trailer, and behind-the-scenes.</p>
-      <div class="card-go">Visit \u2192</div>
-    </a>
+  <p class="menu-footer-note">Not seeing something? Some pages are staff-only and tied to your rank. <button onclick="doLogout()">Switch account</button></p>
 
-    <a href="games.html" class="page-card" style="--card-color:#3a9c5a">
-      <div class="card-icon">\U0001f3ae</div>
-      <div class="card-name">Games</div>
-      <p class="card-desc">Play Snake, Tic-Tac-Toe, Memory, and Tips Trivia. Scores go on the leaderboard.</p>
-      <div class="card-go">Play \u2192</div>
-    </a>
+  <div class="site-footer"><p>tips &amp; stuff — shared with friends ✦</p></div>
+</div>
 
-    <a href="leaderboard.html" class="page-card" style="--card-color:#c8a000">
-      <div class="card-icon">\U0001f3c6</div>
-      <div class="card-name">Leaderboard</div>
-      <p class="card-desc">Top game scores and visit stats for everyone on the site. See where you rank.</p>
-      <div class="card-go">View \u2192</div>
-    </a>
-
-    <a href="news.html" class="page-card" style="--card-color:#2a60c8">
-      <div class="card-icon">\U0001f4f0</div>
-      <div class="card-name">News</div>
-      <p class="card-desc">Latest announcements, updates, events, and warnings from the Owner and Admins.</p>
-      <div class="card-go">Read \u2192</div>
-    </a>
-
-    <a href="donate.html" class="page-card" style="--card-color:#c8602a">
-      <div class="card-icon">\U0001f49b</div>
-      <div class="card-name">Donate</div>
-      <p class="card-desc">Support the site through PayPal, Cash App, Venmo, or Ko-fi. Every bit helps keep this running.</p>
-      <div class="card-go">Support \u2192</div>
-    </a>
-
-    <a href="version.html" class="page-card" style="--card-color:#4a8a1a">
-      <div class="card-icon">\U0001f516</div>
-      <div class="card-name">Version History</div>
-      <p class="card-desc">Full changelog of every update \u2014 stable releases, betas, and what\u2019s new in each version.</p>
-      <div class="card-go">See changes \u2192</div>
-    </a>
-
-  </div>
-
-  <!-- SITE INFO -->
-  <div class="section-label">Site Info</div>
-  <div class="cards-grid">
-
-    <a href="ranks.html" class="page-card" style="--card-color:#7a2ac8">
-      <div class="card-icon">\U0001f3c5</div>
-      <div class="card-name">Ranks</div>
-      <p class="card-desc">See what each rank can do \u2014 Owner, Admin, Mod, and Public. Staff roster is listed here.</p>
-      <div class="card-go">View \u2192</div>
-    </a>
-
-    <a href="rules.html" class="page-card" style="--card-color:#2a60c8">
-      <div class="card-icon">\U0001f4dc</div>
-      <div class="card-name">Rules</div>
-      <p class="card-desc">The site rules set by the Owner. Read these before posting or interacting.</p>
-      <div class="card-go">Read \u2192</div>
-    </a>
-
-    <a href="banlist.html" class="page-card" style="--card-color:#c0392b">
-      <div class="card-icon">\U0001f6ab</div>
-      <div class="card-name">Ban List</div>
-      <p class="card-desc">Who is currently banned and why. Managed by Owner and Admins.</p>
-      <div class="card-go">View \u2192</div>
-    </a>
-
-  </div>
-
-  <!-- QUICK LINKS ROW -->
-  <div class="section-label" style="margin-top:0.5rem">Quick links</div>
-  <div class="link-row">
-    <a href="index.html#sec-recommended" class="link-pill">\u2b50 Recommended Tips</a>
-    <a href="index.html#sec-public"      class="link-pill">\U0001f4e2 Submit a Tip</a>
-    <a href="index.html#sec-news"        class="link-pill">\U0001f4f0 News</a>
-    <a href="index.html#sec-complaints"  class="link-pill">\U0001f4dd Complaints</a>
-    <a href="index.html#sec-mysettings"  class="link-pill">\U0001f3a8 My Style</a>
-    <span class="link-pill" id="staff-link" style="display:none"><a href="index.html#sec-settings" style="color:inherit;text-decoration:none">\u2699\ufe0f Settings</a></span>
-  </div>
-
-</main>
-
-<!-- FLOATING TIPS JS -->
 <script>
-(function(){
-  const TIPS=[
-    {tag:'\U0001f4a1 life',tc:'#2d5016',bc:'rgba(232,240,224,0.85)',text:'Drink water first thing in the morning.'},
-    {tag:'\U0001f4a1 life',tc:'#2d5016',bc:'rgba(232,240,224,0.85)',text:'Make your bed \u2014 2 minutes, cleaner space.'},
-    {tag:'\U0001f4a1 life',tc:'#2d5016',bc:'rgba(232,240,224,0.85)',text:'If it takes under 2 minutes, do it now.'},
-    {tag:'\U0001f35c food',tc:'#7a3a0a',bc:'rgba(253,236,214,0.85)',text:'Add a pinch of salt to coffee grounds.'},
-    {tag:'\U0001f35c food',tc:'#7a3a0a',bc:'rgba(253,236,214,0.85)',text:'Let steak rest 5 min before cutting.'},
-    {tag:'\U0001f35c food',tc:'#7a3a0a',bc:'rgba(253,236,214,0.85)',text:'Toast spices 30 sec \u2014 doubles flavor.'},
-    {tag:'\u26a1 tech', tc:'#4a1f7a',bc:'rgba(236,224,248,0.85)',text:'Ctrl+Shift+T reopens closed tabs.'},
-    {tag:'\u26a1 tech', tc:'#4a1f7a',bc:'rgba(236,224,248,0.85)',text:'Ctrl+Z undoes in almost every app.'},
-    {tag:'\U0001f3b2 random',tc:'#7a1a2e',bc:'rgba(252,232,236,0.85)',text:'Flip a coin \u2014 notice what you hope for.'},
-    {tag:'\U0001f3b2 random',tc:'#7a1a2e',bc:'rgba(252,232,236,0.85)',text:'Keep a notebook by your bed.'},
-    {tag:'\U0001f4a1 life',tc:'#2d5016',bc:'rgba(232,240,224,0.85)',text:'Tell people when you appreciate them.'},
-    {tag:'\u26a1 tech', tc:'#4a1f7a',bc:'rgba(236,224,248,0.85)',text:'Windows+V opens clipboard history.'},
-  ];
-  const bg=document.getElementById('floating-bg');
-  if(!bg)return;
-  const ps=[];const N=10;
-  function rnd(a,b){return a+Math.random()*(b-a)}
-  function spawn(now){
-    const t=TIPS[Math.floor(Math.random()*TIPS.length)];
-    const el=document.createElement('div');el.className='ft';
-    el.innerHTML=`<span class="ft-tag" style="background:${t.bc};color:${t.tc}">${t.tag}</span><br>${t.text}`;
-    bg.appendChild(el);
-    const w=el.offsetWidth||150,h=el.offsetHeight||48;
-    const vx=rnd(-0.15,0.15),vy=rnd(-0.22,-0.1);
-    return{el,x:rnd(0,window.innerWidth-w),y:now?rnd(0,window.innerHeight-h):window.innerHeight+10,vx,vy,op:rnd(0.15,0.38),life:0,w,h};
-  }
-  for(let i=0;i<N;i++)ps.push(spawn(true));
-  (function tick(){
-    for(let i=0;i<ps.length;i++){
-      const p=ps[i];p.life++;p.x+=p.vx;p.y+=p.vy;
-      if(p.x>window.innerWidth+10)p.x=-p.w-5;
-      if(p.x<-p.w-10)p.x=window.innerWidth+5;
-      const fi=Math.min(1,p.life/80),fo=p.y<-p.h-20?0:Math.min(1,(p.y+p.h)/80);
-      p.el.style.transform=`translate(${p.x|0}px,${p.y|0}px)`;
-      p.el.style.opacity=p.op*fi*fo;
-      if(p.y<-p.h-30){bg.removeChild(p.el);ps[i]=spawn(false);}
-    }
-    requestAnimationFrame(tick);
-  })();
-})();
-</script>
+const rank = localStorage.getItem('rank') || 'public';
+const username = localStorage.getItem('username') || '';
 
-<!-- MAIN SCRIPT -->
-<script>
-var rank=localStorage.getItem('rank')||'public';
-var username=localStorage.getItem('username')||'';
-
-// Greeting
-var greetEl=document.getElementById('greeting-name');
-if(greetEl&&username) greetEl.textContent=username;
-
-// Rank chip
-var chip=document.getElementById('rank-chip');
-var icons={owner:'\U0001f451 Owner',admin:'\U0001f6e1\ufe0f Admin',mod:'\U0001f527 Mod',public:'\U0001f464 '+(username||'Public')};
-var cls={owner:'rank-owner',admin:'rank-admin',mod:'rank-mod',public:'rank-public'};
-chip.textContent=icons[rank]||icons.public;
-chip.className='rank-chip '+(cls[rank]||'rank-public');
-
-// Greeting subtitle based on time
-var hour=new Date().getHours();
-var sub=document.getElementById('greeting-sub');
-if(sub){
-  if(hour<12)sub.textContent='Good morning \u2014 where do you want to go today?';
-  else if(hour<18)sub.textContent='Good afternoon \u2014 what are you up to?';
-  else sub.textContent='Good evening \u2014 what are we getting into tonight?';
-}
-
-// Show staff link if applicable
-if(rank==='owner'||rank==='admin'||rank==='mod'){
-  var sl=document.getElementById('staff-link');
-  if(sl)sl.style.display='';
-}
-
-// Show owner card
-if(rank==='owner'){
-  var grid=document.getElementById('explore-grid');
-  if(grid){
-    var adminCard=document.createElement('a');
-    adminCard.href='index.html';
-    adminCard.style.cssText='--card-color:#b8860b';
-    adminCard.className='page-card';
-    adminCard.setAttribute('onclick',"setTimeout(()=>{document.querySelector('[onclick*=settings]')&&document.querySelector('[onclick*=settings]').click()},800)");
-    adminCard.innerHTML=`<div class="card-icon">\u2699\ufe0f</div><div class="card-name">Owner Settings</div><p class="card-desc">Manage passwords, announcement banners, site appearance, rules, members, custom pages, and version updates.</p><div class="card-go">Open \u2192</div>`;
-    grid.appendChild(adminCard);
-  }
-}
+const RANK_LABELS = { owner:'👑 Owner', admin:'🛡️ Admin', mod:'🔧 Mod', public:'👤 Public' };
+const RANK_CLASSES = { owner:'rank-owner', admin:'rank-admin', mod:'rank-mod', public:'rank-public' };
 
 function doLogout(){
   localStorage.removeItem('rank');
   localStorage.removeItem('username');
   window.location.replace('login.html');
 }
+
+// Every page on the site that isn't index.html itself, with what it is and
+// who's allowed to see it. `minRank` mirrors the same staff hierarchy used
+// across the rest of the site (owner > admin > mod > public). Guests never
+// reach this page at all, so there's nothing to gate for them here.
+const MENU_ITEMS = [
+  { url:'ranks.html',       icon:'🏅', name:'Ranks',        desc:'See the staff roster and what each rank can do.',                 accent:'#7a2ac8', minRank:'public' },
+  { url:'rules.html',       icon:'📜', name:'Rules',        desc:'The house rules everyone here agrees to follow.',                  accent:'#2a60c8', minRank:'public' },
+  { url:'banlist.html',     icon:'🚫', name:'Ban List',     desc:'Who has been banned and, where given, why.',                       accent:'#c0392b', minRank:'public' },
+  { url:'news.html',        icon:'📰', name:'News',         desc:'Announcements, updates, and the occasional warning.',              accent:'#2a60c8', minRank:'public' },
+  { url:'games.html',       icon:'🎮', name:'Games',        desc:'Snake, Tic-Tac-Toe, Memory, Trivia, and Chess. Scores count!',     accent:'#3a9c5a', minRank:'public' },
+  { url:'leaderboard.html', icon:'🏆', name:'Leaderboard',  desc:'Top scores across every game, all in one place.',                  accent:'#c8602a', minRank:'public' },
+  { url:'movie.html',       icon:'🎬', name:'Movie',        desc:"What's happening with the movie — synopsis, trailer, progress.",  accent:'#5a4632', minRank:'public' },
+  { url:'version.html',     icon:'🔖', name:'Version',      desc:'Changelog of what has been added or fixed recently.',              accent:'#7a7060', minRank:'public' },
+  { url:'donate.html',      icon:'💛', name:'Donate',       desc:'Support the site if you feel like it. Totally optional.',         accent:'#f0c060', minRank:'public' },
+];
+
+const RANK_ORDER = { public:0, mod:1, admin:2, owner:3 };
+function rankMeets(min){ return (RANK_ORDER[rank] ?? 0) >= (RANK_ORDER[min] ?? 0); }
+
+function renderMenu(){
+  const rd = document.getElementById('rank-display');
+  const label = username ? (RANK_LABELS[rank]?.split(' ')[0] || '👤') + ' ' + username : (RANK_LABELS[rank] || '👤 Public');
+  rd.textContent = label;
+  rd.className = 'rank-badge ' + (RANK_CLASSES[rank] || 'rank-public');
+
+  const greetEl = document.getElementById('menu-greeting');
+  const hour = new Date().getHours();
+  const timeGreeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
+  greetEl.textContent = username ? `${timeGreeting}, ${username}` : timeGreeting;
+
+  const grid = document.getElementById('menu-grid');
+  const visible = MENU_ITEMS.filter(item => rankMeets(item.minRank));
+  grid.innerHTML = visible.map(item => `
+    <a href="${item.url}" class="menu-card" style="--card-accent:${item.accent}">
+      <div class="menu-card-top">
+        <span class="menu-card-icon">${item.icon}</span>
+        <span class="menu-card-name">${item.name}</span>
+      </div>
+      <p class="menu-card-desc">${item.desc}</p>
+    </a>
+  `).join('');
+}
+renderMenu();
 </script>
 </body>
-</html>"""
-
-with open('/mnt/user-data/outputs/tips-site/menu.html', 'w', encoding='utf-8') as f:
-    f.write(menu_html)
-print(f"menu.html written: {len(menu_html)} chars")
+</html>
