@@ -116,7 +116,8 @@
   (function(){
     var r = localStorage.getItem('rank');
     if(r && r !== 'null' && r !== 'undefined') {
-      window.location.replace('index.html');
+      // Guests skip the menu and go straight to the tips page; everyone else lands on the menu first.
+      window.location.replace(r === 'guest' ? 'index.html' : 'menu.html');
     }
   })();
 </script>
@@ -292,11 +293,17 @@ function showToast(id, msg, type) {
   setTimeout(() => el.className = 'toast', 3500);
 }
 
+// Where to send each rank after a successful login. Guests go straight to the
+// tips page; everyone else sees the menu page first.
+function destinationFor(rank) {
+  return rank === 'guest' ? 'index.html' : 'menu.html';
+}
+
 function successRedirect(displayName, rank) {
   const icons = { owner:'👑', admin:'🛡️', mod:'🔧', public:'👤', guest:'👀' };
   document.getElementById('success-msg').textContent = 'Welcome, ' + displayName + '! ' + (icons[rank]||'');
   document.getElementById('success-overlay').classList.add('show');
-  setTimeout(() => window.location.replace('index.html'), 750);
+  setTimeout(() => window.location.replace(destinationFor(rank)), 750);
 }
 
 // ── STAFF LOGIN ──
